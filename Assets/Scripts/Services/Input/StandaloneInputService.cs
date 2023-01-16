@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using Additional;
+using UnityEngine;
 
 namespace Services.Input
 {
@@ -8,6 +10,6 @@ namespace Services.Input
             new(UnityEngine.Input.GetAxis(Horizontal), UnityEngine.Input.GetAxis(Vertical));
 
         public override bool IsAttackInvoked() =>
-            UnityEngine.Input.GetAxis(Fire) == 1.0f;
+            Math.Abs(UnityEngine.Input.GetAxis(Fire) - 1.0f) < Constants.Epsilon;
     }
 }

@@ -9,9 +9,11 @@ namespace Character
         private CharacterAnimationType _currentAnimation;
 
 
-        public void PlayIdle() => SetAnimation(CharacterAnimationType.Idle);
+        public void PlayIdle() => 
+            SetAnimation(CharacterAnimationType.Idle);
 
-        public void PlayWalking() => SetAnimation(CharacterAnimationType.Walking);
+        public void PlayWalking() => 
+            SetAnimation(CharacterAnimationType.Walking);
 
         private void Awake()
         {

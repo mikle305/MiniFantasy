@@ -259,7 +259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterController: {fileID: 918384550}
   _characterAnimation: {fileID: 918384552}
-  _speed: 6
+  _speed: 4
 --- !u!114 &918384552
 MonoBehaviour:
   m_ObjectHideFlags: 0

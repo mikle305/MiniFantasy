@@ -3,6 +3,6 @@
     public enum CharacterAnimationType
     {
         Idle,
-        Walking,
+        Walking
     }
 }

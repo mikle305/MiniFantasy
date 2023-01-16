@@ -22,23 +22,30 @@ namespace Character
 
         private void Update()
         {
+            Move();
+        }
+
+        private void Move()
+        {
             Vector3 movementVector = Vector3.zero;
             Vector2 axis = _inputService.GetAxis();
             if (axis.sqrMagnitude > Constants.Epsilon)
             {
                 _characterAnimation.PlayWalking();
-                movementVector = _camera.TransformDirection(axis.x, 0, axis.y);
+                movementVector.x = axis.x;
+                movementVector.z = axis.y;
+                movementVector = _camera.TransformDirection(movementVector);
                 movementVector.Normalize();
-               transform.forward = movementVector;
+                transform.forward = movementVector;
             }
             else
             {
                 _characterAnimation.PlayIdle();
             }
-            
+
             movementVector += Physics.gravity;
+                
             _characterController.Move(movementVector * (_speed * Time.deltaTime));
-            
         }
     }
 }
