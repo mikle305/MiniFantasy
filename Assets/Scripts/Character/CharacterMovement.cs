@@ -1,5 +1,4 @@
 using Additional;
-using CameraLogic;
 using Infrastructure;
 using Services.Input;
 using UnityEngine;
@@ -8,22 +7,35 @@ namespace Character
 {
     public class CharacterMovement : MonoBehaviour
     {
-        [SerializeField] private Transform _environment;
         [SerializeField] private CharacterController _characterController;
         [SerializeField] private CharacterAnimation _characterAnimation;
         [SerializeField] private float _speed;
 
         private IInputService _inputService;
-        private Transform _cameraTransform;
+        private Transform _camera;
+        private Transform _world;
+        private bool _isWorldNull = true;
 
+
+        public void InitWorld(Transform world)
+        {
+            if (!_isWorldNull)
+                return;
+                
+            _world = world;
+            _isWorldNull = false;
+        }
 
         private void Start()
         {
-            _inputService = Game.InputService; 
+            _inputService = Game.InputService;
         }
 
         private void Update()
         {
+            if (_isWorldNull)
+                return;
+
             Move();
         }
 
@@ -36,7 +48,7 @@ namespace Character
                 _characterAnimation.PlayWalking();
                 movementVector.x = axis.x;
                 movementVector.z = axis.y;
-                movementVector = _environment.TransformDirection(movementVector);
+                movementVector = _world.TransformDirection(movementVector);
                 movementVector.Normalize();
                 transform.forward = movementVector;
             }

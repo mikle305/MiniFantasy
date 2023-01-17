@@ -4,10 +4,11 @@ namespace CameraLogic
 {
     public class CameraFollow : MonoBehaviour
     {
-        [SerializeField] private Transform _target;
         [SerializeField] private float _rotationAngleX;
         [SerializeField] private int _distance;
         [SerializeField] private float _offsetY;
+
+        private Transform _target;
 
         
         public void Follow(Transform target) =>
