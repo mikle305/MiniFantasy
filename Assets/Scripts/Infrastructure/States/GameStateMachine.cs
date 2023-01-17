@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Infrastructure.Scene;
+using Services.GameFactory;
 
 namespace Infrastructure.States
 {
@@ -10,12 +11,12 @@ namespace Infrastructure.States
         private IExitableState _activeState;
 
         
-        public GameStateMachine(SceneLoader sceneLoader)
+        public GameStateMachine(SceneLoader sceneLoader, IGameFactory gameFactory)
         {
             _states = new Dictionary<Type, IExitableState>
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader),
-                [typeof(LevelLoadingState)] = new LevelLoadingState(this, sceneLoader),
+                [typeof(LevelLoadingState)] = new LevelLoadingState(this, sceneLoader, gameFactory),
             };
         }
 

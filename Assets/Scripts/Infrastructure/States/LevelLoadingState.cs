@@ -1,6 +1,6 @@
 ﻿using CameraLogic;
-using Character;
 using Infrastructure.Scene;
+using Services.GameFactory;
 using UnityEngine;
 
 namespace Infrastructure.States
@@ -9,12 +9,13 @@ namespace Infrastructure.States
     {
         private readonly GameStateMachine _gameStateMachine;
         private readonly SceneLoader _sceneLoader;
+        private readonly IGameFactory _gameFactory;
 
-        
-        public LevelLoadingState(GameStateMachine gameStateMachine, SceneLoader sceneLoader)
+        public LevelLoadingState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory)
         {
             _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
+            _gameFactory = gameFactory;
         }
 
         public void Enter(SceneName sceneName)
@@ -26,35 +27,12 @@ namespace Infrastructure.States
         {
         }
 
-        private static void OnLoaded()
+        private void OnLoaded()
         {
-            World world = CreateWorld();
-            GameObject character = CreateCharacter(world);
-            CreateHud();
+            World world = _gameFactory.CreateWorld();
+            GameObject character = _gameFactory.CreateCharacter(world);
+            _gameFactory.CreateHud();
             FollowCamera(character.transform);
-        }
-
-        private static World CreateWorld()
-        {
-            var prefab = Resources.Load<World>("World/World");
-            return Object.Instantiate(prefab);
-        }
-
-        private static GameObject CreateCharacter(World world)
-        {
-            var prefab = Resources.Load<GameObject>("Characters/Prefabs/Character");
-            GameObject character = Object.Instantiate(prefab, world.SpawnPoint.position, Quaternion.identity, world.transform);
-            character
-                .GetComponent<CharacterMovement>()
-                .InitWorld(world.transform);
-
-            return character;
-        }
-
-        private static void CreateHud()
-        {
-            var prefab = Resources.Load<GameObject>("UI/Hud");
-            Object.Instantiate(prefab);
         }
 
         private static void FollowCamera(Transform target)

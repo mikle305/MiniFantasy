@@ -1,5 +1,6 @@
 ﻿using Infrastructure.Scene;
 using Infrastructure.States;
+using Services.GameFactory;
 using Services.Input;
 
 namespace Infrastructure
@@ -12,7 +13,7 @@ namespace Infrastructure
         
         public Game(ICoroutineRunner coroutineRunner)
         {
-            StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner));
+            StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner), new GameFactory());
         }
     }
 }
