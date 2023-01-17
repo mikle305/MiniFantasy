@@ -6,13 +6,13 @@ namespace Infrastructure.States
 {
     public class BootstrapState: IState
     {
-        private readonly GameStateMachine _context;
+        private readonly GameStateMachine _gameStateMachine;
         private readonly SceneLoader _sceneLoader;
         
 
-        public BootstrapState(GameStateMachine context, SceneLoader sceneLoader)
+        public BootstrapState(GameStateMachine gameStateMachine, SceneLoader sceneLoader)
         {
-            _context = context;
+            _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
         }
 
@@ -32,7 +32,7 @@ namespace Infrastructure.States
         }
 
         private void EnterLoadLevel() => 
-            _context.Enter<LevelLoadingState>();
+            _gameStateMachine.Enter<LevelLoadingState, SceneName>(SceneName.MainScene);
 
         private static IInputService SetupInputService()
         {

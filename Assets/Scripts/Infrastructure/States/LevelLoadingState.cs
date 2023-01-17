@@ -2,21 +2,21 @@
 
 namespace Infrastructure.States
 {
-    public class LevelLoadingState : IState
+    public class LevelLoadingState : IPayloadedState<SceneName>
     {
-        private readonly GameStateMachine _context;
+        private readonly GameStateMachine _gameStateMachine;
         private readonly SceneLoader _sceneLoader;
 
         
-        public LevelLoadingState(GameStateMachine context, SceneLoader sceneLoader)
+        public LevelLoadingState(GameStateMachine gameStateMachine, SceneLoader sceneLoader)
         {
-            _context = context;
+            _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
         }
 
-        public void Enter()
+        public void Enter(SceneName sceneName)
         {
-            _sceneLoader.Load(SceneName.MainScene);
+            _sceneLoader.Load(sceneName);
         }
 
         public void Exit()
