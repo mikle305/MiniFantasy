@@ -1,20 +1,25 @@
-﻿using Services.Input;
+﻿using Infrastructure.Scene;
+using Services.Input;
 using UnityEngine;
 
 namespace Infrastructure.States
 {
-    public class BootstrapState: IGameState
+    public class BootstrapState: IState
     {
         private readonly GameStateMachine _context;
+        private readonly SceneLoader _sceneLoader;
+        
 
-        public BootstrapState(GameStateMachine context)
+        public BootstrapState(GameStateMachine context, SceneLoader sceneLoader)
         {
             _context = context;
+            _sceneLoader = sceneLoader;
         }
 
         public void Enter()
         {
             RegisterServices();
+            _sceneLoader.Load(SceneName.BootstrapScene, EnterLoadLevel);
         }
 
         public void Exit()
@@ -25,7 +30,10 @@ namespace Infrastructure.States
         {
             Game.InputService = SetupInputService();
         }
-        
+
+        private void EnterLoadLevel() => 
+            _context.Enter<LevelLoadingState>();
+
         private static IInputService SetupInputService()
         {
             if (Application.isMobilePlatform)

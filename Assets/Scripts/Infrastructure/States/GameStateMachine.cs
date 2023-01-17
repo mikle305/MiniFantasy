@@ -1,25 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using Infrastructure.Scene;
 
 namespace Infrastructure.States
 {
     public class GameStateMachine
     {
-        private readonly Dictionary<Type,IGameState> _states;
-        private IGameState _activeState;
+        private readonly Dictionary<Type,IState> _states;
+        private IState _activeState;
 
-        public GameStateMachine()
+        public GameStateMachine(SceneLoader sceneLoader)
         {
-            _states = new Dictionary<Type, IGameState>
+            _states = new Dictionary<Type, IState>
             {
-                [typeof(BootstrapState)] = new BootstrapState(this),
+                [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader),
+                [typeof(LevelLoadingState)] = new LevelLoadingState(this, sceneLoader),
             };
         }
 
-        public void Enter<TState>() where TState : IGameState
+        public void Enter<TState>() where TState : IState
         {
             _activeState?.Exit();
-            IGameState state = _states[typeof(TState)];
+            IState state = _states[typeof(TState)];
             _activeState = state;
             state.Enter();
         }

@@ -1,6 +1,6 @@
 ﻿namespace Infrastructure.States
 {
-    public interface IGameState
+    public interface IState
     {
         public void Enter();
 
