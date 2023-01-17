@@ -1,20 +1,18 @@
-﻿using Services.Input;
-using UnityEngine;
+﻿using Infrastructure.States;
+using Services.Input;
 
-public class Game
+namespace Infrastructure
 {
-    public static IInputService InputService { get; private set; }
-
-    public Game()
+    public class Game
     {
-        RegisterInput();
-    }
+        public GameStateMachine StateMachine { get; }
 
-    private static void RegisterInput()
-    {
-        if (Application.isMobilePlatform)
-            InputService = new MobileInputService();
-        else
-            InputService = new StandaloneInputService();
+        public static IInputService InputService { get; set; }
+        
+
+        public Game()
+        {
+            StateMachine = new GameStateMachine();
+        }
     }
 }

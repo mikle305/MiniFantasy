@@ -1,12 +1,18 @@
+using Infrastructure.States;
 using UnityEngine;
 
-public class GameBootstrapper : MonoBehaviour
+namespace Infrastructure
 {
-    private Game _game;
-
-    private void Awake()
+    public class GameBootstrapper : MonoBehaviour
     {
-        _game = new Game();
-        DontDestroyOnLoad(this);
+        private Game _game;
+
+        private void Awake()
+        {
+            _game = new Game();
+            _game.StateMachine.Enter<BootstrapState>();
+            
+            DontDestroyOnLoad(this);
+        }
     }
 }
