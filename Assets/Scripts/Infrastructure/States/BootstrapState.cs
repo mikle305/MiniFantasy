@@ -17,7 +17,9 @@ namespace Infrastructure.States
             RegisterServices();
         }
 
-        public void Exit() { }
+        public void Exit()
+        {
+        }
 
         private static void RegisterServices()
         {
