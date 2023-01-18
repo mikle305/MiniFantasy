@@ -1,4 +1,3 @@
-using Infrastructure.States;
 using UnityEngine;
 
 namespace Infrastructure
@@ -10,8 +9,6 @@ namespace Infrastructure
         private void Awake()
         {
             _game = new Game(this);
-            _game.StateMachine.Enter<BootstrapState>();
-            
             DontDestroyOnLoad(this);
         }
     }

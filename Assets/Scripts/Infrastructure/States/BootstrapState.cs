@@ -11,17 +11,20 @@ namespace Infrastructure.States
     {
         private readonly GameStateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
-        
+        private static ServiceProvider _services;
 
-        public BootstrapState(GameStateMachine stateMachine, SceneLoader sceneLoader)
+
+        public BootstrapState(GameStateMachine stateMachine, SceneLoader sceneLoader, ServiceProvider services)
         {
+            _services = services;
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
+            
+            RegisterServices(services);
         }
 
         public void Enter()
         {
-            RegisterServices();
             _sceneLoader.Load(SceneName.BootstrapScene, EnterLoadLevel);
         }
 
@@ -29,10 +32,8 @@ namespace Infrastructure.States
         {
         }
 
-        private static void RegisterServices()
+        private static void RegisterServices(ServiceProvider services)
         {
-            ServiceProvider services = ServiceProvider.Container;
-
             IAssetProvider assetProvider = new AssetProvider();
             IGameFactory gameFactory = new GameFactory(assetProvider);
             IInputService inputService = CreateInputService();

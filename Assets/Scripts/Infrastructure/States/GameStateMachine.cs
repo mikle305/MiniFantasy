@@ -12,12 +12,12 @@ namespace Infrastructure.States
         private IExitableState _activeState;
 
         
-        public GameStateMachine(SceneLoader sceneLoader)
+        public GameStateMachine(SceneLoader sceneLoader, ServiceProvider services)
         {
             _states = new Dictionary<Type, IExitableState>
             {
-                [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader),
-                [typeof(LevelLoadingState)] = new LevelLoadingState(this, sceneLoader, ServiceProvider.Container.Resolve<IGameFactory>()),
+                [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
+                [typeof(LevelLoadingState)] = new LevelLoadingState(this, sceneLoader, services.Resolve<IGameFactory>()),
             };
         }
 
