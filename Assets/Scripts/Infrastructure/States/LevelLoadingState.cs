@@ -1,20 +1,20 @@
 ﻿using CameraLogic;
+using Infrastructure.Factory;
 using Infrastructure.Scene;
 using Models;
-using Services.GameFactory;
 using UnityEngine;
 
 namespace Infrastructure.States
 {
     public class LevelLoadingState : IPayloadedState<SceneName>
     {
-        private readonly GameStateMachine _gameStateMachine;
+        private readonly GameStateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
         private readonly IGameFactory _gameFactory;
 
-        public LevelLoadingState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory)
+        public LevelLoadingState(GameStateMachine stateMachine, SceneLoader sceneLoader, IGameFactory gameFactory)
         {
-            _gameStateMachine = gameStateMachine;
+            _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
             _gameFactory = gameFactory;
         }

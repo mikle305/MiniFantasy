@@ -1,9 +1,10 @@
-﻿using Models;
+﻿using Infrastructure.Services;
+using Models;
 using UnityEngine;
 
-namespace Services.GameFactory
+namespace Infrastructure.Factory
 {
-    public interface IGameFactory
+    public interface IGameFactory : IService
     {
         public GameObject CreateCharacter(World world);
         

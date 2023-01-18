@@ -1,17 +1,22 @@
+using System;
 using Additional;
 using Infrastructure;
-using Services.Input;
+using Infrastructure.Input;
+using Infrastructure.Services;
 using UnityEngine;
 
 namespace Character
 {
+    [RequireComponent(typeof(CharacterController))]
+    [RequireComponent(typeof(CharacterAnimation))]
     public class CharacterMovement : MonoBehaviour
     {
-        [SerializeField] private CharacterController _characterController;
-        [SerializeField] private CharacterAnimation _characterAnimation;
         [SerializeField] private float _speed;
 
+        private CharacterController _characterController;
+        private CharacterAnimation _characterAnimation;
         private IInputService _inputService;
+        
         private Transform _camera;
         private Transform _world;
         private bool _isWorldNull = true;
@@ -26,9 +31,13 @@ namespace Character
             _isWorldNull = false;
         }
 
-        private void Start()
+        private void Awake()
         {
-            _inputService = Game.InputService;
+            ServiceProvider services = ServiceProvider.Container;
+
+            _inputService = services.Resolve<IInputService>();
+            _characterController = GetComponent<CharacterController>();
+            _characterAnimation = GetComponent<CharacterAnimation>();
         }
 
         private void Update()

@@ -1,10 +1,10 @@
 ﻿using Additional;
 using Character;
+using Infrastructure.AssetManagement;
 using Models;
-using Services.AssetManagement;
 using UnityEngine;
 
-namespace Services.GameFactory
+namespace Infrastructure.Factory
 {
     public class GameFactory : IGameFactory
     {
