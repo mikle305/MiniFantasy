@@ -2,7 +2,7 @@
 using Additional;
 using UnityEngine;
 
-namespace Infrastructure.Input
+namespace Infrastructure.Services.Input
 {
     public class StandaloneInputService : InputService
     {

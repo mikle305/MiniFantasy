@@ -17,9 +17,4 @@
             return ServiceImplementation<TService>.Instance;
         }
     }
-
-    public static class ServiceImplementation<TService> where TService : IService
-    {
-        public static TService Instance { get; set; }
-    }
 }

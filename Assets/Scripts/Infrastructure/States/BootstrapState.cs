@@ -1,8 +1,9 @@
-﻿using Infrastructure.AssetManagement;
-using Infrastructure.Factory;
-using Infrastructure.Input;
-using Infrastructure.Scene;
+﻿using Infrastructure.Scene;
 using Infrastructure.Services;
+using Infrastructure.Services.AssetManagement;
+using Infrastructure.Services.Factory;
+using Infrastructure.Services.Input;
+using Infrastructure.Services.PersistentProgress;
 using UnityEngine;
 
 namespace Infrastructure.States
@@ -37,10 +38,12 @@ namespace Infrastructure.States
             IAssetProvider assetProvider = new AssetProvider();
             IGameFactory gameFactory = new GameFactory(assetProvider);
             IInputService inputService = CreateInputService();
-            
-            services.RegisterSingle<IInputService>(inputService);
+            IPersistentProgressService progressService = new PersistentProgressService();
+
             services.RegisterSingle<IAssetProvider>(implementation: assetProvider);
             services.RegisterSingle<IGameFactory>(implementation: gameFactory);
+            services.RegisterSingle<IInputService>(inputService);
+            services.RegisterSingle<IPersistentProgressService>(progressService);
         }
 
         private static IInputService CreateInputService()

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Infrastructure.Factory;
 using Infrastructure.Scene;
 using Infrastructure.Services;
+using Infrastructure.Services.Factory;
 
 namespace Infrastructure.States
 {

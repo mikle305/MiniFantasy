@@ -1,8 +1,7 @@
-﻿using Infrastructure.Services;
-using Models;
+﻿using Models;
 using UnityEngine;
 
-namespace Infrastructure.Factory
+namespace Infrastructure.Services.Factory
 {
     public interface IGameFactory : IService
     {
