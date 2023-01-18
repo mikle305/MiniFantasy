@@ -16,6 +16,9 @@ namespace Infrastructure.Scene
 
         public void Load(SceneName sceneName, Action onLoaded = null) =>
             _coroutineRunner.StartCoroutine(LoadingCoroutine(sceneName.ToString(), onLoaded));
+        
+        public void Load(string sceneName, Action onLoaded = null) =>
+            _coroutineRunner.StartCoroutine(LoadingCoroutine(sceneName, onLoaded));
 
         private static IEnumerator LoadingCoroutine(string nextScene, Action onLoaded = null)
         {

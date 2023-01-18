@@ -5,6 +5,6 @@ namespace Data
     [Serializable]
     public class WorldData
     {
-        public PositionOnLevel Position;
+        public LevelPosition LevelPosition;
     }
 }

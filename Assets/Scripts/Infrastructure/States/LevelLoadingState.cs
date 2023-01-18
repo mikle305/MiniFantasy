@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Infrastructure.States
 {
-    public class LevelLoadingState : IPayloadedState<SceneName>
+    public class LevelLoadingState : IPayloadedState<string>
     {
         private readonly GameStateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
@@ -19,7 +19,7 @@ namespace Infrastructure.States
             _gameFactory = gameFactory;
         }
 
-        public void Enter(SceneName sceneName)
+        public void Enter(string sceneName)
         {
             _sceneLoader.Load(sceneName, OnLoaded);
         }

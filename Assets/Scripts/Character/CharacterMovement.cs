@@ -35,7 +35,7 @@ namespace Character
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            progress.WorldData.Position = new PositionOnLevel
+            progress.WorldData.LevelPosition = new LevelPosition
             {
                 Level = GetCurrentLevel(),
                 Position = transform.position.ToVectorData()
@@ -44,11 +44,11 @@ namespace Character
 
         public void LoadProgress(PlayerProgress progress)
         {
-            PositionOnLevel position = progress.WorldData.Position;
-            if (position.Level != GetCurrentLevel())
+            LevelPosition levelPosition = progress.WorldData.LevelPosition;
+            if (levelPosition.Level != GetCurrentLevel())
                 return;
 
-            Vector3Data savedPosition = position.Position;
+            Vector3Data savedPosition = levelPosition.Position;
             if (savedPosition == null)
                 return;
             
