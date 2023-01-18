@@ -1,5 +1,6 @@
 ﻿using CameraLogic;
 using Infrastructure.Scene;
+using Models;
 using Services.GameFactory;
 using UnityEngine;
 
