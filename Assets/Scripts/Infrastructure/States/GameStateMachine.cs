@@ -4,7 +4,7 @@ using Infrastructure.Scene;
 using Infrastructure.Services;
 using Infrastructure.Services.Factory;
 using Infrastructure.Services.PersistentProgress;
-using Infrastructure.Services.SaveLoad;
+using Infrastructure.Services.Storage;
 
 namespace Infrastructure.States
 {

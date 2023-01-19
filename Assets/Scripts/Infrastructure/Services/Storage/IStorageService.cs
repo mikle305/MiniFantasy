@@ -1,6 +1,6 @@
 ﻿using Data;
 
-namespace Infrastructure.Services.SaveLoad
+namespace Infrastructure.Services.Storage
 {
     public interface IStorageService : IService
     {

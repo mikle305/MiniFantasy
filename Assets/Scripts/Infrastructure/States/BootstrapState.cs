@@ -4,7 +4,7 @@ using Infrastructure.Services.AssetManagement;
 using Infrastructure.Services.Factory;
 using Infrastructure.Services.Input;
 using Infrastructure.Services.PersistentProgress;
-using Infrastructure.Services.SaveLoad;
+using Infrastructure.Services.Storage;
 using UnityEngine;
 
 namespace Infrastructure.States

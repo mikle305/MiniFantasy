@@ -14,7 +14,11 @@ namespace Infrastructure.States
         private readonly IGameFactory _gameFactory;
         private readonly IPersistentProgressService _progressService;
 
-        public LevelLoadingState(GameStateMachine stateMachine, SceneLoader sceneLoader, IGameFactory gameFactory, IPersistentProgressService progressService)
+        public LevelLoadingState(
+            GameStateMachine stateMachine, 
+            SceneLoader sceneLoader, 
+            IGameFactory gameFactory, 
+            IPersistentProgressService progressService)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;

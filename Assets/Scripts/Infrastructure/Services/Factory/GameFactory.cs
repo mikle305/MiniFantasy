@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Threading;
 using Additional;
 using Character;
 using Infrastructure.Services.AssetManagement;
@@ -12,11 +11,11 @@ namespace Infrastructure.Services.Factory
     public class GameFactory : IGameFactory
     {
         private readonly IAssetProvider _assetProvider;
-
-
+        
         public List<ISavedProgressReader> ProgressReaders { get; } = new();
 
         public List<ISavedProgressWriter> ProgressWriters { get; } = new();
+        
 
         public GameFactory(IAssetProvider assetProvider)
         {
@@ -38,7 +37,7 @@ namespace Infrastructure.Services.Factory
         { 
             var world = _assetProvider.Instantiate<World>(AssetPath.WorldPath);
             RegisterProgressWatchers(world.gameObject);
-            return world;
+            return world;    
         }
 
         public void CreateHud()

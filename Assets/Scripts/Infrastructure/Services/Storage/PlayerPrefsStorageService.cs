@@ -4,11 +4,11 @@ using Infrastructure.Services.Factory;
 using Infrastructure.Services.PersistentProgress;
 using UnityEngine;
 
-namespace Infrastructure.Services.SaveLoad
+namespace Infrastructure.Services.Storage
 {
     public class PlayerPrefsStorageService : IStorageService
     {
-        private const string ProgressKey = "Progress";
+        private const string _progressKey = "Progress";
 
         private readonly IPersistentProgressService _progressService;
         private readonly IGameFactory _gameFactory;
@@ -27,13 +27,13 @@ namespace Infrastructure.Services.SaveLoad
 
             string progressJsonString = _progressService.PlayerProgress.ToJson();
             PlayerPrefs
-                .SetString(ProgressKey, progressJsonString);
+                .SetString(_progressKey, progressJsonString);
         }
 
         public PlayerProgress LoadProgress()
         {
             return PlayerPrefs
-                .GetString(ProgressKey)
+                .GetString(_progressKey)
                 .FromJson<PlayerProgress>();
         }
     }

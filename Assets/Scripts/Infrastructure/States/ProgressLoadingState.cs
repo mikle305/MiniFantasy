@@ -1,7 +1,7 @@
 ﻿using Data;
 using Infrastructure.Scene;
 using Infrastructure.Services.PersistentProgress;
-using Infrastructure.Services.SaveLoad;
+using Infrastructure.Services.Storage;
 
 namespace Infrastructure.States
 {
@@ -24,18 +24,14 @@ namespace Infrastructure.States
 
         public void Enter()
         {
-            LoadOrInitProgress(_progressService);
+            _progressService.PlayerProgress = _storageService.LoadProgress() ?? CreateNewProgress();
+            
             string sceneName = _progressService.PlayerProgress.WorldData.LevelPosition.Level;
             _stateMachine.Enter<LevelLoadingState, string>(sceneName);
         }
 
         public void Exit()
         {
-        }
-
-        private void LoadOrInitProgress(IPersistentProgressService progressService)
-        {
-            progressService.PlayerProgress = _storageService.LoadProgress() ?? CreateNewProgress();
         }
 
         private static PlayerProgress CreateNewProgress()
