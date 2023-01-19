@@ -13,12 +13,10 @@ namespace Infrastructure.States
     {
         private readonly GameStateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
-        private static ServiceProvider _services;
 
 
         public BootstrapState(GameStateMachine stateMachine, SceneLoader sceneLoader, ServiceProvider services)
         {
-            _services = services;
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
             
@@ -40,7 +38,7 @@ namespace Infrastructure.States
             IGameFactory gameFactory = new GameFactory(assetProvider);
             IInputService inputService = CreateInputService();
             IPersistentProgressService progressService = new PersistentProgressService();
-            IStorageService storageService = new PlayerPrefsStorageService();
+            IStorageService storageService = new PlayerPrefsStorageService(progressService, gameFactory);
 
             services.RegisterSingle<IAssetProvider>(implementation: assetProvider);
             services.RegisterSingle<IGameFactory>(implementation: gameFactory);

@@ -28,7 +28,8 @@ namespace Infrastructure.States
                 [typeof(LevelLoadingState)] = new LevelLoadingState(
                     this, 
                     sceneLoader, 
-                    services.Resolve<IGameFactory>()),
+                    services.Resolve<IGameFactory>(),
+                    services.Resolve<IPersistentProgressService>()),
             };
         }
 
