@@ -2,6 +2,7 @@
 using Data;
 using Infrastructure.Services.Factory;
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.ProgressWatchers;
 using UnityEngine;
 
 namespace Infrastructure.Services.Storage
@@ -10,24 +11,24 @@ namespace Infrastructure.Services.Storage
     {
         private const string _progressKey = "Progress";
 
-        private readonly IPersistentProgressService _progressService;
-        private readonly IGameFactory _gameFactory;
+        private readonly IPersistentProgressAccess _progressAccess;
+        private readonly IProgressWatchers _progressWatchers;
 
 
-        public PlayerPrefsStorageService(IPersistentProgressService progressService, IGameFactory gameFactory)
+        public PlayerPrefsStorageService(
+            IPersistentProgressAccess progressAccess, 
+            IProgressWatchers progressWatchers)
         {
-            _progressService = progressService;
-            _gameFactory = gameFactory;
+            _progressAccess = progressAccess;
+            _progressWatchers = progressWatchers;
         }
 
         public void SaveProgress()
         {
-            foreach(ISavedProgressWriter progressWriter in _gameFactory.ProgressWriters)
-                progressWriter.UpdateProgress(_progressService.PlayerProgress);
+            _progressWatchers.InformWriters();
 
-            string progressJsonString = _progressService.PlayerProgress.ToJson();
-            PlayerPrefs
-                .SetString(_progressKey, progressJsonString);
+            string progressJsonString = _progressAccess.PlayerProgress.ToJson();
+            PlayerPrefs.SetString(_progressKey, progressJsonString);
         }
 
         public PlayerProgress LoadProgress()

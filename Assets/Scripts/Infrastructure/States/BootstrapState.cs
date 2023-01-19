@@ -4,6 +4,7 @@ using Infrastructure.Services.AssetManagement;
 using Infrastructure.Services.Factory;
 using Infrastructure.Services.Input;
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.ProgressWatchers;
 using Infrastructure.Services.Storage;
 using UnityEngine;
 
@@ -34,16 +35,18 @@ namespace Infrastructure.States
 
         private static void RegisterServices(ServiceProvider services)
         {
-            IAssetProvider assetProvider = new AssetProvider();
-            IGameFactory gameFactory = new GameFactory(assetProvider);
             IInputService inputService = CreateInputService();
-            IPersistentProgressService progressService = new PersistentProgressService();
-            IStorageService storageService = new PlayerPrefsStorageService(progressService, gameFactory);
+            var assetProvider = new AssetProvider();
+            var progressAccess = new PersistentProgressAccess();
+            var progressWatchers = new ProgressWatchers(progressAccess);
+            var gameFactory = new GameFactory(assetProvider, progressWatchers);
+            var storageService = new PlayerPrefsStorageService(progressAccess, progressWatchers);
 
-            services.RegisterSingle<IAssetProvider>(implementation: assetProvider);
-            services.RegisterSingle<IGameFactory>(implementation: gameFactory);
             services.RegisterSingle<IInputService>(implementation: inputService);
-            services.RegisterSingle<IPersistentProgressService>(implementation: progressService);
+            services.RegisterSingle<IAssetProvider>(implementation: assetProvider);
+            services.RegisterSingle<IProgressWatchers>(implementation: progressWatchers);
+            services.RegisterSingle<IGameFactory>(implementation: gameFactory);
+            services.RegisterSingle<IPersistentProgressAccess>(implementation: progressAccess);
             services.RegisterSingle<IStorageService>(implementation: storageService);
         }
 

@@ -4,6 +4,7 @@ using Infrastructure.Scene;
 using Infrastructure.Services;
 using Infrastructure.Services.Factory;
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.ProgressWatchers;
 using Infrastructure.Services.Storage;
 
 namespace Infrastructure.States
@@ -22,14 +23,14 @@ namespace Infrastructure.States
                 
                 [typeof(ProgressLoadingState)] = new ProgressLoadingState(
                     this, 
-                    services.Resolve<IPersistentProgressService>(), 
+                    services.Resolve<IPersistentProgressAccess>(), 
                     services.Resolve<IStorageService>()),
                 
                 [typeof(LevelLoadingState)] = new LevelLoadingState(
                     this, 
                     sceneLoader, 
                     services.Resolve<IGameFactory>(),
-                    services.Resolve<IPersistentProgressService>()),
+                    services.Resolve<IProgressWatchers>()),
             };
         }
 

@@ -8,25 +8,25 @@ namespace Infrastructure.States
     public class ProgressLoadingState : IState
     {
         private readonly GameStateMachine _stateMachine;
-        private readonly IPersistentProgressService _progressService;
+        private readonly IPersistentProgressAccess _progressAccess;
         private readonly IStorageService _storageService;
 
 
         public ProgressLoadingState(
             GameStateMachine stateMachine, 
-            IPersistentProgressService progressService, 
+            IPersistentProgressAccess progressAccess, 
             IStorageService storageService)
         {
             _stateMachine = stateMachine;
-            _progressService = progressService;
+            _progressAccess = progressAccess;
             _storageService = storageService;
         }
 
         public void Enter()
         {
-            _progressService.PlayerProgress = _storageService.LoadProgress() ?? CreateNewProgress();
+            _progressAccess.PlayerProgress = _storageService.LoadProgress() ?? CreateNewProgress();
             
-            string sceneName = _progressService.PlayerProgress.WorldData.LevelPosition.Level;
+            string sceneName = _progressAccess.PlayerProgress.WorldData.LevelPosition.Level;
             _stateMachine.Enter<LevelLoadingState, string>(sceneName);
         }
 
