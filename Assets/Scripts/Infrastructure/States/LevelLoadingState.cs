@@ -1,4 +1,4 @@
-﻿using CameraLogic;
+﻿using Domain.Camera;
 using Infrastructure.Scene;
 using Infrastructure.Services.Factory;
 using Infrastructure.Services.ProgressWatchers;

@@ -7,7 +7,7 @@ using Infrastructure.Services.PersistentProgress;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Character
+namespace Domain.Character
 {
     [RequireComponent(typeof(CharacterController))]
     [RequireComponent(typeof(CharacterAnimation))]

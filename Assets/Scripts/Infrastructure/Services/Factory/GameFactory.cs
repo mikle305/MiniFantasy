@@ -1,5 +1,5 @@
 ﻿using Additional;
-using Character;
+using Domain.Character;
 using Infrastructure.Services.AssetManagement;
 using Infrastructure.Services.ProgressWatchers;
 using Models;

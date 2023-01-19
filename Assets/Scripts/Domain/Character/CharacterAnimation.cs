@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Character
+namespace Domain.Character
 {
     [RequireComponent(typeof(Animator))]
     public class CharacterAnimation: MonoBehaviour
