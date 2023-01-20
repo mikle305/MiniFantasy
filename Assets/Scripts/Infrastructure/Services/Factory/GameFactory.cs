@@ -21,25 +21,28 @@ namespace Infrastructure.Services.Factory
 
         public GameObject CreateCharacter(World world)
         {
-            GameObject character = _assetProvider.Instantiate(AssetPath.CharacterPath, world.SpawnPoint.position, world.transform);
+            GameObject character =
+                _assetProvider.Instantiate(AssetPath.CharacterPath, world.SpawnPoint.position, world.transform);
+            
+            _progressWatchers.RegisterComponents(character);
+            
             character
                 .GetComponent<CharacterMovement>()
                 .InitWorld(world.transform);
 
-            _progressWatchers.RegisterComponents(character);
             return character;
         }
 
         public World CreateWorld()
-        { 
+        {
             var world = _assetProvider.Instantiate<World>(AssetPath.WorldPath);
             _progressWatchers.RegisterComponents(world.gameObject);
-            return world;    
+            return world;
         }
 
-        public void CreateHud()
+        public RectTransform CreateHud()
         {
-            _assetProvider.Instantiate(AssetPath.HudPath);
+            return _assetProvider.Instantiate<RectTransform>(AssetPath.HudPath);
         }
     }
 }

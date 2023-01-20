@@ -9,6 +9,6 @@ namespace Infrastructure.Services.Factory
         
         public World CreateWorld();
         
-        public void CreateHud();
+        public RectTransform CreateHud();
     }
 }

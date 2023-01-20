@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Infrastructure
+namespace Infrastructure.Game
 {
     public class GameBootstrapper : MonoBehaviour, ICoroutineRunner
     {

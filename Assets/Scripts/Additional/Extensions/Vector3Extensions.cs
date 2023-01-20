@@ -24,5 +24,11 @@ namespace Additional.Extensions
                 z = vectorData.Z
             };
         }
+
+        public static Vector3 AddY(this Vector3 vector, float offset)
+        {
+            vector.y += offset;
+            return vector;
+        }
     }
 }

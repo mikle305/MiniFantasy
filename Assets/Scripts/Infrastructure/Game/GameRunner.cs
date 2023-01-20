@@ -1,8 +1,6 @@
-﻿using System;
-using UnityEngine;
-using Object = UnityEngine.Object;
+﻿using UnityEngine;
 
-namespace Infrastructure
+namespace Infrastructure.Game
 {
     /// <summary>
     /// Wrapper of game bootstrapper to run game from any scene in editor

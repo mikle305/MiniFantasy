@@ -1,6 +1,8 @@
-﻿using Infrastructure.Scene;
+﻿using Infrastructure.Game;
+using Infrastructure.Scene;
 using Infrastructure.Services;
 using Infrastructure.Services.AssetManagement;
+using Infrastructure.Services.AutoSaver;
 using Infrastructure.Services.Factory;
 using Infrastructure.Services.Input;
 using Infrastructure.Services.PersistentProgress;
@@ -13,14 +15,21 @@ namespace Infrastructure.States
     public class BootstrapState: IState
     {
         private readonly GameStateMachine _stateMachine;
+
         private readonly SceneLoader _sceneLoader;
 
+        private readonly ICoroutineRunner _coroutineRunner;
 
-        public BootstrapState(GameStateMachine stateMachine, SceneLoader sceneLoader, ServiceProvider services)
+
+        public BootstrapState(GameStateMachine stateMachine,
+            ServiceProvider services,
+            SceneLoader sceneLoader,
+            ICoroutineRunner coroutineRunner)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
-            
+            _coroutineRunner = coroutineRunner;
+
             RegisterServices(services);
         }
 
@@ -33,7 +42,7 @@ namespace Infrastructure.States
         {
         }
 
-        private static void RegisterServices(ServiceProvider services)
+        private void RegisterServices(ServiceProvider services)
         {
             IInputService inputService = CreateInputService();
             var assetProvider = new AssetProvider();
@@ -41,13 +50,16 @@ namespace Infrastructure.States
             var progressWatchers = new ProgressWatchers(progressAccess);
             var gameFactory = new GameFactory(assetProvider, progressWatchers);
             var storageService = new PlayerPrefsStorageService(progressAccess, progressWatchers);
+            var autoSaver = new ProgressAutoSaver(storageService, _coroutineRunner);
 
             services.RegisterSingle<IInputService>(implementation: inputService);
+            services.RegisterSingle<ICoroutineRunner>(_coroutineRunner);
             services.RegisterSingle<IAssetProvider>(implementation: assetProvider);
             services.RegisterSingle<IProgressWatchers>(implementation: progressWatchers);
             services.RegisterSingle<IGameFactory>(implementation: gameFactory);
             services.RegisterSingle<IPersistentProgressAccess>(implementation: progressAccess);
             services.RegisterSingle<IStorageService>(implementation: storageService);
+            services.RegisterSingle<IProgressAutoSaver>(implementation: autoSaver);
         }
 
         private static IInputService CreateInputService()

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Infrastructure.Game;
 using Infrastructure.Scene;
 using Infrastructure.Services;
+using Infrastructure.Services.AutoSaver;
 using Infrastructure.Services.Factory;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.ProgressWatchers;
@@ -15,16 +17,21 @@ namespace Infrastructure.States
         private IExitableState _activeState;
 
         
-        public GameStateMachine(SceneLoader sceneLoader, ServiceProvider services)
+        public GameStateMachine(ServiceProvider services, SceneLoader sceneLoader, ICoroutineRunner coroutineRunner)
         {
             _states = new Dictionary<Type, IExitableState>
             {
-                [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
+                [typeof(BootstrapState)] = new BootstrapState(
+                    this, 
+                    services, 
+                    sceneLoader, 
+                    coroutineRunner),
                 
                 [typeof(ProgressLoadingState)] = new ProgressLoadingState(
                     this, 
                     services.Resolve<IPersistentProgressAccess>(), 
-                    services.Resolve<IStorageService>()),
+                    services.Resolve<IStorageService>(),
+                    services.Resolve<IProgressAutoSaver>()),
                 
                 [typeof(LevelLoadingState)] = new LevelLoadingState(
                     this, 

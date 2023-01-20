@@ -7,6 +7,11 @@
         public static ServiceProvider Container => _instance ??= new ServiceProvider();
 
         
+        private ServiceProvider()
+        {
+            
+        }
+        
         public void RegisterSingle<TService>(TService implementation) where TService : IService
         {
             ServiceImplementation<TService>.Instance = implementation;

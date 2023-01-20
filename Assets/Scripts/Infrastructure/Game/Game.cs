@@ -2,7 +2,7 @@
 using Infrastructure.Services;
 using Infrastructure.States;
 
-namespace Infrastructure
+namespace Infrastructure.Game
 {
     public class Game
     {
@@ -12,7 +12,8 @@ namespace Infrastructure
         public Game(ICoroutineRunner coroutineRunner)
         {
             var sceneLoader = new SceneLoader(coroutineRunner);
-            _stateMachine = new GameStateMachine(sceneLoader, ServiceProvider.Container);
+            ServiceProvider services = ServiceProvider.Container;
+            _stateMachine = new GameStateMachine(services, sceneLoader, coroutineRunner);
             _stateMachine.Enter<BootstrapState>();
         }
     }

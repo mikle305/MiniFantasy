@@ -98,7 +98,7 @@ namespace Domain.Character
         private void Warp(Vector3Data to)
         {
             _characterController.enabled = false;
-            transform.position = to.ToUnityVector();
+            transform.position = to.ToUnityVector().AddY(_characterController.height);
             _characterController.enabled = true;
         }
 
