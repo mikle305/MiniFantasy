@@ -10,13 +10,13 @@ using UnityEngine.SceneManagement;
 namespace Domain.Character
 {
     [RequireComponent(typeof(CharacterController))]
-    [RequireComponent(typeof(CharacterAnimation))]
+    [RequireComponent(typeof(CharacterAnimator))]
     public class CharacterMovement : MonoBehaviour, ISavedProgressWriter
     {
         [SerializeField] private float _speed;
 
         private CharacterController _characterController;
-        private CharacterAnimation _characterAnimation;
+        private CharacterAnimator _characterAnimator;
         private IInputService _inputService;
         
         private Transform _camera;
@@ -61,7 +61,7 @@ namespace Domain.Character
 
             _inputService = services.Resolve<IInputService>();
             _characterController = GetComponent<CharacterController>();
-            _characterAnimation = GetComponent<CharacterAnimation>();
+            _characterAnimator = GetComponent<CharacterAnimator>();
         }
 
         private void Update()
@@ -78,7 +78,7 @@ namespace Domain.Character
             Vector2 axis = _inputService.GetAxis();
             if (axis.sqrMagnitude > Constants.Epsilon)
             {
-                _characterAnimation.PlayWalking();
+                _characterAnimator.UpdateMoving(1);
                 movementVector.x = axis.x;
                 movementVector.z = axis.y;
                 movementVector = _world.TransformDirection(movementVector);
@@ -87,7 +87,7 @@ namespace Domain.Character
             }
             else
             {
-                _characterAnimation.PlayIdle();
+                _characterAnimator.StopMoving();
             }
 
             movementVector += Physics.gravity;
