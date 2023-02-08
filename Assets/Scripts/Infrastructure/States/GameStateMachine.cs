@@ -13,26 +13,24 @@ namespace Infrastructure.States
 {
     public class GameStateMachine
     {
-        private readonly Dictionary<Type,IExitableState> _states;
+        private readonly Dictionary<Type,IExitableState> _map;
         private IExitableState _activeState;
 
         
         public GameStateMachine(ServiceProvider services, SceneLoader sceneLoader, ICoroutineRunner coroutineRunner)
         {
-            _states = new Dictionary<Type, IExitableState>
+            _map = new Dictionary<Type, IExitableState>
             {
                 [typeof(BootstrapState)] = new BootstrapState(
                     this, 
                     services, 
                     sceneLoader, 
                     coroutineRunner),
-                
                 [typeof(ProgressLoadingState)] = new ProgressLoadingState(
                     this, 
                     services.Resolve<IPersistentProgressAccess>(), 
                     services.Resolve<IStorageService>(),
                     services.Resolve<IProgressAutoSaver>()),
-                
                 [typeof(LevelLoadingState)] = new LevelLoadingState(
                     this, 
                     sceneLoader, 
@@ -59,7 +57,7 @@ namespace Infrastructure.States
         /// <typeparam name="TPayload"></typeparam>
         public void Enter<TState, TPayload>(TPayload payload) where TState : class, IPayloadedState<TPayload>
         {
-            TState state = ChangeState<TState>();
+            var state = ChangeState<TState>();
             state.Enter(payload);
         }
         
@@ -67,13 +65,13 @@ namespace Infrastructure.States
         {
             _activeState?.Exit();
             
-            TState state = GetState<TState>();
+            var state = GetState<TState>();
             _activeState = state;
             
             return state;
         }
 
-        private TState GetState<TState>() where TState : class, IExitableState => 
-            _states[typeof(TState)] as TState;
+        private TState GetState<TState>() where TState : class, IExitableState 
+            => _map[typeof(TState)] as TState;
     }
 }

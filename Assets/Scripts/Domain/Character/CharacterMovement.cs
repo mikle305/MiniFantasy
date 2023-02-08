@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Additional;
 using Additional.Extensions;
@@ -37,28 +38,6 @@ namespace Domain.Character
             _isWorldNull = false;
         }
 
-        public void UpdateProgress(PlayerProgress progress)
-        {
-            progress.WorldData.LevelPosition = new LevelPosition
-            {
-                Level = GetCurrentLevel(),
-                Position = transform.position.ToVectorData()
-            };
-        }
-
-        public void LoadProgress(PlayerProgress progress)
-        {
-            LevelPosition levelPosition = progress.WorldData.LevelPosition;
-            if (levelPosition.Level != GetCurrentLevel())
-                return;
-
-            Vector3Data savedPosition = levelPosition.Position;
-            if (savedPosition == null)
-                return;
-            
-            Warp(to: savedPosition);
-        }
-
         private void Awake()
         {
             ServiceProvider services = ServiceProvider.Container;
@@ -66,6 +45,11 @@ namespace Domain.Character
             _inputService = services.Resolve<IInputService>();
             _characterController = GetComponent<CharacterController>();
             _characterAnimator = GetComponent<ICharacterAnimator>();
+        }
+
+        private void Start()
+        {
+            _characterAnimator.SetAttackDuration(_attackDuration);
         }
 
         private void Update()
@@ -125,7 +109,29 @@ namespace Domain.Character
             _characterController.enabled = true;
         }
 
+        public void LoadProgress(PlayerProgress progress)
+        {
+            LevelPosition levelPosition = progress.WorldData.LevelPosition;
+            if (levelPosition.Level != GetCurrentLevel())
+                return;
+
+            Vector3Data savedPosition = levelPosition.Position;
+            if (savedPosition == null)
+                return;
+            
+            Warp(to: savedPosition);
+        }
+
         private static string GetCurrentLevel() =>
             SceneManager.GetActiveScene().name;
+
+        public void UpdateProgress(PlayerProgress progress)
+        {
+            progress.WorldData.LevelPosition = new LevelPosition
+            {
+                Level = GetCurrentLevel(),
+                Position = transform.position.ToVectorData()
+            };
+        }
     }
 }

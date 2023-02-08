@@ -11,5 +11,7 @@
         public void UpdateMoving(float speedCoefficient);
         
         public void StopMoving();
+        
+        public void SetAttackDuration(float duration);
     }
 }
