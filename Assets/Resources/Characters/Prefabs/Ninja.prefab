@@ -6958,7 +6958,7 @@ GameObject:
   - component: {fileID: 4481646126760248}
   - component: {fileID: 95311200093912232}
   m_Layer: 0
-  m_Name: Chr_Samurai_Ninja_01
+  m_Name: Ninja
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
