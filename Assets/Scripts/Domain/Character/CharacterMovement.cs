@@ -1,3 +1,4 @@
+using System.Collections;
 using Additional;
 using Additional.Extensions;
 using Data;
@@ -14,14 +15,17 @@ namespace Domain.Character
     public class CharacterMovement : MonoBehaviour, ISavedProgressWriter
     {
         [SerializeField] private float _speed;
+        
+        private const float _attackDuration = 2.0f;
 
         private CharacterController _characterController;
-        private CharacterAnimator _characterAnimator;
+        private ICharacterAnimator _characterAnimator;
         private IInputService _inputService;
-        
         private Transform _camera;
         private Transform _world;
+        
         private bool _isWorldNull = true;
+        private bool _isAttacking;
 
 
         public void InitWorld(Transform world)
@@ -61,24 +65,36 @@ namespace Domain.Character
 
             _inputService = services.Resolve<IInputService>();
             _characterController = GetComponent<CharacterController>();
-            _characterAnimator = GetComponent<CharacterAnimator>();
+            _characterAnimator = GetComponent<ICharacterAnimator>();
         }
 
         private void Update()
         {
             if (_isWorldNull)
                 return;
-
+            
             Move();
         }
 
         private void Move()
         {
+            if (_isAttacking)
+                return;
+            
+            if (_inputService.IsAttackInvoked())
+            {
+                _isAttacking = true;
+                _characterAnimator.PlayMeleeAttack();
+                StartCoroutine(StopAttacking(_attackDuration));
+                return;
+            }
+            
             Vector3 movementVector = Vector3.zero;
             Vector2 axis = _inputService.GetAxis();
             if (axis.sqrMagnitude > Constants.Epsilon)
             {
                 _characterAnimator.UpdateMoving(1);
+                
                 movementVector.x = axis.x;
                 movementVector.z = axis.y;
                 movementVector = _world.TransformDirection(movementVector);
@@ -93,6 +109,13 @@ namespace Domain.Character
             movementVector += Physics.gravity;
                 
             _characterController.Move(movementVector * (_speed * Time.deltaTime));
+        }
+
+        private IEnumerator StopAttacking(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+
+            _isAttacking = false;
         }
 
         private void Warp(Vector3Data to)
