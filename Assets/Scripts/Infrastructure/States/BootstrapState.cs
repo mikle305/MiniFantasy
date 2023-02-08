@@ -21,7 +21,8 @@ namespace Infrastructure.States
         private readonly ICoroutineRunner _coroutineRunner;
 
 
-        public BootstrapState(GameStateMachine stateMachine,
+        public BootstrapState(
+            GameStateMachine stateMachine,
             ServiceProvider services,
             SceneLoader sceneLoader,
             ICoroutineRunner coroutineRunner)
@@ -49,13 +50,15 @@ namespace Infrastructure.States
             var progressAccess = new PersistentProgressAccess();
             var progressWatchers = new ProgressWatchers(progressAccess);
             var gameFactory = new GameFactory(assetProvider, progressWatchers);
+            var enemyFactory = new EnemyFactory(assetProvider);
             var storageService = new PlayerPrefsStorageService(progressAccess, progressWatchers);
             var autoSaver = new ProgressAutoSaver(storageService, _coroutineRunner);
 
             services.RegisterSingle<IInputService>(implementation: inputService);
-            services.RegisterSingle<ICoroutineRunner>(_coroutineRunner);
+            services.RegisterSingle<ICoroutineRunner>(implementation: _coroutineRunner);
             services.RegisterSingle<IAssetProvider>(implementation: assetProvider);
             services.RegisterSingle<IProgressWatchers>(implementation: progressWatchers);
+            services.RegisterSingle<IEnemyFactory>(implementation: enemyFactory);
             services.RegisterSingle<IGameFactory>(implementation: gameFactory);
             services.RegisterSingle<IPersistentProgressAccess>(implementation: progressAccess);
             services.RegisterSingle<IStorageService>(implementation: storageService);
@@ -70,7 +73,7 @@ namespace Infrastructure.States
             return new StandaloneInputService();
         }
 
-        private void EnterProgressLoadingState() => 
+        private void EnterProgressLoadingState() =>
             _stateMachine.Enter<ProgressLoadingState>();
     }
 }

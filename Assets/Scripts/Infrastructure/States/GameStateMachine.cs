@@ -17,7 +17,10 @@ namespace Infrastructure.States
         private IExitableState _activeState;
 
         
-        public GameStateMachine(ServiceProvider services, SceneLoader sceneLoader, ICoroutineRunner coroutineRunner)
+        public GameStateMachine(
+            ServiceProvider services, 
+            SceneLoader sceneLoader, 
+            ICoroutineRunner coroutineRunner)
         {
             _map = new Dictionary<Type, IExitableState>
             {
