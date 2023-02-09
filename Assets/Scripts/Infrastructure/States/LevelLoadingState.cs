@@ -1,6 +1,5 @@
 ﻿using Domain.Camera;
 using Infrastructure.Scene;
-using Infrastructure.Services.AutoSaver;
 using Infrastructure.Services.Factory;
 using Infrastructure.Services.ProgressWatchers;
 using Models;
@@ -46,7 +45,10 @@ namespace Infrastructure.States
             World world = _gameFactory.CreateWorld();
             GameObject character = _gameFactory.CreateCharacter(world);
             _gameFactory.CreateHud();
+            
             FollowCamera(character.transform);
+            
+            world.NavMeshBaker.Bake();
         }
 
         private static void FollowCamera(Transform target)

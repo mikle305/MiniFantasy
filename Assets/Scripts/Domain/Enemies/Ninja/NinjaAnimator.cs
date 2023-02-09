@@ -13,13 +13,13 @@ namespace Domain.Enemies.Ninja
         private static readonly int _isMovingHash = Animator.StringToHash("IsMoving");
         private static readonly int _attackSpeedHash = Animator.StringToHash("AttackSpeed");
 
-        private Animator _animator;
-
         // Clips names
         private const string _meleeAttackClipName = "RotateAndAttack";
-
+        
         // Clips lengths
         private float _meleeAttackClipLength;
+
+        private Animator _animator;
 
 
         private void Awake()
