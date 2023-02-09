@@ -3,7 +3,7 @@
 namespace Domain.Enemies.Ninja
 {
     [RequireComponent(typeof(Animator))]
-    public class NinjaAnimator : MonoBehaviour, INinjaAnimator
+    public class NinjaAnimator : MonoBehaviour
     {
         // Parameters
         private static readonly int _dieHash = Animator.StringToHash("Die");

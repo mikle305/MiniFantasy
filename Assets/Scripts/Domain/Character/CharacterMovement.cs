@@ -20,7 +20,7 @@ namespace Domain.Character
         private const float _attackDuration = 2.0f;
 
         private CharacterController _characterController;
-        private ICharacterAnimator _characterAnimator;
+        private CharacterAnimator _characterAnimator;
         private IInputService _inputService;
         private Transform _camera;
         private Transform _world;
@@ -44,7 +44,7 @@ namespace Domain.Character
 
             _inputService = services.Resolve<IInputService>();
             _characterController = GetComponent<CharacterController>();
-            _characterAnimator = GetComponent<ICharacterAnimator>();
+            _characterAnimator = GetComponent<CharacterAnimator>();
         }
 
         private void Start()

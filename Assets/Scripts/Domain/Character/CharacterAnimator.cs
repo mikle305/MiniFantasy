@@ -3,7 +3,7 @@
 namespace Domain.Character
 {
     [RequireComponent(typeof(Animator))]
-    public class CharacterAnimator : MonoBehaviour, ICharacterAnimator
+    public class CharacterAnimator : MonoBehaviour
     {
         // Parameters
         private static readonly int _dieHash = Animator.StringToHash("Die");
