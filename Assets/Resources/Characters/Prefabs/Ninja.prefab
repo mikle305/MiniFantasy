@@ -1283,9 +1283,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4481646126760248}
   - component: {fileID: 95311200093912232}
-  - component: {fileID: 4213285396008643203}
   - component: {fileID: 5643594415395831062}
   - component: {fileID: 3835074404040549117}
+  - component: {fileID: 4213285396008643203}
+  - component: {fileID: -6692695054325570002}
+  - component: {fileID: 2753362449988788841}
   m_Layer: 0
   m_Name: Ninja
   m_TagString: Untagged
@@ -1330,18 +1332,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4213285396008643203
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1880444566353528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bd82cdf36904497805fd88aa0887112, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!195 &5643594415395831062
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1351,7 +1341,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1880444566353528}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.4
+  m_Radius: 0.5
   m_Speed: 5
   m_Acceleration: 15
   avoidancePriority: 50
@@ -1376,6 +1366,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52b64c63e9bca7d4fb04d184595308cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4213285396008643203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1880444566353528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bd82cdf36904497805fd88aa0887112, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-6692695054325570002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1880444566353528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cba0fd41ad144b58f8b59b0c1557412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!136 &2753362449988788841
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1880444566353528}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 1.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!1 &1906435638013852
 GameObject:
   m_ObjectHideFlags: 0

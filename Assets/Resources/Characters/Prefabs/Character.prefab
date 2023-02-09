@@ -610,7 +610,7 @@ Transform:
   - {fileID: 6935062214883247773}
   - {fileID: 6926961710981307321}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &7024013681098194107
 Animator:
@@ -644,7 +644,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 1.8
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_SlopeLimit: 45
   m_StepOffset: 0.05
   m_SkinWidth: 0.08
@@ -662,9 +662,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f08fadf2916b6aa41b0a8014af3be017, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _world: {fileID: 0}
-  _characterController: {fileID: 6930536337813200355}
-  _characterAnimation: {fileID: 6930536337813200365}
   _speed: 4
 --- !u!114 &6930536337813200365
 MonoBehaviour:

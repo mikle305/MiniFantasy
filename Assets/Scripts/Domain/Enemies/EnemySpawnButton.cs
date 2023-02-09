@@ -12,7 +12,6 @@ public class EnemySpawnButton : MonoBehaviour
     private IEnemyFactory _enemyFactory;
 
     private bool _isActive;
-    private Transform _character;
 
 
     private void Awake()
@@ -21,13 +20,8 @@ public class EnemySpawnButton : MonoBehaviour
         _enemyFactory = services.Resolve<IEnemyFactory>();
         _button = GetComponent<Button>();
         _camera = Camera.main;
-        
-        _button.onClick.AddListener(() => _isActive = !_isActive);
-    }
 
-    private void Start()
-    {
-        _character = FindObjectOfType<CharacterMovement>().transform;
+        _button.onClick.AddListener(() => _isActive = !_isActive);
     }
 
     private void Update()
@@ -50,9 +44,6 @@ public class EnemySpawnButton : MonoBehaviour
         _isActive = false;
     }
 
-    private void CreateEnemy(Vector3 position)
-    {
-        GameObject enemy = _enemyFactory.CreateNinja(position);
-        enemy.GetComponent<AgentFollow>().Target = _character;
-    }
+    private void CreateEnemy(Vector3 position) =>
+        _enemyFactory.CreateNinja(position);
 }
