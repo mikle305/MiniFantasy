@@ -2,8 +2,8 @@
 using Infrastructure.Scene;
 using Infrastructure.Services.Factory;
 using Infrastructure.Services.ProgressWatchers;
-using Models;
 using UnityEngine;
+using Views;
 
 namespace Infrastructure.States
 {

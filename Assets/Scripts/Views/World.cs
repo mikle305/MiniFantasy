@@ -1,6 +1,7 @@
+using Domain.NavMesh;
 using UnityEngine;
 
-namespace Models
+namespace Views
 {
     public class World : MonoBehaviour
     {

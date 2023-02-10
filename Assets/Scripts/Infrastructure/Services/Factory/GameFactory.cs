@@ -2,8 +2,8 @@
 using Domain.Character;
 using Infrastructure.Services.AssetManagement;
 using Infrastructure.Services.ProgressWatchers;
-using Models;
 using UnityEngine;
+using Views;
 
 namespace Infrastructure.Services.Factory
 {
