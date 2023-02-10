@@ -1419,7 +1419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _triggerObserver: {fileID: 6767333910633985679}
-  _agentFollow: {fileID: 3835074404040549117}
+  _follower: {fileID: 3835074404040549117}
   _followingCooldown: 1
 --- !u!1 &1906435638013852
 GameObject:

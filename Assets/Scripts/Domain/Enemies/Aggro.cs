@@ -1,18 +1,18 @@
 ﻿using System.Collections;
-using Domain.NavMesh;
+using Domain.Follow;
 using UnityEngine;
 
 namespace Domain.Enemies
 {
     public class Aggro : MonoBehaviour
     {
-        [SerializeField] private TriggerObserver _triggerObserver;
-        [SerializeField] private AgentFollow _agentFollow;
+        [SerializeField] private TriggerObserver _triggerObserver; 
+        [SerializeField] private Follower _follower;
         
         [Header("Settings")] [Space(3)] 
         [Tooltip("In seconds")] [SerializeField] private float _followingCooldown;
 
-        private Coroutine _aggroCoroutine;
+        private Coroutine _aggroCooldown;
         private bool _hasAggroTarget;
 
 
@@ -22,14 +22,14 @@ namespace Domain.Enemies
             _triggerObserver.TriggerExited += OnTriggerExited;
         }
 
-        private void OnTriggerEntered(Collider to)
+        private void OnTriggerEntered(Collider entered)
         {
             if (_hasAggroTarget)
                 return;
 
             _hasAggroTarget = true;
             StopAggroCooldown();
-            Follow(to);
+            _follower.FollowTo(entered.transform);
         }
 
         private void OnTriggerExited(Collider to)
@@ -38,28 +38,22 @@ namespace Domain.Enemies
                 return;
 
             _hasAggroTarget = false;
-            _aggroCoroutine = StartCoroutine(StartAggroCooldown());
+            _aggroCooldown = StartCoroutine(StartAggroCooldown());
         }
 
         private IEnumerator StartAggroCooldown()
         {
             yield return new WaitForSeconds(_followingCooldown);
 
-            StopFollow();
+            _follower.StopFollowing();
         }
 
         private void StopAggroCooldown()
         {
-            if (_aggroCoroutine == null)
+            if (_aggroCooldown == null)
                 return;
             
-            StopCoroutine(_aggroCoroutine);
+            StopCoroutine(_aggroCooldown);
         }
-
-        private void StopFollow() 
-            => _agentFollow.StopFollowing();
-
-        private void Follow(Collider to) 
-            => _agentFollow.Follow(to.transform);
     }
 }
