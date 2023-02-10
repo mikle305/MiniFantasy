@@ -1,27 +1,26 @@
 using Additional;
 using Additional.Extensions;
-using Data;
-using Infrastructure.Services.PersistentProgress;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Domain.Character
 {
     [RequireComponent(typeof(CharacterController))]
     [RequireComponent(typeof(CharacterAnimator))]
-    public class CharacterMovement : MonoBehaviour, ISavedProgressWriter
+    public class CharacterMovement : MonoBehaviour
     {
         [SerializeField] private float _speed;
 
         private CharacterController _characterController;
+        private CharacterAnimator _characterAnimator;
         private Transform _world;
-        
+
         private bool _isWorldNull = true;
 
 
         private void Awake()
         {
             _characterController = GetComponent<CharacterController>();
+            _characterAnimator = GetComponent<CharacterAnimator>();
         }
 
         public void InitWorld(Transform world)
@@ -33,62 +32,39 @@ namespace Domain.Character
             _isWorldNull = false;
         }
 
-        public bool Move(Vector2 axis)
+        public void UpdateMoving(Vector2 axis)
         {
             if (_isWorldNull)
-                return false;
+                return;
 
-            var isMoved = false;
-            Vector3 movementVector = Vector3.zero;
+            var vectorBuilder = new MovementVectorBuilder();
+            bool axisNotZero = axis.sqrMagnitude > Constants.Epsilon;
             
-            if (axis.sqrMagnitude > Constants.Epsilon)
+            if (axisNotZero)
             {
-                isMoved = true;
+                _characterAnimator.UpdateMoving(_speed);
                 
-                movementVector.x = axis.x;
-                movementVector.z = axis.y;
-                movementVector = _world.TransformDirection(movementVector);
-                movementVector.Normalize();
-                transform.forward = movementVector;
+                vectorBuilder.WithAxis(axis);
+                vectorBuilder.TransformToWorld(_world);
+                vectorBuilder.Normalize();
+                
+                transform.forward = vectorBuilder.Build();
             }
+            else
+            {
+                _characterAnimator.StopMoving();
+            }
+            
+            vectorBuilder.WithGravity();
 
-            movementVector += Physics.gravity;
-                
-            _characterController.Move(movementVector * (_speed * Time.deltaTime));
-
-            return isMoved;
+            _characterController.Move(vectorBuilder.Build() * (_speed * Time.deltaTime));
         }
 
-        private void Warp(Vector3Data to)
+        public void Warp(Vector3 to)
         {
             _characterController.enabled = false;
-            transform.position = to.ToUnityVector().AddY(_characterController.height);
+            transform.position = to.AddY(_characterController.height);
             _characterController.enabled = true;
-        }
-
-        private static string GetCurrentLevel() =>
-            SceneManager.GetActiveScene().name;
-
-        public void LoadProgress(PlayerProgress progress)
-        {
-            LevelPosition levelPosition = progress.WorldData.LevelPosition;
-            if (levelPosition.Level != GetCurrentLevel())
-                return;
-
-            Vector3Data savedPosition = levelPosition.Position;
-            if (savedPosition == null)
-                return;
-            
-            Warp(to: savedPosition);
-        }
-
-        public void UpdateProgress(PlayerProgress progress)
-        {
-            progress.WorldData.LevelPosition = new LevelPosition
-            {
-                Level = GetCurrentLevel(),
-                Position = transform.position.ToVectorData()
-            };
         }
     }
 }
