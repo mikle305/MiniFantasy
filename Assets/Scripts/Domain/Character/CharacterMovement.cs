@@ -1,10 +1,6 @@
-using System;
-using System.Collections;
 using Additional;
 using Additional.Extensions;
 using Data;
-using Infrastructure.Services;
-using Infrastructure.Services.Input;
 using Infrastructure.Services.PersistentProgress;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,18 +12,17 @@ namespace Domain.Character
     public class CharacterMovement : MonoBehaviour, ISavedProgressWriter
     {
         [SerializeField] private float _speed;
-        
-        private const float _attackDuration = 2.0f;
 
         private CharacterController _characterController;
-        private CharacterAnimator _characterAnimator;
-        private IInputService _inputService;
-        private Transform _camera;
         private Transform _world;
         
         private bool _isWorldNull = true;
-        private bool _isAttacking;
 
+
+        private void Awake()
+        {
+            _characterController = GetComponent<CharacterController>();
+        }
 
         public void InitWorld(Transform world)
         {
@@ -38,46 +33,17 @@ namespace Domain.Character
             _isWorldNull = false;
         }
 
-        private void Awake()
-        {
-            ServiceProvider services = ServiceProvider.Container;
-
-            _inputService = services.Resolve<IInputService>();
-            _characterController = GetComponent<CharacterController>();
-            _characterAnimator = GetComponent<CharacterAnimator>();
-        }
-
-        private void Start()
-        {
-            _characterAnimator.SetAttackDuration(_attackDuration);
-        }
-
-        private void Update()
+        public bool Move(Vector2 axis)
         {
             if (_isWorldNull)
-                return;
-            
-            Move();
-        }
+                return false;
 
-        private void Move()
-        {
-            if (_isAttacking)
-                return;
-            
-            if (_inputService.IsAttackInvoked())
-            {
-                _isAttacking = true;
-                _characterAnimator.PlayMeleeAttack();
-                StartCoroutine(StopAttacking(_attackDuration));
-                return;
-            }
-            
+            var isMoved = false;
             Vector3 movementVector = Vector3.zero;
-            Vector2 axis = _inputService.GetAxis();
+            
             if (axis.sqrMagnitude > Constants.Epsilon)
             {
-                _characterAnimator.UpdateMoving(1);
+                isMoved = true;
                 
                 movementVector.x = axis.x;
                 movementVector.z = axis.y;
@@ -85,21 +51,12 @@ namespace Domain.Character
                 movementVector.Normalize();
                 transform.forward = movementVector;
             }
-            else
-            {
-                _characterAnimator.StopMoving();
-            }
 
             movementVector += Physics.gravity;
                 
             _characterController.Move(movementVector * (_speed * Time.deltaTime));
-        }
 
-        private IEnumerator StopAttacking(float delay)
-        {
-            yield return new WaitForSeconds(delay);
-
-            _isAttacking = false;
+            return isMoved;
         }
 
         private void Warp(Vector3Data to)
@@ -108,6 +65,9 @@ namespace Domain.Character
             transform.position = to.ToUnityVector().AddY(_characterController.height);
             _characterController.enabled = true;
         }
+
+        private static string GetCurrentLevel() =>
+            SceneManager.GetActiveScene().name;
 
         public void LoadProgress(PlayerProgress progress)
         {
@@ -121,9 +81,6 @@ namespace Domain.Character
             
             Warp(to: savedPosition);
         }
-
-        private static string GetCurrentLevel() =>
-            SceneManager.GetActiveScene().name;
 
         public void UpdateProgress(PlayerProgress progress)
         {
