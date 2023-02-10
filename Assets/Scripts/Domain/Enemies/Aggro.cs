@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using Domain.NavMesh;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Domain.Enemies
 {
@@ -14,6 +13,7 @@ namespace Domain.Enemies
         [Tooltip("In seconds")] [SerializeField] private float _followingCooldown;
 
         private Coroutine _aggroCoroutine;
+        private bool _hasAggroTarget;
 
 
         private void Start()
@@ -24,21 +24,28 @@ namespace Domain.Enemies
 
         private void OnTriggerEntered(Collider to)
         {
+            if (_hasAggroTarget)
+                return;
+
+            _hasAggroTarget = true;
             StopAggroCooldown();
-            
-            _agentFollow.Follow(to.transform);
+            Follow(to);
         }
 
         private void OnTriggerExited(Collider to)
         {
+            if (!_hasAggroTarget)
+                return;
+
+            _hasAggroTarget = false;
             _aggroCoroutine = StartCoroutine(StartAggroCooldown());
         }
 
         private IEnumerator StartAggroCooldown()
         {
             yield return new WaitForSeconds(_followingCooldown);
-            
-            _agentFollow.StopFollowing();
+
+            StopFollow();
         }
 
         private void StopAggroCooldown()
@@ -48,5 +55,11 @@ namespace Domain.Enemies
             
             StopCoroutine(_aggroCoroutine);
         }
+
+        private void StopFollow() 
+            => _agentFollow.StopFollowing();
+
+        private void Follow(Collider to) 
+            => _agentFollow.Follow(to.transform);
     }
 }
