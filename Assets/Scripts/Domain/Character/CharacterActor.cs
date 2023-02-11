@@ -6,16 +6,15 @@ namespace Domain.Character
 {
     [RequireComponent(typeof(CharacterMovement))]
     [RequireComponent(typeof(CharacterAttacker))]
-    public class Character : MonoBehaviour
+    public class CharacterActor : MonoBehaviour
     {
         private CharacterMovement _characterMovement;
         private CharacterAttacker _characterAttacker;
         private IInputService _inputService;
-
-        private float _attackDuration;
-        private bool _isAttacking;
-
         
+        private bool _isAttacking;
+        
+
         private void Awake()
         {
             ServiceProvider services = ServiceProvider.Container;
@@ -46,12 +45,17 @@ namespace Domain.Character
 
             if (_inputService.IsAttackInvoked())
             {
-                _characterAttacker.Attack();
+                Attack();
                 return;
             }
 
-            Vector2 axis = _inputService.GetAxis();
-            _characterMovement.UpdateMoving(axis);
+            Move(_inputService.GetAxis());
         }
+
+        private void Attack() 
+            => _characterAttacker.Attack();
+
+        private void Move(Vector2 axis) 
+            => _characterMovement.Move(axis);
     }
 }

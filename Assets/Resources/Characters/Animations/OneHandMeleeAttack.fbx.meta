@@ -58,14 +58,14 @@ ModelImporter:
       curves: []
       events:
       - time: 0.26802593
-        functionName: FirstAttackEnded
+        functionName: OnFirstAttackAnimated
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.51699597
-        functionName: SecondAttackEnded
+        functionName: OnSecondAttackAnimated
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

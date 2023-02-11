@@ -32,7 +32,7 @@ namespace Domain.Character
             _isWorldNull = false;
         }
 
-        public void UpdateMoving(Vector2 axis)
+        public void Move(Vector2 axis)
         {
             if (_isWorldNull)
                 return;
