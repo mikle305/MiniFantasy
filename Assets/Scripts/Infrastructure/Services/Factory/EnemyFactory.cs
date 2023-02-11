@@ -1,4 +1,4 @@
-﻿using Additional;
+﻿using Additional.Constants;
 using Infrastructure.Services.AssetManagement;
 using UnityEngine;
 

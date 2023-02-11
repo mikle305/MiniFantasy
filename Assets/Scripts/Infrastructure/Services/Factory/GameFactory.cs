@@ -1,5 +1,6 @@
 ﻿using Additional;
-using Domain.Character;
+using Additional.Constants;
+using Domain.Units.Character;
 using Infrastructure.Services.AssetManagement;
 using Infrastructure.Services.ProgressWatchers;
 using UnityEngine;

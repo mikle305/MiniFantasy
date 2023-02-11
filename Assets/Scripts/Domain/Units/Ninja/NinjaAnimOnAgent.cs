@@ -1,8 +1,8 @@
-﻿using Additional;
+﻿using Additional.Constants;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Domain.Enemies.Ninja
+namespace Domain.Units.Ninja
 {
     [RequireComponent(typeof(NavMeshAgent))]
     [RequireComponent(typeof(NinjaAnimator))]

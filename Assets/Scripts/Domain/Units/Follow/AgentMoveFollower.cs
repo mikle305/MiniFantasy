@@ -1,6 +1,6 @@
 using UnityEngine.AI;
 
-namespace Domain.Follow
+namespace Domain.Units.Follow
 {
     public class AgentMoveFollower : Follower
     {

@@ -1,4 +1,4 @@
-﻿namespace Additional
+﻿namespace Additional.Constants
 {
     public static class AssetPath
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Domain.Character
+namespace Domain.Additional
 {
     public class MovementVectorBuilder
     {

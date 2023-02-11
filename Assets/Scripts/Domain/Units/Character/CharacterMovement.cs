@@ -1,8 +1,9 @@
-using Additional;
+using Additional.Constants;
 using Additional.Extensions;
+using Domain.Additional;
 using UnityEngine;
 
-namespace Domain.Character
+namespace Domain.Units.Character
 {
     [RequireComponent(typeof(CharacterController))]
     [RequireComponent(typeof(CharacterAnimator))]

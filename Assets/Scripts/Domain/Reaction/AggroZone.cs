@@ -1,28 +1,21 @@
 ﻿using System.Collections;
-using Domain.Follow;
+using Domain.Units.Follow;
 using UnityEngine;
 
-namespace Domain.Enemies
+namespace Domain.Reaction
 {
-    public class Aggro : MonoBehaviour
+    public class AggroZone : ReactionZone
     {
-        [SerializeField] private TriggerObserver _triggerObserver; 
         [SerializeField] private Follower _follower;
         
-        [Header("Settings")] [Space(3)] 
+        [Header("Settings")] [Space(3)]
         [Tooltip("In seconds")] [SerializeField] private float _followingCooldown;
 
         private Coroutine _aggroCooldown;
         private bool _hasAggroTarget;
 
 
-        private void Start()
-        {
-            _triggerObserver.TriggerEntered += OnTriggerEntered;
-            _triggerObserver.TriggerExited += OnTriggerExited;
-        }
-
-        private void OnTriggerEntered(Collider entered)
+        protected override void OnTriggerEntered(Collider entered)
         {
             if (_hasAggroTarget)
                 return;
@@ -32,7 +25,7 @@ namespace Domain.Enemies
             _follower.FollowTo(entered.transform);
         }
 
-        private void OnTriggerExited(Collider to)
+        protected override void OnTriggerExited(Collider entered)
         {
             if (!_hasAggroTarget)
                 return;

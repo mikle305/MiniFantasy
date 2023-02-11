@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Domain.Enemies.Ninja
+namespace Domain.Units.Ninja
 {
     [RequireComponent(typeof(Animator))]
     public class NinjaAnimator : MonoBehaviour

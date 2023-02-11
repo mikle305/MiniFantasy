@@ -5,7 +5,7 @@ using Additional.Extensions;
 using Additional.Utils;
 using UnityEngine;
 
-namespace Domain.Character
+namespace Domain.Units.Character
 {
     [RequireComponent(typeof(CharacterAnimator))]
     [RequireComponent(typeof(CharacterController))]
@@ -36,7 +36,6 @@ namespace Domain.Character
             _characterAnimator.SetAttackDuration(_attackDuration);
             
             _layerMask = 1 << _layerId;
-            Debug.Log(_layerMask);
             _bodyMid = characterController.height / 2;
             _hits = new Collider[_maxHitsCount];
         }

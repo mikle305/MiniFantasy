@@ -4,7 +4,7 @@ using Infrastructure.Services.PersistentProgress;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Domain.Character
+namespace Domain.Units.Character
 {
     [RequireComponent(typeof(CharacterMovement))]
     public class CharacterProgress : MonoBehaviour, ISavedProgressWriter
