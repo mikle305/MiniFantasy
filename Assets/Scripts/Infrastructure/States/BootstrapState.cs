@@ -5,8 +5,7 @@ using Infrastructure.Services.AssetManagement;
 using Infrastructure.Services.AutoSaver;
 using Infrastructure.Services.Factory;
 using Infrastructure.Services.Input;
-using Infrastructure.Services.PersistentProgress;
-using Infrastructure.Services.ProgressWatchers;
+using Infrastructure.Services.Progress;
 using Infrastructure.Services.Storage;
 using UnityEngine;
 
@@ -47,7 +46,7 @@ namespace Infrastructure.States
         {
             IInputService inputService = CreateInputService();
             var assetProvider = new AssetProvider();
-            var progressAccess = new PersistentProgressAccess();
+            var progressAccess = new ProgressAccess();
             var progressWatchers = new ProgressWatchers(progressAccess);
             var gameFactory = new GameFactory(assetProvider, progressWatchers);
             var enemyFactory = new EnemyFactory(assetProvider);
@@ -60,7 +59,7 @@ namespace Infrastructure.States
             services.RegisterSingle<IProgressWatchers>(implementation: progressWatchers);
             services.RegisterSingle<IEnemyFactory>(implementation: enemyFactory);
             services.RegisterSingle<IGameFactory>(implementation: gameFactory);
-            services.RegisterSingle<IPersistentProgressAccess>(implementation: progressAccess);
+            services.RegisterSingle<IProgressAccess>(implementation: progressAccess);
             services.RegisterSingle<IStorageService>(implementation: storageService);
             services.RegisterSingle<IProgressAutoSaver>(implementation: autoSaver);
         }

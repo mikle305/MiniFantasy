@@ -1,7 +1,7 @@
 ﻿using Domain.Camera;
 using Infrastructure.Scene;
 using Infrastructure.Services.Factory;
-using Infrastructure.Services.ProgressWatchers;
+using Infrastructure.Services.Progress;
 using UnityEngine;
 using Views;
 
@@ -29,7 +29,8 @@ namespace Infrastructure.States
         public void Enter(string sceneName)
         {
             _progressWatchers.CleanUp();
-            _sceneLoader.Load(sceneName, () =>
+            
+            _sceneLoader.Load(sceneName, onLoaded: () =>
             {
                 InitGameWorld();
                 _progressWatchers.InformReaders();
@@ -47,7 +48,6 @@ namespace Infrastructure.States
             _gameFactory.CreateHud();
             
             FollowCamera(character.transform);
-            
             world.NavMeshBaker.Bake();
         }
 

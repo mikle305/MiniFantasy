@@ -6,5 +6,7 @@ namespace Data
     public class PlayerProgress
     {
         public WorldData WorldData;
+
+        public CharacterStatsData CharacterStats;
     }
 }

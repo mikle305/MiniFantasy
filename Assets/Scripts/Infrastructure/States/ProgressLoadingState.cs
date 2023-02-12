@@ -1,7 +1,8 @@
-﻿using Data;
+﻿using Additional.Constants;
+using Data;
 using Infrastructure.Scene;
 using Infrastructure.Services.AutoSaver;
-using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.Progress;
 using Infrastructure.Services.Storage;
 
 namespace Infrastructure.States
@@ -9,14 +10,14 @@ namespace Infrastructure.States
     public class ProgressLoadingState : IState
     {
         private readonly GameStateMachine _stateMachine;
-        private readonly IPersistentProgressAccess _progressAccess;
+        private readonly IProgressAccess _progressAccess;
         private readonly IStorageService _storageService;
         private readonly IProgressAutoSaver _progressAutoSaver;
 
 
         public ProgressLoadingState(
             GameStateMachine stateMachine,
-            IPersistentProgressAccess progressAccess,
+            IProgressAccess progressAccess,
             IStorageService storageService, 
             IProgressAutoSaver progressAutoSaver)
         {
@@ -41,16 +42,34 @@ namespace Infrastructure.States
 
         private static PlayerProgress CreateNewProgress()
         {
-            var mainScene = SceneName.MainScene.ToString();
-            
             return new PlayerProgress
             {
-                WorldData = new WorldData
+                WorldData = CreateNewWorldData(),
+                CharacterStats = CreateNewCharacterStats()
+            };
+        }
+
+        private static WorldData CreateNewWorldData()
+        {
+            var mainScene = SceneName.MainScene.ToString();
+            
+            return new WorldData
+            {
+                LevelPosition = new LevelPosition
                 {
-                    LevelPosition = new LevelPosition
-                    {
-                        Level = mainScene
-                    }
+                    Level = mainScene
+                }
+            };
+        }
+
+        private static CharacterStatsData CreateNewCharacterStats()
+        {
+            return new CharacterStatsData
+            {
+                Health = new StatData
+                {
+                    MaxValue = CharacterStatsConst.BaseHealth,
+                    CurrentValue = CharacterStatsConst.BaseHealth
                 }
             };
         }

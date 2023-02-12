@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Infrastructure.Services.ProgressWatchers
+namespace Infrastructure.Services.Progress
 {
     public interface IProgressWatchers : IService
     {

@@ -1,8 +1,6 @@
 ﻿using Additional.Extensions;
 using Data;
-using Infrastructure.Services.Factory;
-using Infrastructure.Services.PersistentProgress;
-using Infrastructure.Services.ProgressWatchers;
+using Infrastructure.Services.Progress;
 using UnityEngine;
 
 namespace Infrastructure.Services.Storage
@@ -11,12 +9,12 @@ namespace Infrastructure.Services.Storage
     {
         private const string _progressKey = "Progress";
 
-        private readonly IPersistentProgressAccess _progressAccess;
+        private readonly IProgressAccess _progressAccess;
         private readonly IProgressWatchers _progressWatchers;
 
 
         public PlayerPrefsStorageService(
-            IPersistentProgressAccess progressAccess, 
+            IProgressAccess progressAccess, 
             IProgressWatchers progressWatchers)
         {
             _progressAccess = progressAccess;

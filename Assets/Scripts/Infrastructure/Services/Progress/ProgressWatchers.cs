@@ -1,18 +1,17 @@
 ﻿using System.Collections.Generic;
-using Infrastructure.Services.PersistentProgress;
 using UnityEngine;
 
-namespace Infrastructure.Services.ProgressWatchers
+namespace Infrastructure.Services.Progress
 {
     public class ProgressWatchers : IProgressWatchers
     {
         private readonly List<ISavedProgressReader> _readers = new();
         private readonly List<ISavedProgressWriter> _writers = new();
 
-        private readonly IPersistentProgressAccess _progressAccess;
+        private readonly IProgressAccess _progressAccess;
 
         
-        public ProgressWatchers(IPersistentProgressAccess progressAccess)
+        public ProgressWatchers(IProgressAccess progressAccess)
         {
             _progressAccess = progressAccess;
         }
@@ -23,10 +22,10 @@ namespace Infrastructure.Services.ProgressWatchers
         /// <param name="gameObject"></param>
         public void RegisterComponents(GameObject gameObject)
         {
-            ISavedProgressReader[] progressReaders = gameObject.GetComponentsInChildren<ISavedProgressReader>();
+            ISavedProgressReader[] progressReaders = gameObject.GetComponents<ISavedProgressReader>();
             foreach (ISavedProgressReader progressReader in progressReaders)
             {
-                Register(progressReader);
+                RegisterWatcher(progressReader);
             }
         }
 
@@ -48,7 +47,7 @@ namespace Infrastructure.Services.ProgressWatchers
             _writers.Clear();
         }
 
-        private void Register(ISavedProgressReader progressReader)
+        private void RegisterWatcher(ISavedProgressReader progressReader)
         {
             _readers.Add(progressReader);
             

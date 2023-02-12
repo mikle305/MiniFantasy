@@ -5,8 +5,7 @@ using Infrastructure.Scene;
 using Infrastructure.Services;
 using Infrastructure.Services.AutoSaver;
 using Infrastructure.Services.Factory;
-using Infrastructure.Services.PersistentProgress;
-using Infrastructure.Services.ProgressWatchers;
+using Infrastructure.Services.Progress;
 using Infrastructure.Services.Storage;
 
 namespace Infrastructure.States
@@ -31,7 +30,7 @@ namespace Infrastructure.States
                     coroutineRunner),
                 [typeof(ProgressLoadingState)] = new ProgressLoadingState(
                     this, 
-                    services.Resolve<IPersistentProgressAccess>(), 
+                    services.Resolve<IProgressAccess>(), 
                     services.Resolve<IStorageService>(),
                     services.Resolve<IProgressAutoSaver>()),
                 [typeof(LevelLoadingState)] = new LevelLoadingState(

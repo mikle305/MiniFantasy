@@ -1,6 +1,6 @@
 ﻿using Additional.Extensions;
 using Data;
-using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.Progress;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
