@@ -11,5 +11,7 @@ namespace Infrastructure.Services.Input
         public abstract Vector2 GetAxis();
 
         public abstract bool IsAttackInvoked();
+        
+        public abstract bool IsUiPressed();
     }
 }

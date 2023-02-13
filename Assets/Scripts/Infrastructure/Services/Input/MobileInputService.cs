@@ -9,5 +9,8 @@ namespace Infrastructure.Services.Input
 
         public override bool IsAttackInvoked() => 
             SimpleInput.GetButtonUp(Fire);
+
+        public override bool IsUiPressed() => 
+            throw new System.NotImplementedException();
     }
 }

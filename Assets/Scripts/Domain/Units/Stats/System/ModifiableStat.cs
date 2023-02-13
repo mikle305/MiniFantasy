@@ -12,9 +12,11 @@ namespace Domain.Units.Stats.System
         public event Action<float, float> ValueChanged;
 
 
-        public ModifiableStat()
+        public ModifiableStat(float baseValue = 0.0f)
         {
             _modifiers = new List<StatModifier>();
+            _baseValue = baseValue;
+            CacheFinalValue();
         }
 
         public float BaseValue

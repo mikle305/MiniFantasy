@@ -5,9 +5,14 @@ namespace Domain.Units.Stats.System
     public class DefaultStat : IStat
     {
         private float _value;
-
+        
         public event Action<float, float> ValueChanged;
         
+
+        public DefaultStat(float value = 0.0f)
+        {
+            _value = value;
+        }
 
         public float GetValue() 
             => _value;

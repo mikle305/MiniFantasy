@@ -5,21 +5,26 @@ namespace Domain.Units.Character
     [RequireComponent(typeof(Animator))]
     public class CharacterAnimator : MonoBehaviour
     {
+        [Header("Clips names")] [Space(3)]
+        [SerializeField] private string _meleeAttackClipName = "OneHandMeleeAttack";
+        [SerializeField] private string _getHitClipName = "GettingHit";
+
         // Parameters
         private static readonly int _dieHash = Animator.StringToHash("Die");
         private static readonly int _getHitHash = Animator.StringToHash("GetHit");
         private static readonly int _meleeAttackHash = Animator.StringToHash("MeleeAttack");
         private static readonly int _speedHash = Animator.StringToHash("Speed");
         private static readonly int _isMovingHash = Animator.StringToHash("IsMoving");
+        
+        // Anim states speed multipliers
         private static readonly int _attackSpeedHash = Animator.StringToHash("AttackSpeed");
-
-        private Animator _animator;
-
-        // Clips names
-        private const string _meleeAttackClipName = "OneHandMeleeAttack";
+        private static readonly int _getHitSpeedHash = Animator.StringToHash("GetHitSpeed");
 
         // Clips lengths
         private float _meleeAttackClipLength;
+        private float _getHitClipLength;
+        
+        private Animator _animator;
 
 
         private void Awake()
@@ -46,11 +51,11 @@ namespace Domain.Units.Character
         public void StopMoving() =>
             _animator.SetBool(_isMovingHash, false);
 
-        public void SetAttackDuration(float duration)
-        {
-            float multiplier = _meleeAttackClipLength / duration;
-            _animator.SetFloat(_attackSpeedHash, multiplier);
-        }
+        public void SetAttackDuration(float duration) 
+            => SetAnimStateDuration(_attackSpeedHash, _meleeAttackClipLength, duration);
+
+        public void SetGetHitDuration(float duration) 
+            => SetAnimStateDuration(_getHitSpeedHash, _getHitClipLength, duration);
 
         private void InitClipsLengths()
         {
@@ -60,11 +65,20 @@ namespace Domain.Units.Character
             {
                 switch(clip.name)
                 {
-                    case _meleeAttackClipName:
+                    case var value when value == _meleeAttackClipName:
                         _meleeAttackClipLength = clip.length;
+                        break;
+                    case var value when value == _getHitClipName:
+                        _getHitClipLength = clip.length;
                         break;
                 }
             }
+        }
+
+        private void SetAnimStateDuration(int paramHash, float clipLength, float duration)
+        {
+            float multiplier = clipLength / duration;
+            _animator.SetFloat(paramHash, multiplier);
         }
     }
 }

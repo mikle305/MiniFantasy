@@ -12,25 +12,25 @@ namespace Infrastructure.States
         private readonly GameStateMachine _stateMachine;
         private readonly IProgressAccess _progressAccess;
         private readonly IStorageService _storageService;
-        private readonly IProgressAutoSaver _progressAutoSaver;
+        private readonly IAutoSaver _autoSaver;
 
 
         public ProgressLoadingState(
             GameStateMachine stateMachine,
             IProgressAccess progressAccess,
             IStorageService storageService, 
-            IProgressAutoSaver progressAutoSaver)
+            IAutoSaver autoSaver)
         {
             _stateMachine = stateMachine;
             _progressAccess = progressAccess;
             _storageService = storageService;
-            _progressAutoSaver = progressAutoSaver;
+            _autoSaver = autoSaver;
         }
 
         public void Enter()
         {
             _progressAccess.PlayerProgress = _storageService.LoadProgress() ?? CreateNewProgress();
-            _progressAutoSaver.Start();
+            _autoSaver.Start();
             
             string sceneName = _progressAccess.PlayerProgress.WorldData.LevelPosition.Level;
             _stateMachine.Enter<LevelLoadingState, string>(sceneName);

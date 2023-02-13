@@ -32,7 +32,7 @@ namespace Infrastructure.States
                     this, 
                     services.Resolve<IProgressAccess>(), 
                     services.Resolve<IStorageService>(),
-                    services.Resolve<IProgressAutoSaver>()),
+                    services.Resolve<IAutoSaver>()),
                 [typeof(LevelLoadingState)] = new LevelLoadingState(
                     this, 
                     sceneLoader, 

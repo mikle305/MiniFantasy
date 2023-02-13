@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Infrastructure.Services.AutoSaver
 {
-    public class ProgressAutoSaver : IProgressAutoSaver
+    public class AutoSaver : IAutoSaver
     {
         private bool _isActive;
         private readonly float _saveTime;
@@ -14,7 +14,7 @@ namespace Infrastructure.Services.AutoSaver
         private readonly ICoroutineRunner _coroutineRunner;
 
 
-        public ProgressAutoSaver(IStorageService storageService, ICoroutineRunner coroutineRunner)
+        public AutoSaver(IStorageService storageService, ICoroutineRunner coroutineRunner)
         {
             _storageService = storageService;
             _coroutineRunner = coroutineRunner;

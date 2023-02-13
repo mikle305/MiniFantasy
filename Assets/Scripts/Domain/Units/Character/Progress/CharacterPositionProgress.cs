@@ -4,16 +4,18 @@ using Infrastructure.Services.Progress;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Domain.Units.Character
+namespace Domain.Units.Character.Progress
 {
-    [RequireComponent(typeof(CharacterMovement))]
-    public class CharacterProgress : MonoBehaviour, ISavedProgressWriter
+    public class CharacterPositionProgress : ISavedProgressWriter
     {
-        private CharacterMovement _characterMovement;
+        private readonly CharacterMovement _characterMovement;
+        private readonly Transform _transform;
 
-        private void Awake()
+        
+        public CharacterPositionProgress(CharacterMovement characterMovement, Transform transform)
         {
-            _characterMovement = GetComponent<CharacterMovement>();
+            _characterMovement = characterMovement;
+            _transform = transform;
         }
 
         public void LoadProgress(PlayerProgress progress)
@@ -25,7 +27,7 @@ namespace Domain.Units.Character
             Vector3Data savedPosition = levelPosition.Position;
             if (savedPosition == null)
                 return;
-            
+
             _characterMovement.Warp(to: savedPosition.ToUnityVector());
         }
 
@@ -34,7 +36,7 @@ namespace Domain.Units.Character
             progress.WorldData.LevelPosition = new LevelPosition
             {
                 Level = GetCurrentLevel(),
-                Position = transform.position.ToVectorData()
+                Position = _transform.position.ToVectorData()
             };
         }
 

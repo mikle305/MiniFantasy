@@ -43,12 +43,11 @@ namespace Domain.Units.Character
         public void Attack()
         {
             AttackStarted?.Invoke();
-            
             _characterAnimator.PlayMeleeAttack();
-            
             StartCoroutine(InvokeAttackEnded(_attackDuration));
         }
 
+        // Animation event callback
         private void OnFirstAttackAnimated()
         {
             PhysicsDebug.DrawSphere(CalculateHitPoint(), _hitRadius);
@@ -57,7 +56,8 @@ namespace Domain.Units.Character
             {
             }
         }
-
+        
+        // Animation event callback
         private void OnSecondAttackAnimated()
         {
             PhysicsDebug.DrawSphere(CalculateHitPoint(), _hitRadius);

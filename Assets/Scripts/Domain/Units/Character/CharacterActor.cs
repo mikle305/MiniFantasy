@@ -8,11 +8,14 @@ namespace Domain.Units.Character
     [RequireComponent(typeof(CharacterAttacker))]
     public class CharacterActor : MonoBehaviour
     {
+        [SerializeField] private CharacterHealth _characterHealth;
+        
         private CharacterMovement _characterMovement;
         private CharacterAttacker _characterAttacker;
         private IInputService _inputService;
         
         private bool _isAttacking;
+        private bool _isHited;
         
 
         private void Awake()
@@ -31,6 +34,12 @@ namespace Domain.Units.Character
 
             _characterAttacker.AttackEnded +=
                 () => _isAttacking = false;
+
+            _characterHealth.DamageStarted +=
+                () => _isHited = true;
+
+            _characterHealth.DamageEnded +=
+                () => _isHited = false;
         }
 
         private void Update()
@@ -42,20 +51,18 @@ namespace Domain.Units.Character
         {
             if (_isAttacking)
                 return;
+            
+            if (_isHited)
+                return;
 
-            if (_inputService.IsAttackInvoked())
+            if (_inputService.IsAttackInvoked() && !_inputService.IsUiPressed())
             {
-                Attack();
+                _characterAttacker.Attack();
                 return;
             }
-
-            Move(_inputService.GetAxis());
+            
+            Vector2 axis = _inputService.GetAxis();
+            _characterMovement.Move(axis);
         }
-
-        private void Attack() 
-            => _characterAttacker.Attack();
-
-        private void Move(Vector2 axis) 
-            => _characterMovement.Move(axis);
     }
 }

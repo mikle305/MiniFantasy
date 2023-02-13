@@ -14,9 +14,7 @@ namespace Infrastructure.States
     public class BootstrapState: IState
     {
         private readonly GameStateMachine _stateMachine;
-
         private readonly SceneLoader _sceneLoader;
-
         private readonly ICoroutineRunner _coroutineRunner;
 
 
@@ -51,7 +49,7 @@ namespace Infrastructure.States
             var gameFactory = new GameFactory(assetProvider, progressWatchers);
             var enemyFactory = new EnemyFactory(assetProvider);
             var storageService = new PlayerPrefsStorageService(progressAccess, progressWatchers);
-            var autoSaver = new ProgressAutoSaver(storageService, _coroutineRunner);
+            var autoSaver = new AutoSaver(storageService, _coroutineRunner);
 
             services.RegisterSingle<IInputService>(implementation: inputService);
             services.RegisterSingle<ICoroutineRunner>(implementation: _coroutineRunner);
@@ -61,7 +59,7 @@ namespace Infrastructure.States
             services.RegisterSingle<IGameFactory>(implementation: gameFactory);
             services.RegisterSingle<IProgressAccess>(implementation: progressAccess);
             services.RegisterSingle<IStorageService>(implementation: storageService);
-            services.RegisterSingle<IProgressAutoSaver>(implementation: autoSaver);
+            services.RegisterSingle<IAutoSaver>(implementation: autoSaver);
         }
 
         private static IInputService CreateInputService()
