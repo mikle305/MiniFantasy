@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Infrastructure.Game
 {
-    public class GameBootstrapper : MonoBehaviour, ICoroutineRunner
+    public class EntryPoint : MonoBehaviour, ICoroutineRunner
     {
         private Game _game;
 
