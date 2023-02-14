@@ -1,4 +1,5 @@
-﻿using Domain.Units.Character;
+﻿using Domain.Units.Health;
+using Domain.Units.Specific.Character;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,21 +10,21 @@ namespace UI
     {
         [SerializeField] private float _damage = 1.0f;
         
-        private CharacterHealth _characterHealth;
+        private Health _health;
         private Button _button;
         
         
         private void Start()
         {
-            _characterHealth = FindObjectOfType<CharacterHealth>();
+            _health = FindObjectOfType<CharacterActor>().GetComponent<Health>();
             _button = GetComponent<Button>();
             _button.onClick.AddListener(OnButtonClicked);
         }
 
         private void OnButtonClicked()
         {
-            _characterHealth.TakeDamage(_damage);
-            Debug.Log($"{_characterHealth.CurrentValue()} / {_characterHealth.MaxValueWithBonuses()}");
+            _health.TakeDamage(_damage);
+            Debug.Log($"{_health.CurrentValue()} / {_health.MaxValueWithBonuses()}");
         }
     }
 }

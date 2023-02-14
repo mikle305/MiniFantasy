@@ -1,14 +1,13 @@
 ﻿using Data;
-using Domain.Units.Stats.Components;
 using Infrastructure.Services.Progress;
 
-namespace Domain.Units.Character.Progress
+namespace Domain.Units.Specific.Character.Progress
 {
     public class CharacterStatsProgress : ISavedProgressWriter
     {
-        private readonly Health _health;
+        private readonly Health.Health _health;
 
-        public CharacterStatsProgress(Health health)
+        public CharacterStatsProgress(Health.Health health)
         {
             _health = health;
         }

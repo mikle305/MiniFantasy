@@ -3,7 +3,7 @@ using Additional.Extensions;
 using Domain.Additional;
 using UnityEngine;
 
-namespace Domain.Units.Character
+namespace Domain.Units.Specific.Character
 {
     [RequireComponent(typeof(CharacterController))]
     [RequireComponent(typeof(CharacterAnimator))]

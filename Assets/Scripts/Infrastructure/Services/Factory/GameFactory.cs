@@ -1,5 +1,5 @@
 ﻿using Additional.Constants;
-using Domain.Units.Character;
+using Domain.Units.Specific.Character;
 using Infrastructure.Services.AssetManagement;
 using Infrastructure.Services.Progress;
 using UnityEngine;

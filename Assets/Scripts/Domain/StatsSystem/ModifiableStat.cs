@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Domain.Units.Stats.System
+namespace Domain.StatsSystem
 {
     public class ModifiableStat : IStat
     {

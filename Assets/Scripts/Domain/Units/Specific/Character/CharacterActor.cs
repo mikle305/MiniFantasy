@@ -1,17 +1,18 @@
-﻿using Infrastructure.Services;
+﻿using Domain.Units.Health;
+using Infrastructure.Services;
 using Infrastructure.Services.Input;
 using UnityEngine;
 
-namespace Domain.Units.Character
+namespace Domain.Units.Specific.Character
 {
     [RequireComponent(typeof(CharacterMovement))]
     [RequireComponent(typeof(CharacterAttacker))]
+    [RequireComponent(typeof(HitAnimOnHealth))]
     public class CharacterActor : MonoBehaviour
     {
-        [SerializeField] private CharacterHealth _characterHealth;
-        
         private CharacterMovement _characterMovement;
         private CharacterAttacker _characterAttacker;
+        private HitAnimOnHealth _hitAnimOnHealth;
         private IInputService _inputService;
         
         private bool _isAttacking;
@@ -35,10 +36,10 @@ namespace Domain.Units.Character
             _characterAttacker.AttackEnded +=
                 () => _isAttacking = false;
 
-            _characterHealth.DamageStarted +=
+            _hitAnimOnHealth.Started +=
                 () => _isHited = true;
 
-            _characterHealth.DamageEnded +=
+            _hitAnimOnHealth.Ended +=
                 () => _isHited = false;
         }
 

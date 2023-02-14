@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
 using Data;
-using Domain.Units.Stats.Components;
 using Infrastructure.Services.Progress;
 using UnityEngine;
 
-namespace Domain.Units.Character.Progress
+namespace Domain.Units.Specific.Character.Progress
 {
     public class CharacterCompositeProgress : MonoBehaviour, ISavedProgressWriter
     {
         [SerializeField] private CharacterMovement _characterMovement;
-        [SerializeField] private Health _health;
+        [SerializeField] private Health.Health _health;
         
         private readonly List<ISavedProgressWriter> _characterProgressParts = new();
 

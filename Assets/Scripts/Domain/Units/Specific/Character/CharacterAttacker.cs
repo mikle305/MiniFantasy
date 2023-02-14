@@ -3,26 +3,27 @@ using System.Collections;
 using System.Linq;
 using Additional.Extensions;
 using Additional.Utils;
+using Domain.Units.AnimatorAbstractions;
 using UnityEngine;
 
-namespace Domain.Units.Character
+namespace Domain.Units.Specific.Character
 {
     [RequireComponent(typeof(CharacterAnimator))]
     [RequireComponent(typeof(CharacterController))]
     public class CharacterAttacker : MonoBehaviour
     {
-        [SerializeField] private float _attackDuration = 2.0f;
-
         [Header("Hits settings")] [Space(3)] 
         [SerializeField] private float _hitRadius;
         [SerializeField] private float _hitDistance;
         [SerializeField] private int _maxHitsCount = 1;
         [SerializeField] private int _layerId;
 
-        private CharacterAnimator _characterAnimator;
+        private IAttackAnimator _characterAnimator;
         private Collider[] _hits;
         private float _bodyMid;
         private int _layerMask;
+        
+        private const float _attackDuration = 2.0f;
 
         public event Action AttackStarted;
         public event Action AttackEnded;
@@ -30,7 +31,7 @@ namespace Domain.Units.Character
 
         private void Awake()
         {
-            _characterAnimator = GetComponent<CharacterAnimator>();
+            _characterAnimator = GetComponent<IAttackAnimator>();
             var characterController = GetComponent<CharacterController>();
             
             _characterAnimator.SetAttackDuration(_attackDuration);

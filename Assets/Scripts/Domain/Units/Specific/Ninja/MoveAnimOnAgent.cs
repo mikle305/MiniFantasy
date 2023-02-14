@@ -1,21 +1,22 @@
 ﻿using Additional.Constants;
+using Domain.Units.AnimatorAbstractions;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Domain.Units.Ninja
+namespace Domain.Units.Specific.Ninja
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    [RequireComponent(typeof(NinjaAnimator))]
-    public class NinjaAnimOnAgent : MonoBehaviour
+    [RequireComponent(typeof(IMoveAnimator))]
+    public class MoveAnimOnAgent : MonoBehaviour
     {
         private NavMeshAgent _agent;
-        private NinjaAnimator _animator;
+        private IMoveAnimator _animator;
 
 
         private void Awake()
         {
             _agent = GetComponent<NavMeshAgent>();
-            _animator = GetComponent<NinjaAnimator>();
+            _animator = GetComponent<IMoveAnimator>();
         }
 
         private void Update()

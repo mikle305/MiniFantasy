@@ -1,4 +1,4 @@
-﻿namespace Domain.Units.Stats.System
+﻿namespace Domain.StatsSystem
 {
     public enum ModifierType
     {

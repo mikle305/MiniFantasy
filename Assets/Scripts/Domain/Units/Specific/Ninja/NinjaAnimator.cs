@@ -1,32 +1,32 @@
-﻿using UnityEngine;
+﻿using Domain.Units.AnimatorAbstractions;
+using UnityEngine;
 
-namespace Domain.Units.Ninja
+namespace Domain.Units.Specific.Ninja
 {
     [RequireComponent(typeof(Animator))]
-    public class NinjaAnimator : MonoBehaviour
+    public class NinjaAnimator : UnitAnimator, IMoveAnimator, IHitAnimator, IAttackAnimator
     {
+        [Header("Clips names")] [Space(3)]
+        [SerializeField] private string _meleeAttackClipName = "RotateAndAttack";
+        [SerializeField] private string _getHitClipName = "GettingHit";
+        
         // Parameters
         private static readonly int _dieHash = Animator.StringToHash("Die");
         private static readonly int _getHitHash = Animator.StringToHash("GetHit");
         private static readonly int _meleeAttackHash = Animator.StringToHash("MeleeAttack");
         private static readonly int _speedHash = Animator.StringToHash("Speed");
         private static readonly int _isMovingHash = Animator.StringToHash("IsMoving");
-        private static readonly int _attackSpeedHash = Animator.StringToHash("AttackSpeed");
 
-        // Clips names
-        private const string _meleeAttackClipName = "RotateAndAttack";
-        
         // Clips lengths
         private float _meleeAttackClipLength;
+        private float _getHitClipLength;
+        
+        // Anim states speed multipliers
+        private static readonly int _attackSpeedHash = Animator.StringToHash("AttackSpeed");
+        private static readonly int _getHitSpeedHash = Animator.StringToHash("GetHitSpeed");
 
-        private Animator _animator;
-
-
-        private void Awake()
-        {
-            _animator = GetComponent<Animator>();
-            InitClipsLengths();
-        }
+        
+        
 
         public void PlayMeleeAttack() =>
             _animator.SetTrigger(_meleeAttackHash);
@@ -46,13 +46,13 @@ namespace Domain.Units.Ninja
         public void StopMoving() =>
             _animator.SetBool(_isMovingHash, false);
 
-        public void SetAttackDuration(float duration)
-        {
-            float multiplier = _meleeAttackClipLength / duration;
-            _animator.SetFloat(_attackSpeedHash, multiplier);
-        }
+        public void SetAttackDuration(float duration) 
+            => SetAnimStateDuration(_attackSpeedHash, _meleeAttackClipLength, duration);
 
-        private void InitClipsLengths()
+        public void SetHitDuration(float duration)
+            => SetAnimStateDuration(_getHitSpeedHash, _getHitClipLength, duration);
+
+        protected override void InitClipsLengths()
         {
             AnimationClip[] clips = _animator.runtimeAnimatorController.animationClips;
             
@@ -60,8 +60,11 @@ namespace Domain.Units.Ninja
             {
                 switch(clip.name)
                 {
-                    case _meleeAttackClipName:
+                    case var value when value == _meleeAttackClipName:
                         _meleeAttackClipLength = clip.length;
+                        break;
+                    case var value when value == _getHitClipName:
+                        _getHitClipLength = clip.length;
                         break;
                 }
             }

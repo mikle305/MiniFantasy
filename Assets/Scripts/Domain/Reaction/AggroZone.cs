@@ -21,8 +21,8 @@ namespace Domain.Reaction
                 return;
 
             _hasAggroTarget = true;
-            StopAggroCooldown();
-            _follower.FollowTo(entered.transform);
+            BreakAggroCooldown();
+            StartFollowing(entered.transform);
         }
 
         protected override void OnTriggerExited(Collider entered)
@@ -31,17 +31,20 @@ namespace Domain.Reaction
                 return;
 
             _hasAggroTarget = false;
-            _aggroCooldown = StartCoroutine(StartAggroCooldown());
+            _aggroCooldown = StartCoroutine(StopFollowingWithDelay());
         }
 
-        private IEnumerator StartAggroCooldown()
+        private void StartFollowing(Transform target) 
+            => _follower.FollowTo(target);
+
+        private IEnumerator StopFollowingWithDelay()
         {
             yield return new WaitForSeconds(_followingCooldown);
 
             _follower.StopFollowing();
         }
 
-        private void StopAggroCooldown()
+        private void BreakAggroCooldown()
         {
             if (_aggroCooldown == null)
                 return;

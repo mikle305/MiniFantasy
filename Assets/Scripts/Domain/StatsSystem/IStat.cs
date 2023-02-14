@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Domain.Units.Stats.System
+namespace Domain.StatsSystem
 {
     public interface IStat
     {

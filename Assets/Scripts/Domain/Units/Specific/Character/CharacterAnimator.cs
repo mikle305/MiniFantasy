@@ -1,9 +1,9 @@
-﻿using UnityEngine;
+﻿using Domain.Units.AnimatorAbstractions;
+using UnityEngine;
 
-namespace Domain.Units.Character
+namespace Domain.Units.Specific.Character
 {
-    [RequireComponent(typeof(Animator))]
-    public class CharacterAnimator : MonoBehaviour
+    public class CharacterAnimator : UnitAnimator, IHitAnimator, IAttackAnimator, IMoveAnimator
     {
         [Header("Clips names")] [Space(3)]
         [SerializeField] private string _meleeAttackClipName = "OneHandMeleeAttack";
@@ -23,15 +23,6 @@ namespace Domain.Units.Character
         // Clips lengths
         private float _meleeAttackClipLength;
         private float _getHitClipLength;
-        
-        private Animator _animator;
-
-
-        private void Awake()
-        {
-            _animator = GetComponent<Animator>();
-            InitClipsLengths();
-        }
 
         public void PlayMeleeAttack() =>
             _animator.SetTrigger(_meleeAttackHash);
@@ -54,10 +45,10 @@ namespace Domain.Units.Character
         public void SetAttackDuration(float duration) 
             => SetAnimStateDuration(_attackSpeedHash, _meleeAttackClipLength, duration);
 
-        public void SetGetHitDuration(float duration) 
+        public void SetHitDuration(float duration) 
             => SetAnimStateDuration(_getHitSpeedHash, _getHitClipLength, duration);
 
-        private void InitClipsLengths()
+        protected override void InitClipsLengths()
         {
             AnimationClip[] clips = _animator.runtimeAnimatorController.animationClips;
             
@@ -73,12 +64,6 @@ namespace Domain.Units.Character
                         break;
                 }
             }
-        }
-
-        private void SetAnimStateDuration(int paramHash, float clipLength, float duration)
-        {
-            float multiplier = clipLength / duration;
-            _animator.SetFloat(paramHash, multiplier);
         }
     }
 }
