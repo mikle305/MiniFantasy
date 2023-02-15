@@ -1,4 +1,4 @@
-﻿using Domain.Units.Health;
+﻿using Domain.Units.Stats;
 using Infrastructure.Services;
 using Infrastructure.Services.Input;
 using UnityEngine;
@@ -21,16 +21,41 @@ namespace Domain.Units.Specific.Character
 
         private void Awake()
         {
+            InitDependencies();
+            InitStatesUpdaters();
+        }
+
+        private void Update()
+        {
+            if (_isAttacking)
+                return;
+            
+            if (_isHited)
+                return;
+            
+            if (_inputService.IsAttackInvoked() && !_inputService.IsUiPressed())
+            {
+                _characterAttacker.Attack();
+                return;
+            }
+            
+            Vector2 axis = _inputService.GetAxis();
+            _characterMovement.Move(axis);
+        }
+
+        private void InitDependencies()
+        {
             ServiceProvider services = ServiceProvider.Container;
             _inputService = services.Resolve<IInputService>();
 
             _characterMovement = GetComponent<CharacterMovement>();
             _characterAttacker = GetComponent<CharacterAttacker>();
+            _hitAnimOnHealth = GetComponent<HitAnimOnHealth>();
         }
 
-        private void Start()
+        private void InitStatesUpdaters()
         {
-            _characterAttacker.AttackStarted += 
+            _characterAttacker.AttackStarted +=
                 () => _isAttacking = true;
 
             _characterAttacker.AttackEnded +=
@@ -41,29 +66,6 @@ namespace Domain.Units.Specific.Character
 
             _hitAnimOnHealth.Ended +=
                 () => _isHited = false;
-        }
-
-        private void Update()
-        {
-            ActOnInput();
-        }
-
-        private void ActOnInput()
-        {
-            if (_isAttacking)
-                return;
-            
-            if (_isHited)
-                return;
-
-            if (_inputService.IsAttackInvoked() && !_inputService.IsUiPressed())
-            {
-                _characterAttacker.Attack();
-                return;
-            }
-            
-            Vector2 axis = _inputService.GetAxis();
-            _characterMovement.Move(axis);
         }
     }
 }

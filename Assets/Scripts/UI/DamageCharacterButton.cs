@@ -1,5 +1,5 @@
-﻿using Domain.Units.Health;
-using Domain.Units.Specific.Character;
+﻿using Domain.Units.Specific.Character;
+using Domain.Units.Stats;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,7 +24,6 @@ namespace UI
         private void OnButtonClicked()
         {
             _health.TakeDamage(_damage);
-            Debug.Log($"{_health.CurrentValue()} / {_health.MaxValueWithBonuses()}");
         }
     }
 }

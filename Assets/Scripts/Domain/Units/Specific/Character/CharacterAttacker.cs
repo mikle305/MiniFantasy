@@ -4,6 +4,7 @@ using System.Linq;
 using Additional.Extensions;
 using Additional.Utils;
 using Domain.Units.AnimatorAbstractions;
+using Domain.Units.Stats;
 using UnityEngine;
 
 namespace Domain.Units.Specific.Character
@@ -24,6 +25,8 @@ namespace Domain.Units.Specific.Character
         private int _layerMask;
         
         private const float _attackDuration = 2.0f;
+        private const float _firstAttackDamage = 1.0f;
+        private const float _secondAttackDamage = 0.5f;
 
         public event Action AttackStarted;
         public event Action AttackEnded;
@@ -53,9 +56,7 @@ namespace Domain.Units.Specific.Character
         {
             PhysicsDebug.DrawSphere(CalculateHitPoint(), _hitRadius);
 
-            if (TryHit(out Collider hit))
-            {
-            }
+            TryDamage(_firstAttackDamage);
         }
         
         // Animation event callback
@@ -63,11 +64,21 @@ namespace Domain.Units.Specific.Character
         {
             PhysicsDebug.DrawSphere(CalculateHitPoint(), _hitRadius);
 
-            if (TryHit(out Collider hit))
-            {
-            }
+            TryDamage(_secondAttackDamage);
         }
 
+        private bool TryDamage(float damage)
+        {
+            if (!TryHit(out Collider hit))
+                return false;
+            
+            if (!hit.TryGetComponent(out Health health))
+                return false;
+            
+            health.TakeDamage(damage);
+            return true;
+        }
+        
         private bool TryHit(out Collider hit)
         {
             int hitsCount = Physics.OverlapSphereNonAlloc(

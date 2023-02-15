@@ -2,7 +2,7 @@
 using Domain.StatsSystem;
 using UnityEngine;
 
-namespace Domain.Units.Health
+namespace Domain.Units.Stats
 {
     public class Health : MonoBehaviour
     {
@@ -10,9 +10,9 @@ namespace Domain.Units.Health
         private ModifiableStat _max;
         private bool _isInitialized;
 
-        public event Action Damaged; 
-
-
+        public event Action Damaged;
+        
+        
         public void Init(float current, float max)
         {
             if (_isInitialized)
@@ -47,7 +47,6 @@ namespace Domain.Units.Health
             
             float diff = _current.GetValue() - value;
             _current.SetValue(diff < 0 ? 0 : diff);
-            
             Damaged?.Invoke();
         }
 

@@ -11,7 +11,7 @@ namespace Domain.Units.Specific.Ninja
     {
         private NavMeshAgent _agent;
         private IMoveAnimator _animator;
-
+        
 
         private void Awake()
         {

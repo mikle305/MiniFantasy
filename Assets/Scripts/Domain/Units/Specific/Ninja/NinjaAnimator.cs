@@ -17,16 +17,16 @@ namespace Domain.Units.Specific.Ninja
         private static readonly int _speedHash = Animator.StringToHash("Speed");
         private static readonly int _isMovingHash = Animator.StringToHash("IsMoving");
 
+
         // Clips lengths
         private float _meleeAttackClipLength;
         private float _getHitClipLength;
-        
+
+
         // Anim states speed multipliers
         private static readonly int _attackSpeedHash = Animator.StringToHash("AttackSpeed");
         private static readonly int _getHitSpeedHash = Animator.StringToHash("GetHitSpeed");
 
-        
-        
 
         public void PlayMeleeAttack() =>
             _animator.SetTrigger(_meleeAttackHash);

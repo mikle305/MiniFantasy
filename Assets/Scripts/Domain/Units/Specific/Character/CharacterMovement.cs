@@ -1,6 +1,7 @@
 using Additional.Constants;
 using Additional.Extensions;
 using Domain.Additional;
+using Domain.Units.AnimatorAbstractions;
 using UnityEngine;
 
 namespace Domain.Units.Specific.Character
@@ -12,7 +13,7 @@ namespace Domain.Units.Specific.Character
         [SerializeField] private float _speed;
 
         private CharacterController _characterController;
-        private CharacterAnimator _characterAnimator;
+        private IMoveAnimator _characterAnimator;
         private Transform _world;
 
         private bool _isWorldNull = true;
@@ -21,7 +22,7 @@ namespace Domain.Units.Specific.Character
         private void Awake()
         {
             _characterController = GetComponent<CharacterController>();
-            _characterAnimator = GetComponent<CharacterAnimator>();
+            _characterAnimator = GetComponent<IMoveAnimator>();
         }
 
         public void InitWorld(Transform world)

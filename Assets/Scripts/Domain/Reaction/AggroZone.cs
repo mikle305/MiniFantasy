@@ -20,18 +20,18 @@ namespace Domain.Reaction
             if (_hasAggroTarget)
                 return;
 
-            _hasAggroTarget = true;
             BreakAggroCooldown();
             StartFollowing(entered.transform);
+            _hasAggroTarget = true;
         }
-
+        
         protected override void OnTriggerExited(Collider entered)
         {
             if (!_hasAggroTarget)
                 return;
 
-            _hasAggroTarget = false;
             _aggroCooldown = StartCoroutine(StopFollowingWithDelay());
+            _hasAggroTarget = false;
         }
 
         private void StartFollowing(Transform target) 

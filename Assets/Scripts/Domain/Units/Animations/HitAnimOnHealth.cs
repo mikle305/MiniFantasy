@@ -3,20 +3,23 @@ using System.Collections;
 using Domain.Units.AnimatorAbstractions;
 using UnityEngine;
 
-namespace Domain.Units.Health
+namespace Domain.Units.Stats
 {
     [RequireComponent(typeof(IHitAnimator))]
     [RequireComponent(typeof(Health))]
     public class HitAnimOnHealth : MonoBehaviour
     {
-        private const float _hitDuration = 1.0f;
+        [SerializeField] private float _hitDuration = 2.0f;
+
         private Health _health;
         private IHitAnimator _animator;
-
+        
+        private Coroutine _endedCoroutine;
+        
         public event Action Started;
         public event Action Ended;
 
-        
+
         private void Awake()
         {
             _health = GetComponent<Health>();
@@ -28,15 +31,26 @@ namespace Domain.Units.Health
 
         private void AnimateHit()
         {
-            Started?.Invoke();
+            if (_endedCoroutine != null)
+            {
+                StopCoroutine(_endedCoroutine);
+            }
+            else
+            {
+                Started?.Invoke();
+            }
+
             _animator.PlayHit();
-            StartCoroutine(InvokeDamageEnded(_hitDuration));
+            _endedCoroutine = StartEndedCoroutine();
         }
+
+        private Coroutine StartEndedCoroutine() 
+            => StartCoroutine(InvokeDamageEnded(_hitDuration));
 
         private IEnumerator InvokeDamageEnded(float delay)
         {
             yield return new WaitForSeconds(delay);
-            
+
             Ended?.Invoke();
         }
     }

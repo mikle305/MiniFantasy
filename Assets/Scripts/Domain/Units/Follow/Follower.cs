@@ -10,15 +10,19 @@ namespace Domain.Units.Follow
         private void Update()
         {
             if (_target != null)
-                UpdateTarget();
+                OnUpdate();
         }
-
-        protected abstract void UpdateTarget();
 
         public void FollowTo(Transform target) 
             => _target = target;
 
         public void StopFollowing() 
             => _target = null;
+
+        protected abstract void OnUpdate();
+
+        public abstract void Block();
+
+        public abstract void Unblock();
     }
 }
