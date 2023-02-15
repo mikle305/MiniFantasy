@@ -33,7 +33,9 @@ namespace Infrastructure.States
 
         public void Enter()
         {
-            _sceneLoader.Load(SceneName.BootstrapScene, EnterProgressLoadingState);
+            _sceneLoader.Load(
+                SceneName.BootstrapScene, 
+                onLoaded: () => _stateMachine.Enter<ProgressLoadingState>());
         }
 
         public void Exit()
@@ -69,8 +71,5 @@ namespace Infrastructure.States
             
             return new StandaloneInputService();
         }
-
-        private void EnterProgressLoadingState() =>
-            _stateMachine.Enter<ProgressLoadingState>();
     }
 }

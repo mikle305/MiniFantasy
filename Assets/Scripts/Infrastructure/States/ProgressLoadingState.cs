@@ -31,8 +31,8 @@ namespace Infrastructure.States
         {
             _progressAccess.PlayerProgress = _storageService.LoadProgress() ?? CreateNewProgress();
             _autoSaver.Start();
-            
             string sceneName = _progressAccess.PlayerProgress.WorldData.LevelPosition.Level;
+            
             _stateMachine.Enter<LevelLoadingState, string>(sceneName);
         }
 
