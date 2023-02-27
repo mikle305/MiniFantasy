@@ -22,20 +22,13 @@ namespace Domain.Units.Specific.Ninja
 
         private void Update()
         {
-            _follower.Block();
-            /*if (_isHited)
+            if (_isHited)
             {
                 _follower.Block();
                 return;
             }
             
-            _follower.Unblock();*/
-        }
-
-        private void InitDependencies()
-        {
-            _follower = GetComponent<Follower>();
-            _hitAnimOnHealth = GetComponent<HitAnimOnHealth>();
+            _follower.Unblock();
         }
 
         private void InitStatesUpdaters()
@@ -45,6 +38,12 @@ namespace Domain.Units.Specific.Ninja
 
             _hitAnimOnHealth.Ended +=
                 () => _isHited = false;
+        }
+
+        private void InitDependencies()
+        {
+            _follower = GetComponent<Follower>();
+            _hitAnimOnHealth = GetComponent<HitAnimOnHealth>();
         }
     }
 }

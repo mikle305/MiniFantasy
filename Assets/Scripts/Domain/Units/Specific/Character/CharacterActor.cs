@@ -43,16 +43,6 @@ namespace Domain.Units.Specific.Character
             _characterMovement.Move(axis);
         }
 
-        private void InitDependencies()
-        {
-            ServiceProvider services = ServiceProvider.Container;
-            _inputService = services.Resolve<IInputService>();
-
-            _characterMovement = GetComponent<CharacterMovement>();
-            _characterAttacker = GetComponent<CharacterAttacker>();
-            _hitAnimOnHealth = GetComponent<HitAnimOnHealth>();
-        }
-
         private void InitStatesUpdaters()
         {
             _characterAttacker.AttackStarted +=
@@ -66,6 +56,16 @@ namespace Domain.Units.Specific.Character
 
             _hitAnimOnHealth.Ended +=
                 () => _isHited = false;
+        }
+
+        private void InitDependencies()
+        {
+            ServiceProvider services = ServiceProvider.Container;
+            _inputService = services.Resolve<IInputService>();
+
+            _characterMovement = GetComponent<CharacterMovement>();
+            _characterAttacker = GetComponent<CharacterAttacker>();
+            _hitAnimOnHealth = GetComponent<HitAnimOnHealth>();
         }
     }
 }

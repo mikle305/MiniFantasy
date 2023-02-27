@@ -9,7 +9,7 @@ namespace Domain.Units.Stats
     [RequireComponent(typeof(Health))]
     public class HitAnimOnHealth : MonoBehaviour
     {
-        [SerializeField] private float _hitDuration = 2.0f;
+        [SerializeField] private float _hitDuration;
 
         private Health _health;
         private IHitAnimator _animator;
@@ -31,15 +31,11 @@ namespace Domain.Units.Stats
 
         private void AnimateHit()
         {
-            if (_endedCoroutine != null)
-            {
-                StopCoroutine(_endedCoroutine);
-            }
-            else
-            {
-                Started?.Invoke();
-            }
 
+            if (_endedCoroutine != null)
+                StopCoroutine(_endedCoroutine);
+
+            Started?.Invoke();
             _animator.PlayHit();
             _endedCoroutine = StartEndedCoroutine();
         }
