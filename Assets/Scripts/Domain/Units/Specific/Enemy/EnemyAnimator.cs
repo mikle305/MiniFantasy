@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Domain.Units.Specific.Enemy
 {
     [RequireComponent(typeof(Animator))]
-    public class EnemyAnimator : UnitAnimator, IMoveAnimator, IHitAnimator, IAttackAnimator
+    public class EnemyAnimator : UnitAnimator, IMoveAnimator, IHitAnimator, IAttackAnimator, IDieAnimator
     {
         [Header("Clips names")] [Space(3)]
         [SerializeField] private string _meleeAttackClipName = "RotateAndAttack";

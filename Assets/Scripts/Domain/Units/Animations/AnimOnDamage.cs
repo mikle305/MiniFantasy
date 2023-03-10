@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections;
 using Domain.Units.Animations.Abstractions;
-using Domain.Units.Stats;
+using Domain.Units.Health;
 using UnityEngine;
 
 namespace Domain.Units.Animations
 {
     [RequireComponent(typeof(IHitAnimator))]
-    [RequireComponent(typeof(Health))]
-    public class HitAnimOnHealth : MonoBehaviour
+    [RequireComponent(typeof(IDamageable))]
+    public class AnimOnDamage : MonoBehaviour
     {
         [SerializeField] private float _hitDuration;
 
-        private Health _health;
+        private IDamageable _damageable;
         private IHitAnimator _animator;
         
         private Coroutine _endedCoroutine;
@@ -23,14 +23,14 @@ namespace Domain.Units.Animations
 
         private void Awake()
         {
-            _health = GetComponent<Health>();
+            _damageable = GetComponent<IDamageable>();
             _animator = GetComponent<IHitAnimator>();
             
             _animator.SetHitDuration(_hitDuration);
-            _health.Damaged += AnimateHit;
+            _damageable.Damaged += AnimateHit;
         }
 
-        private void AnimateHit()
+        private void AnimateHit(float health)
         {
 
             if (_endedCoroutine != null)

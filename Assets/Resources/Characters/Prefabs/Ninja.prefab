@@ -1285,12 +1285,12 @@ GameObject:
   - component: {fileID: 2753362449988788841}
   - component: {fileID: 95311200093912232}
   - component: {fileID: 5643594415395831062}
+  - component: {fileID: 2092527647707644289}
   - component: {fileID: 3835074404040549117}
-  - component: {fileID: 4213285396008643203}
   - component: {fileID: -6692695054325570002}
   - component: {fileID: 4146399864200452387}
-  - component: {fileID: 8573449483573391605}
-  - component: {fileID: 6569431675563677844}
+  - component: {fileID: 6331804363281768791}
+  - component: {fileID: 8260586294591030749}
   - component: {fileID: 6497331023182664158}
   - component: {fileID: 4822237933159702650}
   m_Layer: 13
@@ -1374,19 +1374,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 7
   m_ObstacleAvoidanceType: 4
---- !u!114 &3835074404040549117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1880444566353528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52b64c63e9bca7d4fb04d184595308cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4213285396008643203
+--- !u!114 &2092527647707644289
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1400,6 +1388,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _meleeAttackClipName: RotateAndAttack
   _getHitClipName: GettingHit
+--- !u!114 &3835074404040549117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1880444566353528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52b64c63e9bca7d4fb04d184595308cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-6692695054325570002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1427,7 +1427,7 @@ MonoBehaviour:
   _triggerObserver: {fileID: 6767333910633985679}
   _follower: {fileID: 3835074404040549117}
   _followingCooldown: 1
---- !u!114 &8573449483573391605
+--- !u!114 &6331804363281768791
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1436,10 +1436,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1880444566353528}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19478e3bdd744979b1f77b2ed4b6e2f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 412097049178461e8f2186e497fcbf14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6569431675563677844
+  _defaultValue: 0
+--- !u!114 &8260586294591030749
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1448,10 +1449,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1880444566353528}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 535e1224fe2b4b179c03d0095e6075d5, type: 3}
+  m_Script: {fileID: 11500000, guid: ac8aeb5e28e94e56b65d57e36ae0a1e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseHealth: 5
+  _animDuration: 1
+  _destroyDuration: 3
 --- !u!114 &6497331023182664158
 MonoBehaviour:
   m_ObjectHideFlags: 0

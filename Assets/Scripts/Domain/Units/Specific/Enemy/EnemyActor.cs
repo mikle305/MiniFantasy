@@ -5,10 +5,10 @@ using UnityEngine;
 namespace Domain.Units.Specific.Enemy
 {
     [RequireComponent(typeof(Follower))]
-    [RequireComponent(typeof(HitAnimOnHealth))]
+    [RequireComponent(typeof(AnimOnDamage))]
     public class EnemyActor : MonoBehaviour
     {
-        private HitAnimOnHealth _hitAnimOnHealth;
+        private AnimOnDamage _animOnDamage;
         private Follower _follower;
         
         private bool _isHited;
@@ -33,17 +33,17 @@ namespace Domain.Units.Specific.Enemy
 
         private void InitStatesUpdaters()
         {
-            _hitAnimOnHealth.Started += 
+            _animOnDamage.Started += 
                 () => _isHited = true;
 
-            _hitAnimOnHealth.Ended +=
+            _animOnDamage.Ended +=
                 () => _isHited = false;
         }
 
         private void InitDependencies()
         {
             _follower = GetComponent<Follower>();
-            _hitAnimOnHealth = GetComponent<HitAnimOnHealth>();
+            _animOnDamage = GetComponent<AnimOnDamage>();
         }
     }
 }

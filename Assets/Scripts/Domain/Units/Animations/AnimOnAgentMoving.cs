@@ -7,7 +7,7 @@ namespace Domain.Units.Animations
 {
     [RequireComponent(typeof(NavMeshAgent))]
     [RequireComponent(typeof(IMoveAnimator))]
-    public class MoveAnimOnAgent : MonoBehaviour
+    public class AnimOnAgentMoving : MonoBehaviour
     {
         private NavMeshAgent _agent;
         private IMoveAnimator _animator;

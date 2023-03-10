@@ -1,16 +1,18 @@
 ﻿using System;
+using Additional.Utils;
 using Domain.StatsSystem;
+using Domain.Units.Health;
 using UnityEngine;
 
-namespace Domain.Units.Stats
+namespace Domain.Units.Specific.Character
 {
-    public class Health : MonoBehaviour
+    public class CharacterHealth : MonoBehaviour, IDamageable
     {
         private DefaultStat _current;
         private ModifiableStat _max;
         private bool _isInitialized;
 
-        public event Action Damaged;
+        public event Action<float> Damaged;
         
         
         public void Init(float current, float max)
@@ -32,7 +34,7 @@ namespace Domain.Units.Stats
         public float MaxValueWithBonuses()
             => _max.GetValue();
 
-        public void Heal(float value)
+        public void TakeHeal(float value)
         {
             ValidateValue(value);
             
@@ -47,13 +49,13 @@ namespace Domain.Units.Stats
             
             float diff = _current.GetValue() - value;
             _current.SetValue(diff < 0 ? 0 : diff);
-            Damaged?.Invoke();
+            Damaged?.Invoke(CurrentValue());
         }
 
         private static void ValidateValue(float value)
         {
             if (value <= 0)
-                throw new ArgumentException("Value must be not not less than zero");
+                ThrowHelper.ValueLessThanZero();
         }
     }
 }

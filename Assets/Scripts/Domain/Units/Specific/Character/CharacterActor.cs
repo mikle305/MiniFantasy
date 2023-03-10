@@ -1,5 +1,4 @@
 ﻿using Domain.Units.Animations;
-using Domain.Units.Stats;
 using Infrastructure.Services;
 using Infrastructure.Services.Input;
 using UnityEngine;
@@ -8,12 +7,12 @@ namespace Domain.Units.Specific.Character
 {
     [RequireComponent(typeof(CharacterMovement))]
     [RequireComponent(typeof(CharacterAttacker))]
-    [RequireComponent(typeof(HitAnimOnHealth))]
+    [RequireComponent(typeof(AnimOnDamage))]
     public class CharacterActor : MonoBehaviour
     {
         private CharacterMovement _characterMovement;
         private CharacterAttacker _characterAttacker;
-        private HitAnimOnHealth _hitAnimOnHealth;
+        private AnimOnDamage _animOnDamage;
         private IInputService _inputService;
         
         private bool _isAttacking;
@@ -52,10 +51,10 @@ namespace Domain.Units.Specific.Character
             _characterAttacker.AttackEnded +=
                 () => _isAttacking = false;
 
-            _hitAnimOnHealth.Started +=
+            _animOnDamage.Started +=
                 () => _isHited = true;
 
-            _hitAnimOnHealth.Ended +=
+            _animOnDamage.Ended +=
                 () => _isHited = false;
         }
 
@@ -66,7 +65,7 @@ namespace Domain.Units.Specific.Character
 
             _characterMovement = GetComponent<CharacterMovement>();
             _characterAttacker = GetComponent<CharacterAttacker>();
-            _hitAnimOnHealth = GetComponent<HitAnimOnHealth>();
+            _animOnDamage = GetComponent<AnimOnDamage>();
         }
     }
 }
