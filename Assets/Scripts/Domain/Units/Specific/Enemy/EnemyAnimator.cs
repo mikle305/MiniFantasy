@@ -1,10 +1,10 @@
-﻿using Domain.Units.AnimatorAbstractions;
+﻿using Domain.Units.Animations.Abstractions;
 using UnityEngine;
 
-namespace Domain.Units.Specific.Ninja
+namespace Domain.Units.Specific.Enemy
 {
     [RequireComponent(typeof(Animator))]
-    public class NinjaAnimator : UnitAnimator, IMoveAnimator, IHitAnimator, IAttackAnimator
+    public class EnemyAnimator : UnitAnimator, IMoveAnimator, IHitAnimator, IAttackAnimator
     {
         [Header("Clips names")] [Space(3)]
         [SerializeField] private string _meleeAttackClipName = "RotateAndAttack";
@@ -17,11 +17,9 @@ namespace Domain.Units.Specific.Ninja
         private static readonly int _speedHash = Animator.StringToHash("Speed");
         private static readonly int _isMovingHash = Animator.StringToHash("IsMoving");
 
-
         // Clips lengths
         private float _meleeAttackClipLength;
         private float _getHitClipLength;
-
 
         // Anim states speed multipliers
         private static readonly int _attackSpeedHash = Animator.StringToHash("AttackSpeed");
@@ -46,11 +44,13 @@ namespace Domain.Units.Specific.Ninja
         public void StopMoving() =>
             _animator.SetBool(_isMovingHash, false);
 
+        
         public void SetAttackDuration(float duration) 
             => SetAnimStateDuration(_attackSpeedHash, _meleeAttackClipLength, duration);
 
         public void SetHitDuration(float duration)
             => SetAnimStateDuration(_getHitSpeedHash, _getHitClipLength, duration);
+
 
         protected override void InitClipsLengths()
         {

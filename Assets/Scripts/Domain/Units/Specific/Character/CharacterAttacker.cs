@@ -3,7 +3,7 @@ using System.Collections;
 using System.Linq;
 using Additional.Extensions;
 using Additional.Utils;
-using Domain.Units.AnimatorAbstractions;
+using Domain.Units.Animations.Abstractions;
 using Domain.Units.Stats;
 using UnityEngine;
 

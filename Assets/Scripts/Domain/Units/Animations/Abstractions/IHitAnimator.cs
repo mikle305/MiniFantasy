@@ -1,4 +1,4 @@
-﻿namespace Domain.Units.AnimatorAbstractions
+﻿namespace Domain.Units.Animations.Abstractions
 {
     public interface IHitAnimator
     {

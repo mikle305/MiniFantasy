@@ -4,11 +4,11 @@ using Infrastructure.Services.Progress;
 
 namespace Domain.Units.Specific.Character.Progress
 {
-    public class CharacterStatsProgress : ISavedProgressWriter
+    public class CharacterHealthProgress : ISavedProgressWriter
     {
         private readonly Health _health;
 
-        public CharacterStatsProgress(Health health)
+        public CharacterHealthProgress(Health health)
         {
             _health = health;
         }

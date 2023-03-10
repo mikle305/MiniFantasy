@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using Infrastructure.Game;
+using Additional.Abstractions.States;
 using Infrastructure.Scene;
 using Infrastructure.Services;
 using Infrastructure.Services.AutoSaver;
 using Infrastructure.Services.Factory;
 using Infrastructure.Services.Progress;
 using Infrastructure.Services.Storage;
+using Infrastructure.States;
 
-namespace Infrastructure.States
+namespace Infrastructure.Game
 {
     public class GameStateMachine
     {
         private readonly Dictionary<Type,IExitableState> _map;
-        private IExitableState _activeState;
+        private IExitableState _currentState;
 
         
         public GameStateMachine(
@@ -38,25 +39,16 @@ namespace Infrastructure.States
                     sceneLoader, 
                     services.Resolve<IGameFactory>(),
                     services.Resolve<IProgressWatchers>()),
+                [typeof(GamePlayState)] = new GamePlayState(),
             };
         }
-
-        /// <summary>
-        /// Enter state
-        /// </summary>
-        /// <typeparam name="TState"></typeparam>
+        
         public void Enter<TState>() where TState : class, IState
         {
             IState state = ChangeState<TState>();
             state.Enter();
         }
 
-        /// <summary>
-        /// Enter state with payload
-        /// </summary>
-        /// <param name="payload"></param>
-        /// <typeparam name="TState"></typeparam>
-        /// <typeparam name="TPayload"></typeparam>
         public void Enter<TState, TPayload>(TPayload payload) where TState : class, IPayloadedState<TPayload>
         {
             var state = ChangeState<TState>();
@@ -65,10 +57,10 @@ namespace Infrastructure.States
         
         private TState ChangeState<TState>() where TState : class, IExitableState
         {
-            _activeState?.Exit();
+            _currentState?.Exit();
             
             var state = GetState<TState>();
-            _activeState = state;
+            _currentState = state;
             
             return state;
         }

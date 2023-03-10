@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections;
-using Domain.Units.AnimatorAbstractions;
+using Domain.Units.Animations.Abstractions;
+using Domain.Units.Stats;
 using UnityEngine;
 
-namespace Domain.Units.Stats
+namespace Domain.Units.Animations
 {
     [RequireComponent(typeof(IHitAnimator))]
     [RequireComponent(typeof(Health))]

@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.States
+﻿namespace Additional.Abstractions.States
 {
     public interface IExitableState
     {

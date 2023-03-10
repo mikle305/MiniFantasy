@@ -1,12 +1,12 @@
-﻿using Domain.Units.Follow;
-using Domain.Units.Stats;
+﻿using Domain.Units.Animations;
+using Domain.Units.Follow;
 using UnityEngine;
 
-namespace Domain.Units.Specific.Ninja
+namespace Domain.Units.Specific.Enemy
 {
     [RequireComponent(typeof(Follower))]
     [RequireComponent(typeof(HitAnimOnHealth))]
-    public class NinjaActor : MonoBehaviour
+    public class EnemyActor : MonoBehaviour
     {
         private HitAnimOnHealth _hitAnimOnHealth;
         private Follower _follower;

@@ -38,7 +38,7 @@ namespace Domain.Units.Specific.Character.Progress
         private void RegisterProgressParts()
         {
             var positionProgress = new CharacterPositionProgress(_characterMovement, transform);
-            var statsProgress = new CharacterStatsProgress(_health);
+            var statsProgress = new CharacterHealthProgress(_health);
 
             _characterProgressParts.Add(positionProgress);
             _characterProgressParts.Add(statsProgress);

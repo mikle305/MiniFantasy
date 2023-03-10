@@ -1,4 +1,4 @@
-﻿using Domain.Units.AnimatorAbstractions;
+﻿using Domain.Units.Animations.Abstractions;
 using UnityEngine;
 
 namespace Domain.Units.Specific.Character

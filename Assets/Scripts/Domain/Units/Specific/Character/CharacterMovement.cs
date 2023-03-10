@@ -1,7 +1,7 @@
 using Additional.Constants;
 using Additional.Extensions;
 using Domain.Additional;
-using Domain.Units.AnimatorAbstractions;
+using Domain.Units.Animations.Abstractions;
 using UnityEngine;
 
 namespace Domain.Units.Specific.Character

@@ -1,4 +1,5 @@
-﻿using Domain.Units.Stats;
+﻿using Domain.Units.Animations;
+using Domain.Units.Stats;
 using Infrastructure.Services;
 using Infrastructure.Services.Input;
 using UnityEngine;

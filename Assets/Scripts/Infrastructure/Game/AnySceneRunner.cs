@@ -5,7 +5,7 @@ namespace Infrastructure.Game
     /// <summary>
     /// Wrapper of entry point to run game from any scene in editor
     /// </summary>
-    public class AnySceneEntryRunner : MonoBehaviour
+    public class AnySceneRunner : MonoBehaviour
     {
         [SerializeField] private EntryPoint _entryPoint;
 

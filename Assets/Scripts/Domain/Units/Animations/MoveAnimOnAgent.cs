@@ -1,9 +1,9 @@
 ﻿using Additional.Constants;
-using Domain.Units.AnimatorAbstractions;
+using Domain.Units.Animations.Abstractions;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Domain.Units.Specific.Ninja
+namespace Domain.Units.Animations
 {
     [RequireComponent(typeof(NavMeshAgent))]
     [RequireComponent(typeof(IMoveAnimator))]

@@ -1,4 +1,6 @@
-﻿using Domain.Camera;
+﻿using Additional.Abstractions.States;
+using Domain.Camera;
+using Infrastructure.Game;
 using Infrastructure.Scene;
 using Infrastructure.Services.Factory;
 using Infrastructure.Services.Progress;
@@ -35,6 +37,8 @@ namespace Infrastructure.States
                 InitGameWorld();
                 _progressWatchers.InformReaders();
             });
+            
+            _stateMachine.Enter<GamePlayState>();
         }
 
         public void Exit()
