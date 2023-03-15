@@ -8,7 +8,7 @@ namespace Domain.Units.Animations
 {
     [RequireComponent(typeof(IHitAnimator))]
     [RequireComponent(typeof(IDamageable))]
-    public class AnimOnDamage : MonoBehaviour
+    public class HitOnDamage : MonoBehaviour
     {
         [SerializeField] private float _hitDuration;
 
@@ -32,7 +32,6 @@ namespace Domain.Units.Animations
 
         private void AnimateHit(float health)
         {
-
             if (_endedCoroutine != null)
                 StopCoroutine(_endedCoroutine);
 

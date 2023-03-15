@@ -7,12 +7,12 @@ namespace Domain.Units.Specific.Character
 {
     [RequireComponent(typeof(CharacterMovement))]
     [RequireComponent(typeof(CharacterAttacker))]
-    [RequireComponent(typeof(AnimOnDamage))]
-    public class CharacterActor : MonoBehaviour
+    [RequireComponent(typeof(HitOnDamage))]
+    public class CharacterState : MonoBehaviour
     {
         private CharacterMovement _characterMovement;
         private CharacterAttacker _characterAttacker;
-        private AnimOnDamage _animOnDamage;
+        private HitOnDamage _hitOnDamage;
         private IInputService _inputService;
         
         private bool _isAttacking;
@@ -51,10 +51,10 @@ namespace Domain.Units.Specific.Character
             _characterAttacker.AttackEnded +=
                 () => _isAttacking = false;
 
-            _animOnDamage.Started +=
+            _hitOnDamage.Started +=
                 () => _isHited = true;
 
-            _animOnDamage.Ended +=
+            _hitOnDamage.Ended +=
                 () => _isHited = false;
         }
 
@@ -65,7 +65,7 @@ namespace Domain.Units.Specific.Character
 
             _characterMovement = GetComponent<CharacterMovement>();
             _characterAttacker = GetComponent<CharacterAttacker>();
-            _animOnDamage = GetComponent<AnimOnDamage>();
+            _hitOnDamage = GetComponent<HitOnDamage>();
         }
     }
 }

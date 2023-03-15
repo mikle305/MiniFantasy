@@ -15,7 +15,7 @@ namespace UI
         
         private void Start()
         {
-            _health = FindObjectOfType<CharacterActor>().GetComponent<CharacterHealth>();
+            _health = FindObjectOfType<CharacterState>().GetComponent<CharacterHealth>();
             _button = GetComponent<Button>();
             _button.onClick.AddListener(OnButtonClicked);
         }

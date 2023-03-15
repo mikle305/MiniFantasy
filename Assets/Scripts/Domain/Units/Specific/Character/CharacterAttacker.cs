@@ -4,6 +4,7 @@ using System.Linq;
 using Additional.Extensions;
 using Additional.Utils;
 using Domain.Units.Animations.Abstractions;
+using Domain.Units.Health;
 using UnityEngine;
 
 namespace Domain.Units.Specific.Character
@@ -71,10 +72,10 @@ namespace Domain.Units.Specific.Character
             if (!TryHit(out Collider hit))
                 return false;
             
-            if (!hit.TryGetComponent(out CharacterHealth health))
+            if (!hit.TryGetComponent(out IDamageable damageable))
                 return false;
             
-            health.TakeDamage(damage);
+            damageable.TakeDamage(damage);
             return true;
         }
         

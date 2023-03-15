@@ -123,7 +123,7 @@ AnimatorStateMachine:
     m_Position: {x: 140, y: 320, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -312481147174801624}
-    m_Position: {x: 150, y: -50, z: 0}
+    m_Position: {x: 160, y: -40, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4237533991019286199}
     m_Position: {x: 620, y: 110, z: 0}
@@ -226,13 +226,13 @@ AnimatorState:
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
   m_Mirror: 0
-  m_SpeedParameterActive: 0
+  m_SpeedParameterActive: 1
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 15459f89eab8fde488ef8e6d000616d0, type: 3}
+  m_Motion: {fileID: -203655887218126122, guid: 681d7dd94ab044c4799881e5ce24e1e9, type: 3}
   m_Tag: 
-  m_SpeedParameter: 
+  m_SpeedParameter: DieSpeed
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
@@ -282,6 +282,12 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: GetHitSpeed
+    m_Type: 1
+    m_DefaultFloat: 1
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: DieSpeed
     m_Type: 1
     m_DefaultFloat: 1
     m_DefaultInt: 0

@@ -6,6 +6,8 @@ namespace Domain.Units.Health
     {
         public event Action<float> Damaged;
         
-        public void TakeDamage(float value);
+        public event Action ZeroReached;
+
+        public void TakeDamage(float damage);
     }
 }

@@ -23,8 +23,8 @@ namespace Domain.Units.Specific.Character.Progress
         {
             CharacterStatsData statsData = progress.CharacterStats;
             
-            statsData.Health.CurrentValue = _health.CurrentValue();
-            statsData.Health.MaxValue = _health.MaxValue();
+            statsData.Health.CurrentValue = _health.CurrentValue;
+            statsData.Health.MaxValue = _health.MaxValue;
         }
     }
 }
