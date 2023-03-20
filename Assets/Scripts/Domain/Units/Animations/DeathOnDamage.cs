@@ -1,18 +1,20 @@
+using System;
+using System.Collections;
 using Domain.Units.Animations.Abstractions;
 using Domain.Units.Health;
 using UnityEngine;
 
-namespace Domain.Units.Specific.Enemy
+namespace Domain.Units.Animations
 {
-    [RequireComponent(typeof(IDieAnimator))]
     [RequireComponent(typeof(IDamageable))]
     public class DeathOnDamage : MonoBehaviour
     {
-        [SerializeField] private float _animDuration = 2;
+        [Tooltip("Will be used only if object has death animator")][SerializeField] private float _animDuration = 2;
         [SerializeField] private float _destroyDuration = 10;
-        
-        private IDieAnimator _dieAnimator;
+        [Tooltip("Not required")][SerializeField] private GameObject _effect;
+
         private IDamageable _damageable;
+        private IDieAnimator _dieAnimator;
 
 
         private void Awake()
@@ -26,9 +28,29 @@ namespace Domain.Units.Specific.Enemy
 
         private void Die()
         {
-            _dieAnimator.PlayDie();
-            float destroyDelay = _destroyDuration > _animDuration ? _destroyDuration : _animDuration;
+            PlayAnim();
+            Invoke(nameof(OnAnimated), _animDuration);
+        }
+        
+        private void OnAnimated()
+        {
+            float destroyDelay = _destroyDuration > 0 ? _destroyDuration : 0;
+            PlayFx();
             Destroy(gameObject, destroyDelay);
+        }
+
+        private void PlayAnim()
+        {
+            if (_dieAnimator != null)
+                _dieAnimator.PlayDie();
+            else
+                _animDuration = 0;
+        }
+
+        private void PlayFx()
+        {
+            if (_effect != null)
+                Instantiate(_effect, transform.position, Quaternion.identity);
         }
     }
 }
