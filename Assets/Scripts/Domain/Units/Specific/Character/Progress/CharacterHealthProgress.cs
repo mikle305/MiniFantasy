@@ -16,14 +16,13 @@ namespace Domain.Units.Character.Progress
         {
             CharacterStatsData statsData = progress.CharacterStats;
             
-            _health.Init(statsData.Health.CurrentValue, statsData.Health.MaxValue);
+            _health.Init(statsData.Health.MaxValue, statsData.Health.MaxValue);
         }
 
         public void UpdateProgress(PlayerProgress progress)
         {
             CharacterStatsData statsData = progress.CharacterStats;
             
-            statsData.Health.CurrentValue = _health.CurrentValue;
             statsData.Health.MaxValue = _health.MaxValue;
         }
     }

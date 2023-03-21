@@ -70,8 +70,7 @@ namespace Infrastructure.States
             {
                 Health = new StatData
                 {
-                    MaxValue = CharacterStatsConst.BaseHealth,
-                    CurrentValue = CharacterStatsConst.BaseHealth
+                    MaxValue = CharacterStatsConst.BaseHealth
                 }
             };
         }
