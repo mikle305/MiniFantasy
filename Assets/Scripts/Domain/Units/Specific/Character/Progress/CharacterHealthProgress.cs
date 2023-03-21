@@ -1,7 +1,7 @@
 ﻿using Data;
 using Infrastructure.Services.Progress;
 
-namespace Domain.Units.Specific.Character.Progress
+namespace Domain.Units.Character.Progress
 {
     public class CharacterHealthProgress : ISavedProgressWriter
     {

@@ -1,6 +1,6 @@
 ﻿using Domain.StatsSystem;
 
-namespace Domain.Units.Specific.Character
+namespace Domain.Units.Character
 {
     public class CharacterHealth : Health.Health
     {
@@ -11,6 +11,7 @@ namespace Domain.Units.Specific.Character
         {
             _max = new ModifiableStat(max);
             _current = new DefaultStat(current);
+            InvokeChanged();
         }
     }
 }

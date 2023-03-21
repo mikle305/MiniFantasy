@@ -1,16 +1,17 @@
 using System;
+using Additional.Constants;
 using Additional.Utils;
 using Domain.StatsSystem;
 using UnityEngine;
 
 namespace Domain.Units.Health
 {
-    public abstract class Health : MonoBehaviour, IDamageable
+    public abstract class Health : MonoBehaviour, IHealth
     {
         protected DefaultStat _current;
         protected ModifiableStat _max;
 
-        public event Action<float> Damaged;
+        public virtual event Action Changed;
         public event Action ZeroReached;
         
         public float CurrentValue => 
@@ -25,7 +26,11 @@ namespace Domain.Units.Health
             if (CurrentValue == 0)
                 return;
             
+            if (Math.Abs(MaxValue - CurrentValue) < Constants.Epsilon)
+                return;
+            
             ApplyHeal(health);
+            Changed?.Invoke();
         }
 
         public void TakeDamage(float damage)
@@ -35,6 +40,10 @@ namespace Domain.Units.Health
                 return;
             
             ApplyDamage(damage);
+            Changed?.Invoke();
+            
+            if (CurrentValue == 0)
+                ZeroReached?.Invoke();
         }
 
         protected virtual void ApplyHeal(float health)
@@ -47,18 +56,14 @@ namespace Domain.Units.Health
         protected virtual void ApplyDamage(float damage)
         {
             float diff = _current.GetValue() - damage;
-            Damaged?.Invoke(CurrentValue);
-
             if (diff > 0)
-            {
                 _current.SetValue(diff);
-            }
             else
-            {
                 _current.SetValue(0);
-                ZeroReached?.Invoke();
-            }
         }
+
+        protected void InvokeChanged() =>
+            Changed?.Invoke();
 
         private static void ValidateValue(float value)
         {

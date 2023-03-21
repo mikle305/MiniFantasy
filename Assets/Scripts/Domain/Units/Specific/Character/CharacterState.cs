@@ -3,7 +3,7 @@ using Infrastructure.Services;
 using Infrastructure.Services.Input;
 using UnityEngine;
 
-namespace Domain.Units.Specific.Character
+namespace Domain.Units.Character
 {
     [RequireComponent(typeof(CharacterMovement))]
     [RequireComponent(typeof(CharacterAttacker))]

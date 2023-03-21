@@ -4,7 +4,7 @@ using Domain.Additional;
 using Domain.Units.Animations.Abstractions;
 using UnityEngine;
 
-namespace Domain.Units.Specific.Character
+namespace Domain.Units.Character
 {
     [RequireComponent(typeof(CharacterController))]
     [RequireComponent(typeof(CharacterAnimator))]

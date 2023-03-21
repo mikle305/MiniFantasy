@@ -49,7 +49,7 @@ namespace Infrastructure.States
         {
             World world = _gameFactory.CreateWorld();
             GameObject character = _gameFactory.CreateCharacter(world);
-            _gameFactory.CreateHud();
+            Hud hud = _gameFactory.CreateHud(character);
             
             FollowCamera(character.transform);
             world.NavMeshBaker.Bake();

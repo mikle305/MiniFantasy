@@ -1,4 +1,4 @@
-﻿using Domain.Units.Specific.Character;
+﻿using Domain.Units.Character;
 using UnityEngine;
 using UnityEngine.UI;
 

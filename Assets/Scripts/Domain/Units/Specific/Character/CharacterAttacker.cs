@@ -7,7 +7,7 @@ using Domain.Units.Animations.Abstractions;
 using Domain.Units.Health;
 using UnityEngine;
 
-namespace Domain.Units.Specific.Character
+namespace Domain.Units.Character
 {
     [RequireComponent(typeof(CharacterAnimator))]
     [RequireComponent(typeof(CharacterController))]
@@ -72,7 +72,7 @@ namespace Domain.Units.Specific.Character
             if (!TryHit(out Collider hit))
                 return false;
             
-            if (!hit.TryGetComponent(out IDamageable damageable))
+            if (!hit.TryGetComponent(out IHealth damageable))
                 return false;
             
             damageable.TakeDamage(damage);

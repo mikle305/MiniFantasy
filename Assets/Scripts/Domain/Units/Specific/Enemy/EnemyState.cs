@@ -3,16 +3,16 @@ using Domain.Units.Follow;
 using Domain.Units.Health;
 using UnityEngine;
 
-namespace Domain.Units.Specific.Enemy
+namespace Domain.Units.Enemy
 {
     [RequireComponent(typeof(Follower))]
     [RequireComponent(typeof(HitOnDamage))]
-    [RequireComponent(typeof(IDamageable))]
+    [RequireComponent(typeof(IHealth))]
     public class EnemyState : MonoBehaviour
     {
         private HitOnDamage _hitOnDamage;
         private Follower _follower;
-        private IDamageable _damageable;
+        private IHealth _health;
 
         private bool _isHited;
         private bool _isDied;
@@ -43,7 +43,7 @@ namespace Domain.Units.Specific.Enemy
             _hitOnDamage.Ended += () => 
                 _isHited = false;
 
-            _damageable.ZeroReached += () =>
+            _health.ZeroReached += () =>
             {
                 _follower.Block();
                 _isDied = true;
@@ -54,7 +54,7 @@ namespace Domain.Units.Specific.Enemy
         {
             _follower = GetComponent<Follower>();
             _hitOnDamage = GetComponent<HitOnDamage>();
-            _damageable = GetComponent<IDamageable>();
+            _health = GetComponent<IHealth>();
         }
     }
 }

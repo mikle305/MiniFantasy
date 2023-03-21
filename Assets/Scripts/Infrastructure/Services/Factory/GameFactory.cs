@@ -1,5 +1,6 @@
 ﻿using Additional.Constants;
-using Domain.Units.Specific.Character;
+using Domain.Units.Character;
+using Domain.Units.Health;
 using Infrastructure.Services.AssetManagement;
 using Infrastructure.Services.Progress;
 using UnityEngine;
@@ -40,9 +41,14 @@ namespace Infrastructure.Services.Factory
             return world;
         }
 
-        public RectTransform CreateHud()
+        public Hud CreateHud(GameObject character)
         {
-            return _assetProvider.Instantiate<RectTransform>(AssetPath.HudPath);
+            var hud = _assetProvider.Instantiate<Hud>(AssetPath.HudPath);
+
+            var health = character.GetComponent<IHealth>();
+            hud.HudActor.InitHealth(health, hud.HealthBar);
+            
+            return hud;
         }
     }
 }

@@ -7,12 +7,12 @@ using UnityEngine;
 namespace Domain.Units.Animations
 {
     [RequireComponent(typeof(IHitAnimator))]
-    [RequireComponent(typeof(IDamageable))]
+    [RequireComponent(typeof(IHealth))]
     public class HitOnDamage : MonoBehaviour
     {
         [SerializeField] private float _hitDuration;
 
-        private IDamageable _damageable;
+        private IHealth _health;
         private IHitAnimator _animator;
         
         private Coroutine _endedCoroutine;
@@ -23,14 +23,14 @@ namespace Domain.Units.Animations
 
         private void Awake()
         {
-            _damageable = GetComponent<IDamageable>();
+            _health = GetComponent<IHealth>();
             _animator = GetComponent<IHitAnimator>();
             
             _animator.SetHitDuration(_hitDuration);
-            _damageable.Damaged += AnimateHit;
+            _health.Changed += AnimateHit;
         }
 
-        private void AnimateHit(float health)
+        private void AnimateHit()
         {
             if (_endedCoroutine != null)
                 StopCoroutine(_endedCoroutine);

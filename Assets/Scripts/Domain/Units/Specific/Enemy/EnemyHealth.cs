@@ -1,7 +1,7 @@
 using Domain.StatsSystem;
 using UnityEngine;
 
-namespace Domain.Units.Specific.Enemy
+namespace Domain.Units.Enemy
 {
     public class EnemyHealth : Health.Health
     {
