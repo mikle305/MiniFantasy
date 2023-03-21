@@ -1290,8 +1290,8 @@ GameObject:
   - component: {fileID: -6692695054325570002}
   - component: {fileID: 4146399864200452387}
   - component: {fileID: 6331804363281768791}
-  - component: {fileID: 8260586294591030749}
   - component: {fileID: 6497331023182664158}
+  - component: {fileID: 8260586294591030749}
   - component: {fileID: 4822237933159702650}
   m_Layer: 13
   m_Name: Ninja
@@ -1387,7 +1387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _meleeAttackClipName: RotateAndAttack
-  _getHitClipName: GettingHit
+  _getHitClipName: GettingHitFast
   _dieClipName: StandingDeathBackward
 --- !u!114 &3835074404040549117
 MonoBehaviour:
@@ -1441,6 +1441,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaultValue: 3
+--- !u!114 &6497331023182664158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1880444566353528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30410417bbae423a94bd695c5edc1343, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hitDuration: 1
 --- !u!114 &8260586294591030749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1456,19 +1469,6 @@ MonoBehaviour:
   _animDuration: 2
   _destroyDuration: 10
   _effect: {fileID: 5642766282230003982, guid: b5c8ca7ed10b61e499cce8ec3b6e2e4c, type: 3}
---- !u!114 &6497331023182664158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1880444566353528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30410417bbae423a94bd695c5edc1343, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _hitDuration: 2
 --- !u!114 &4822237933159702650
 MonoBehaviour:
   m_ObjectHideFlags: 0

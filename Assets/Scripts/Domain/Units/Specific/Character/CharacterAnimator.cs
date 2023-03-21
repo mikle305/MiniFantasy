@@ -7,7 +7,7 @@ namespace Domain.Units.Character
     {
         [Header("Clips names")] [Space(3)]
         [SerializeField] private string _meleeAttackClipName = "OneHandMeleeAttack";
-        [SerializeField] private string _getHitClipName = "GettingHit";
+        [SerializeField] private string _getHitClipName = "GettingHitFast";
 
         // Parameters
         private static readonly int _dieHash = Animator.StringToHash("Die");
@@ -24,11 +24,17 @@ namespace Domain.Units.Character
         private float _meleeAttackClipLength;
         private float _getHitClipLength;
 
-        public void PlayMeleeAttack() =>
+        public void PlayMeleeAttack()
+        {
             _animator.SetTrigger(_meleeAttackHash);
+            StopMoving();
+        }
 
-        public void PlayHit() =>
+        public void PlayHit()
+        {
             _animator.SetTrigger(_getHitHash);
+            StopMoving();
+        }
 
         public void PlayDie() =>
             _animator.SetTrigger(_dieHash);

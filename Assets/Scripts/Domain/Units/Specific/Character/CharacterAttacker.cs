@@ -18,15 +18,16 @@ namespace Domain.Units.Character
         [SerializeField] private float _hitDistance;
         [SerializeField] private int _maxHitsCount = 1;
         [SerializeField] private int _layerId;
+        
+        [Header("Attack settings")] [Space(3)]
+        [SerializeField] private float _attackDuration = 1.0f;
+        [SerializeField] private float _firstAttackDamage = 1.0f;
+        [SerializeField] private float _secondAttackDamage = 0.5f;
 
         private IAttackAnimator _characterAnimator;
         private Collider[] _hits;
         private float _bodyMid;
         private int _layerMask;
-        
-        private const float _attackDuration = 2.0f;
-        private const float _firstAttackDamage = 1.0f;
-        private const float _secondAttackDamage = 0.5f;
 
         public event Action AttackStarted;
         public event Action AttackEnded;

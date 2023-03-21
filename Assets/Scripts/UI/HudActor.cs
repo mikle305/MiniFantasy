@@ -14,6 +14,7 @@ namespace UI
             _healthBar = healthBar;
             
             _health.Changed += UpdateHealthBar;
+            UpdateHealthBar();
         }
 
         private void OnDestroy()

@@ -20,6 +20,13 @@ namespace Infrastructure.Services.Factory
             _progressWatchers = progressWatchers;
         }
 
+        public World CreateWorld()
+        {
+            var world = _assetProvider.Instantiate<World>(AssetPath.WorldPath);
+            _progressWatchers.RegisterComponents(world.gameObject);
+            return world;
+        }
+
         public GameObject CreateCharacter(World world)
         {
             GameObject character =
@@ -32,13 +39,6 @@ namespace Infrastructure.Services.Factory
                 .InitWorld(world.transform);
 
             return character;
-        }
-
-        public World CreateWorld()
-        {
-            var world = _assetProvider.Instantiate<World>(AssetPath.WorldPath);
-            _progressWatchers.RegisterComponents(world.gameObject);
-            return world;
         }
 
         public Hud CreateHud(GameObject character)

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: de9dcb4e2d52ba4438093f24a09ed250
+guid: b87f5f0650bc991449739184b31c449b
 ModelImporter:
   serializedVersion: 22103
   internalIDToNameTable: []
@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: GettingHit
+      name: GettingHitFast
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 207
+      lastFrame: 54
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

@@ -8,7 +8,7 @@ namespace Domain.Units.Enemy
     {
         [Header("Clips names")] [Space(3)]
         [SerializeField] private string _meleeAttackClipName = "RotateAndAttack";
-        [SerializeField] private string _getHitClipName = "GettingHit";
+        [SerializeField] private string _getHitClipName = "GettingHitFast";
         [SerializeField] private string _dieClipName = "StandingDeathBackward";
 
         // Parameters
@@ -29,11 +29,17 @@ namespace Domain.Units.Enemy
         private static readonly int _dieSpeedHash = Animator.StringToHash("DieSpeed");
 
 
-        public void PlayMeleeAttack() =>
+        public void PlayMeleeAttack()
+        {
             _animator.SetTrigger(_meleeAttackHash);
+            StopMoving();
+        }
 
-        public void PlayHit() =>
+        public void PlayHit()
+        {
             _animator.SetTrigger(_getHitHash);
+            StopMoving();
+        }
 
         public void PlayDie() =>
             _animator.SetTrigger(_dieHash);

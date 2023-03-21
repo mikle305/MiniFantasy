@@ -680,7 +680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _meleeAttackClipName: OneHandMeleeAttack
-  _getHitClipName: GettingHit
+  _getHitClipName: GettingHitFast
 --- !u!114 &6930536337813200354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -710,6 +710,9 @@ MonoBehaviour:
   _hitDistance: 1.35
   _maxHitsCount: 1
   _layerId: 13
+  _attackDuration: 1.5
+  _firstAttackDamage: 1
+  _secondAttackDamage: 0.5
 --- !u!114 &4886653898272821823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -722,7 +725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30410417bbae423a94bd695c5edc1343, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hitDuration: 2
+  _hitDuration: 0.75
 --- !u!114 &1677962277623434842
 MonoBehaviour:
   m_ObjectHideFlags: 0

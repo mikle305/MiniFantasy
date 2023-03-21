@@ -32,11 +32,7 @@ namespace Infrastructure.States
         {
             _progressWatchers.CleanUp();
             
-            _sceneLoader.Load(sceneName, onLoaded: () =>
-            {
-                InitGameWorld();
-                _progressWatchers.InformReaders();
-            });
+            _sceneLoader.Load(sceneName, onLoaded: InitGameWorld);
             
             _stateMachine.Enter<GamePlayState>();
         }
@@ -49,6 +45,8 @@ namespace Infrastructure.States
         {
             World world = _gameFactory.CreateWorld();
             GameObject character = _gameFactory.CreateCharacter(world);
+            _progressWatchers.InformReaders();
+            
             Hud hud = _gameFactory.CreateHud(character);
             
             FollowCamera(character.transform);

@@ -11,7 +11,6 @@ namespace Domain.Units.Character
         {
             _max = new ModifiableStat(max);
             _current = new DefaultStat(current);
-            InvokeChanged();
         }
     }
 }
