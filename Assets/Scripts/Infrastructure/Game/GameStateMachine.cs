@@ -39,7 +39,9 @@ namespace Infrastructure.Game
                     sceneLoader, 
                     services.Resolve<IGameFactory>(),
                     services.Resolve<IProgressWatchers>()),
-                [typeof(GamePlayState)] = new GamePlayState(),
+                [typeof(GamePlayState)] = new GamePlayState(
+                    this, 
+                    services.Resolve<IAutoSaver>()),
             };
         }
         

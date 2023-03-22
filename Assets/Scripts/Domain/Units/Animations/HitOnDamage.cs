@@ -11,6 +11,7 @@ namespace Domain.Units.Animations
     public class HitOnDamage : MonoBehaviour
     {
         [SerializeField] private float _hitDuration;
+        [Tooltip("Not required")][SerializeField] private Effect _effect;
 
         private IHealth _health;
         private IHitAnimator _animator;
@@ -32,16 +33,19 @@ namespace Domain.Units.Animations
 
         private void AnimateHit()
         {
+            Started?.Invoke();
+            PlayEffect();
+            _animator.PlayHit();
             if (_endedCoroutine != null)
                 StopCoroutine(_endedCoroutine);
-
-            Started?.Invoke();
-            _animator.PlayHit();
-            _endedCoroutine = StartEndedCoroutine();
+            _endedCoroutine = StartCoroutine(InvokeDamageEnded(_hitDuration));
         }
 
-        private Coroutine StartEndedCoroutine() 
-            => StartCoroutine(InvokeDamageEnded(_hitDuration));
+        private void PlayEffect()
+        {
+            if (_effect != null)
+                _effect.Play();
+        }
 
         private IEnumerator InvokeDamageEnded(float delay)
         {

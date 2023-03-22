@@ -3,11 +3,12 @@ using UnityEngine;
 
 namespace Domain.Units.Character
 {
-    public class CharacterAnimator : UnitAnimator, IHitAnimator, IAttackAnimator, IMoveAnimator
+    public class CharacterAnimator : UnitAnimator, IHitAnimator, IAttackAnimator, IDieAnimator, IMoveAnimator
     {
         [Header("Clips names")] [Space(3)]
         [SerializeField] private string _meleeAttackClipName = "OneHandMeleeAttack";
         [SerializeField] private string _getHitClipName = "GettingHitFast";
+        [SerializeField] private string _dieClipName = "StandingDeathBackward";
 
         // Parameters
         private static readonly int _dieHash = Animator.StringToHash("Die");
@@ -19,10 +20,13 @@ namespace Domain.Units.Character
         // Anim states speed multipliers
         private static readonly int _attackSpeedHash = Animator.StringToHash("AttackSpeed");
         private static readonly int _getHitSpeedHash = Animator.StringToHash("GetHitSpeed");
+        private static readonly int _dieSpeedHash = Animator.StringToHash("DieSpeed");
 
         // Clips lengths
         private float _meleeAttackClipLength;
         private float _getHitClipLength;
+        private float _dieClipLength;
+
 
         public void PlayMeleeAttack()
         {
@@ -54,6 +58,9 @@ namespace Domain.Units.Character
         public void SetHitDuration(float duration) 
             => SetAnimStateDuration(_getHitSpeedHash, _getHitClipLength, duration);
 
+        public void SetDieDuration(float duration)
+            => SetAnimStateDuration(_dieSpeedHash, _dieClipLength, duration);
+
         protected override void InitClipsLengths()
         {
             AnimationClip[] clips = _animator.runtimeAnimatorController.animationClips;
@@ -67,6 +74,9 @@ namespace Domain.Units.Character
                         break;
                     case var value when value == _getHitClipName:
                         _getHitClipLength = clip.length;
+                        break;
+                    case var value when value == _dieClipName:
+                        _dieClipLength = clip.length;
                         break;
                 }
             }

@@ -7,8 +7,8 @@ namespace Infrastructure.Services.AutoSaver
 {
     public class AutoSaver : IAutoSaver
     {
-        private bool _isActive;
-        private readonly float _saveTime;
+        private const float _saveTime = 1.0f;
+        private Coroutine _saveLoopCoroutine;
 
         private readonly IStorageService _storageService;
         private readonly ICoroutineRunner _coroutineRunner;
@@ -18,25 +18,21 @@ namespace Infrastructure.Services.AutoSaver
         {
             _storageService = storageService;
             _coroutineRunner = coroutineRunner;
-            _saveTime = 1.0f;
         }
 
-        public void Start()
+        public void Start() => 
+            _saveLoopCoroutine = _coroutineRunner.StartCoroutine(SaveLoop());
+
+        public void Stop()
         {
-            _isActive = true;
-            _coroutineRunner.StartCoroutine(Save());
+            if (_saveLoopCoroutine != null)
+                _coroutineRunner.StopCoroutine(_saveLoopCoroutine);
         }
 
-        public void Stop() => 
-            _isActive = false;
-
-        private IEnumerator Save()
+        private IEnumerator SaveLoop()
         {
             while (true)
             {
-                if (!_isActive)
-                    yield break;
-
                 yield return new WaitForSeconds(_saveTime);
                 
                 _storageService.SaveProgress();
