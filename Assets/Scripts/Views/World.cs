@@ -9,7 +9,9 @@ namespace Views
         [SerializeField] private NavMeshBaker _navMeshBaker;
 
         public Transform SpawnPoint => _spawnPoint;
-
         public NavMeshBaker NavMeshBaker => _navMeshBaker;
+        
+        public void FindEnemySpawners() =>
+            this.Get
     }
 }
