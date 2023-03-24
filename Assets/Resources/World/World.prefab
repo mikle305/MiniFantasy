@@ -332,6 +332,10 @@ PrefabInstance:
       propertyPath: Id
       value: World_9948db3a-b837-439c-9136-a59eac69412d
       objectReference: {fileID: 0}
+    - target: {fileID: 6058424037650408080, guid: 2e2f049cab5ca0a43a266aca4e13a27d, type: 3}
+      propertyPath: _id
+      value: World_024186c3-237d-478c-9b96-cee7cdf55396
+      objectReference: {fileID: 0}
     - target: {fileID: 6087445127382861984, guid: 2e2f049cab5ca0a43a266aca4e13a27d, type: 3}
       propertyPath: m_Name
       value: EnemySpawner (1)
@@ -404,6 +408,10 @@ PrefabInstance:
       propertyPath: Id
       value: World_4979f0c2-a47b-4a2f-99e7-795840de461e
       objectReference: {fileID: 0}
+    - target: {fileID: 6058424037650408080, guid: 2e2f049cab5ca0a43a266aca4e13a27d, type: 3}
+      propertyPath: _id
+      value: World_8415f96b-ce26-43a8-a1a7-da90702a41dc
+      objectReference: {fileID: 0}
     - target: {fileID: 6087445127382861984, guid: 2e2f049cab5ca0a43a266aca4e13a27d, type: 3}
       propertyPath: m_Name
       value: EnemySpawner
@@ -475,6 +483,10 @@ PrefabInstance:
     - target: {fileID: 6058424037650408080, guid: 2e2f049cab5ca0a43a266aca4e13a27d, type: 3}
       propertyPath: Id
       value: World_ee398ba2-c323-4983-8cd7-ae1c1a33c2e3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6058424037650408080, guid: 2e2f049cab5ca0a43a266aca4e13a27d, type: 3}
+      propertyPath: _id
+      value: World_753b4e76-8da9-45a3-b48d-13942faebe98
       objectReference: {fileID: 0}
     - target: {fileID: 6087445127382861984, guid: 2e2f049cab5ca0a43a266aca4e13a27d, type: 3}
       propertyPath: m_Name

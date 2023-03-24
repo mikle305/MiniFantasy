@@ -25,23 +25,23 @@ namespace Infrastructure.Game
             _map = new Dictionary<Type, IExitableState>
             {
                 [typeof(BootstrapState)] = new BootstrapState(
-                    this, 
-                    services, 
-                    sceneLoader, 
-                    coroutineRunner),
+                    stateMachine: this, 
+                    services: services, 
+                    sceneLoader: sceneLoader, 
+                    coroutineRunner: coroutineRunner),
                 [typeof(ProgressLoadingState)] = new ProgressLoadingState(
-                    this, 
-                    services.Resolve<IProgressAccess>(), 
-                    services.Resolve<IStorageService>(),
-                    services.Resolve<IAutoSaver>()),
+                    stateMachine: this, 
+                    progressAccess: services.Resolve<IProgressAccess>(), 
+                    storageService: services.Resolve<IStorageService>(),
+                    autoSaver: services.Resolve<IAutoSaver>()),
                 [typeof(LevelLoadingState)] = new LevelLoadingState(
-                    this, 
-                    sceneLoader, 
-                    services.Resolve<IGameFactory>(),
-                    services.Resolve<IProgressWatchers>()),
+                    stateMachine: this, 
+                    sceneLoader: sceneLoader, 
+                    gameFactory: services.Resolve<IGameFactory>(),
+                    progressWatchers: services.Resolve<IProgressWatchers>()),
                 [typeof(GamePlayState)] = new GamePlayState(
-                    this, 
-                    services.Resolve<IAutoSaver>()),
+                    stateMachine: this, 
+                    autoSaver: services.Resolve<IAutoSaver>()),
             };
         }
         

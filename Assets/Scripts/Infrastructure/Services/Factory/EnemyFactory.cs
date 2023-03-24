@@ -15,5 +15,8 @@ namespace Infrastructure.Services.Factory
 
         public GameObject CreateNinja(Vector3 position) =>
             _assetProvider.Instantiate(AssetPath.NinjaPath, position);
+
+        public GameObject CreateSkeletonArcher(Vector3 position) =>
+            _assetProvider.Instantiate(AssetPath.SkeletonArcherPath, position);
     }
 }

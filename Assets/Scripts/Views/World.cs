@@ -1,4 +1,5 @@
 using Domain.NavMesh;
+using Domain.Units.Spawn;
 using UnityEngine;
 
 namespace Views
@@ -7,11 +8,15 @@ namespace Views
     {
         [SerializeField] private Transform _spawnPoint;
         [SerializeField] private NavMeshBaker _navMeshBaker;
-
+        
         public Transform SpawnPoint => _spawnPoint;
         public NavMeshBaker NavMeshBaker => _navMeshBaker;
+        public EnemySpawner[] EnemySpawners { get; private set; }
+
         
-        public void FindEnemySpawners() =>
-            this.Get
+        private void Awake()
+        {
+            EnemySpawners = GetComponentsInChildren<EnemySpawner>();
+        }
     }
 }

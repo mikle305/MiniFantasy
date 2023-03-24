@@ -7,5 +7,6 @@
         public const string HudPath = "UI/Hud";
 
         public const string NinjaPath = "Characters/Prefabs/Ninja";
+        public const string SkeletonArcherPath = "Characters/Prefabs/SkeletonArcher";
     }
 }
