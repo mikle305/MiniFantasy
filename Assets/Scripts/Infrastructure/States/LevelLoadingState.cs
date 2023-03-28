@@ -43,42 +43,26 @@ namespace Infrastructure.States
         private void InitGameWorld()
         {
             World world = InitWorld();
-            BakeNavMesh(world);
             InitEnemies(world);
             
             GameObject character = InitCharacter(world);
+            _progressWatchers.InformReaders();
             InitHud(character);
             FollowCamera(character);
             
             EnterGamePlay(character);
         }
 
-        private void EnterGamePlay(GameObject character)
-        {
-            _stateMachine.Enter<GamePlayState, GameObject>(character);
-        }
-
-        private static void BakeNavMesh(World world)
-        {
-            world.NavMeshBaker.Bake();
-        }
-
-        private Hud InitHud(GameObject character)
-        {
-            return _gameFactory.CreateHud(character);
-        }
-
         private World InitWorld() 
             => _gameFactory.CreateWorld();
 
-        private GameObject InitCharacter(World world)
-        {
-            GameObject character =_gameFactory.CreateCharacter(world);
-            _progressWatchers.InformReaders();
-            return character;
-        }
+        private GameObject InitCharacter(World world) 
+            => _gameFactory.CreateCharacter(world);
 
-        private GameObject[] InitEnemies(World world)
+        private Hud InitHud(GameObject character) 
+            => _gameFactory.CreateHud(character);
+
+        private static GameObject[] InitEnemies(World world)
         {
             EnemySpawner[] spawners = world.EnemySpawners;
             var enemies = new GameObject[spawners.Length];
@@ -89,11 +73,15 @@ namespace Infrastructure.States
             return enemies;
         }
 
-        private static void FollowCamera(GameObject target)
-        {
+        private static void BakeNavMesh(World world) 
+            => world.NavMeshBaker.Bake();
+
+        private static void FollowCamera(GameObject target) =>
             Camera.main!
                 .GetComponent<CameraFollow>()
                 .Follow(target.transform);
-        }
+
+        private void EnterGamePlay(GameObject character) 
+            => _stateMachine.Enter<GamePlayState, GameObject>(character);
     }
 }

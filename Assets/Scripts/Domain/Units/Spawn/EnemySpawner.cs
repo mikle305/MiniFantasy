@@ -20,11 +20,11 @@ namespace Domain.Units.Spawn
 
         public GameObject Spawn()
         {
-            Func<Vector3, GameObject> factory = GetEnemyFactory(_enemyTypeId);
-            return factory.Invoke(transform.position);
+            Func<Vector3, Transform, GameObject> factory = GetEnemyFactory(_enemyTypeId);
+            return factory.Invoke(transform.position, transform);
         }
 
-        private Func<Vector3, GameObject> GetEnemyFactory(EnemyTypeId enemyTypeId)
+        private Func<Vector3, Transform, GameObject> GetEnemyFactory(EnemyTypeId enemyTypeId)
         {
             switch(enemyTypeId)
             {

@@ -227,9 +227,10 @@ GameObject:
   m_Component:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
-  - component: {fileID: 963194226}
   - component: {fileID: 963194229}
   - component: {fileID: 963194230}
+  - component: {fileID: 963194226}
+  - component: {fileID: 963194231}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -334,6 +335,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 32
   m_MaxRayIntersections: 0
+--- !u!124 &963194231
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
 --- !u!1001 &2024143069
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -348,15 +357,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 234141153124009201, guid: 286f1418d7155c8429ed9ff8d0115467, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.5169618
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 234141153124009201, guid: 286f1418d7155c8429ed9ff8d0115467, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.926096
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 234141153124009201, guid: 286f1418d7155c8429ed9ff8d0115467, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.16866386
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 234141153124009201, guid: 286f1418d7155c8429ed9ff8d0115467, type: 3}
       propertyPath: m_LocalRotation.w

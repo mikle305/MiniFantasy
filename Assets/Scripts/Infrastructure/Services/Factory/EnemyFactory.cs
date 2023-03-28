@@ -13,10 +13,10 @@ namespace Infrastructure.Services.Factory
             _assetProvider = assetProvider;
         }
 
-        public GameObject CreateNinja(Vector3 position) =>
-            _assetProvider.Instantiate(AssetPath.NinjaPath, position);
+        public GameObject CreateNinja(Vector3 position, Transform parent) =>
+            _assetProvider.Instantiate(AssetPath.NinjaPath, position, parent);
 
-        public GameObject CreateSkeletonArcher(Vector3 position) =>
-            _assetProvider.Instantiate(AssetPath.SkeletonArcherPath, position);
+        public GameObject CreateSkeletonArcher(Vector3 position, Transform parent) =>
+            _assetProvider.Instantiate(AssetPath.SkeletonArcherPath, position, parent);
     }
 }
