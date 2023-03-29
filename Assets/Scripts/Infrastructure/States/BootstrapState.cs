@@ -13,62 +13,82 @@ using UnityEngine;
 
 namespace Infrastructure.States
 {
-    public class BootstrapState: IState
+    public class BootstrapState : IState
     {
         private readonly GameStateMachine _stateMachine;
+        private readonly ServiceProvider _services;
         private readonly SceneLoader _sceneLoader;
         private readonly ICoroutineRunner _coroutineRunner;
+        private readonly ITickUpdater _tickUpdater;
 
 
-        public BootstrapState(
-            GameStateMachine stateMachine,
+        public BootstrapState(GameStateMachine stateMachine,
             ServiceProvider services,
             SceneLoader sceneLoader,
-            ICoroutineRunner coroutineRunner)
+            ICoroutineRunner coroutineRunner, 
+            ITickUpdater tickUpdater)
         {
             _stateMachine = stateMachine;
+            _services = services;
             _sceneLoader = sceneLoader;
             _coroutineRunner = coroutineRunner;
+            _tickUpdater = tickUpdater;
 
-            RegisterServices(services);
+            RegisterServices();
         }
 
         public void Enter()
         {
             _sceneLoader.Load(
                 SceneName.BootstrapScene, 
-                onLoaded: () => _stateMachine.Enter<ProgressLoadingState>());
+                onLoaded: EnterSettingsLoadingState);
         }
 
         public void Exit()
         {
         }
 
-        private void RegisterServices(ServiceProvider services)
+        private void RegisterServices()
         {
-            services.RegisterSingle<IInputService>(implementation: CreateInputService());
-            services.RegisterSingle<IFpsService>(implementation: new FpsService());
-            services.RegisterSingle<ICoroutineRunner>(implementation: _coroutineRunner);
-            services.RegisterSingle<IAssetProvider>(implementation: new AssetProvider());
-            services.RegisterSingle<IProgressAccess>(implementation: new ProgressAccess());
-            services.RegisterSingle<IProgressWatchers>(implementation: new ProgressWatchers(
-                progressAccess: services.Resolve<IProgressAccess>()));
+            RegisterSingletonService<IInputService>(instance: CreateInputService());
+            RegisterSingletonService<IFpsService>(instance: new FpsService());
+            RegisterSingletonService<ICoroutineRunner>(instance: _coroutineRunner);
+            RegisterSingletonService<IAssetProvider>(instance: new AssetProvider());
+            RegisterSingletonService<IProgressAccess>(instance: new ProgressAccess());
+            RegisterSingletonService<IProgressWatchers>(instance: new ProgressWatchers(
+                progressAccess: _services.Resolve<IProgressAccess>()));
             
-            services.RegisterSingle<IEnemyFactory>(implementation: new EnemyFactory(
-                assetProvider: services.Resolve<IAssetProvider>()));
+            RegisterSingletonService<IEnemyFactory>(instance: new EnemyFactory(
+                assetProvider: _services.Resolve<IAssetProvider>()));
             
-            services.RegisterSingle<IGameFactory>(implementation: new GameFactory(
-                assetProvider: services.Resolve<IAssetProvider>(), 
-                progressWatchers: services.Resolve<IProgressWatchers>()));
+            RegisterSingletonService<IGameFactory>(instance: new GameFactory(
+                assetProvider: _services.Resolve<IAssetProvider>(), 
+                progressWatchers: _services.Resolve<IProgressWatchers>()));
             
-            services.RegisterSingle<IStorageService>(implementation: new PlayerPrefsStorageService(
-                progressAccess: services.Resolve<IProgressAccess>(), 
-                progressWatchers: services.Resolve<IProgressWatchers>()));
+            RegisterSingletonService<IStorageService>(instance: new PlayerPrefsStorageService(
+                progressAccess: _services.Resolve<IProgressAccess>(), 
+                progressWatchers: _services.Resolve<IProgressWatchers>()));
             
-            services.RegisterSingle<IAutoSaver>(implementation: new AutoSaver(
-                storageService: services.Resolve<IStorageService>(), 
-                coroutineRunner: services.Resolve<ICoroutineRunner>()));
+            RegisterSingletonService<IAutoSaver>(instance: new AutoSaver(
+                storageService: _services.Resolve<IStorageService>(), 
+                coroutineRunner: _services.Resolve<ICoroutineRunner>()));
         }
+
+        private void RegisterSingletonService<TService>(TService instance) 
+            where TService : class, IService
+        {
+            RegisterTickable(instance);
+            _services.RegisterSingle(instance);
+        }
+
+        private void RegisterTickable<TService>(TService instance)
+        {
+            if (instance is ITickable tickableService)
+                _tickUpdater.AddTickable(tickableService);
+        }
+
+        private void EnterSettingsLoadingState() 
+            => _stateMachine.Enter<SettingsLoadingState>();
 
         private static IInputService CreateInputService()
         {

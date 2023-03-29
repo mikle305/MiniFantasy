@@ -5,9 +5,12 @@ using Infrastructure.Scene;
 using Infrastructure.Services;
 using Infrastructure.Services.AutoSaver;
 using Infrastructure.Services.Factory;
+using Infrastructure.Services.Fps;
 using Infrastructure.Services.Progress;
 using Infrastructure.Services.Storage;
 using Infrastructure.States;
+using Unity.VisualScripting;
+using IState = Additional.Abstractions.States.IState;
 
 namespace Infrastructure.Game
 {
@@ -17,10 +20,10 @@ namespace Infrastructure.Game
         private IExitableState _currentState;
 
         
-        public GameStateMachine(
-            ServiceProvider services, 
-            SceneLoader sceneLoader, 
-            ICoroutineRunner coroutineRunner)
+        public GameStateMachine(ServiceProvider services,
+            SceneLoader sceneLoader,
+            ICoroutineRunner coroutineRunner, 
+            ITickUpdater tickUpdater)
         {
             _map = new Dictionary<Type, IExitableState>
             {
@@ -28,7 +31,11 @@ namespace Infrastructure.Game
                     stateMachine: this, 
                     services: services, 
                     sceneLoader: sceneLoader, 
-                    coroutineRunner: coroutineRunner),
+                    coroutineRunner: coroutineRunner,
+                    tickUpdater: tickUpdater),
+                [typeof(SettingsLoadingState)] = new SettingsLoadingState(
+                    stateMachine: this,
+                    fpsService: services.Resolve<IFpsService>()),
                 [typeof(ProgressLoadingState)] = new ProgressLoadingState(
                     stateMachine: this, 
                     progressAccess: services.Resolve<IProgressAccess>(), 

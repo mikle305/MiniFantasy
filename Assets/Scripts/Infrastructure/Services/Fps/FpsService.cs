@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Infrastructure.Services.Fps
 {
-    public class FpsService : IFpsService, IUpdatable
+    public class FpsService : IFpsService, ITickable
     {
         private readonly float[] _cachedFramesDurations;
         private int _lastCachedFrameIndex = -1;
@@ -32,7 +32,7 @@ namespace Infrastructure.Services.Fps
             QualitySettings.vSyncCount = 0;
         }
 
-        public void Update()
+        public void OnTick()
         {
             _lastCachedFrameIndex = ++_lastCachedFrameIndex % AppSettings.CachedFramesCount;
             _cachedFramesDurations[_lastCachedFrameIndex] = Time.unscaledDeltaTime;
