@@ -4,7 +4,8 @@
     {
         private static ServiceProvider _instance;
 
-        public static ServiceProvider Container => _instance ??= new ServiceProvider();
+        public static ServiceProvider Container 
+            => _instance ??= new ServiceProvider();
 
         
         private ServiceProvider()

@@ -5,6 +5,7 @@ using Infrastructure.Services;
 using Infrastructure.Services.AssetManagement;
 using Infrastructure.Services.AutoSaver;
 using Infrastructure.Services.Factory;
+using Infrastructure.Services.Fps;
 using Infrastructure.Services.Input;
 using Infrastructure.Services.Progress;
 using Infrastructure.Services.Storage;
@@ -45,24 +46,28 @@ namespace Infrastructure.States
 
         private void RegisterServices(ServiceProvider services)
         {
-            IInputService inputService = CreateInputService();
-            var assetProvider = new AssetProvider();
-            var progressAccess = new ProgressAccess();
-            var progressWatchers = new ProgressWatchers(progressAccess);
-            var gameFactory = new GameFactory(assetProvider, progressWatchers);
-            var enemyFactory = new EnemyFactory(assetProvider);
-            var storageService = new PlayerPrefsStorageService(progressAccess, progressWatchers);
-            var autoSaver = new AutoSaver(storageService, _coroutineRunner);
-
-            services.RegisterSingle<IInputService>(implementation: inputService);
+            services.RegisterSingle<IInputService>(implementation: CreateInputService());
+            services.RegisterSingle<IFpsService>(implementation: new FpsService());
             services.RegisterSingle<ICoroutineRunner>(implementation: _coroutineRunner);
-            services.RegisterSingle<IAssetProvider>(implementation: assetProvider);
-            services.RegisterSingle<IProgressWatchers>(implementation: progressWatchers);
-            services.RegisterSingle<IEnemyFactory>(implementation: enemyFactory);
-            services.RegisterSingle<IGameFactory>(implementation: gameFactory);
-            services.RegisterSingle<IProgressAccess>(implementation: progressAccess);
-            services.RegisterSingle<IStorageService>(implementation: storageService);
-            services.RegisterSingle<IAutoSaver>(implementation: autoSaver);
+            services.RegisterSingle<IAssetProvider>(implementation: new AssetProvider());
+            services.RegisterSingle<IProgressAccess>(implementation: new ProgressAccess());
+            services.RegisterSingle<IProgressWatchers>(implementation: new ProgressWatchers(
+                progressAccess: services.Resolve<IProgressAccess>()));
+            
+            services.RegisterSingle<IEnemyFactory>(implementation: new EnemyFactory(
+                assetProvider: services.Resolve<IAssetProvider>()));
+            
+            services.RegisterSingle<IGameFactory>(implementation: new GameFactory(
+                assetProvider: services.Resolve<IAssetProvider>(), 
+                progressWatchers: services.Resolve<IProgressWatchers>()));
+            
+            services.RegisterSingle<IStorageService>(implementation: new PlayerPrefsStorageService(
+                progressAccess: services.Resolve<IProgressAccess>(), 
+                progressWatchers: services.Resolve<IProgressWatchers>()));
+            
+            services.RegisterSingle<IAutoSaver>(implementation: new AutoSaver(
+                storageService: services.Resolve<IStorageService>(), 
+                coroutineRunner: services.Resolve<ICoroutineRunner>()));
         }
 
         private static IInputService CreateInputService()
