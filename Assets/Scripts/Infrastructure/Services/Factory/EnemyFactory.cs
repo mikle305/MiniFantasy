@@ -1,8 +1,7 @@
 ﻿using Additional.Constants;
-using Infrastructure.Services.AssetManagement;
 using UnityEngine;
 
-namespace Infrastructure.Services.Factory
+namespace Infrastructure.Services
 {
     public class EnemyFactory : IEnemyFactory
     {

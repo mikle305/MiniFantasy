@@ -3,7 +3,7 @@ using Additional.Constants;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Infrastructure.Services.Input
+namespace Infrastructure.Services
 {
     public class StandaloneInputService : InputService
     {

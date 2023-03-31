@@ -1,19 +1,18 @@
 ﻿using Additional.Abstractions.States;
 using Additional.Utils;
 using Domain.Units.Character;
-using Infrastructure.Game;
-using Infrastructure.Services.AutoSaver;
+using Infrastructure.Services;
 using UnityEngine;
 
 namespace Infrastructure.States
 {
-    public class GamePlayState : IPayloadedState<GameObject>
+    public class GameProcessState : IPayloadedState<GameObject>
     {
         private readonly GameStateMachine _stateMachine;
         private readonly IAutoSaver _autoSaver;
         private CharacterDeath _characterDeath;
 
-        public GamePlayState(GameStateMachine stateMachine, IAutoSaver autoSaver)
+        public GameProcessState(GameStateMachine stateMachine, IAutoSaver autoSaver)
         {
             _stateMachine = stateMachine;
             _autoSaver = autoSaver;

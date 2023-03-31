@@ -1,17 +1,24 @@
+using System;
+using System.Collections;
 using System.Linq;
 using Additional.Constants;
 using UnityEngine;
 
-namespace Infrastructure.Services.Fps
+namespace Infrastructure.Services
 {
-    public class FpsService : IFpsService, ITickable
+    public class FpsService : IFpsService, IDisposable
     {
         private readonly float[] _cachedFramesDurations;
         private int _lastCachedFrameIndex = -1;
+        private readonly Coroutine _cacheFrameDurationCoroutine;
+        private readonly ICoroutineRunner _coroutineRunner;
 
-        public FpsService()
+
+        public FpsService(ICoroutineRunner coroutineRunner)
         {
+            _coroutineRunner = coroutineRunner;
             _cachedFramesDurations = Enumerable.Repeat(0.01f, AppSettings.CachedFramesCount).ToArray();
+            _cacheFrameDurationCoroutine = _coroutineRunner.StartCoroutine(CacheFrameDurationLoop());
         }
         
         public int CalculateFps()
@@ -31,11 +38,21 @@ namespace Infrastructure.Services.Fps
             Application.targetFrameRate = -1;
             QualitySettings.vSyncCount = 0;
         }
-
-        public void OnTick()
+        
+        public void Dispose()
         {
-            _lastCachedFrameIndex = ++_lastCachedFrameIndex % AppSettings.CachedFramesCount;
-            _cachedFramesDurations[_lastCachedFrameIndex] = Time.unscaledDeltaTime;
+            _coroutineRunner.StopCoroutine(_cacheFrameDurationCoroutine);
+        }
+
+        private IEnumerator CacheFrameDurationLoop()
+        {
+            while (true)
+            {
+                yield return null;
+                
+                _lastCachedFrameIndex = (_lastCachedFrameIndex + 1) % AppSettings.CachedFramesCount;
+                _cachedFramesDurations[_lastCachedFrameIndex] = Time.unscaledDeltaTime;
+            }
         }
     }
 }

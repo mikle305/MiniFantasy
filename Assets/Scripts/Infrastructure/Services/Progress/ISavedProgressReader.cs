@@ -1,6 +1,6 @@
 ﻿using Data;
 
-namespace Infrastructure.Services.Progress
+namespace Infrastructure.Services
 {
     public interface ISavedProgressReader
     {

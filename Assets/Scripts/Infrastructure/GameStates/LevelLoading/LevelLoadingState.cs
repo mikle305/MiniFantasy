@@ -1,10 +1,9 @@
 ﻿using Additional.Abstractions.States;
 using Domain.Camera;
 using Domain.Units.Spawn;
-using Infrastructure.Game;
 using Infrastructure.Scene;
-using Infrastructure.Services.Factory;
-using Infrastructure.Services.Progress;
+using Infrastructure.Services;
+using Infrastructure.Services.Scene;
 using UnityEngine;
 using Views;
 
@@ -82,6 +81,6 @@ namespace Infrastructure.States
                 .Follow(target.transform);
 
         private void EnterGamePlay(GameObject character) 
-            => _stateMachine.Enter<GamePlayState, GameObject>(character);
+            => _stateMachine.Enter<GameProcessState, GameObject>(character);
     }
 }

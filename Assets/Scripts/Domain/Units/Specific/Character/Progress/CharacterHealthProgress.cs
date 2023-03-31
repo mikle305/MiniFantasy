@@ -1,5 +1,5 @@
 ﻿using Data;
-using Infrastructure.Services.Progress;
+using Infrastructure.Services;
 
 namespace Domain.Units.Character.Progress
 {

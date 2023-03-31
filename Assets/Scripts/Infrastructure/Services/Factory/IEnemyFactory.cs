@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Infrastructure.Services.Factory
+namespace Infrastructure.Services
 {
-    public interface IEnemyFactory : IService
+    public interface IEnemyFactory
     {
         public GameObject CreateNinja(Vector3 position, Transform parent);
         

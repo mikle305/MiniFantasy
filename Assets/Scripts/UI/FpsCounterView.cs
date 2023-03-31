@@ -2,7 +2,6 @@ using System.Collections;
 using System.Globalization;
 using Additional.Constants;
 using Infrastructure.Services;
-using Infrastructure.Services.Fps;
 using UnityEngine;
 using UnityEngine.UI;
 

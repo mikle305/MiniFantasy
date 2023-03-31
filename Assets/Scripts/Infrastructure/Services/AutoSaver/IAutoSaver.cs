@@ -1,6 +1,6 @@
-﻿namespace Infrastructure.Services.AutoSaver
+﻿namespace Infrastructure.Services
 {
-    public interface IAutoSaver : IService
+    public interface IAutoSaver
     {
         public void Start();
         

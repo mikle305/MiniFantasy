@@ -1,8 +1,8 @@
 ﻿using Data;
 
-namespace Infrastructure.Services.Storage
+namespace Infrastructure.Services
 {
-    public interface IStorageService : IService
+    public interface IStorageService
     {
         public void SaveProgress();
         

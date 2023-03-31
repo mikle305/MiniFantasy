@@ -1,12 +1,10 @@
 ﻿using Additional.Constants;
 using Domain.Units.Character;
 using Domain.Units.Health;
-using Infrastructure.Services.AssetManagement;
-using Infrastructure.Services.Progress;
 using UnityEngine;
 using Views;
 
-namespace Infrastructure.Services.Factory
+namespace Infrastructure.Services
 {
     public class GameFactory : IGameFactory
     {

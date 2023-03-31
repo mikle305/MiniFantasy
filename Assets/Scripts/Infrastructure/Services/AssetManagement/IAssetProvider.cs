@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Infrastructure.Services.AssetManagement
+namespace Infrastructure.Services
 {
-    public interface IAssetProvider : IService
+    public interface IAssetProvider
     {
         public GameObject Instantiate(string path, Vector3? position = null, Transform parent = null);
 

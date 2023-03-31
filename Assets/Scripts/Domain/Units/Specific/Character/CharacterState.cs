@@ -1,7 +1,6 @@
 ﻿using Domain.Units.Animations;
 using Domain.Units.Health;
 using Infrastructure.Services;
-using Infrastructure.Services.Input;
 using UnityEngine;
 
 namespace Domain.Units.Character

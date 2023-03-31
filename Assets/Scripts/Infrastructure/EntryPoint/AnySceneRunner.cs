@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Infrastructure.Game
+namespace Infrastructure.EntryPoint
 {
     /// <summary>
     /// Wrapper of entry point to run game from any scene in editor

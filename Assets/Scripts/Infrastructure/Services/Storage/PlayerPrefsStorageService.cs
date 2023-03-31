@@ -1,9 +1,8 @@
 ﻿using Additional.Extensions;
 using Data;
-using Infrastructure.Services.Progress;
 using UnityEngine;
 
-namespace Infrastructure.Services.Storage
+namespace Infrastructure.Services
 {
     public class PlayerPrefsStorageService : IStorageService
     {

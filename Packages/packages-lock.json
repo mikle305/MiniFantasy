@@ -7,6 +7,13 @@
       "dependencies": {},
       "hash": "d0c1cbb5415f5accf6a1d49d1dc91cf7d4fb11b9"
     },
+    "com.mikle305.uni-dependency-injection": {
+      "version": "https://github.com/mikle305hd/DiContainer.git#unity",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "3631ecc19c3e220184ee903300f465288de26d71"
+    },
     "com.unity.ai.navigation": {
       "version": "1.0.0-exp.4",
       "depth": 0,

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections;
-using Infrastructure.Game;
+using Infrastructure.Scene;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Infrastructure.Scene
+namespace Infrastructure.Services.Scene
 {
-    public class SceneLoader
+    public class SceneLoader : ISceneLoader
     {
         private readonly ICoroutineRunner _coroutineRunner;
 

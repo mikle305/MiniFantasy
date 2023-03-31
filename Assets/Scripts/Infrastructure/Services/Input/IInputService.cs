@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Infrastructure.Services.Input
+namespace Infrastructure.Services
 {
-    public interface IInputService: IService
+    public interface IInputService
     {
         public Vector2 GetAxis();
 

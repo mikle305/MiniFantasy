@@ -1,6 +1,6 @@
-namespace Infrastructure.Services.Fps
+namespace Infrastructure.Services
 {
-    public interface IFpsService : IService
+    public interface IFpsService
     {
         public int CalculateFps();
         

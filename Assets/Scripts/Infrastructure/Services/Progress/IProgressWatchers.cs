@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Infrastructure.Services.Progress
+namespace Infrastructure.Services
 {
-    public interface IProgressWatchers : IService
+    public interface IProgressWatchers
     {
         public void RegisterComponents(GameObject gameObject);
 

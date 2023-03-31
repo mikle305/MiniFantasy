@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using Views;
 
-namespace Infrastructure.Services.Factory
+namespace Infrastructure.Services
 {
-    public interface IGameFactory : IService
+    public interface IGameFactory
     {
         public World CreateWorld();
         

@@ -1,6 +1,5 @@
 using Additional.Abstractions.States;
-using Infrastructure.Game;
-using Infrastructure.Services.Fps;
+using Infrastructure.Services;
 
 namespace Infrastructure.States
 {

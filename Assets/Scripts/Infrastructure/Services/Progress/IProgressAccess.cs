@@ -1,8 +1,8 @@
 ﻿using Data;
 
-namespace Infrastructure.Services.Progress
+namespace Infrastructure.Services
 {
-    public interface IProgressAccess: IService
+    public interface IProgressAccess
     {
         public PlayerProgress PlayerProgress { get; set; }
     }

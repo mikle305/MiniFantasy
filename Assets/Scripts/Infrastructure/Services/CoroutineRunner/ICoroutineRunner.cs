@@ -1,10 +1,9 @@
 ﻿using System.Collections;
-using Infrastructure.Services;
 using UnityEngine;
 
-namespace Infrastructure.Game
+namespace Infrastructure.Services
 {
-    public interface ICoroutineRunner : IService
+    public interface ICoroutineRunner
     {
         public Coroutine StartCoroutine(IEnumerator coroutine);
 

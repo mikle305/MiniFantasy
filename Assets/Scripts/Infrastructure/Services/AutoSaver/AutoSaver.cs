@@ -1,9 +1,7 @@
 ﻿using System.Collections;
-using Infrastructure.Game;
-using Infrastructure.Services.Storage;
 using UnityEngine;
 
-namespace Infrastructure.Services.AutoSaver
+namespace Infrastructure.Services
 {
     public class AutoSaver : IAutoSaver
     {
