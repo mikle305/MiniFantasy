@@ -1,6 +1,4 @@
-using System;
-using System.Collections.Generic;
-using Additional.Abstractions.States;
+using DiContainer.UniDependencyInjection.Core.Unity;
 using Infrastructure.Services;
 using Infrastructure.Services.Scene;
 using Infrastructure.States;
@@ -10,10 +8,10 @@ using UnityEngine;
 
 namespace Infrastructure.EntryPoint
 {
-    public class Game
+    public class Game : StartUp
+
     {
         private readonly ICoroutineRunner _coroutineRunner;
-        private readonly SceneLoader _sceneLoader;
         private GameStateMachine _stateMachine;
 
 
@@ -22,11 +20,18 @@ namespace Infrastructure.EntryPoint
             _coroutineRunner = coroutineRunner;
         }
 
-        public IContainerBuilder ConfigureServices(IContainerBuilder containerBuilder)
-            => containerBuilder
+        protected override void ConfigureServices(IContainerBuilder containerBuilder)
+        {
+            RegisterPlatformDependentServices(containerBuilder);
+            RegisterGameStates(containerBuilder);
+            RegisterDefaultServices(containerBuilder);
+        }
+
+        private void RegisterDefaultServices(IContainerBuilder containerBuilder)
+        {
+            containerBuilder
                 .RegisterSingle<ICoroutineRunner>(_coroutineRunner)
                 .RegisterSingle<ISceneLoader, SceneLoader>()
-                .RegisterSingle<IInputService>(CreateInputService())
                 .RegisterSingle<IFpsService, FpsService>()
                 .RegisterSingle<IAssetProvider, AssetProvider>()
                 .RegisterSingle<IProgressAccess, ProgressAccess>()
@@ -34,44 +39,37 @@ namespace Infrastructure.EntryPoint
                 .RegisterSingle<IEnemyFactory, EnemyFactory>()
                 .RegisterSingle<IGameFactory, GameFactory>()
                 .RegisterSingle<IStorageService, PlayerPrefsStorageService>()
-                .RegisterSingle<IAutoSaver, AutoSaver>()
+                .RegisterSingle<IAutoSaver, AutoSaver>();
+        }
+
+        private static void RegisterPlatformDependentServices(IContainerBuilder containerBuilder)
+        {
+            if (Application.isMobilePlatform)
+            {
+                containerBuilder.RegisterSingle<IInputService, MobileInputService>();
+            }
+            else
+            {
+                containerBuilder.RegisterSingle<IInputService, StandaloneInputService>();
+            }
+        }
+
+        private static void RegisterGameStates(IContainerBuilder containerBuilder)
+        {
+            containerBuilder
                 .RegisterSingle<BootstrapState>()
                 .RegisterSingle<SettingsLoadingState>()
                 .RegisterSingle<ProgressLoadingState>()
                 .RegisterSingle<LevelLoadingState>()
-                .RegisterSingle<GameProcessState>();
+                .RegisterSingle<GameProcessState>()
+                .RegisterSingle<GameStateMachine>();
+        }
 
-        public void Start(IContainer container)
+        public void Start(IScope scope)
         {
-            Dictionary<Type, IExitableState> statesMap = CreateStatesMap(container);
-            _stateMachine = new GameStateMachine(statesMap);
+            _stateMachine = scope.Resolve<GameStateMachine>();
+            _stateMachine.Init(scope);
             _stateMachine.Enter<BootstrapState>();
-        }
-
-        private Dictionary<Type, IExitableState> CreateStatesMap(IContainer container)
-        {
-            IScope scope = container.CreateScope();
-            var statesMap = new Dictionary<Type, IExitableState>();
-            
-            AddState<BootstrapState>();
-            AddState<SettingsLoadingState>();
-            AddState<ProgressLoadingState>();
-            AddState<LevelLoadingState>();
-            AddState<GameProcessState>();
-
-            return statesMap;
-
-
-            void AddState<TState>() where TState : IExitableState 
-                => statesMap.Add(typeof(TState), scope.Resolve<TState>());
-        }
-
-        private static IInputService CreateInputService()
-        {
-            if (Application.isMobilePlatform)
-                return new MobileInputService();
-
-            return new StandaloneInputService();
         }
     }
 }

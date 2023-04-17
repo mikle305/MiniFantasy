@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Globalization;
 using Additional.Constants;
+using DiContainer.UniDependencyInjection.Core.Unity;
 using Infrastructure.Services;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,10 +14,15 @@ namespace UI
         private Text _text;
         private IFpsService _fpsService;
 
+        [Inject]
+        public void Construct(IFpsService fpsService)
+        {
+            _fpsService = fpsService;
+        }
+
         private void Awake()
         {
             _text = GetComponent<Text>();
-            _fpsService = ServiceProvider.Container.Resolve<IFpsService>();
             
             StartCoroutine(ShowFpsLoop());
         }

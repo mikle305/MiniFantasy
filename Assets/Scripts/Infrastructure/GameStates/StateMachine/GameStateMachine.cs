@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using Additional.Abstractions.States;
+﻿using Additional.Abstractions.States;
+using UniDependencyInjection.Core.Model;
 using IState = Additional.Abstractions.States.IState;
 
 namespace Infrastructure.States
 {
     public class GameStateMachine
     {
-        private readonly Dictionary<Type, IExitableState> _statesMap;
         private IExitableState _currentState;
+        private IScope _scope;
 
-        
-        public GameStateMachine(Dictionary<Type, IExitableState> statesMap)
+
+        public void Init(IScope scope)
         {
-            _statesMap = statesMap;
+            _scope = scope;
         }
 
         public void Enter<TState>() where TState : class, IState
@@ -32,13 +31,10 @@ namespace Infrastructure.States
         {
             _currentState?.Exit();
             
-            var state = GetState<TState>();
+            var state = _scope.Resolve<TState>();
             _currentState = state;
             
             return state;
         }
-
-        private TState GetState<TState>() where TState : class, IExitableState 
-            => _statesMap[typeof(TState)] as TState;
     }
 }

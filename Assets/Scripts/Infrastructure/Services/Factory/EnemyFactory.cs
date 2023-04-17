@@ -11,7 +11,7 @@ namespace Infrastructure.Services
         {
             _assetProvider = assetProvider;
         }
-
+        
         public GameObject CreateNinja(Vector3 position, Transform parent) =>
             _assetProvider.Instantiate(AssetPath.NinjaPath, position, parent);
 

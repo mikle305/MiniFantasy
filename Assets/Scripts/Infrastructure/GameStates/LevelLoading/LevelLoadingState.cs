@@ -12,13 +12,13 @@ namespace Infrastructure.States
     public class LevelLoadingState : IPayloadedState<string>
     {
         private readonly GameStateMachine _stateMachine;
-        private readonly SceneLoader _sceneLoader;
+        private readonly ISceneLoader _sceneLoader;
         private readonly IGameFactory _gameFactory;
         private readonly IProgressWatchers _progressWatchers;
 
         public LevelLoadingState(
             GameStateMachine stateMachine,
-            SceneLoader sceneLoader,
+            ISceneLoader sceneLoader,
             IGameFactory gameFactory,
             IProgressWatchers progressWatchers)
         {

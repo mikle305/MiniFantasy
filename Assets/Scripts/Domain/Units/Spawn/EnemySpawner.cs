@@ -1,5 +1,6 @@
 using System;
 using Additional.Utils;
+using DiContainer.UniDependencyInjection.Core.Unity;
 using Infrastructure.Services;
 using UnityEngine;
 
@@ -11,10 +12,11 @@ namespace Domain.Units.Spawn
 
         private IEnemyFactory _enemyFactory;
 
-        
-        private void Awake()
+
+        [Inject]
+        public void Construct(IEnemyFactory enemyFactory)
         {
-            _enemyFactory = ServiceProvider.Container.Resolve<IEnemyFactory>();
+            _enemyFactory = enemyFactory;
         }
 
         public GameObject Spawn()

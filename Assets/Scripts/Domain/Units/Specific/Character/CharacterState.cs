@@ -1,4 +1,5 @@
-﻿using Domain.Units.Animations;
+﻿using DiContainer.UniDependencyInjection.Core.Unity;
+using Domain.Units.Animations;
 using Domain.Units.Health;
 using Infrastructure.Services;
 using UnityEngine;
@@ -21,7 +22,12 @@ namespace Domain.Units.Character
         private bool _isHited;
         private bool _isDied;
 
-
+        [Inject]
+        public void Construct(IInputService inputService)
+        {
+            _inputService = inputService;
+        }
+        
         private void Awake()
         {
             InitDependencies();
@@ -45,9 +51,6 @@ namespace Domain.Units.Character
 
         private void InitDependencies()
         {
-            ServiceProvider services = ServiceProvider.Container;
-            _inputService = services.Resolve<IInputService>();
-
             _characterMovement = GetComponent<CharacterMovement>();
             _characterAttacker = GetComponent<CharacterAttacker>();
             _hitOnDamage = GetComponent<HitOnDamage>();
