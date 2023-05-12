@@ -19,7 +19,6 @@ namespace Infrastructure.Services
             _progressWatchers = progressWatchers;
         }
 
-        [MonoFactory(injectInChildren: true)]
         public World CreateWorld()
         {
             var world = _assetProvider.Instantiate<World>(AssetPath.WorldPath);
@@ -27,7 +26,6 @@ namespace Infrastructure.Services
             return world;
         }
 
-        [MonoFactory]
         public GameObject CreateCharacter(World world)
         {
             GameObject character =
@@ -42,7 +40,6 @@ namespace Infrastructure.Services
             return character;
         }
 
-        [MonoFactory]
         public Hud CreateHud(GameObject character)
         {
             var hud = _assetProvider.Instantiate<Hud>(AssetPath.HudPath);
