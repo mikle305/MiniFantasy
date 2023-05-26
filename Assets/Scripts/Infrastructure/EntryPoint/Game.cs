@@ -22,9 +22,9 @@ namespace Infrastructure.EntryPoint
 
         protected override void ConfigureServices(IContainerBuilder containerBuilder)
         {
+            RegisterDefaultServices(containerBuilder);
             RegisterPlatformDependentServices(containerBuilder);
             RegisterGameStates(containerBuilder);
-            RegisterDefaultServices(containerBuilder);
         }
 
         private void RegisterDefaultServices(IContainerBuilder containerBuilder)
@@ -65,10 +65,9 @@ namespace Infrastructure.EntryPoint
                 .RegisterSingle<GameStateMachine>();
         }
 
-        public void Start(IScope scope)
+        public void Start(IContainer container)
         {
-            _stateMachine = scope.Resolve<GameStateMachine>();
-            _stateMachine.Init(scope);
+            _stateMachine = container.CreateScope().Resolve<GameStateMachine>();
             _stateMachine.Enter<BootstrapState>();
         }
     }

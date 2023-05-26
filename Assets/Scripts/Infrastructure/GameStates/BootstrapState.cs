@@ -13,8 +13,7 @@ namespace Infrastructure.States
 
         public BootstrapState(
             GameStateMachine stateMachine,
-            ISceneLoader sceneLoader,
-            ICoroutineRunner coroutineRunner)
+            ISceneLoader sceneLoader)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;

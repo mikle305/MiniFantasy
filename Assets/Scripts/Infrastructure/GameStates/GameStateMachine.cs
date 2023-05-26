@@ -7,12 +7,12 @@ namespace Infrastructure.States
     public class GameStateMachine
     {
         private IExitableState _currentState;
-        private IScope _scope;
+        private readonly IScope _scope;
 
 
-        public void Init(IScope scope)
+        public GameStateMachine(IContainer container)
         {
-            _scope = scope;
+            _scope = container.CreateScope();
         }
 
         public void Enter<TState>() where TState : class, IState

@@ -1,5 +1,4 @@
 using Infrastructure.Services;
-using Infrastructure.States;
 using UniDependencyInjection.Core.Model;
 using UnityEngine;
 
@@ -17,7 +16,7 @@ namespace Infrastructure.EntryPoint
 
             _game = new Game(this);
             _container = _game.Build();
-            _game.Start(_container.CreateScope());
+            _game.Start(_container);
         }
 
         private void OnDestroy()
