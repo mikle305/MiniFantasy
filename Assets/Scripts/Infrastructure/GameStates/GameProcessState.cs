@@ -4,7 +4,7 @@ using Domain.Units.Character;
 using Infrastructure.Services;
 using UnityEngine;
 
-namespace Infrastructure.States
+namespace Infrastructure.GameStates
 {
     public class GameProcessState : IPayloadedState<GameObject>
     {

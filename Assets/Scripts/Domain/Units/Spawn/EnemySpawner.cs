@@ -1,7 +1,6 @@
-using System;
-using Additional.Utils;
 using DiContainer.UniDependencyInjection.Core.Unity;
 using Infrastructure.Services;
+using Infrastructure.Services.Configurators;
 using UnityEngine;
 
 namespace Domain.Units.Spawn
@@ -10,33 +9,22 @@ namespace Domain.Units.Spawn
     {
         [SerializeField] private EnemyTypeId _enemyTypeId;
 
-        private IEnemyFactory _enemyFactory;
+        private IEnemyFactory _factory;
+        private IEnemyConfigurator _configurator;
 
 
         [Inject]
-        public void Construct(IEnemyFactory enemyFactory)
+        public void Construct(IEnemyFactory factory, IEnemyConfigurator configurator)
         {
-            _enemyFactory = enemyFactory;
+            _factory = factory;
+            _configurator = configurator;
         }
 
         public GameObject Spawn()
         {
-            Func<Vector3, Transform, GameObject> factory = GetEnemyFactory(_enemyTypeId);
-            return factory.Invoke(transform.position, transform);
-        }
-
-        private Func<Vector3, Transform, GameObject> GetEnemyFactory(EnemyTypeId enemyTypeId)
-        {
-            switch(enemyTypeId)
-            {
-                case EnemyTypeId.Ninja:
-                    return _enemyFactory.CreateNinja;
-                case EnemyTypeId.SkeletonArcher:
-                    return _enemyFactory.CreateSkeletonArcher;
-                default:
-                    ThrowHelper.NotImplementedEnemyType(enemyTypeId);
-                    return null;
-            }
+            GameObject enemy = _factory.Create(_enemyTypeId, transform.position, transform);
+            _configurator.Configure(enemy, _enemyTypeId);
+            return enemy;
         }
     }
 }

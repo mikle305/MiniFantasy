@@ -1,7 +1,7 @@
 using Additional.Abstractions.States;
 using Infrastructure.Services;
 
-namespace Infrastructure.States
+namespace Infrastructure.GameStates
 {
     public class SettingsLoadingState : IState
     {

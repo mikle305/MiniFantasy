@@ -1,9 +1,8 @@
 ﻿using Additional.Abstractions.States;
-using Infrastructure.Scene;
+using Additional.Constants;
 using Infrastructure.Services;
-using Infrastructure.Services.Scene;
 
-namespace Infrastructure.States
+namespace Infrastructure.GameStates
 {
     public class BootstrapState : IState
     {
@@ -22,15 +21,15 @@ namespace Infrastructure.States
         public void Enter()
         {
             _sceneLoader.Load(
-                sceneName: SceneName.BootstrapScene, 
-                onLoaded: EnterSettingsLoadingState);
+                sceneName: SceneName.BootstrapScene,
+                onLoaded: EnterStaticDataLoadingState);
         }
 
         public void Exit()
         {
         }
 
-        private void EnterSettingsLoadingState() 
-            => _stateMachine.Enter<SettingsLoadingState>();
+        private void EnterStaticDataLoadingState()
+            => _stateMachine.Enter<StaticDataLoadingState>();
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using Domain.Units.Animations.Abstractions;
 using Domain.Units.Health;
+using StaticData;
 using UnityEngine;
 
 namespace Domain.Units.Animations
@@ -44,7 +45,7 @@ namespace Domain.Units.Animations
         private void PlayEffect()
         {
             if (_effect != null)
-                _effect.Play();
+                Instantiate(_effect.Prefab, _effect.Position, Quaternion.identity, transform);
         }
 
         private IEnumerator InvokeDamageEnded(float delay)

@@ -1,5 +1,6 @@
 using Domain.Units.Animations.Abstractions;
 using Domain.Units.Health;
+using StaticData;
 using UnityEngine;
 
 namespace Domain.Units.Animations
@@ -34,7 +35,7 @@ namespace Domain.Units.Animations
             Invoke(nameof(OnDestroyed), _destroyDuration);
         }
 
-        protected virtual void OnAnimated()
+        protected void OnAnimated()
         {
             DisableColliders();
             PlayEffect();
@@ -47,16 +48,14 @@ namespace Domain.Units.Animations
 
         private void DisableColliders()
         {
-            foreach (Collider col in _colliders)
-            {
+            foreach (Collider col in _colliders) 
                 col.enabled = false;
-            }
         }
 
         private void PlayEffect()
         {
             if (_effect != null)
-                _effect.Play();
+                Instantiate(_effect.Prefab, _effect.Position, Quaternion.identity, transform);
         }
     }
 }

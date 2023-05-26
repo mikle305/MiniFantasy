@@ -1,7 +1,8 @@
 using DiContainer.UniDependencyInjection.Core.Unity;
+using Infrastructure.GameStates;
 using Infrastructure.Services;
-using Infrastructure.Services.Scene;
-using Infrastructure.States;
+using Infrastructure.Services.Configurators;
+using Infrastructure.Services.StaticData;
 using UniDependencyInjection.Core.Extensions;
 using UniDependencyInjection.Core.Model;
 using UnityEngine;
@@ -38,8 +39,10 @@ namespace Infrastructure.EntryPoint
                 .RegisterSingle<IProgressWatchers, ProgressWatchers>()
                 .RegisterSingle<IEnemyFactory, EnemyFactory>()
                 .RegisterSingle<IGameFactory, GameFactory>()
+                .RegisterSingle<IEnemyConfigurator, EnemyConfigurator>()
                 .RegisterSingle<IStorageService, PlayerPrefsStorageService>()
-                .RegisterSingle<IAutoSaver, AutoSaver>();
+                .RegisterSingle<IAutoSaver, AutoSaver>()
+                .RegisterSingle<IStaticDataService, StaticDataService>();
         }
 
         private static void RegisterPlatformDependentServices(IContainerBuilder containerBuilder)
@@ -57,12 +60,13 @@ namespace Infrastructure.EntryPoint
         private static void RegisterGameStates(IContainerBuilder containerBuilder)
         {
             containerBuilder
+                .RegisterSingle<GameStateMachine>()
                 .RegisterSingle<BootstrapState>()
+                .RegisterSingle<StaticDataLoadingState>()
                 .RegisterSingle<SettingsLoadingState>()
                 .RegisterSingle<ProgressLoadingState>()
                 .RegisterSingle<LevelLoadingState>()
-                .RegisterSingle<GameProcessState>()
-                .RegisterSingle<GameStateMachine>();
+                .RegisterSingle<GameProcessState>();
         }
 
         public void Start(IContainer container)

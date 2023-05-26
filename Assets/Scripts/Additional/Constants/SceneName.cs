@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Scene
+﻿namespace Additional.Constants
 {
     public enum SceneName
     {

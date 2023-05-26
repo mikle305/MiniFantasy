@@ -1,10 +1,9 @@
 ﻿using Additional.Abstractions.States;
 using Additional.Constants;
 using Data;
-using Infrastructure.Scene;
 using Infrastructure.Services;
 
-namespace Infrastructure.States
+namespace Infrastructure.GameStates
 {
     public class ProgressLoadingState : IState
     {

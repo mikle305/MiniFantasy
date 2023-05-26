@@ -1,7 +1,7 @@
 using System;
-using Infrastructure.Scene;
+using Additional.Constants;
 
-namespace Infrastructure.Services.Scene
+namespace Infrastructure.Services
 {
     public interface ISceneLoader
     {

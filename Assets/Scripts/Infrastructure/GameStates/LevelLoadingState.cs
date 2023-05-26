@@ -1,13 +1,11 @@
 ﻿using Additional.Abstractions.States;
 using Domain.Camera;
 using Domain.Units.Spawn;
-using Infrastructure.Scene;
+using Domain.Views;
 using Infrastructure.Services;
-using Infrastructure.Services.Scene;
 using UnityEngine;
-using Views;
 
-namespace Infrastructure.States
+namespace Infrastructure.GameStates
 {
     public class LevelLoadingState : IPayloadedState<string>
     {
@@ -42,13 +40,11 @@ namespace Infrastructure.States
         private void InitGameWorld()
         {
             World world = InitWorld();
-            InitEnemies(world);
-            
             GameObject character = InitCharacter(world);
-            _progressWatchers.InformReaders();
+            InitEnemies(world);
+            LoadProgress();
             InitHud(character);
             FollowCamera(character);
-            
             EnterGamePlay(character);
         }
 
@@ -60,6 +56,9 @@ namespace Infrastructure.States
 
         private Hud InitHud(GameObject character) 
             => _gameFactory.CreateHud(character);
+
+        private void LoadProgress() 
+            => _progressWatchers.InformReaders();
 
         private static GameObject[] InitEnemies(World world)
         {

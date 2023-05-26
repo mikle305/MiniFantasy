@@ -2,7 +2,7 @@
 using UniDependencyInjection.Core.Model;
 using IState = Additional.Abstractions.States.IState;
 
-namespace Infrastructure.States
+namespace Infrastructure.GameStates
 {
     public class GameStateMachine
     {
