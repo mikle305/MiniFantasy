@@ -8,15 +8,15 @@ namespace StaticData
     {
         [Header("Resources")] [Space(3)]
         public string PrefabPath;
+        public EnemyTypeId EnemyTypeId;
         public Effect HitEffect;
         public Effect DeathEffect;
 
-        [Header("Configuration")] [Space(3)] 
-        public EnemyTypeId EnemyTypeId;
-        public float Health;
-        public float FollowingCooldown;
-        public float HitDuration;
-        public float DeathDuration;
-        public float DestroyDuration;
+        [Header("Configuration")] [Space(3)]
+        public float Health = 3;
+        public float FollowingCooldown = 1;
+        public float HitDuration = 1;
+        public float DeathDuration = 2;
+        public float DestroyDuration = 10;
     }
 }
