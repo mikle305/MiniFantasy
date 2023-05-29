@@ -8,6 +8,8 @@ namespace Domain.Units.Health
         
         public event Action ZeroReached;
 
+        public void Init(float current, float max);
+        
         public float CurrentValue { get; }
 
         public float MaxValue { get; }

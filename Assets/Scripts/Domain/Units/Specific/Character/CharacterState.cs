@@ -6,10 +6,6 @@ using UnityEngine;
 
 namespace Domain.Units.Character
 {
-    [RequireComponent(typeof(CharacterMovement))]
-    [RequireComponent(typeof(CharacterAttacker))]
-    [RequireComponent(typeof(HitOnDamage))]
-    [RequireComponent(typeof(IHealth))]
     public class CharacterState : MonoBehaviour
     {
         private CharacterMovement _characterMovement;

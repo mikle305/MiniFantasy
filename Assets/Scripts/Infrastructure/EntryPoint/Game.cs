@@ -42,7 +42,7 @@ namespace Infrastructure.EntryPoint
                 .RegisterSingle<IEnemyConfigurator, EnemyConfigurator>()
                 .RegisterSingle<IStorageService, PlayerPrefsStorageService>()
                 .RegisterSingle<IAutoSaver, AutoSaver>()
-                .RegisterSingle<IStaticDataService, StaticDataService>();
+                .RegisterSingle<IStaticDataAccess, StaticDataAccess>();
         }
 
         private static void RegisterPlatformDependentServices(IContainerBuilder containerBuilder)

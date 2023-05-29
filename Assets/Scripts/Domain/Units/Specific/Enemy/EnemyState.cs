@@ -5,9 +5,6 @@ using UnityEngine;
 
 namespace Domain.Units.Enemy
 {
-    [RequireComponent(typeof(Follower))]
-    [RequireComponent(typeof(HitOnDamage))]
-    [RequireComponent(typeof(IHealth))]
     public class EnemyState : MonoBehaviour
     {
         private HitOnDamage _hitOnDamage;
@@ -18,7 +15,7 @@ namespace Domain.Units.Enemy
         private bool _isDied;
 
 
-        private void Awake()
+        private void Start()
         {
             InitDependencies();
             InitStatesUpdaters();

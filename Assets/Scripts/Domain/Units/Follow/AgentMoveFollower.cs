@@ -15,10 +15,12 @@ namespace Domain.Units.Follow
             _agent = GetComponent<NavMeshAgent>();
         }
 
-        protected override void OnUpdate()
+        private void Update()
         {
-            if (!_isBlocked)
-                _agent.destination = _target.position;
+            if (_target == null || _isBlocked)
+                return;
+            
+            _agent.destination = _target.position;
         }
 
         public override void Block()

@@ -9,12 +9,12 @@ namespace Domain.Reaction
         
         private void Start()
         {
-            _triggerObserver.TriggerEntered += OnTriggerEntered;
-            _triggerObserver.TriggerExited += OnTriggerExited;
+            _triggerObserver.TriggerEntered += ObjectEntered;
+            _triggerObserver.TriggerExited += ObjectExited;
         }
 
-        protected abstract void OnTriggerEntered(Collider entered);
+        protected abstract void ObjectEntered(Collider entered);
         
-        protected abstract void OnTriggerExited(Collider entered);
+        protected abstract void ObjectExited(Collider exited);
     }
 }

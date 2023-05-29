@@ -6,19 +6,26 @@ using UnityEngine;
 
 namespace Domain.Units.Health
 {
-    public abstract class Health : MonoBehaviour, IHealth
+    public class Health : MonoBehaviour, IHealth
     {
         protected DefaultStat _current;
         protected ModifiableStat _max;
 
-        public virtual event Action Changed;
+        public event Action Changed;
         public event Action ZeroReached;
         
-        public float CurrentValue => 
-            _current.GetValue();
+        
+        public void Init(float current, float max)
+        {
+            _max = new ModifiableStat(max);
+            _current = new DefaultStat(current);
+        }
+        
+        public float CurrentValue 
+            => _current.GetValue();
 
-        public float MaxValue => 
-            _max.GetValue();
+        public float MaxValue 
+            => _max.GetValue();
 
         public void TakeHeal(float health)
         {
@@ -30,7 +37,7 @@ namespace Domain.Units.Health
                 return;
             
             ApplyHeal(health);
-            Changed?.Invoke();
+            InvokeChanged();
         }
 
         public void TakeDamage(float damage)
@@ -40,10 +47,8 @@ namespace Domain.Units.Health
                 return;
             
             ApplyDamage(damage);
-            Changed?.Invoke();
-            
-            if (CurrentValue == 0)
-                ZeroReached?.Invoke();
+            InvokeChanged();
+            InvokeZeroReached();
         }
 
         protected virtual void ApplyHeal(float health)
@@ -62,8 +67,14 @@ namespace Domain.Units.Health
                 _current.SetValue(0);
         }
 
-        protected void InvokeChanged() =>
-            Changed?.Invoke();
+        private void InvokeZeroReached()
+        {
+            if (CurrentValue == 0)
+                ZeroReached?.Invoke();
+        }
+
+        private void InvokeChanged()
+            => Changed?.Invoke();
 
         private static void ValidateValue(float value)
         {

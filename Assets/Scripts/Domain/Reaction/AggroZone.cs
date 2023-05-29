@@ -8,14 +8,18 @@ namespace Domain.Reaction
     {
         [SerializeField] private Follower _follower;
         
-        [Header("Settings")] [Space(3)]
-        [Tooltip("In seconds")] [SerializeField] private float _followingCooldown;
+        private float _followingCooldown;
 
         private Coroutine _aggroCooldown;
         private bool _hasAggroTarget;
 
 
-        protected override void OnTriggerEntered(Collider entered)
+        public void Init(float followingCooldown)
+        {
+            _followingCooldown = followingCooldown;
+        }
+
+        protected override void ObjectEntered(Collider entered)
         {
             if (_hasAggroTarget)
                 return;
@@ -25,7 +29,7 @@ namespace Domain.Reaction
             _hasAggroTarget = true;
         }
         
-        protected override void OnTriggerExited(Collider entered)
+        protected override void ObjectExited(Collider exited)
         {
             if (!_hasAggroTarget)
                 return;

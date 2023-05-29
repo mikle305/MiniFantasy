@@ -590,7 +590,7 @@ GameObject:
   - component: {fileID: 6930536337813200365}
   - component: {fileID: 6930536337813200354}
   - component: {fileID: 6206049585540694502}
-  - component: {fileID: 2433417669288402247}
+  - component: {fileID: 5490674950630196945}
   - component: {fileID: 4886653898272821823}
   - component: {fileID: 1065242456212177311}
   - component: {fileID: 1677962277623434842}
@@ -715,7 +715,7 @@ MonoBehaviour:
   _attackDuration: 1.5
   _firstAttackDamage: 1
   _secondAttackDamage: 0.5
---- !u!114 &2433417669288402247
+--- !u!114 &5490674950630196945
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -724,7 +724,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6929602986688959769}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19478e3bdd744979b1f77b2ed4b6e2f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 412097049178461e8f2186e497fcbf14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &4886653898272821823
@@ -739,10 +739,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30410417bbae423a94bd695c5edc1343, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hitDuration: 0.75
-  _effect:
-    Prefab: {fileID: 0}
-    Position: {x: 0, y: 0, z: 0}
 --- !u!114 &1065242456212177311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -755,11 +751,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 504b7b107f4344e38cc4b3916a362910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animDuration: 2
-  _destroyDuration: 5
-  _effect:
-    Prefab: {fileID: 0}
-    Position: {x: 0, y: 0, z: 0}
 --- !u!114 &1677962277623434842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -772,8 +763,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 833fead1c01f4611ad8de18adfaab54c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterMovement: {fileID: 6930536337813200354}
-  _health: {fileID: 2433417669288402247}
 --- !u!1 &6929646995442421117
 GameObject:
   m_ObjectHideFlags: 0

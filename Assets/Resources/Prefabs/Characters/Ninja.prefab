@@ -1289,7 +1289,7 @@ GameObject:
   - component: {fileID: 3835074404040549117}
   - component: {fileID: -6692695054325570002}
   - component: {fileID: 4146399864200452387}
-  - component: {fileID: 6331804363281768791}
+  - component: {fileID: 6328243603481058547}
   - component: {fileID: 6497331023182664158}
   - component: {fileID: 8260586294591030749}
   - component: {fileID: 4822237933159702650}
@@ -1428,7 +1428,7 @@ MonoBehaviour:
   _triggerObserver: {fileID: 6767333910633985679}
   _follower: {fileID: 3835074404040549117}
   _followingCooldown: 1
---- !u!114 &6331804363281768791
+--- !u!114 &6328243603481058547
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1437,10 +1437,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1880444566353528}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c5904e6e22b46439ee5f1acc666fe46, type: 3}
+  m_Script: {fileID: 11500000, guid: 412097049178461e8f2186e497fcbf14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultValue: 3
 --- !u!114 &6497331023182664158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1453,10 +1452,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30410417bbae423a94bd695c5edc1343, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hitDuration: 1
-  _effect:
-    Prefab: {fileID: 0}
-    Position: {x: 0, y: 0, z: 0}
 --- !u!114 &8260586294591030749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1469,11 +1464,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac8aeb5e28e94e56b65d57e36ae0a1e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animDuration: 2
-  _destroyDuration: 10
-  _effect:
-    Prefab: {fileID: 0}
-    Position: {x: 0, y: 0, z: 0}
 --- !u!114 &4822237933159702650
 MonoBehaviour:
   m_ObjectHideFlags: 0

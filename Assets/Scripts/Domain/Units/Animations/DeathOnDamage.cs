@@ -1,3 +1,4 @@
+using Additional.Utils;
 using Domain.Units.Animations.Abstractions;
 using Domain.Units.Health;
 using StaticData;
@@ -5,21 +6,23 @@ using UnityEngine;
 
 namespace Domain.Units.Animations
 {
-    [RequireComponent(typeof(IDieAnimator))]
-    [RequireComponent(typeof(IHealth))]
     public class DeathOnDamage : MonoBehaviour
     {
-        [SerializeField] private float _animDuration = 2;
-        [SerializeField] private float _destroyDuration = 10;
-        [Tooltip("Not required")][SerializeField] private Effect _effect;
+        private float _animDuration;
+        private float _destroyDuration;
+        private Effect _effect;
 
         private IHealth _health;
         private IDieAnimator _animator;
         private Collider[] _colliders;
 
 
-        private void Awake()
+        public void Init(float animDuration, float destroyDuration, Effect effect = null)
         {
+            _animDuration = animDuration;
+            _destroyDuration = destroyDuration;
+            _effect = effect;
+            
             _animator = GetComponent<IDieAnimator>();
             _health = GetComponent<IHealth>();
             _colliders = GetComponents<Collider>();
@@ -52,10 +55,7 @@ namespace Domain.Units.Animations
                 col.enabled = false;
         }
 
-        private void PlayEffect()
-        {
-            if (_effect != null)
-                Instantiate(_effect.Prefab, _effect.Position, Quaternion.identity, transform);
-        }
+        private void PlayEffect() 
+            => GameUtils.PlayEffect(_effect, transform);
     }
 }

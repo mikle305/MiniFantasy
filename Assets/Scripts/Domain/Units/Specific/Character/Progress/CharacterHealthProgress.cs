@@ -1,13 +1,14 @@
 ﻿using Data;
+using Domain.Units.Health;
 using Infrastructure.Services;
 
 namespace Domain.Units.Character.Progress
 {
     public class CharacterHealthProgress : ISavedProgressWriter
     {
-        private readonly CharacterHealth _health;
+        private readonly IHealth _health;
 
-        public CharacterHealthProgress(CharacterHealth health)
+        public CharacterHealthProgress(IHealth health)
         {
             _health = health;
         }

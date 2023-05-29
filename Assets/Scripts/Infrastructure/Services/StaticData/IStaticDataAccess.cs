@@ -3,7 +3,7 @@ using StaticData;
 
 namespace Infrastructure.Services.StaticData
 {
-    public interface IStaticDataService
+    public interface IStaticDataAccess
     {
         public void LoadEnemies();
         

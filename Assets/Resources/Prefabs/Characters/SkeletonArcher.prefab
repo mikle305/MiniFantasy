@@ -945,10 +945,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1627716094429072}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c5904e6e22b46439ee5f1acc666fe46, type: 3}
+  m_Script: {fileID: 11500000, guid: 412097049178461e8f2186e497fcbf14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultValue: 3
 --- !u!114 &2748729521728562555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -961,10 +960,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30410417bbae423a94bd695c5edc1343, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hitDuration: 1
-  _effect:
-    Prefab: {fileID: 0}
-    Position: {x: 0, y: 0, z: 0}
 --- !u!114 &6881244985582050221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -977,11 +972,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac8aeb5e28e94e56b65d57e36ae0a1e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animDuration: 2
-  _destroyDuration: 10
-  _effect:
-    Prefab: {fileID: 0}
-    Position: {x: 0, y: 0, z: 0}
 --- !u!114 &4124806720567506142
 MonoBehaviour:
   m_ObjectHideFlags: 0

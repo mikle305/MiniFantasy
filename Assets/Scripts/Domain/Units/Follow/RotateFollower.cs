@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Domain.Units.Follow
 {
@@ -9,9 +10,9 @@ namespace Domain.Units.Follow
         private bool _isBlocked;
 
 
-        protected override void OnUpdate()
+        private void Update()
         {
-            if (_isBlocked)
+            if (_target == null || _isBlocked)
                 return;
             
             RotateToTarget(_target);

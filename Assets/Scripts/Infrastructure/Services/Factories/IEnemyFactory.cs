@@ -5,6 +5,6 @@ namespace Infrastructure.Services
 {
     public interface IEnemyFactory
     {
-        GameObject Create(EnemyTypeId enemyTypeId, Vector3 position, Transform parent);
+        public GameObject Create(EnemyTypeId enemyTypeId, Vector3 position, Transform parent);
     }
 }

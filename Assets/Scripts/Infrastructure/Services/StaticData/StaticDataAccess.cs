@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Infrastructure.Services.StaticData
 {
-    public class StaticDataService : IStaticDataService
+    public class StaticDataAccess : IStaticDataAccess
     {
         private Dictionary<EnemyTypeId, EnemyStaticData> _enemies;
 

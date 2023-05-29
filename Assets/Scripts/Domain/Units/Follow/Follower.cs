@@ -6,20 +6,12 @@ namespace Domain.Units.Follow
     {
         protected Transform _target;
 
-        
-        private void Update()
-        {
-            if (_target != null)
-                OnUpdate();
-        }
 
         public void FollowTo(Transform target) 
             => _target = target;
 
         public void StopFollowing() 
             => _target = null;
-
-        protected abstract void OnUpdate();
 
         public abstract void Block();
 

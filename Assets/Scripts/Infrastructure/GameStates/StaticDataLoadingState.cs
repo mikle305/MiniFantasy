@@ -6,19 +6,19 @@ namespace Infrastructure.GameStates
     public class StaticDataLoadingState : IState
     {
         private readonly GameStateMachine _stateMachine;
-        private readonly IStaticDataService _staticDataService;
+        private readonly IStaticDataAccess _staticDataAccess;
 
         public StaticDataLoadingState(
             GameStateMachine stateMachine, 
-            IStaticDataService staticDataService)
+            IStaticDataAccess staticDataAccess)
         {
             _stateMachine = stateMachine;
-            _staticDataService = staticDataService;
+            _staticDataAccess = staticDataAccess;
         }
         
         public void Enter()
         {
-            _staticDataService.LoadEnemies();
+            _staticDataAccess.LoadEnemies();
             EnterSettingsLoadingState();
         }
 

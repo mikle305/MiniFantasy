@@ -1,4 +1,3 @@
-using Domain.Units.Animations;
 using Domain.Units.Spawn;
 using UnityEngine;
 

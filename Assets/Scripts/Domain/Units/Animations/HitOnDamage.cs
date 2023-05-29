@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Additional.Utils;
 using Domain.Units.Animations.Abstractions;
 using Domain.Units.Health;
 using StaticData;
@@ -7,12 +8,10 @@ using UnityEngine;
 
 namespace Domain.Units.Animations
 {
-    [RequireComponent(typeof(IHitAnimator))]
-    [RequireComponent(typeof(IHealth))]
     public class HitOnDamage : MonoBehaviour
     {
-        [SerializeField] private float _hitDuration;
-        [Tooltip("Not required")][SerializeField] private Effect _effect;
+        private float _animDuration;
+        private Effect _effect;
 
         private IHealth _health;
         private IHitAnimator _animator;
@@ -21,14 +20,17 @@ namespace Domain.Units.Animations
         
         public event Action Started;
         public event Action Ended;
-
-
-        private void Awake()
+        
+        
+        public void Init(float animDuration, Effect effect = null)
         {
+            _animDuration = animDuration;
+            _effect = effect;
+            
             _health = GetComponent<IHealth>();
             _animator = GetComponent<IHitAnimator>();
             
-            _animator.SetHitDuration(_hitDuration);
+            _animator.SetHitDuration(_animDuration);
             _health.Changed += AnimateHit;
         }
 
@@ -39,13 +41,7 @@ namespace Domain.Units.Animations
             _animator.PlayHit();
             if (_endedCoroutine != null)
                 StopCoroutine(_endedCoroutine);
-            _endedCoroutine = StartCoroutine(InvokeDamageEnded(_hitDuration));
-        }
-
-        private void PlayEffect()
-        {
-            if (_effect != null)
-                Instantiate(_effect.Prefab, _effect.Position, Quaternion.identity, transform);
+            _endedCoroutine = StartCoroutine(InvokeDamageEnded(_animDuration));
         }
 
         private IEnumerator InvokeDamageEnded(float delay)
@@ -54,5 +50,8 @@ namespace Domain.Units.Animations
 
             Ended?.Invoke();
         }
+
+        private void PlayEffect() 
+            => GameUtils.PlayEffect(_effect, transform);
     }
 }
