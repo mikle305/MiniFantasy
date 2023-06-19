@@ -1,4 +1,4 @@
-using DiContainer.UniDependencyInjection.Core.Unity;
+using GamePlay.Loot;
 using Infrastructure.GameStates;
 using Infrastructure.Services;
 using Infrastructure.Services.Configurators;
@@ -9,14 +9,14 @@ using UnityEngine;
 
 namespace Infrastructure.EntryPoint
 {
-    public class Game : StartUp
+    public class StartUp : DiContainer.UniDependencyInjection.Core.Unity.StartUp
 
     {
         private readonly ICoroutineRunner _coroutineRunner;
         private GameStateMachine _stateMachine;
 
 
-        public Game(ICoroutineRunner coroutineRunner)
+        public StartUp(ICoroutineRunner coroutineRunner)
         {
             _coroutineRunner = coroutineRunner;
         }
@@ -30,6 +30,8 @@ namespace Infrastructure.EntryPoint
 
         private void RegisterDefaultServices(IContainerBuilder containerBuilder)
         {
+            var staticDataService = new StaticDataService();
+            
             containerBuilder
                 .RegisterSingle<ICoroutineRunner>(_coroutineRunner)
                 .RegisterSingle<ISceneLoader, SceneLoader>()
@@ -37,12 +39,15 @@ namespace Infrastructure.EntryPoint
                 .RegisterSingle<IAssetProvider, AssetProvider>()
                 .RegisterSingle<IProgressAccess, ProgressAccess>()
                 .RegisterSingle<IProgressWatchers, ProgressWatchers>()
-                .RegisterSingle<IEnemyFactory, EnemyFactory>()
                 .RegisterSingle<IGameFactory, GameFactory>()
+                .RegisterSingle<IEnemyFactory, EnemyFactory>()
+                .RegisterSingle<ILootFactory, LootFactory>()
                 .RegisterSingle<IEnemyConfigurator, EnemyConfigurator>()
+                .RegisterSingle<ILootConfigurator, LootConfigurator>()
                 .RegisterSingle<IStorageService, PlayerPrefsStorageService>()
                 .RegisterSingle<IAutoSaver, AutoSaver>()
-                .RegisterSingle<IStaticDataAccess, StaticDataAccess>();
+                .RegisterSingle<IStaticDataAccess>(staticDataService)
+                .RegisterSingle<IStaticDataLoader>(staticDataService);
         }
 
         private static void RegisterPlatformDependentServices(IContainerBuilder containerBuilder)

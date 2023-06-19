@@ -7,7 +7,6 @@ namespace Infrastructure.Services
     {
         private readonly List<ISavedProgressReader> _readers = new();
         private readonly List<ISavedProgressWriter> _writers = new();
-
         private readonly IProgressAccess _progressAccess;
 
         

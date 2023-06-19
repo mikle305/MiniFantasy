@@ -1,5 +1,4 @@
 ﻿using Additional.Constants;
-using DiContainer.UniDependencyInjection.Core.Unity;
 using Domain.Units.Character;
 using Domain.Units.Health;
 using Domain.Views;
@@ -28,8 +27,11 @@ namespace Infrastructure.Services
 
         public GameObject CreateCharacter(World world)
         {
-            GameObject character =
-                _assetProvider.Instantiate<GameObject>(AssetPath.CharacterPath, world.SpawnPoint.position, world.transform);
+            GameObject character = _assetProvider.Instantiate<GameObject>(
+                AssetPath.CharacterPath, 
+                world.SpawnPoint.position, 
+                world.transform,
+                injectInChildren: false);
             
             _progressWatchers.RegisterComponents(character);
             

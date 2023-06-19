@@ -5,8 +5,8 @@ namespace Infrastructure.Services.StaticData
 {
     public interface IStaticDataAccess
     {
-        public void LoadEnemies();
-        
         public EnemyStaticData FindEnemyData(EnemyTypeId enemyTypeId);
+        
+        public LootStaticData FindLootData(LootTypeId lootTypeId);
     }
 }

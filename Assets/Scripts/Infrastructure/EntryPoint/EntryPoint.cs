@@ -6,7 +6,7 @@ namespace Infrastructure.EntryPoint
 {
     public class EntryPoint : MonoBehaviour, ICoroutineRunner
     {
-        private Game _game;
+        private StartUp _startUp;
         private IContainerBuilder _containerBuilder;
         private IContainer _container;
 
@@ -14,9 +14,9 @@ namespace Infrastructure.EntryPoint
         {
             DontDestroyOnLoad(this);
 
-            _game = new Game(this);
-            _container = _game.Build();
-            _game.Start(_container);
+            _startUp = new StartUp(this);
+            _container = _startUp.Build();
+            _startUp.Start(_container);
         }
 
         private void OnDestroy()
