@@ -53,20 +53,12 @@ namespace Domain.Units.Character
         }
 
         // Animation event callback
-        private void OnFirstAttackAnimated()
-        {
-            PhysicsDebug.DrawSphere(CalculateHitPoint(), _hitRadius);
+        private void OnFirstAttackAnimated() 
+            => TryDamage(_firstAttackDamage);
 
-            TryDamage(_firstAttackDamage);
-        }
-        
         // Animation event callback
-        private void OnSecondAttackAnimated()
-        {
-            PhysicsDebug.DrawSphere(CalculateHitPoint(), _hitRadius);
-
-            TryDamage(_secondAttackDamage);
-        }
+        private void OnSecondAttackAnimated() 
+            => TryDamage(_secondAttackDamage);
 
         private bool TryDamage(float damage)
         {
@@ -88,6 +80,7 @@ namespace Domain.Units.Character
                 _hits, 
                 _layerMask);
             
+            PhysicsDebug.DrawSphere(CalculateHitPoint(), _hitRadius);
             hit = _hits.FirstOrDefault();
             
             return hitsCount > 0;

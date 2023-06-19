@@ -35,13 +35,22 @@ namespace Infrastructure.Services.Configurators
         private static void InitDeath(GameObject enemy, EnemyStaticData enemyData)
         {
             if (enemy.TryGetComponent(out DeathOnDamage deathOnDamage))
-                deathOnDamage.Init(enemyData.DeathDuration, enemyData.DestroyDuration, enemyData.DeathEffect);
+                deathOnDamage.Init(enemyData.DeathDuration);
+            
+            if (enemy.TryGetComponent(out DestroyOnDeath destroyOnDeath))
+                destroyOnDeath.Init(enemyData.DestroyDuration);
+            
+            if (enemy.TryGetComponent(out EffectOnDeath effectOnDeath))
+                effectOnDeath.Init(enemyData.DeathEffect);
         }
 
         private static void InitHitting(GameObject enemy, EnemyStaticData enemyData)
         {
             if (enemy.TryGetComponent(out HitOnDamage hitOnDamage))
-                hitOnDamage.Init(enemyData.HitDuration, enemyData.HitEffect);
+                hitOnDamage.Init(enemyData.GetHitDuration);
+
+            if (enemy.TryGetComponent(out EffectOnHit effectOnHit))
+                effectOnHit.Init(enemyData.HitEffect);
         }
 
         private static void InitAggroZone(GameObject enemy, EnemyStaticData enemyData)

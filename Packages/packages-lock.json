@@ -7,6 +7,13 @@
       "dependencies": {},
       "hash": "d0c1cbb5415f5accf6a1d49d1dc91cf7d4fb11b9"
     },
+    "com.cysharp.unitask": {
+      "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask/#master",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "f2773f585e762480c835ac718b82b87cb111e500"
+    },
     "com.mikle305.uni-dependency-injection": {
       "version": "https://github.com/mikle305hd/DiContainer.git#unity",
       "depth": 0,

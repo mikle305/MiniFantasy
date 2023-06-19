@@ -15,7 +15,7 @@ namespace StaticData
         [Header("Configuration")] [Space(3)]
         public float Health = 3;
         public float FollowingCooldown = 1;
-        public float HitDuration = 1;
+        public float GetHitDuration = 1;
         public float DeathDuration = 2;
         public float DestroyDuration = 10;
     }

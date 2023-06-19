@@ -1,5 +1,6 @@
 ﻿using Additional.Abstractions.States;
 using Additional.Utils;
+using Domain.Units.Animations;
 using Domain.Units.Character;
 using Infrastructure.Services;
 using UnityEngine;
@@ -10,7 +11,7 @@ namespace Infrastructure.GameStates
     {
         private readonly GameStateMachine _stateMachine;
         private readonly IAutoSaver _autoSaver;
-        private CharacterDeath _characterDeath;
+        private DestroyOnDeath _characterDestroy;
 
         public GameProcessState(GameStateMachine stateMachine, IAutoSaver autoSaver)
         {
@@ -20,15 +21,15 @@ namespace Infrastructure.GameStates
 
         public void Enter(GameObject character)
         {
-            if (!character.TryGetComponent(out _characterDeath))
+            if (!character.TryGetComponent(out _characterDestroy))
                 ThrowHelper.CharacterDeathComponentIsRequired();
             
-            _characterDeath.Destroyed += OnDestroyed;
+            _characterDestroy.Destroyed += OnDestroyed;
         }
 
         public void Exit()
         {
-            _characterDeath.Destroyed -= OnDestroyed;
+            _characterDestroy.Destroyed -= OnDestroyed;
         }
 
         private void OnDestroyed()

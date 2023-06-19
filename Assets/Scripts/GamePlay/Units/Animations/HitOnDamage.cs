@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using Additional.Utils;
 using Domain.Units.Animations.Abstractions;
 using Domain.Units.Health;
 using StaticData;
@@ -11,7 +10,6 @@ namespace Domain.Units.Animations
     public class HitOnDamage : MonoBehaviour
     {
         private float _animDuration;
-        private Effect _effect;
 
         private IHealth _health;
         private IHitAnimator _animator;
@@ -25,22 +23,19 @@ namespace Domain.Units.Animations
         public void Init(float animDuration, Effect effect = null)
         {
             _animDuration = animDuration;
-            _effect = effect;
-            
-            _health = GetComponent<IHealth>();
             _animator = GetComponent<IHitAnimator>();
-            
             _animator.SetHitDuration(_animDuration);
+            _health = GetComponent<IHealth>();
             _health.Changed += AnimateHit;
         }
 
         private void AnimateHit()
         {
             Started?.Invoke();
-            PlayEffect();
             _animator.PlayHit();
             if (_endedCoroutine != null)
                 StopCoroutine(_endedCoroutine);
+            
             _endedCoroutine = StartCoroutine(InvokeDamageEnded(_animDuration));
         }
 
@@ -50,8 +45,5 @@ namespace Domain.Units.Animations
 
             Ended?.Invoke();
         }
-
-        private void PlayEffect() 
-            => GameUtils.PlayEffect(_effect, transform);
     }
 }
