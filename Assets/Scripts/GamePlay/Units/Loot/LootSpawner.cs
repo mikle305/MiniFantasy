@@ -1,5 +1,4 @@
 using DiContainer.UniDependencyInjection.Core.Unity;
-using Domain.Units.Animations;
 using Infrastructure.Services.StaticData;
 using UnityEngine;
 
@@ -20,12 +19,7 @@ namespace GamePlay.Loot
             _factory = factory;
         }
 
-        private void Awake()
-        {
-            GetComponent<DeathOnDamage>().Happened += Spawn;
-        }
-
-        private void Spawn()
+        public void Spawn()
         {
             _factory.Create(_lootTypeId, transform.position, transform);
         }
