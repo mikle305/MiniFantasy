@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
-using Domain.Units.Spawn;
+using GamePlay.Units.Loot;
+using GamePlay.Units.Spawn;
 using StaticData;
 using UnityEngine;
 
-namespace Infrastructure.Services.StaticData
+namespace Infrastructure.Services
 {
     public class StaticDataService : IStaticDataAccess, IStaticDataLoader
     {

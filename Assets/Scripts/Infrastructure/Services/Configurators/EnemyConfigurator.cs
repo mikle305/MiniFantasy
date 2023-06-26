@@ -1,12 +1,12 @@
-using Domain.Reaction;
-using Domain.Units.Animations;
-using Domain.Units.Health;
-using Domain.Units.Spawn;
-using Infrastructure.Services.StaticData;
+using GamePlay.Reaction;
+using GamePlay.Units.Animations;
+using GamePlay.Units.Health;
+using GamePlay.Units.Loot;
+using GamePlay.Units.Spawn;
 using StaticData;
 using UnityEngine;
 
-namespace Infrastructure.Services.Configurators
+namespace Infrastructure.Services
 {
     public class EnemyConfigurator : IEnemyConfigurator
     {
@@ -24,6 +24,7 @@ namespace Infrastructure.Services.Configurators
             InitDeath(enemy, enemyData);
             InitHitting(enemy, enemyData);
             InitAggroZone(enemy, enemyData);
+            InitLootSpawner(enemy, enemyData);
         }
 
         private static void InitHealth(GameObject enemy, EnemyStaticData enemyData)
@@ -57,6 +58,12 @@ namespace Infrastructure.Services.Configurators
         {
             if (enemy.TryGetComponent(out AggroZone aggroZone))
                 aggroZone.Init(enemyData.FollowingCooldown);
+        }
+
+        private static void InitLootSpawner(GameObject enemy, EnemyStaticData enemyData)
+        {
+            if (enemy.TryGetComponent(out LootSpawner lootSpawner))
+                lootSpawner.Init(enemyData.LootCollection);
         }
     }
 }

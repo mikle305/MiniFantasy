@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Domain.Reaction
+namespace GamePlay.Reaction
 {
     [RequireComponent(typeof(Collider))]
     public class TriggerObserver : MonoBehaviour

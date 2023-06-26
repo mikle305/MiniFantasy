@@ -1,7 +1,7 @@
-﻿using Domain.Units.Animations.Abstractions;
+﻿using GamePlay.Units.Animations;
 using UnityEngine;
 
-namespace Domain.Units.Character
+namespace GamePlay.Units.Character
 {
     public class CharacterAnimator : UnitAnimator, IHitAnimator, IAttackAnimator, IDieAnimator, IMoveAnimator
     {

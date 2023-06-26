@@ -1,6 +1,6 @@
 using System;
 
-namespace Domain.Units.Health
+namespace GamePlay.Units.Health
 {
     public interface IHealth
     {

@@ -1,7 +1,7 @@
 ﻿using Additional.Abstractions.States;
-using Domain.Camera;
-using Domain.Units.Spawn;
-using Domain.Views;
+using GamePlay.Camera;
+using GamePlay.Units.Spawn;
+using GamePlay.Views;
 using Infrastructure.Services;
 using UnityEngine;
 

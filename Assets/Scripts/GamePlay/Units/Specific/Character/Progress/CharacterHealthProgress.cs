@@ -1,8 +1,8 @@
 ﻿using Data;
-using Domain.Units.Health;
+using GamePlay.Units.Health;
 using Infrastructure.Services;
 
-namespace Domain.Units.Character.Progress
+namespace GamePlay.Units.Character
 {
     public class CharacterHealthProgress : ISavedProgressWriter
     {

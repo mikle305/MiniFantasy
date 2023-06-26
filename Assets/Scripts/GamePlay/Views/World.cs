@@ -1,8 +1,8 @@
-using Domain.NavMesh;
-using Domain.Units.Spawn;
+using GamePlay.NavMesh;
+using GamePlay.Units.Spawn;
 using UnityEngine;
 
-namespace Domain.Views
+namespace GamePlay.Views
 {
     public class World : MonoBehaviour
     {

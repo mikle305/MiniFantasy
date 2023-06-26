@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Domain.Units.Follow
+namespace GamePlay.Units.Follow
 {
     [RequireComponent(typeof(NavMeshAgent))]
     public class AgentMoveFollower : Follower

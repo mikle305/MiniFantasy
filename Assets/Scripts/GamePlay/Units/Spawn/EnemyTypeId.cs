@@ -1,4 +1,4 @@
-namespace Domain.Units.Spawn
+namespace GamePlay.Units.Spawn
 {
     public enum EnemyTypeId
     {

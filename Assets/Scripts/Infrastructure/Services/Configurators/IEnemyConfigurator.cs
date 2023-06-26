@@ -1,7 +1,7 @@
-using Domain.Units.Spawn;
+using GamePlay.Units.Spawn;
 using UnityEngine;
 
-namespace Infrastructure.Services.Configurators
+namespace Infrastructure.Services
 {
     public interface IEnemyConfigurator
     {

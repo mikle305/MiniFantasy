@@ -1,4 +1,4 @@
-namespace Domain.Units.Animations.Abstractions
+namespace GamePlay.Units.Animations
 {
     public interface IDieAnimator
     {

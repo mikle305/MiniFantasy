@@ -1,7 +1,7 @@
 using UI;
 using UnityEngine;
 
-namespace Domain.Views
+namespace GamePlay.Views
 {
     [RequireComponent(typeof(RectTransform))]
     public class Hud : MonoBehaviour

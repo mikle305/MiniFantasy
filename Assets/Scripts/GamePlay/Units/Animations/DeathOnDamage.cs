@@ -1,10 +1,9 @@
 using System;
 using System.Collections;
-using Domain.Units.Animations.Abstractions;
-using Domain.Units.Health;
+using GamePlay.Units.Health;
 using UnityEngine;
 
-namespace Domain.Units.Animations
+namespace GamePlay.Units.Animations
 {
     public class DeathOnDamage : MonoBehaviour
     {

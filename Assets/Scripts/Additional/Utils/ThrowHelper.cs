@@ -1,5 +1,5 @@
 using System;
-using Domain.Units.Spawn;
+using GamePlay.Units.Spawn;
 using UnityEngine;
 
 namespace Additional.Utils
@@ -14,5 +14,10 @@ namespace Additional.Utils
         
         public static void NotImplementedEnemyType(EnemyTypeId enemyTypeId)
             => throw new NotImplementedException($"{enemyTypeId.ToString()} is not implemented in spawner get factory method");
+
+        public static void InvalidChance()
+        {
+            throw new ArgumentException("Invalid chance value");
+        }
     }
 }

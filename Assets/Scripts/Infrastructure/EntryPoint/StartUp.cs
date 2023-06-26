@@ -1,8 +1,5 @@
-using GamePlay.Loot;
 using Infrastructure.GameStates;
 using Infrastructure.Services;
-using Infrastructure.Services.Configurators;
-using Infrastructure.Services.StaticData;
 using UniDependencyInjection.Core.Extensions;
 using UniDependencyInjection.Core.Model;
 using UnityEngine;
@@ -31,23 +28,24 @@ namespace Infrastructure.EntryPoint
         private void RegisterDefaultServices(IContainerBuilder containerBuilder)
         {
             var staticDataService = new StaticDataService();
-            
+
             containerBuilder
-                .RegisterSingle<ICoroutineRunner>(_coroutineRunner)
+                .RegisterSingle(_coroutineRunner)
                 .RegisterSingle<ISceneLoader, SceneLoader>()
-                .RegisterSingle<IFpsService, FpsService>()
                 .RegisterSingle<IAssetProvider, AssetProvider>()
-                .RegisterSingle<IProgressAccess, ProgressAccess>()
-                .RegisterSingle<IProgressWatchers, ProgressWatchers>()
                 .RegisterSingle<IGameFactory, GameFactory>()
                 .RegisterSingle<IEnemyFactory, EnemyFactory>()
                 .RegisterSingle<ILootFactory, LootFactory>()
                 .RegisterSingle<IEnemyConfigurator, EnemyConfigurator>()
                 .RegisterSingle<ILootConfigurator, LootConfigurator>()
+                .RegisterSingle<IProgressAccess, ProgressAccess>()
+                .RegisterSingle<IProgressWatchers, ProgressWatchers>()
                 .RegisterSingle<IStorageService, PlayerPrefsStorageService>()
                 .RegisterSingle<IAutoSaver, AutoSaver>()
                 .RegisterSingle<IStaticDataAccess>(staticDataService)
-                .RegisterSingle<IStaticDataLoader>(staticDataService);
+                .RegisterSingle<IStaticDataLoader>(staticDataService)
+                .RegisterSingle<IRandomizer, Randomizer>()
+                .RegisterSingle<IFpsService, FpsService>();
         }
 
         private static void RegisterPlatformDependentServices(IContainerBuilder containerBuilder)

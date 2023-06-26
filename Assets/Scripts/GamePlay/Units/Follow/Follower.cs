@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Domain.Units.Follow
+namespace GamePlay.Units.Follow
 {
     public abstract class Follower : MonoBehaviour
     {

@@ -1,9 +1,9 @@
-﻿using Domain.Units.Animations;
-using Domain.Units.Follow;
-using Domain.Units.Health;
+﻿using GamePlay.Units.Animations;
+using GamePlay.Units.Follow;
+using GamePlay.Units.Health;
 using UnityEngine;
 
-namespace Domain.Units.Enemy
+namespace GamePlay.Units.Enemy
 {
     public class EnemyState : MonoBehaviour
     {

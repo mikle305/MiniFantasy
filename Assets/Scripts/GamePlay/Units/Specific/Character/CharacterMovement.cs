@@ -1,10 +1,10 @@
 using Additional.Constants;
 using Additional.Extensions;
-using Domain.Additional;
-using Domain.Units.Animations.Abstractions;
+using GamePlay.Additional;
+using GamePlay.Units.Animations;
 using UnityEngine;
 
-namespace Domain.Units.Character
+namespace GamePlay.Units.Character
 {
     [RequireComponent(typeof(CharacterController))]
     [RequireComponent(typeof(CharacterAnimator))]

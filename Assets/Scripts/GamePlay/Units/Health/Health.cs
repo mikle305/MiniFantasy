@@ -1,10 +1,10 @@
 using System;
 using Additional.Constants;
 using Additional.Utils;
-using Domain.StatsSystem;
+using GamePlay.StatsSystem;
 using UnityEngine;
 
-namespace Domain.Units.Health
+namespace GamePlay.Units.Health
 {
     public class Health : MonoBehaviour, IHealth
     {

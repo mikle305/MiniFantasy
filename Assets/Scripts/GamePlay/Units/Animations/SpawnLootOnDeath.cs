@@ -1,7 +1,7 @@
-using GamePlay.Loot;
+using GamePlay.Units.Loot;
 using UnityEngine;
 
-namespace Domain.Units.Animations
+namespace GamePlay.Units.Animations
 {
     public class SpawnLootOnDeath : MonoBehaviour
     {

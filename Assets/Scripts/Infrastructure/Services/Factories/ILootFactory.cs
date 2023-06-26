@@ -1,10 +1,10 @@
-using Infrastructure.Services.StaticData;
+using GamePlay.Units.Loot;
 using UnityEngine;
 
-namespace GamePlay.Loot
+namespace Infrastructure.Services
 {
     public interface ILootFactory
     {
-        public GameObject Create(LootTypeId lootTypeId, Vector3 position, Transform parent);
+        public LootPiece Create(LootTypeId lootTypeId, Vector3 position, Transform parent);
     }
 }

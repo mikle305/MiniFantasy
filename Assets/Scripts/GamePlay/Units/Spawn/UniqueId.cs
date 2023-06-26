@@ -1,7 +1,7 @@
 using Additional.Attributes;
 using UnityEngine;
 
-namespace Domain.Units.Spawn
+namespace GamePlay.Units.Spawn
 {
     public class UniqueId : MonoBehaviour
     {

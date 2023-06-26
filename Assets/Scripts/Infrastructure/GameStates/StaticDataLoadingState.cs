@@ -1,5 +1,5 @@
 using Additional.Abstractions.States;
-using Infrastructure.Services.StaticData;
+using Infrastructure.Services;
 
 namespace Infrastructure.GameStates
 {

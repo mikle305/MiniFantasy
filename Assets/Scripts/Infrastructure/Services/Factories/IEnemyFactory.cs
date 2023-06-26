@@ -1,4 +1,4 @@
-﻿using Domain.Units.Spawn;
+﻿using GamePlay.Units.Spawn;
 using UnityEngine;
 
 namespace Infrastructure.Services

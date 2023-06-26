@@ -1,8 +1,7 @@
-using Infrastructure.Services;
-using Infrastructure.Services.StaticData;
+using GamePlay.Units.Loot;
 using UnityEngine;
 
-namespace GamePlay.Loot
+namespace Infrastructure.Services
 {
     public class LootFactory : ILootFactory
     {
@@ -15,10 +14,10 @@ namespace GamePlay.Loot
             _staticDataAccess = staticDataAccess;
         }
         
-        public GameObject Create(LootTypeId lootTypeId, Vector3 position, Transform parent)
+        public LootPiece Create(LootTypeId lootTypeId, Vector3 position, Transform parent)
         {
             string prefabPath = _staticDataAccess.FindLootData(lootTypeId).PrefabPath;
-            return _assetProvider.Instantiate<GameObject>(prefabPath, position, parent);
+            return _assetProvider.Instantiate<LootPiece>(prefabPath, position, parent);
         }
     }
 }

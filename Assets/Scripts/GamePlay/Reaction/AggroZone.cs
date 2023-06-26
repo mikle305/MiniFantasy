@@ -1,8 +1,8 @@
 ﻿using System.Collections;
-using Domain.Units.Follow;
+using GamePlay.Units.Follow;
 using UnityEngine;
 
-namespace Domain.Reaction
+namespace GamePlay.Reaction
 {
     public class AggroZone : ReactionZone
     {

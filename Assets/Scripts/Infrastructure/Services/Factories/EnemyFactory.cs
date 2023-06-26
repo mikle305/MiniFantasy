@@ -1,5 +1,4 @@
-﻿using Domain.Units.Spawn;
-using Infrastructure.Services.StaticData;
+﻿using GamePlay.Units.Spawn;
 using UnityEngine;
 
 namespace Infrastructure.Services

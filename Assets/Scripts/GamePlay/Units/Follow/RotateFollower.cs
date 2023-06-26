@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Domain.Units.Follow
+namespace GamePlay.Units.Follow
 {
     public class RotateFollower : Follower
     {

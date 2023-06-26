@@ -1,9 +1,8 @@
 using DiContainer.UniDependencyInjection.Core.Unity;
 using Infrastructure.Services;
-using Infrastructure.Services.Configurators;
 using UnityEngine;
 
-namespace Domain.Units.Spawn
+namespace GamePlay.Units.Spawn
 {
     public class EnemySpawner : MonoBehaviour
     {

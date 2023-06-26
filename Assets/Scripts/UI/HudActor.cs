@@ -1,4 +1,4 @@
-using Domain.Units.Health;
+using GamePlay.Units.Health;
 using UnityEngine;
 
 namespace UI

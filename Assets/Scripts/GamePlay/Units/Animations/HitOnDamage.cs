@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections;
-using Domain.Units.Animations.Abstractions;
-using Domain.Units.Health;
+using GamePlay.Units.Health;
 using StaticData;
 using UnityEngine;
 
-namespace Domain.Units.Animations
+namespace GamePlay.Units.Animations
 {
     public class HitOnDamage : MonoBehaviour
     {

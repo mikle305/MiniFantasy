@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Domain.Units.Animations.Abstractions
+namespace GamePlay.Units.Animations
 {
     [RequireComponent(typeof(Animator))]
     public abstract class UnitAnimator : MonoBehaviour

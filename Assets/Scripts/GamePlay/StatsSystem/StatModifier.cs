@@ -1,4 +1,4 @@
-﻿namespace Domain.StatsSystem
+﻿namespace GamePlay.StatsSystem
 {
     public class StatModifier
     {

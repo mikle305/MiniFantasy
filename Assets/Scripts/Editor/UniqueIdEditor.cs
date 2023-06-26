@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
-using Domain.Units.Spawn;
 using Editor.Extensions;
+using GamePlay.Units.Spawn;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;

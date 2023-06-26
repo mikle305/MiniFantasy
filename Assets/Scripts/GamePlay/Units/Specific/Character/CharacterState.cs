@@ -1,10 +1,10 @@
 ﻿using DiContainer.UniDependencyInjection.Core.Unity;
-using Domain.Units.Animations;
-using Domain.Units.Health;
+using GamePlay.Units.Animations;
+using GamePlay.Units.Health;
 using Infrastructure.Services;
 using UnityEngine;
 
-namespace Domain.Units.Character
+namespace GamePlay.Units.Character
 {
     public class CharacterState : MonoBehaviour
     {

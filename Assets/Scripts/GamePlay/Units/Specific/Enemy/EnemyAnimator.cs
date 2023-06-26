@@ -1,7 +1,7 @@
-﻿using Domain.Units.Animations.Abstractions;
+﻿using GamePlay.Units.Animations;
 using UnityEngine;
 
-namespace Domain.Units.Enemy
+namespace GamePlay.Units.Enemy
 {
     [RequireComponent(typeof(Animator))]
     public class EnemyAnimator : UnitAnimator, IMoveAnimator, IHitAnimator, IAttackAnimator, IDieAnimator

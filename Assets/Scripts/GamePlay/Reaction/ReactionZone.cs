@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Domain.Reaction
+namespace GamePlay.Reaction
 {
     public abstract class ReactionZone : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Domain.StatsSystem
+namespace GamePlay.StatsSystem
 {
     public interface IStat
     {

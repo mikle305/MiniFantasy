@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using Data;
-using Domain.Units.Health;
+using GamePlay.Units.Health;
 using Infrastructure.Services;
 using UnityEngine;
 
-namespace Domain.Units.Character.Progress
+namespace GamePlay.Units.Character
 {
     public class CharacterCompositeProgress : MonoBehaviour, ISavedProgressWriter
     {

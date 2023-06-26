@@ -3,11 +3,11 @@ using System.Collections;
 using System.Linq;
 using Additional.Extensions;
 using Additional.Utils;
-using Domain.Units.Animations.Abstractions;
-using Domain.Units.Health;
+using GamePlay.Units.Animations;
+using GamePlay.Units.Health;
 using UnityEngine;
 
-namespace Domain.Units.Character
+namespace GamePlay.Units.Character
 {
     [RequireComponent(typeof(CharacterAnimator))]
     [RequireComponent(typeof(CharacterController))]

@@ -1,7 +1,6 @@
 ﻿using Additional.Abstractions.States;
 using Additional.Utils;
-using Domain.Units.Animations;
-using Domain.Units.Character;
+using GamePlay.Units.Animations;
 using Infrastructure.Services;
 using UnityEngine;
 

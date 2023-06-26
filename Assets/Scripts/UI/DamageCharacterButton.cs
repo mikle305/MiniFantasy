@@ -1,5 +1,5 @@
-﻿using Domain.Units.Character;
-using Domain.Units.Health;
+﻿using GamePlay.Units.Character;
+using GamePlay.Units.Health;
 using UnityEngine;
 using UnityEngine.UI;
 

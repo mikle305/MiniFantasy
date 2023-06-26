@@ -1,27 +1,47 @@
+using System.Collections.Generic;
 using DiContainer.UniDependencyInjection.Core.Unity;
-using Infrastructure.Services.StaticData;
+using Infrastructure.Services;
+using StaticData;
 using UnityEngine;
 
-namespace GamePlay.Loot
+namespace GamePlay.Units.Loot
 {
     public class LootSpawner : MonoBehaviour
     {
-        [SerializeField] private LootTypeId _lootTypeId;
-        
         private ILootFactory _factory;
-        private ILootConfigurator _configurator;
+        private List<RandomLoot> _lootCollection;
+        private IRandomizer _randomizer;
+        private ILootConfigurator _lootConfigurator;
 
-        
+
         [Inject]
-        public void Construct(ILootFactory factory, ILootConfigurator configurator)
+        public void Construct(ILootFactory factory, ILootConfigurator lootConfigurator, IRandomizer randomizer)
         {
-            _configurator = configurator;
+            _lootConfigurator = lootConfigurator;
+            _randomizer = randomizer;
             _factory = factory;
+        }
+
+        public void Init(List<RandomLoot> lootCollection)
+        {
+            _lootCollection = lootCollection;
         }
 
         public void Spawn()
         {
-            _factory.Create(_lootTypeId, transform.position, transform);
+            foreach (RandomLoot loot in _lootCollection) 
+                SpawnOne(loot);
+        }
+
+        private void SpawnOne(RandomLoot loot)
+        {
+            if (_randomizer.TryChancePercents(loot.Chanсe) == false)
+                return;
+
+            int lootCount = _randomizer.Generate(loot.MinCount, loot.MaxCount);
+            LootPiece lootPiece = _factory.Create(loot.Id, transform.position, transform);
+            lootPiece.Init(lootCount);
+            _lootConfigurator.Configure(lootPiece, loot.Id);
         }
     }
 }

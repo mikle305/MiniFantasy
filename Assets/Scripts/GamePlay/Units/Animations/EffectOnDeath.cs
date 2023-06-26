@@ -2,7 +2,7 @@ using Additional.Utils;
 using StaticData;
 using UnityEngine;
 
-namespace Domain.Units.Animations
+namespace GamePlay.Units.Animations
 {
     public class EffectOnDeath : MonoBehaviour
     {

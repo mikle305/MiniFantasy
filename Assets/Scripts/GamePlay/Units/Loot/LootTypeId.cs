@@ -1,6 +1,9 @@
-namespace Infrastructure.Services.StaticData
+namespace GamePlay.Units.Loot
 {
     public enum LootTypeId
     {
+        Money,
+        Wood,
+        Stone,
     }
 }

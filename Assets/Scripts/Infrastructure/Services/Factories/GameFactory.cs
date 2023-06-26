@@ -1,7 +1,7 @@
 ﻿using Additional.Constants;
-using Domain.Units.Character;
-using Domain.Units.Health;
-using Domain.Views;
+using GamePlay.Units.Character;
+using GamePlay.Units.Health;
+using GamePlay.Views;
 using UnityEngine;
 
 namespace Infrastructure.Services

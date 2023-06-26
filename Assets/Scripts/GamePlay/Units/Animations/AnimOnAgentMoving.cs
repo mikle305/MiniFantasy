@@ -1,9 +1,8 @@
 ﻿using Additional.Constants;
-using Domain.Units.Animations.Abstractions;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Domain.Units.Animations
+namespace GamePlay.Units.Animations
 {
     [RequireComponent(typeof(NavMeshAgent))]
     [RequireComponent(typeof(IMoveAnimator))]

@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-namespace Domain.Units.Animations
+namespace GamePlay.Units.Animations
 {
     public class DestroyOnDeath : MonoBehaviour
     {

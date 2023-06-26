@@ -1,7 +1,7 @@
 using Unity.AI.Navigation;
 using UnityEngine;
 
-namespace Domain.NavMesh
+namespace GamePlay.NavMesh
 {
     [RequireComponent(typeof(NavMeshSurface))]
     public class NavMeshBaker : MonoBehaviour
