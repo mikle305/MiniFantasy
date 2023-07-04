@@ -14,10 +14,10 @@ namespace Infrastructure.Services
             _staticDataAccess = staticDataAccess;
         }
         
-        public LootPiece Create(LootTypeId lootTypeId, Vector3 position, Transform parent)
+        public LootPiece Create(LootTypeId lootTypeId, Vector3 position)
         {
             string prefabPath = _staticDataAccess.FindLootData(lootTypeId).PrefabPath;
-            return _assetProvider.Instantiate<LootPiece>(prefabPath, position, parent);
+            return _assetProvider.Instantiate<LootPiece>(prefabPath, position);
         }
     }
 }

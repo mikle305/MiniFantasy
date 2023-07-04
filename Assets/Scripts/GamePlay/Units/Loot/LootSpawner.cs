@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Additional.Extensions;
 using DiContainer.UniDependencyInjection.Core.Unity;
 using Infrastructure.Services;
 using StaticData;
@@ -39,7 +40,7 @@ namespace GamePlay.Units.Loot
                 return;
 
             int lootCount = _randomizer.Generate(loot.MinCount, loot.MaxCount);
-            LootPiece lootPiece = _factory.Create(loot.Id, transform.position, transform);
+            LootPiece lootPiece = _factory.Create(loot.Id, transform.position.AddY(1));
             lootPiece.Init(lootCount);
             _lootConfigurator.Configure(lootPiece, loot.Id);
         }

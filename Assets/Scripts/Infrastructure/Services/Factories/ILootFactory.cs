@@ -5,6 +5,6 @@ namespace Infrastructure.Services
 {
     public interface ILootFactory
     {
-        public LootPiece Create(LootTypeId lootTypeId, Vector3 position, Transform parent);
+        public LootPiece Create(LootTypeId lootTypeId, Vector3 position);
     }
 }
