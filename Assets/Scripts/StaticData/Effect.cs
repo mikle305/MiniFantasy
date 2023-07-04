@@ -6,7 +6,11 @@ namespace StaticData
     [Serializable]
     public class Effect
     {
-        public GameObject Prefab;
-        public Vector3 Position;
+        [SerializeField] private GameObject _prefab;
+        [SerializeField] private Vector3 _position;
+
+        
+        public GameObject Prefab => _prefab;
+        public Vector3 Position => _position;
     }
 }

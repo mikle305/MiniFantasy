@@ -1,5 +1,4 @@
 using GamePlay.Units.Loot;
-using UnityEngine;
 
 namespace Infrastructure.Services
 {

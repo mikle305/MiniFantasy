@@ -35,7 +35,7 @@ namespace GamePlay.Units.Loot
 
         private void SpawnOne(RandomLoot loot)
         {
-            if (_randomizer.TryChancePercents(loot.Chanсe) == false)
+            if (_randomizer.TryChancePercents(loot.Chance) == false)
                 return;
 
             int lootCount = _randomizer.Generate(loot.MinCount, loot.MaxCount);

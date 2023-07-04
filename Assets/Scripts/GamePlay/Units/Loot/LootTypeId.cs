@@ -2,7 +2,7 @@ namespace GamePlay.Units.Loot
 {
     public enum LootTypeId
     {
-        Money,
+        Coin,
         Wood,
         Stone,
     }

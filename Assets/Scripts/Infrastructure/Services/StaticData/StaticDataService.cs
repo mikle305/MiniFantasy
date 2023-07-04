@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Additional.Constants;
 using GamePlay.Units.Loot;
 using GamePlay.Units.Spawn;
 using StaticData;
@@ -14,13 +15,13 @@ namespace Infrastructure.Services
 
         public void LoadEnemies() 
             => _enemiesMap = Resources
-                .LoadAll<EnemyStaticData>("StaticData/Enemies")
-                .ToDictionary(e => e.EnemyTypeId, e => e);
+                .LoadAll<EnemyStaticData>(AssetPath.EnemiesFolder)
+                .ToDictionary(e => e.TypeId, e => e);
 
         public void LoadLoot()
             => _lootMap = Resources
-                .LoadAll<LootStaticData>("StaticData/Loot")
-                .ToDictionary(l => l.LootTypeId, l => l);
+                .LoadAll<LootStaticData>(AssetPath.LootFolder)
+                .ToDictionary(l => l.TypeId, l => l);
 
         public EnemyStaticData FindEnemyData(EnemyTypeId enemyTypeId) 
             => _enemiesMap.TryGetValue(enemyTypeId, out EnemyStaticData enemyStaticData) 

@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
-using GamePlay.Units.Loot;
 using GamePlay.Units.Spawn;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace StaticData
 {
@@ -10,29 +9,31 @@ namespace StaticData
     public class EnemyStaticData : ScriptableObject
     {
         [Header("Resources")] [Space(3)]
-        public string PrefabPath;
-        public EnemyTypeId EnemyTypeId;
-        public Effect HitEffect;
-        public Effect DeathEffect;
+        [SerializeField] [FormerlySerializedAs("EnemyTypeId")] private EnemyTypeId _enemyTypeId;
+        [SerializeField] [FormerlySerializedAs("PrefabPath")] private string _prefabPath;
+        [SerializeField] [FormerlySerializedAs("HitEffect")] private Effect _hitEffect;
+        [SerializeField] [FormerlySerializedAs("DeathEffect")] private Effect _deathEffect;
 
         [Header("Configuration")] [Space(3)]
-        public float Health = 3;
-        public float FollowingCooldown = 1;
-        public float GetHitDuration = 1;
-        public float DeathDuration = 2;
-        public float DestroyDuration = 10;
-
-        [Space(3)]
-        public List<RandomLoot> LootCollection = new();
-    }
-    
-    [Serializable]
-    public class RandomLoot
-    {
-        public LootTypeId Id;
-        public int MinCount = 1;
-        public int MaxCount = 1;
+        [SerializeField] [FormerlySerializedAs("Health")] private float _health = 3;
+        [SerializeField] [FormerlySerializedAs("FollowingCooldown")] private float _followingCooldown = 1;
+        [SerializeField] [FormerlySerializedAs("GetHitDuration")] private float _getHitDuration = 1;
+        [SerializeField] [FormerlySerializedAs("DeathDuration")] private float _deathDuration = 2;
+        [SerializeField] [FormerlySerializedAs("DestroyDuration")] private float _destroyDuration = 10;
         
-        [Tooltip("In percents")] public float Chanсe = 100;
+        [Space(3)]
+        [SerializeField] private List<RandomLoot> _lootCollection = new();
+
+        
+        public string PrefabPath => _prefabPath;
+        public EnemyTypeId TypeId => _enemyTypeId;
+        public Effect HitEffect => _hitEffect;
+        public Effect DeathEffect => _deathEffect;
+        public float Health => _health;
+        public float FollowingCooldown => _followingCooldown;
+        public float DeathDuration => _deathDuration;
+        public float GetHitDuration => _getHitDuration;
+        public float DestroyDuration => _destroyDuration;
+        public List<RandomLoot> LootCollection => _lootCollection;
     }
 }
