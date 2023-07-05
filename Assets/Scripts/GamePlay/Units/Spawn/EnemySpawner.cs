@@ -2,11 +2,11 @@ using DiContainer.UniDependencyInjection.Core.Unity;
 using Infrastructure.Services;
 using UnityEngine;
 
-namespace GamePlay.Units.Spawn
+namespace GamePlay.Units
 {
     public class EnemySpawner : MonoBehaviour
     {
-        [SerializeField] private EnemyTypeId _enemyTypeId;
+        [SerializeField] private EnemyId _enemyId = EnemyId.None;
 
         private IEnemyFactory _factory;
         private IEnemyConfigurator _configurator;
@@ -21,8 +21,8 @@ namespace GamePlay.Units.Spawn
 
         public GameObject Spawn()
         {
-            GameObject enemy = _factory.Create(_enemyTypeId, transform.position, transform);
-            _configurator.Configure(enemy, _enemyTypeId);
+            GameObject enemy = _factory.Create(_enemyId, transform.position, transform);
+            _configurator.Configure(enemy, _enemyId);
             return enemy;
         }
     }

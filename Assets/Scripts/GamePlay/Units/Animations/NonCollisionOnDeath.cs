@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GamePlay.Units.Animations
+namespace GamePlay.Units
 {
     public class NonCollisionOnDeath : MonoBehaviour
     {

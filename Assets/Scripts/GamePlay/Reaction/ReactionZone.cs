@@ -9,12 +9,12 @@ namespace GamePlay.Reaction
         
         private void Start()
         {
-            _triggerObserver.TriggerEntered += ObjectEntered;
-            _triggerObserver.TriggerExited += ObjectExited;
+            _triggerObserver.ObjectEntered += OnObjectEntered;
+            _triggerObserver.ObjectExited += OnObjectExited;
         }
 
-        protected abstract void ObjectEntered(Collider entered);
+        protected abstract void OnObjectEntered(Collider entered);
         
-        protected abstract void ObjectExited(Collider exited);
+        protected abstract void OnObjectExited(Collider exited);
     }
 }

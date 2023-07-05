@@ -1,8 +1,8 @@
 ﻿using Additional.Abstractions.States;
-using GamePlay.Camera;
-using GamePlay.Units.Spawn;
-using GamePlay.Views;
+using GamePlay.Additional;
+using GamePlay.Units;
 using Infrastructure.Services;
+using UI;
 using UnityEngine;
 
 namespace Infrastructure.GameStates

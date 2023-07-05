@@ -1,8 +1,7 @@
-using GamePlay.NavMesh;
-using GamePlay.Units.Spawn;
+using GamePlay.Units;
 using UnityEngine;
 
-namespace GamePlay.Views
+namespace GamePlay.Additional
 {
     public class World : MonoBehaviour
     {

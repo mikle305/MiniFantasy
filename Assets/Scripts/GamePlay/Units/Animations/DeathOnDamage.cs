@@ -1,13 +1,12 @@
 using System;
 using System.Collections;
-using GamePlay.Units.Health;
 using UnityEngine;
 
-namespace GamePlay.Units.Animations
+namespace GamePlay.Units
 {
     public class DeathOnDamage : MonoBehaviour
     {
-        private IHealth _health;
+        private Health _health;
         private IDieAnimator _animator;
         private float _animDuration;
 
@@ -17,7 +16,7 @@ namespace GamePlay.Units.Animations
         public void Init(float animDuration)
         {
             _animator = GetComponent<IDieAnimator>();
-            _health = GetComponent<IHealth>();
+            _health = GetComponent<Health>();
             _animDuration = animDuration;
             _health.ZeroReached += Die;
         }

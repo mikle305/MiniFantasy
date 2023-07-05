@@ -4,14 +4,14 @@ using Additional.Utils;
 using GamePlay.StatsSystem;
 using UnityEngine;
 
-namespace GamePlay.Units.Health
+namespace GamePlay.Units
 {
-    public class Health : MonoBehaviour, IHealth
+    public class Health : MonoBehaviour, ICharacteristic
     {
-        protected DefaultStat _current;
-        protected ModifiableStat _max;
+        private DefaultStat _current;
+        private ModifiableStat _max;
 
-        public event Action Changed;
+        public event Action ValueChanged;
         public event Action ZeroReached;
         
         
@@ -74,7 +74,7 @@ namespace GamePlay.Units.Health
         }
 
         private void InvokeChanged()
-            => Changed?.Invoke();
+            => ValueChanged?.Invoke();
 
         private static void ValidateValue(float value)
         {

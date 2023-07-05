@@ -1,5 +1,5 @@
 using System;
-using GamePlay.Units.Spawn;
+using GamePlay.Units;
 using UnityEngine;
 
 namespace Additional.Utils
@@ -12,8 +12,8 @@ namespace Additional.Utils
         public static void CharacterDeathComponentIsRequired() 
             => throw new MissingComponentException("Character death component is required for game process");
         
-        public static void NotImplementedEnemyType(EnemyTypeId enemyTypeId)
-            => throw new NotImplementedException($"{enemyTypeId.ToString()} is not implemented in spawner get factory method");
+        public static void NotImplementedEnemyType(EnemyId enemyId)
+            => throw new NotImplementedException($"{enemyId.ToString()} is not implemented in spawner get factory method");
 
         public static void InvalidChance()
         {

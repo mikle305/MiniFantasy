@@ -1,5 +1,4 @@
-﻿using GamePlay.Units.Character;
-using GamePlay.Units.Health;
+﻿using GamePlay.Units;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,13 +9,13 @@ namespace UI
     {
         [SerializeField] private float _damage = 1.0f;
         
-        private IHealth _health;
+        private Health _health;
         private Button _button;
         
         
         private void Start()
         {
-            _health = FindObjectOfType<CharacterState>().GetComponent<IHealth>();
+            _health = FindObjectOfType<CharacterState>().GetComponent<Health>();
             _button = GetComponent<Button>();
             _button.onClick.AddListener(OnButtonClicked);
         }

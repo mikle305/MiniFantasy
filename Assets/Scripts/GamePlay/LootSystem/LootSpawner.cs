@@ -5,7 +5,7 @@ using Infrastructure.Services;
 using StaticData;
 using UnityEngine;
 
-namespace GamePlay.Units.Loot
+namespace GamePlay.LootSystem
 {
     public class LootSpawner : MonoBehaviour
     {
@@ -40,9 +40,9 @@ namespace GamePlay.Units.Loot
                 return;
 
             int lootCount = _randomizer.Generate(loot.MinCount, loot.MaxCount);
-            LootPiece lootPiece = _factory.Create(loot.Id, transform.position.AddY(1));
-            lootPiece.Init(lootCount);
-            _lootConfigurator.Configure(lootPiece, loot.Id);
+            LootPiece lootPiece = _factory.Create(loot.LootId, transform.position.AddY(1));
+            lootPiece.Init(loot.LootId, lootCount);
+            _lootConfigurator.Configure(lootPiece, loot.LootId);
         }
     }
 }

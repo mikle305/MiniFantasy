@@ -1,7 +1,7 @@
 ﻿using Additional.Constants;
-using GamePlay.Units.Character;
-using GamePlay.Units.Health;
-using GamePlay.Views;
+using GamePlay.Additional;
+using GamePlay.Units;
+using UI;
 using UnityEngine;
 
 namespace Infrastructure.Services
@@ -46,8 +46,8 @@ namespace Infrastructure.Services
         {
             var hud = _assetProvider.Instantiate<Hud>(AssetPath.HudPath);
 
-            var health = character.GetComponent<IHealth>();
-            hud.HudActor.InitHealth(health, hud.HealthBar);
+            var health = character.GetComponent<Health>();
+            hud.HealthBar.Init(health);
             
             return hud;
         }

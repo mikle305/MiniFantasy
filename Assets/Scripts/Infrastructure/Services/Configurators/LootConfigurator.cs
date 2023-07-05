@@ -1,10 +1,11 @@
-using GamePlay.Units.Loot;
+using GamePlay;
+using GamePlay.LootSystem;
 
 namespace Infrastructure.Services
 {
     public class LootConfigurator : ILootConfigurator
     {
-        public void Configure(LootPiece lootPiece, LootTypeId lootId)
+        public void Configure(LootPiece lootPiece, LootId lootId)
         {
             
         }

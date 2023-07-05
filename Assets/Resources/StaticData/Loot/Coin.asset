@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da9900db9312447ba7f556e4f9d3cc82, type: 3}
   m_Name: Coin
   m_EditorClassIdentifier: 
-  _lootTypeId: 0
+  _lootId: 1
   _prefabPath: Prefabs/Loot/Coin

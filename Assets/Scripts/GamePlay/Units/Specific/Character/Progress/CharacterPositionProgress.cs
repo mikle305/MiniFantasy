@@ -4,7 +4,7 @@ using Infrastructure.Services;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace GamePlay.Units.Character
+namespace GamePlay.Units
 {
     public class CharacterPositionProgress : ISavedProgressWriter
     {

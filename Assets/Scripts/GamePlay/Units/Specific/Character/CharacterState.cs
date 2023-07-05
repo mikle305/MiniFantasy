@@ -1,17 +1,15 @@
 ﻿using DiContainer.UniDependencyInjection.Core.Unity;
-using GamePlay.Units.Animations;
-using GamePlay.Units.Health;
 using Infrastructure.Services;
 using UnityEngine;
 
-namespace GamePlay.Units.Character
+namespace GamePlay.Units
 {
     public class CharacterState : MonoBehaviour
     {
         private CharacterMovement _characterMovement;
         private CharacterAttacker _characterAttacker;
         private HitOnDamage _hitOnDamage;
-        private IHealth _health;
+        private Health _health;
         private IInputService _inputService;
 
         private bool _isAttacking;
@@ -50,7 +48,7 @@ namespace GamePlay.Units.Character
             _characterMovement = GetComponent<CharacterMovement>();
             _characterAttacker = GetComponent<CharacterAttacker>();
             _hitOnDamage = GetComponent<HitOnDamage>();
-            _health = GetComponent<IHealth>();
+            _health = GetComponent<Health>();
         }
 
         private void InitStatesUpdaters()

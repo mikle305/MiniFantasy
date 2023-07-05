@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using GamePlay.Units.Spawn;
+using GamePlay.Units;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -9,7 +9,7 @@ namespace StaticData
     public class EnemyStaticData : ScriptableObject
     {
         [Header("Resources")] [Space(3)]
-        [SerializeField] [FormerlySerializedAs("EnemyTypeId")] private EnemyTypeId _enemyTypeId;
+        [SerializeField] [FormerlySerializedAs("EnemyTypeId")] private EnemyId _enemyId = EnemyId.None;
         [SerializeField] [FormerlySerializedAs("PrefabPath")] private string _prefabPath;
         [SerializeField] [FormerlySerializedAs("HitEffect")] private Effect _hitEffect;
         [SerializeField] [FormerlySerializedAs("DeathEffect")] private Effect _deathEffect;
@@ -26,7 +26,7 @@ namespace StaticData
 
         
         public string PrefabPath => _prefabPath;
-        public EnemyTypeId TypeId => _enemyTypeId;
+        public EnemyId Id => _enemyId;
         public Effect HitEffect => _hitEffect;
         public Effect DeathEffect => _deathEffect;
         public float Health => _health;

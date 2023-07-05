@@ -1,4 +1,5 @@
-using GamePlay.Units.Loot;
+using GamePlay;
+using GamePlay.LootSystem;
 using UnityEngine;
 
 namespace Infrastructure.Services
@@ -14,9 +15,9 @@ namespace Infrastructure.Services
             _staticDataAccess = staticDataAccess;
         }
         
-        public LootPiece Create(LootTypeId lootTypeId, Vector3 position)
+        public LootPiece Create(LootId lootId, Vector3 position)
         {
-            string prefabPath = _staticDataAccess.FindLootData(lootTypeId).PrefabPath;
+            string prefabPath = _staticDataAccess.FindLootData(lootId).PrefabPath;
             return _assetProvider.Instantiate<LootPiece>(prefabPath, position);
         }
     }

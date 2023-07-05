@@ -1,15 +1,12 @@
-﻿using GamePlay.Units.Animations;
-using GamePlay.Units.Follow;
-using GamePlay.Units.Health;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace GamePlay.Units.Enemy
+namespace GamePlay.Units
 {
     public class EnemyState : MonoBehaviour
     {
         private HitOnDamage _hitOnDamage;
         private Follower _follower;
-        private IHealth _health;
+        private Health _health;
 
         private bool _isHited;
         private bool _isDied;
@@ -51,7 +48,7 @@ namespace GamePlay.Units.Enemy
         {
             _follower = GetComponent<Follower>();
             _hitOnDamage = GetComponent<HitOnDamage>();
-            _health = GetComponent<IHealth>();
+            _health = GetComponent<Health>();
         }
     }
 }

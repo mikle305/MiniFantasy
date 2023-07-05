@@ -1,10 +1,10 @@
-﻿using GamePlay.Units.Spawn;
+﻿using GamePlay.Units;
 using UnityEngine;
 
 namespace Infrastructure.Services
 {
     public interface IEnemyFactory
     {
-        public GameObject Create(EnemyTypeId enemyTypeId, Vector3 position, Transform parent);
+        public GameObject Create(EnemyId enemyId, Vector3 position, Transform parent);
     }
 }

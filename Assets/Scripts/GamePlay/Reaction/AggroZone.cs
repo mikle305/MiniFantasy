@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using GamePlay.Units.Follow;
+using GamePlay.Units;
 using UnityEngine;
 
 namespace GamePlay.Reaction
@@ -19,7 +19,7 @@ namespace GamePlay.Reaction
             _followingCooldown = followingCooldown;
         }
 
-        protected override void ObjectEntered(Collider entered)
+        protected override void OnObjectEntered(Collider entered)
         {
             if (_hasAggroTarget)
                 return;
@@ -29,7 +29,7 @@ namespace GamePlay.Reaction
             _hasAggroTarget = true;
         }
         
-        protected override void ObjectExited(Collider exited)
+        protected override void OnObjectExited(Collider exited)
         {
             if (!_hasAggroTarget)
                 return;

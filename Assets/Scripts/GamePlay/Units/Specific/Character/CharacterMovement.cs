@@ -1,10 +1,9 @@
 using Additional.Constants;
 using Additional.Extensions;
 using GamePlay.Additional;
-using GamePlay.Units.Animations;
 using UnityEngine;
 
-namespace GamePlay.Units.Character
+namespace GamePlay.Units
 {
     [RequireComponent(typeof(CharacterController))]
     [RequireComponent(typeof(CharacterAnimator))]

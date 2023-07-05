@@ -1,7 +1,6 @@
-﻿using GamePlay.Units.Animations;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace GamePlay.Units.Character
+namespace GamePlay.Units
 {
     public class CharacterAnimator : UnitAnimator, IHitAnimator, IAttackAnimator, IDieAnimator, IMoveAnimator
     {

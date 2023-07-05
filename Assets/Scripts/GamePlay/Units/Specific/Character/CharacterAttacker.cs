@@ -3,11 +3,9 @@ using System.Collections;
 using System.Linq;
 using Additional.Extensions;
 using Additional.Utils;
-using GamePlay.Units.Animations;
-using GamePlay.Units.Health;
 using UnityEngine;
 
-namespace GamePlay.Units.Character
+namespace GamePlay.Units
 {
     [RequireComponent(typeof(CharacterAnimator))]
     [RequireComponent(typeof(CharacterController))]
@@ -65,7 +63,7 @@ namespace GamePlay.Units.Character
             if (!TryHit(out Collider hit))
                 return false;
             
-            if (!hit.TryGetComponent(out IHealth damageable))
+            if (!hit.TryGetComponent(out Health damageable))
                 return false;
             
             damageable.TakeDamage(damage);

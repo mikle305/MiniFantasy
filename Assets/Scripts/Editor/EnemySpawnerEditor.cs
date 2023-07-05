@@ -1,4 +1,4 @@
-using GamePlay.Units.Spawn;
+using GamePlay.Units;
 using UnityEditor;
 using UnityEngine;
 

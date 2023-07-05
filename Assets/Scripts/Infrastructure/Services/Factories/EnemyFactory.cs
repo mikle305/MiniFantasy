@@ -1,4 +1,4 @@
-﻿using GamePlay.Units.Spawn;
+﻿using GamePlay.Units;
 using UnityEngine;
 
 namespace Infrastructure.Services
@@ -14,9 +14,9 @@ namespace Infrastructure.Services
             _staticDataAccess = staticDataAccess;
         }
         
-        public GameObject Create(EnemyTypeId enemyTypeId, Vector3 position, Transform parent)
+        public GameObject Create(EnemyId enemyId, Vector3 position, Transform parent)
         {
-            string prefabPath = _staticDataAccess.FindEnemyData(enemyTypeId).PrefabPath;
+            string prefabPath = _staticDataAccess.FindEnemyData(enemyId).PrefabPath;
             return _assetProvider.Instantiate<GameObject>(prefabPath, position, parent);
         }
     }

@@ -1,4 +1,4 @@
-namespace GamePlay.Units.Animations
+namespace GamePlay.Units
 {
     public interface IDieAnimator
     {

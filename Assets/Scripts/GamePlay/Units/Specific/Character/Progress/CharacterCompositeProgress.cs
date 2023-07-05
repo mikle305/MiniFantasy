@@ -1,22 +1,21 @@
 ﻿using System.Collections.Generic;
 using Data;
-using GamePlay.Units.Health;
 using Infrastructure.Services;
 using UnityEngine;
 
-namespace GamePlay.Units.Character
+namespace GamePlay.Units
 {
     public class CharacterCompositeProgress : MonoBehaviour, ISavedProgressWriter
     {
         private CharacterMovement _characterMovement;
-        private IHealth _health;
+        private Health _health;
         
         private readonly List<ISavedProgressWriter> _characterProgressParts = new();
 
         
         private void Awake()
         {
-            _health = GetComponent<IHealth>();
+            _health = GetComponent<Health>();
             _characterMovement = GetComponent<CharacterMovement>();
             RegisterProgressParts();
         }

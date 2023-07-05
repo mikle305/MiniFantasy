@@ -1,8 +1,7 @@
+using GamePlay;
+using GamePlay.LootSystem;
 using GamePlay.Reaction;
-using GamePlay.Units.Animations;
-using GamePlay.Units.Health;
-using GamePlay.Units.Loot;
-using GamePlay.Units.Spawn;
+using GamePlay.Units;
 using StaticData;
 using UnityEngine;
 
@@ -17,9 +16,9 @@ namespace Infrastructure.Services
             _staticDataAccess = staticDataAccess;
         }
 
-        public void Configure(GameObject enemy, EnemyTypeId enemyTypeId)
+        public void Configure(GameObject enemy, EnemyId enemyId)
         {
-            EnemyStaticData enemyData = _staticDataAccess.FindEnemyData(enemyTypeId);
+            EnemyStaticData enemyData = _staticDataAccess.FindEnemyData(enemyId);
             InitHealth(enemy, enemyData);
             InitDeath(enemy, enemyData);
             InitHitting(enemy, enemyData);
@@ -29,7 +28,7 @@ namespace Infrastructure.Services
 
         private static void InitHealth(GameObject enemy, EnemyStaticData enemyData)
         {
-            if (enemy.TryGetComponent(out IHealth health))
+            if (enemy.TryGetComponent(out Health health))
                 health.Init(enemyData.Health, enemyData.Health);
         }
 

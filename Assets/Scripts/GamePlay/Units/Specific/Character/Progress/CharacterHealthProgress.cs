@@ -1,14 +1,13 @@
 ﻿using Data;
-using GamePlay.Units.Health;
 using Infrastructure.Services;
 
-namespace GamePlay.Units.Character
+namespace GamePlay.Units
 {
     public class CharacterHealthProgress : ISavedProgressWriter
     {
-        private readonly IHealth _health;
+        private readonly Health _health;
 
-        public CharacterHealthProgress(IHealth health)
+        public CharacterHealthProgress(Health health)
         {
             _health = health;
         }

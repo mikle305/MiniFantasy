@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace GamePlay.Units.Animations
+namespace GamePlay.Units
 {
     [RequireComponent(typeof(NavMeshAgent))]
     [RequireComponent(typeof(IMoveAnimator))]

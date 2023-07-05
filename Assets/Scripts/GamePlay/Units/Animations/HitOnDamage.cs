@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections;
-using GamePlay.Units.Health;
 using StaticData;
 using UnityEngine;
 
-namespace GamePlay.Units.Animations
+namespace GamePlay.Units
 {
     public class HitOnDamage : MonoBehaviour
     {
         private float _animDuration;
 
-        private IHealth _health;
+        private Health _health;
         private IHitAnimator _animator;
         
         private Coroutine _endedCoroutine;
@@ -24,8 +23,8 @@ namespace GamePlay.Units.Animations
             _animDuration = animDuration;
             _animator = GetComponent<IHitAnimator>();
             _animator.SetHitDuration(_animDuration);
-            _health = GetComponent<IHealth>();
-            _health.Changed += AnimateHit;
+            _health = GetComponent<Health>();
+            _health.ValueChanged += AnimateHit;
         }
 
         private void AnimateHit()

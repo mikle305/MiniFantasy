@@ -1,4 +1,4 @@
-using GamePlay.Units.Loot;
+using GamePlay.LootSystem;
 using UnityEngine;
 
 namespace StaticData
@@ -7,11 +7,11 @@ namespace StaticData
     public class LootStaticData : ScriptableObject
     {
         [Header("Resources")] [Space(3)]
-        [SerializeField] private LootTypeId _lootTypeId;
+        [SerializeField] private LootId _lootId = LootId.None;
         [SerializeField] private string _prefabPath;
         
         
-        public LootTypeId TypeId => _lootTypeId;
+        public LootId LootId => _lootId;
         public string PrefabPath => _prefabPath;
     }
 }
