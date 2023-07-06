@@ -9,18 +9,24 @@ namespace GamePlay.LootSystem
 {
     public class LootSpawner : MonoBehaviour
     {
-        private ILootFactory _factory;
         private List<RandomLoot> _lootCollection;
         private IRandomizer _randomizer;
-        private ILootConfigurator _lootConfigurator;
+        private ILootFactory _factory;
+        private ILootConfigurator _configurator;
+        private IStaticDataAccess _staticDataAccess;
 
 
         [Inject]
-        public void Construct(ILootFactory factory, ILootConfigurator lootConfigurator, IRandomizer randomizer)
+        public void Construct(
+            ILootFactory factory, 
+            ILootConfigurator configurator,
+            IStaticDataAccess staticDataAccess,
+            IRandomizer randomizer)
         {
-            _lootConfigurator = lootConfigurator;
-            _randomizer = randomizer;
             _factory = factory;
+            _configurator = configurator;
+            _staticDataAccess = staticDataAccess;
+            _randomizer = randomizer;
         }
 
         public void Init(List<RandomLoot> lootCollection)
@@ -41,8 +47,8 @@ namespace GamePlay.LootSystem
 
             int lootCount = _randomizer.Generate(loot.MinCount, loot.MaxCount);
             LootPiece lootPiece = _factory.Create(loot.LootId, transform.position.AddY(1));
+            _configurator.Configure(lootPiece, loot.LootId);
             lootPiece.Init(loot.LootId, lootCount);
-            _lootConfigurator.Configure(lootPiece, loot.LootId);
         }
     }
 }

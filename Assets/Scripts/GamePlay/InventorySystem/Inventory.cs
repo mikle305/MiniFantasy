@@ -1,34 +1,73 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using GamePlay.LootSystem;
-using UnityEngine;
+using StaticData;
 
 namespace GamePlay.InventorySystem
 {
-    public class Inventory : MonoBehaviour
+    public class Inventory
     {
-        private readonly Dictionary<LootId, Item> _items = new();
+        private readonly List<Slot> _slots = new();
 
-        public event Action<Item> ItemChanged;
-
-
-        public void AddLoot(LootId lootId, int count)
+        public bool CanAddLoot(LootId lootId)
         {
-            if (_items.TryGetValue(lootId, out Item item))
+            foreach (Slot slot in _slots)
             {
-                item.Count += count;
+                if (slot.ItemId == LootId.None)
+                    return true;
+
+                if (slot.ItemId == lootId && !slot.IsFull())
+                    return true;
             }
-            else
-            {
-                item = new Item
-                {
-                    LootId = lootId,
-                    Count = count,
-                };
-                _items.Add(lootId, item);
-            }
+
+            return false;
+        }
+
+        public int AddLoot(LootStaticData lootId, int count)
+        {
+            int remainsCount = DistributeToOld(lootId, count);
+            if (remainsCount == 0)
+                return 0;
             
-            ItemChanged?.Invoke(item);
+            remainsCount = DistributeToEmpty(lootId, remainsCount);
+            return remainsCount;
+        }
+
+        /// <summary>
+        /// Distributes loot to empty slots
+        /// Returns remains count.
+        /// </summary>
+        private int DistributeToEmpty(LootStaticData loot, int count)
+        {
+            int remainsCount = count;
+            Slot emptySlot = _slots.FirstOrDefault(slot => slot.ItemId == LootId.None);
+            if (emptySlot != null)
+            {
+                emptySlot.TrySetItem(new Item
+                {
+                    
+                });
+                
+            }
+
+            return remainsCount;
+        }
+
+        /// <summary>
+        /// Distributes loot to slots, which already have it.
+        /// Returns remains count.
+        /// </summary>
+        private int DistributeToOld(LootId lootId, int count)
+        {
+            int remainsCount = count;
+            foreach (Slot slot in _slots.Where(slot => slot.ItemId == lootId))
+            {
+                remainsCount = slot.AddCount(remainsCount);
+                if (remainsCount == 0)
+                    return 0;
+            }
+
+            return remainsCount;
         }
     }
 }

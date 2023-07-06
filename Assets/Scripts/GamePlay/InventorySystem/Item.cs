@@ -1,4 +1,4 @@
-﻿using GamePlay.LootSystem;
+using GamePlay.LootSystem;
 
 namespace GamePlay.InventorySystem
 {
@@ -6,5 +6,6 @@ namespace GamePlay.InventorySystem
     {
         public LootId LootId { get; set; }
         public int Count { get; set; }
+        public int MaxCount { get; set; }
     }
 }

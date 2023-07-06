@@ -1,3 +1,4 @@
+using StaticData;
 using UnityEngine;
 
 namespace GamePlay.LootSystem
@@ -9,29 +10,28 @@ namespace GamePlay.LootSystem
         public LootId LootId { get; private set; }
 
 
-        public void Init(LootId lootId, int count)
-        {
-            LootId = lootId;
-            _currentCount = count;
-        }
+        public void Init(LootStaticData lootData) 
+            => LootData = lootData;
+
+        public LootStaticData LootData { get; private set; }
+
+        public void SetCount(int count)
+            => _currentCount = count;
 
         public int PickUpAll()
             => PickUp(_currentCount);
 
-        public int PickUp(int targetCount)
+        private int PickUp(int targetCount)
         {
             int left = _currentCount - targetCount;
-            if (left <= 0)
-            {
-                Disappear();
+            if (left <= 0) 
                 targetCount = _currentCount;
-            }
 
             _currentCount -= targetCount;
             return targetCount;
         }
 
-        private void Disappear() 
+        public void Disappear() 
             => Destroy(gameObject);
     }
 }

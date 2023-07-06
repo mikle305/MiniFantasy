@@ -15,9 +15,12 @@ namespace Additional.Utils
         public static void NotImplementedEnemyType(EnemyId enemyId)
             => throw new NotImplementedException($"{enemyId.ToString()} is not implemented in spawner get factory method");
 
-        public static void InvalidChance()
+        public static void InvalidChance() 
+            => throw new ArgumentException("Invalid chance value");
+
+        public static void LootIdIsNone()
         {
-            throw new ArgumentException("Invalid chance value");
+            throw new ArgumentException("Loot id can not be none.\nProbably need it's not set in loot config");
         }
     }
 }

@@ -8,7 +8,7 @@ namespace GamePlay.Units
 {
     public class CharacterPickupHandler : PickupHandler
     {
-        [SerializeField] private Inventory _inventory;
+        [SerializeField] private LootThrower _lootThrower;
         
         private IStaticDataAccess _staticDataAccess;
         public event Action<LootId, int> Picked;
@@ -18,7 +18,14 @@ namespace GamePlay.Units
         {
             int lootCount = lootPiece.PickUpAll();
             LootId lootId = lootPiece.LootId;
-            _inventory.AddLoot(lootId, lootCount);
+            if (!_inventory.CanAddLoot(lootId))
+                return;
+            
+            lootPiece.Disappear();
+            int remainsCount = _inventory.AddLoot(lootId, lootCount);
+            if (remainsCount > 0)
+                _lootThrower.Throw(lootId, remainsCount);
+            
             Picked?.Invoke(lootId, lootCount);
         }
     }

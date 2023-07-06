@@ -1,4 +1,3 @@
-using GamePlay;
 using GamePlay.LootSystem;
 
 namespace Infrastructure.Services
