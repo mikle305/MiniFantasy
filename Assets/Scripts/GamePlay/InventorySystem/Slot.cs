@@ -9,7 +9,7 @@ namespace GamePlay.InventorySystem
     {
         private Item _currentItem;
 
-        public event Action<InventoryLootData, int> ItemChanged;
+        public event Action<LootId, int> ItemChanged;
         
         public LootId ItemId 
             => _currentItem?.LootId 
@@ -69,6 +69,6 @@ namespace GamePlay.InventorySystem
         }
 
         private void InvokeItemChanged() 
-            => ItemChanged?.Invoke(_currentItem.LootData, _currentItem.Count);
+            => ItemChanged?.Invoke(_currentItem.LootId, _currentItem.Count);
     }
 }

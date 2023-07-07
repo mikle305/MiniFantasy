@@ -9,11 +9,11 @@ namespace GamePlay.LootSystem
 {
     public class LootSpawner : MonoBehaviour
     {
-        private List<RandomLoot> _lootCollection;
         private IRandomizer _randomizer;
         private ILootFactory _factory;
         private ILootConfigurator _configurator;
         private IStaticDataService _staticDataService;
+        private List<RandomLoot> _lootCollection;
 
 
         [Inject]

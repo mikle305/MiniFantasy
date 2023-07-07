@@ -37,6 +37,7 @@ namespace Infrastructure.EntryPoint
                 .RegisterSingle<ILootFactory, LootFactory>()
                 .RegisterSingle<IEnemyConfigurator, EnemyConfigurator>()
                 .RegisterSingle<ILootConfigurator, LootConfigurator>()
+                .RegisterSingle<IUiConfigurator, UiConfigurator>()
                 .RegisterSingle<IProgressAccess, ProgressAccess>()
                 .RegisterSingle<IProgressWatchers, ProgressWatchers>()
                 .RegisterSingle<IStorageService, PlayerPrefsStorageService>()

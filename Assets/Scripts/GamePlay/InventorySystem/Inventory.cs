@@ -66,7 +66,7 @@ namespace GamePlay.InventorySystem
                 
                 count -= countToSet;
                 
-                emptySlot.TrySetItem(new Item(lootData, countToSet));
+                emptySlot.TrySetItem(new Item(lootData.LootId, lootData.MaxCountInSlot, countToSet));
             }
 
             return count;

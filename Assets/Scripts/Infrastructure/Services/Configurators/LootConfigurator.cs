@@ -1,4 +1,5 @@
 using GamePlay.LootSystem;
+using UI.Inventory;
 
 namespace Infrastructure.Services
 {

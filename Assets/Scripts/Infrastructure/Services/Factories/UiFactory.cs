@@ -1,6 +1,8 @@
 ﻿using Additional.Constants;
 using GamePlay.InventorySystem;
+using GamePlay.LootSystem;
 using GamePlay.Units;
+using StaticData;
 using UI;
 using UI.Inventory;
 using UnityEngine;
@@ -9,11 +11,13 @@ namespace Infrastructure.Services
 {
     public class UiFactory : IUiFactory
     {
-        private IAssetProvider _assetProvider;
+        private readonly IAssetProvider _assetProvider;
+        private readonly IStaticDataService _staticDataService;
 
 
-        public UiFactory(IAssetProvider assetProvider)
+        public UiFactory(IAssetProvider assetProvider, IStaticDataService staticDataService)
         {
+            _staticDataService = staticDataService;
             _assetProvider = assetProvider;
         }
 
@@ -33,6 +37,12 @@ namespace Infrastructure.Services
             var slotView = _assetProvider.Instantiate<SlotView>(AssetPath.SlotPath, slotsGrid.position, slotsGrid);
             slotView.Init(slot);
             return slotView;
+        }
+
+        public ItemView CreateItem(LootId lootId, Transform itemHolder)
+        {
+            LootStaticData lootData = _staticDataService.FindLootData(lootId);
+            return _assetProvider.Instantiate<ItemView>(lootData.IconPath, itemHolder.position, itemHolder);
         }
 
         private void InitUiCamera(Canvas hudCanvas, Camera uiCamera)

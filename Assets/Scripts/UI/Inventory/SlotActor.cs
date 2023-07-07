@@ -4,8 +4,8 @@ namespace UI.Inventory
 {
     public class SlotActor
     {
-        private Slot _slot;
-        private SlotView _slotView;
+        private readonly Slot _slot;
+        private readonly SlotView _slotView;
 
         public SlotActor(Slot slot, SlotView slotView)
         {

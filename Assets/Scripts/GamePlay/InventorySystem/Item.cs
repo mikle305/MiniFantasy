@@ -1,19 +1,18 @@
 using GamePlay.LootSystem;
-using StaticData;
 
 namespace GamePlay.InventorySystem
 {
     public class Item
     {
-        public InventoryLootData LootData { get; }
         public int Count { get; set; }
-        public LootId LootId => LootData.LootId;
-        public int MaxCount => LootData.MaxCountInSlot;
+        public LootId LootId { get; }
+        public int MaxCount { get; }
 
 
-        public Item(InventoryLootData lootData, int count)
+        public Item(LootId lootId, int maxCount, int count)
         {
-            LootData = lootData;
+            LootId = lootId;
+            MaxCount = maxCount;
             Count = count;
         }
     }

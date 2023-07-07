@@ -18,7 +18,7 @@ namespace Infrastructure.Services
         public T Instantiate<T>(
             string path, 
             Vector3? position = null, 
-            Transform parent = null, 
+            Transform parent = null,
             bool injectInChildren = true) 
             where T: Object
         {
@@ -26,16 +26,20 @@ namespace Infrastructure.Services
             if (prefab == null)
                 throw new InvalidOperationException($"Object not found in resources, path: {path}");
 
+            T created;
             if (position == null && parent != null)
-                return _container.Instantiate(prefab, parent, injectInChildren: injectInChildren);
+                created = _container.Instantiate(prefab, parent, injectInChildren: injectInChildren);
+
+            else if (position != null && parent == null)
+                created = _container.Instantiate(prefab, (Vector3)position, injectInChildren: injectInChildren);
             
-            if (position != null && parent == null)
-                return _container.Instantiate(prefab, (Vector3)position, injectInChildren: injectInChildren);
-            
-            if (position != null && parent != null)
-                return _container.Instantiate(prefab, (Vector3)position, parent, injectInChildren: injectInChildren);
-            
-            return _container.Instantiate(prefab, injectInChildren: injectInChildren);
+            else if (position != null && parent != null)
+                created = _container.Instantiate(prefab, (Vector3)position, parent, injectInChildren: injectInChildren);
+            else
+                created = _container.Instantiate(prefab, injectInChildren: injectInChildren);
+
+            SetRotationToCreated(created, prefab);
+            return created;
         }
 
         public T Load<T>(string path) where T : Object 
@@ -43,5 +47,30 @@ namespace Infrastructure.Services
 
         public T[] LoadMany<T>(string path) where T : Object 
             => Resources.LoadAll<T>(path);
+
+        private static void SetRotationToCreated<T>(T created, T prefab) where T : Object
+        {
+            switch (created)
+            {
+                case Component createdComponent when prefab is Component prefabComponent:
+                    createdComponent.transform.localRotation = prefabComponent.transform.localRotation;
+                    break;
+                case Component createdComponent:
+                {
+                    if (prefab is GameObject prefabObject)
+                        createdComponent.transform.localRotation = prefabObject.transform.localRotation;
+                    break;
+                }
+                case GameObject createdObject when prefab is Component prefabComponent:
+                    createdObject.transform.localRotation = prefabComponent.transform.localRotation;
+                    break;
+                case GameObject createdObject:
+                {
+                    if (prefab is GameObject prefabObject)
+                        createdObject.transform.localRotation = prefabObject.transform.localRotation;
+                    break;
+                }
+            }
+        }
     }
 }

@@ -19,11 +19,5 @@ namespace Infrastructure.Services
             string prefabPath = _staticDataService.FindLootData(lootId).PrefabPath;
             return _assetProvider.Instantiate<LootPiece>(prefabPath, position);
         }
-
-        public GameObject CreateInUi(LootId lootId, RectTransform parent)
-        {
-            string iconPath = _staticDataService.FindLootData(lootId).IconPath;
-            return _assetProvider.Instantiate<GameObject>(iconPath, parent.position, parent);
-        }
     }
 }
