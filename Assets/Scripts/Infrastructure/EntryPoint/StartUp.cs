@@ -1,12 +1,12 @@
 using Infrastructure.GameStates;
 using Infrastructure.Services;
-using UniDependencyInjection.Core.Extensions;
-using UniDependencyInjection.Core.Model;
+using UniDependencyInjection.Core;
+using UniDependencyInjection.Extensions;
 using UnityEngine;
 
 namespace Infrastructure.EntryPoint
 {
-    public class StartUp : DiContainer.UniDependencyInjection.Core.Unity.StartUp
+    public class StartUp : UniDependencyInjection.Unity.StartUp
 
     {
         private readonly ICoroutineRunner _coroutineRunner;
@@ -27,8 +27,6 @@ namespace Infrastructure.EntryPoint
 
         private void RegisterDefaultServices(IContainerBuilder containerBuilder)
         {
-            var staticDataService = new StaticDataService();
-
             containerBuilder
                 .RegisterSingle(_coroutineRunner)
                 .RegisterSingle<ISceneLoader, SceneLoader>()
@@ -43,8 +41,8 @@ namespace Infrastructure.EntryPoint
                 .RegisterSingle<IProgressWatchers, ProgressWatchers>()
                 .RegisterSingle<IStorageService, PlayerPrefsStorageService>()
                 .RegisterSingle<IAutoSaver, AutoSaver>()
-                .RegisterSingle<IStaticDataAccess>(staticDataService)
-                .RegisterSingle<IStaticDataLoader>(staticDataService)
+                .RegisterSingle<IStaticDataService, StaticDataService>()
+                .RegisterSingle<IConfigAccess, ConfigAccess>()
                 .RegisterSingle<IRandomizer, Randomizer>()
                 .RegisterSingle<IFpsService, FpsService>();
         }

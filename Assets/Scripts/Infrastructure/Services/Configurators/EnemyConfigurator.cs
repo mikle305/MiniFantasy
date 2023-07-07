@@ -1,4 +1,3 @@
-using GamePlay;
 using GamePlay.LootSystem;
 using GamePlay.Reaction;
 using GamePlay.Units;
@@ -9,16 +8,16 @@ namespace Infrastructure.Services
 {
     public class EnemyConfigurator : IEnemyConfigurator
     {
-        private readonly IStaticDataAccess _staticDataAccess;
+        private readonly IStaticDataService _staticDataService;
 
-        public EnemyConfigurator(IStaticDataAccess staticDataAccess)
+        public EnemyConfigurator(IStaticDataService staticDataService)
         {
-            _staticDataAccess = staticDataAccess;
+            _staticDataService = staticDataService;
         }
 
         public void Configure(GameObject enemy, EnemyId enemyId)
         {
-            EnemyStaticData enemyData = _staticDataAccess.FindEnemyData(enemyId);
+            EnemyStaticData enemyData = _staticDataService.FindEnemyData(enemyId);
             InitHealth(enemy, enemyData);
             InitDeath(enemy, enemyData);
             InitHitting(enemy, enemyData);

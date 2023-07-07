@@ -1,4 +1,4 @@
-﻿namespace StaticData
+﻿namespace GamePlay.InventorySystem
 {
     public enum ItemRarity
     {

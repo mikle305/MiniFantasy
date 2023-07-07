@@ -1,7 +1,7 @@
 using Additional.Extensions;
-using DiContainer.UniDependencyInjection.Core.Unity;
 using Infrastructure.Services;
 using StaticData;
+using UniDependencyInjection.Unity;
 using UnityEngine;
 
 namespace GamePlay.LootSystem

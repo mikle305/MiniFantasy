@@ -6,5 +6,6 @@ namespace GamePlay.LootSystem
         Coin,
         Wood,
         Stone,
+        Sword,
     }
 }

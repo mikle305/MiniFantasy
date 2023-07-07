@@ -9,5 +9,6 @@
 
         public const string EnemiesFolder = "StaticData/Enemies";
         public const string LootFolder = "StaticData/Loot";
+        public const string HudConfigPath = "StaticData/HudConfiguration";
     }
 }

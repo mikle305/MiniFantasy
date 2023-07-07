@@ -1,6 +1,6 @@
 ﻿using System;
-using DiContainer.UniDependencyInjection.Core.Unity;
-using UniDependencyInjection.Core.Model;
+using UniDependencyInjection.Core;
+using UniDependencyInjection.Unity;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -37,5 +37,11 @@ namespace Infrastructure.Services
             
             return _container.Instantiate(prefab, injectInChildren: injectInChildren);
         }
+
+        public T Load<T>(string path) where T : Object 
+            => Resources.Load<T>(path);
+
+        public T[] LoadMany<T>(string path) where T : Object 
+            => Resources.LoadAll<T>(path);
     }
 }

@@ -2,6 +2,7 @@
 using GamePlay.InventorySystem;
 using GamePlay.Units;
 using UI;
+using UI.Inventory;
 using UnityEngine;
 
 namespace Infrastructure.Services

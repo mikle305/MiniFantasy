@@ -1,5 +1,6 @@
 ﻿using GamePlay.InventorySystem;
 using UI;
+using UI.Inventory;
 using UnityEngine;
 
 namespace Infrastructure.Services

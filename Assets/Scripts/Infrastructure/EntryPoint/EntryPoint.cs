@@ -1,5 +1,5 @@
 using Infrastructure.Services;
-using UniDependencyInjection.Core.Model;
+using UniDependencyInjection.Core;
 using UnityEngine;
 
 namespace Infrastructure.EntryPoint

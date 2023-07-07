@@ -1,5 +1,5 @@
-﻿using DiContainer.UniDependencyInjection.Core.Unity;
-using Infrastructure.Services;
+﻿using Infrastructure.Services;
+using UniDependencyInjection.Unity;
 using UnityEngine;
 
 namespace GamePlay.Units

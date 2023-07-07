@@ -1,8 +1,9 @@
-﻿using DiContainer.UniDependencyInjection.Core.Unity;
+﻿using GamePlay.InventorySystem;
 using Infrastructure.Services;
+using UniDependencyInjection.Unity;
 using UnityEngine;
 
-namespace GamePlay.InventorySystem
+namespace UI.Inventory
 {
     public class InventoryView : MonoBehaviour
     {
@@ -18,7 +19,7 @@ namespace GamePlay.InventorySystem
             _uiFactory = uiFactory;
         }
         
-        public void Init(Inventory inventory)
+        public void Init(GamePlay.InventorySystem.Inventory inventory)
         {
             _inventoryActor = new InventoryActor(inventory, this);
             _inventoryActor.Subscribe();

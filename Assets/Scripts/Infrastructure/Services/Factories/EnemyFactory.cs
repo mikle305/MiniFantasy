@@ -6,17 +6,17 @@ namespace Infrastructure.Services
     public class EnemyFactory : IEnemyFactory
     {
         private readonly IAssetProvider _assetProvider;
-        private readonly IStaticDataAccess _staticDataAccess;
+        private readonly IStaticDataService _staticDataService;
 
-        public EnemyFactory(IAssetProvider assetProvider, IStaticDataAccess staticDataAccess)
+        public EnemyFactory(IAssetProvider assetProvider, IStaticDataService staticDataService)
         {
             _assetProvider = assetProvider;
-            _staticDataAccess = staticDataAccess;
+            _staticDataService = staticDataService;
         }
         
         public GameObject Create(EnemyId enemyId, Vector3 position, Transform parent)
         {
-            string prefabPath = _staticDataAccess.FindEnemyData(enemyId).PrefabPath;
+            string prefabPath = _staticDataService.FindEnemyData(enemyId).PrefabPath;
             return _assetProvider.Instantiate<GameObject>(prefabPath, position, parent);
         }
     }

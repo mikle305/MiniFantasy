@@ -1,4 +1,6 @@
-﻿namespace GamePlay.InventorySystem
+﻿using GamePlay.InventorySystem;
+
+namespace UI.Inventory
 {
     public class SlotActor
     {

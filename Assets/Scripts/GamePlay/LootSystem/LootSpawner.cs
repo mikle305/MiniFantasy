@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using Additional.Extensions;
-using DiContainer.UniDependencyInjection.Core.Unity;
 using Infrastructure.Services;
 using StaticData;
+using UniDependencyInjection.Unity;
 using UnityEngine;
 
 namespace GamePlay.LootSystem
@@ -13,19 +13,19 @@ namespace GamePlay.LootSystem
         private IRandomizer _randomizer;
         private ILootFactory _factory;
         private ILootConfigurator _configurator;
-        private IStaticDataAccess _staticDataAccess;
+        private IStaticDataService _staticDataService;
 
 
         [Inject]
         public void Construct(
             ILootFactory factory, 
             ILootConfigurator configurator,
-            IStaticDataAccess staticDataAccess,
+            IStaticDataService staticDataService,
             IRandomizer randomizer)
         {
             _factory = factory;
             _configurator = configurator;
-            _staticDataAccess = staticDataAccess;
+            _staticDataService = staticDataService;
             _randomizer = randomizer;
         }
 
@@ -47,7 +47,7 @@ namespace GamePlay.LootSystem
 
             int lootCount = _randomizer.Generate(randomLoot.MinCount, randomLoot.MaxCount);
             LootPiece lootPiece = _factory.CreateInWorld(randomLoot.LootId, transform.position.AddY(1));
-            LootStaticData lootData = _staticDataAccess.FindLootData(randomLoot.LootId);
+            LootStaticData lootData = _staticDataService.FindLootData(randomLoot.LootId);
             lootPiece.Init(lootData, lootCount);
             _configurator.Configure(lootPiece, randomLoot.LootId);
         }

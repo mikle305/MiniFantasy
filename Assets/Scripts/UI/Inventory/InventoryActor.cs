@@ -1,11 +1,11 @@
-﻿namespace GamePlay.InventorySystem
+﻿namespace UI.Inventory
 {
     public class InventoryActor
     {
-        private Inventory _inventory;
+        private GamePlay.InventorySystem.Inventory _inventory;
         private InventoryView _inventoryView;
 
-        public InventoryActor(Inventory inventory, InventoryView inventoryView)
+        public InventoryActor(GamePlay.InventorySystem.Inventory inventory, InventoryView inventoryView)
         {
             _inventoryView = inventoryView;
             _inventory = inventory;

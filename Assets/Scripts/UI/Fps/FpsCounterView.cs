@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Globalization;
 using Additional.Constants;
-using DiContainer.UniDependencyInjection.Core.Unity;
 using Infrastructure.Services;
+using UniDependencyInjection.Unity;
 using UnityEngine;
 using UnityEngine.UI;
 

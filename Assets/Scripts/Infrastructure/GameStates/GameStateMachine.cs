@@ -1,5 +1,5 @@
 ﻿using Additional.Abstractions.States;
-using UniDependencyInjection.Core.Model;
+using UniDependencyInjection.Core;
 
 namespace Infrastructure.GameStates
 {
