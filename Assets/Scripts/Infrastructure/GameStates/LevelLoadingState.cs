@@ -12,14 +12,17 @@ namespace Infrastructure.GameStates
         private readonly GameStateMachine _stateMachine;
         private readonly ISceneLoader _sceneLoader;
         private readonly IGameFactory _gameFactory;
+        private readonly IUiFactory _uiFactory;
         private readonly IProgressWatchers _progressWatchers;
 
         public LevelLoadingState(
             GameStateMachine stateMachine,
             ISceneLoader sceneLoader,
             IGameFactory gameFactory,
+            IUiFactory uiFactory,
             IProgressWatchers progressWatchers)
         {
+            _uiFactory = uiFactory;
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
             _gameFactory = gameFactory;
@@ -43,7 +46,7 @@ namespace Infrastructure.GameStates
             GameObject character = InitCharacter(world);
             InitEnemies(world);
             LoadProgress();
-            InitHud(character);
+            InitHud(world, character);
             FollowCamera(character);
             EnterGamePlay(character);
         }
@@ -54,8 +57,8 @@ namespace Infrastructure.GameStates
         private GameObject InitCharacter(World world) 
             => _gameFactory.CreateCharacter(world);
 
-        private Hud InitHud(GameObject character) 
-            => _gameFactory.CreateHud(character);
+        private Hud InitHud(World world, GameObject character) 
+            => _uiFactory.CreateHud(character, world.UICamera);
 
         private void LoadProgress() 
             => _progressWatchers.InformReaders();
@@ -70,9 +73,6 @@ namespace Infrastructure.GameStates
 
             return enemies;
         }
-
-        private static void BakeNavMesh(World world) 
-            => world.NavMeshBaker.Bake();
 
         private static void FollowCamera(GameObject target) =>
             Camera.main!

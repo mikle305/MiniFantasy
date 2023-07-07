@@ -1,32 +1,49 @@
 ﻿using System;
 using GamePlay.InventorySystem;
 using GamePlay.LootSystem;
-using Infrastructure.Services;
+using StaticData;
 using UnityEngine;
 
 namespace GamePlay.Units
 {
     public class CharacterPickupHandler : PickupHandler
     {
-        [SerializeField] private LootThrower _lootThrower;
+        [SerializeField] private Inventory _characterInventory;
         
-        private IStaticDataAccess _staticDataAccess;
-        public event Action<LootId, int> Picked;
-        
+        public event Action<LootStaticData, int> Picked;
+
         
         public override void Handle(LootPiece lootPiece)
         {
-            int lootCount = lootPiece.PickUpAll();
-            LootId lootId = lootPiece.LootId;
-            if (!_inventory.CanAddLoot(lootId))
+            TryAddInInventory(lootPiece);
+            TryAddCurrency(lootPiece);
+        }
+
+        private void TryAddInInventory(LootPiece lootPiece)
+        {
+            if (lootPiece.LootData is not InventoryLootData inventoryLootData)
                 return;
+                
+            if (!_characterInventory.CanAddLoot(inventoryLootData))
+                return;
+
+            int beforeCount = lootPiece.CurrentCount;
+            int remainsCount = _characterInventory.AddLoot(inventoryLootData, beforeCount);
+            Picked?.Invoke(inventoryLootData, beforeCount - remainsCount);
             
-            lootPiece.Disappear();
-            int remainsCount = _inventory.AddLoot(lootId, lootCount);
-            if (remainsCount > 0)
-                _lootThrower.Throw(lootId, remainsCount);
-            
-            Picked?.Invoke(lootId, lootCount);
+            if (remainsCount == 0)
+            {
+                lootPiece.Disappear();
+                return;
+            }
+
+            lootPiece.CurrentCount = remainsCount;
+        }
+
+        private void TryAddCurrency(LootPiece lootPiece)
+        {
+            if (lootPiece.LootData is not CurrencyLootData currencyLootData)
+                return;
         }
     }
 }

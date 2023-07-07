@@ -34,6 +34,7 @@ namespace Infrastructure.EntryPoint
                 .RegisterSingle<ISceneLoader, SceneLoader>()
                 .RegisterSingle<IAssetProvider, AssetProvider>()
                 .RegisterSingle<IGameFactory, GameFactory>()
+                .RegisterSingle<IUiFactory, UiFactory>()
                 .RegisterSingle<IEnemyFactory, EnemyFactory>()
                 .RegisterSingle<ILootFactory, LootFactory>()
                 .RegisterSingle<IEnemyConfigurator, EnemyConfigurator>()

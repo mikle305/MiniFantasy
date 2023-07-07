@@ -659,6 +659,7 @@ GameObject:
   - component: {fileID: 6498245474253439278}
   - component: {fileID: 2775938864322552708}
   - component: {fileID: 2868177542873087634}
+  - component: {fileID: 708405234590478141}
   - component: {fileID: 2681653226707732565}
   m_Layer: 11
   m_Name: Character
@@ -904,7 +905,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3c300a845484db0a5dff752a61cb149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lootThrower: {fileID: 2681653226707732565}
+  _characterInventory: {fileID: 708405234590478141}
+--- !u!114 &708405234590478141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6929602986688959769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daa28e143edc48e6968b1dab695fe6f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _slotsCount: 24
 --- !u!114 &2681653226707732565
 MonoBehaviour:
   m_ObjectHideFlags: 0

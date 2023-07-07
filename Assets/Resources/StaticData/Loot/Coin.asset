@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da9900db9312447ba7f556e4f9d3cc82, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fe33c1029e641dc8d120a1b2e17bcb1, type: 3}
   m_Name: Coin
   m_EditorClassIdentifier: 
-  _lootId: 1
   _prefabPath: Prefabs/Loot/Coin
+  _iconPath: Prefabs/UI/Loot/Coin
+  _lootId: 1

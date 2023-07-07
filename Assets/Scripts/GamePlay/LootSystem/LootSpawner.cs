@@ -40,15 +40,16 @@ namespace GamePlay.LootSystem
                 SpawnOne(loot);
         }
 
-        private void SpawnOne(RandomLoot loot)
+        private void SpawnOne(RandomLoot randomLoot)
         {
-            if (_randomizer.TryChancePercents(loot.Chance) == false)
+            if (_randomizer.TryChancePercents(randomLoot.Chance) == false)
                 return;
 
-            int lootCount = _randomizer.Generate(loot.MinCount, loot.MaxCount);
-            LootPiece lootPiece = _factory.Create(loot.LootId, transform.position.AddY(1));
-            _configurator.Configure(lootPiece, loot.LootId);
-            lootPiece.Init(loot.LootId, lootCount);
+            int lootCount = _randomizer.Generate(randomLoot.MinCount, randomLoot.MaxCount);
+            LootPiece lootPiece = _factory.CreateInWorld(randomLoot.LootId, transform.position.AddY(1));
+            LootStaticData lootData = _staticDataAccess.FindLootData(randomLoot.LootId);
+            lootPiece.Init(lootData, lootCount);
+            _configurator.Configure(lootPiece, randomLoot.LootId);
         }
     }
 }

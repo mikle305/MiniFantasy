@@ -1,6 +1,7 @@
 using Additional.Extensions;
 using DiContainer.UniDependencyInjection.Core.Unity;
 using Infrastructure.Services;
+using StaticData;
 using UnityEngine;
 
 namespace GamePlay.LootSystem
@@ -18,11 +19,11 @@ namespace GamePlay.LootSystem
             _factory = factory;
         }
 
-        public void Throw(LootId lootId, int count)
+        public void Throw(LootStaticData lootData, int count)
         {
-            LootPiece lootPiece = _factory.Create(lootId, transform.position.AddY(1));
-            lootPiece.Init(lootId, count);
-            _lootConfigurator.Configure(lootPiece, lootId);
+            LootPiece lootPiece = _factory.CreateInWorld(lootData.LootId, transform.position.AddY(1));
+            lootPiece.Init(lootData, count);
+            _lootConfigurator.Configure(lootPiece, lootData.LootId);
         }
     }
 }

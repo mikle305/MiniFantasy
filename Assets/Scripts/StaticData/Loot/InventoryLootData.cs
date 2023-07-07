@@ -10,11 +10,13 @@ namespace StaticData
         [SerializeField] private string _description;
         [SerializeField] private int _maxCountInSlot = 999;
         [SerializeField] private ItemUseType _itemUseType = ItemUseType.None;
+        [SerializeField] private ItemRarity _itemRarity = ItemRarity.Common;
 
 
         public string Name => _name;
         public string Description => _description;
         public int MaxCountInSlot => _maxCountInSlot;
         public ItemUseType UseType => _itemUseType;
+        public ItemRarity ItemRarity => _itemRarity;
     }
 }

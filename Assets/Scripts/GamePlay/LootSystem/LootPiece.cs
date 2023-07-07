@@ -5,30 +5,14 @@ namespace GamePlay.LootSystem
 {
     public class LootPiece : MonoBehaviour
     {
-        private int _currentCount;
-        
-        public LootId LootId { get; private set; }
-
-
-        public void Init(LootStaticData lootData) 
-            => LootData = lootData;
-
         public LootStaticData LootData { get; private set; }
+        public int CurrentCount { get; set; }
+        
 
-        public void SetCount(int count)
-            => _currentCount = count;
-
-        public int PickUpAll()
-            => PickUp(_currentCount);
-
-        private int PickUp(int targetCount)
+        public void Init(LootStaticData lootData, int count)
         {
-            int left = _currentCount - targetCount;
-            if (left <= 0) 
-                targetCount = _currentCount;
-
-            _currentCount -= targetCount;
-            return targetCount;
+            LootData = lootData;
+            CurrentCount = count;
         }
 
         public void Disappear() 

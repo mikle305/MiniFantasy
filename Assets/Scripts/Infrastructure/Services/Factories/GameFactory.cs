@@ -1,7 +1,6 @@
 ﻿using Additional.Constants;
 using GamePlay.Additional;
 using GamePlay.Units;
-using UI;
 using UnityEngine;
 
 namespace Infrastructure.Services
@@ -27,7 +26,7 @@ namespace Infrastructure.Services
 
         public GameObject CreateCharacter(World world)
         {
-            GameObject character = _assetProvider.Instantiate<GameObject>(
+            var character = _assetProvider.Instantiate<GameObject>(
                 AssetPath.CharacterPath, 
                 world.SpawnPoint.position, 
                 world.transform,
@@ -40,16 +39,6 @@ namespace Infrastructure.Services
                 .InitWorld(world.transform);
 
             return character;
-        }
-
-        public Hud CreateHud(GameObject character)
-        {
-            var hud = _assetProvider.Instantiate<Hud>(AssetPath.HudPath);
-
-            var health = character.GetComponent<Health>();
-            hud.HealthBar.Init(health);
-            
-            return hud;
         }
     }
 }

@@ -7,13 +7,13 @@ namespace StaticData
     {
         [Header("Resources")] [Space(3)]
         [SerializeField] private string _prefabPath;
-        [SerializeField] private Sprite _icon;
+        [SerializeField] private string _iconPath;
         
         [Header("Configuration")] [Space(3)]
         [SerializeField] private LootId _lootId = LootId.None;
 
         public string PrefabPath => _prefabPath;
-        public Sprite Icon => _icon;
+        public string IconPath => _iconPath;
         public LootId LootId => _lootId;
     }
 }

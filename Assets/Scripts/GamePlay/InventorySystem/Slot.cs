@@ -1,11 +1,15 @@
+using System;
 using Additional.Utils;
 using GamePlay.LootSystem;
+using StaticData;
 
 namespace GamePlay.InventorySystem
 {
     public class Slot
     {
         private Item _currentItem;
+
+        public event Action<InventoryLootData, int> ItemChanged;
         
         public LootId ItemId 
             => _currentItem?.LootId 
@@ -14,29 +18,22 @@ namespace GamePlay.InventorySystem
         public bool IsFull()
             => _currentItem.MaxCount == _currentItem.Count;
 
-        
+
         /// <summary>
-        /// Returns false if slot item is not empty
+        /// Returns false
+        /// if slot item is not empty
+        /// or if item count is zero
         /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        public bool TrySetItem(Item item)
+        public void TrySetItem(Item item)
         {
             if (_currentItem != null) 
-                return false;
+                return;
 
             if (item.LootId == LootId.None)
                 ThrowHelper.LootIdIsNone();
-            
-            _currentItem = item;
-            return true;
-        }
 
-        public Item ChangeItem(Item newItem)
-        {
-            Item oldItem = _currentItem;
-            _currentItem = newItem;
-            return oldItem;
+            _currentItem = item;
+            InvokeItemChanged();
         }
 
         /// <summary>
@@ -46,17 +43,32 @@ namespace GamePlay.InventorySystem
         public int AddCount(int count)
         {
             if (count == 0)
-                return 0;
+                return count;
+
+            if (IsFull())
+                return count;
             
             int canApplyCount = _currentItem.MaxCount - _currentItem.Count;
             if (count > canApplyCount)
             {
                 _currentItem.Count += canApplyCount;
+                InvokeItemChanged();
                 return count - canApplyCount;
             }
 
             _currentItem.Count += count;
+            InvokeItemChanged();
             return 0;
         }
+
+        public Item SwapItems(Item newItem)
+        {
+            Item oldItem = _currentItem;
+            _currentItem = newItem;
+            return oldItem;
+        }
+
+        private void InvokeItemChanged() 
+            => ItemChanged?.Invoke(_currentItem.LootData, _currentItem.Count);
     }
 }
