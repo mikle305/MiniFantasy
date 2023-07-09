@@ -523,9 +523,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c175293cfaff24e83fc01d37b132be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _uiCamera: {fileID: 6690966549626076005}
   _spawnPoint: {fileID: 9074974301615776470}
-  _navMeshBaker: {fileID: 6257060751199748520}
+  _uiCamera: {fileID: 6690966549626076005}
 --- !u!1 &6305092630833616884
 GameObject:
   m_ObjectHideFlags: 0

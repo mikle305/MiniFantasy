@@ -1,6 +1,5 @@
 ﻿using Additional.Constants;
 using GamePlay.Additional;
-using GamePlay.Units;
 using UnityEngine;
 
 namespace Infrastructure.Services
@@ -24,6 +23,12 @@ namespace Infrastructure.Services
             return world;
         }
 
+        public FollowCamera CreateFollowCamera()
+        {
+            var followCamera = _assetProvider.Instantiate<FollowCamera>(AssetPath.FollowCamera);
+            return followCamera;
+        }
+
         public GameObject CreateCharacter(World world)
         {
             var character = _assetProvider.Instantiate<GameObject>(
@@ -33,10 +38,6 @@ namespace Infrastructure.Services
                 injectInChildren: false);
             
             _progressWatchers.RegisterComponents(character);
-            
-            character
-                .GetComponent<CharacterMovement>()
-                .InitWorld(world.transform);
 
             return character;
         }

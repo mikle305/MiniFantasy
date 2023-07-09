@@ -40,7 +40,8 @@ namespace GamePlay.Units
             }
             
             Vector2 axis = _inputService.GetAxis();
-            _characterMovement.Move(axis);
+            Vector3 cameraDirection = _inputService.GetCameraDirection();
+            _characterMovement.Move(axis, cameraDirection);
         }
 
         private void InitDependencies()

@@ -1,6 +1,4 @@
-using Additional.Constants;
 using Additional.Extensions;
-using GamePlay.Additional;
 using UnityEngine;
 
 namespace GamePlay.Units
@@ -9,13 +7,12 @@ namespace GamePlay.Units
     [RequireComponent(typeof(CharacterAnimator))]
     public class CharacterMovement : MonoBehaviour
     {
-        [SerializeField] private float _speed;
+        [SerializeField] private float _movementSpeed = 5;
+        [SerializeField] private float _rotationSpeed = 20;
+        [SerializeField] private float _minRotateAngle = 10;
 
         private CharacterController _characterController;
         private IMoveAnimator _characterAnimator;
-        private Transform _world;
-
-        private bool _isWorldNull = true;
 
 
         private void Awake()
@@ -24,41 +21,41 @@ namespace GamePlay.Units
             _characterAnimator = GetComponent<IMoveAnimator>();
         }
 
-        public void InitWorld(Transform world)
+        public void Move(Vector2 axis, Vector3 cameraDirection)
         {
-            if (!_isWorldNull)
-                return;
-                
-            _world = world;
-            _isWorldNull = false;
-        }
-
-        public void Move(Vector2 axis)
-        {
-            if (_isWorldNull)
-                return;
-
-            var vectorBuilder = new MovementVectorBuilder();
-            bool axisNotZero = axis.sqrMagnitude > Constants.Epsilon;
-            
-            if (axisNotZero)
+            Vector3 movementVector;
+            if (axis.y > 0)
             {
-                _characterAnimator.UpdateMoving(_speed);
-                
-                vectorBuilder.WithAxis(axis);
-                vectorBuilder.TransformToWorld(_world);
-                vectorBuilder.Normalize();
-                
-                transform.forward = vectorBuilder.Build();
+                TryRotate(cameraDirection);
+                movementVector = transform.forward * _movementSpeed;
+                _characterAnimator.UpdateMoving(1);
             }
             else
             {
+                movementVector = Vector3.zero;
                 _characterAnimator.StopMoving();
             }
             
-            vectorBuilder.WithGravity();
+            movementVector += Physics.gravity;
+            _characterController.Move(movementVector * Time.deltaTime);
+        }
 
-            _characterController.Move(vectorBuilder.Build() * (_speed * Time.deltaTime));
+        private void TryRotate(Vector3 cameraDirection)
+        {
+            float rotationAngle = CalculateRotationAngle(cameraDirection);
+            if (Mathf.Abs(rotationAngle) <= _minRotateAngle)
+                return;
+            
+            transform.Rotate(Vector3.up * (rotationAngle * _rotationSpeed * Time.deltaTime));
+        }
+
+        private float CalculateRotationAngle(Vector3 cameraDirection)
+        {
+            float desiredRotationAngle = Vector3.Angle(transform.forward, cameraDirection);
+            if (Vector3.Cross(transform.forward, cameraDirection).y < 0)
+                desiredRotationAngle *= -1;
+            
+            return desiredRotationAngle;
         }
 
         public void Warp(Vector3 to)

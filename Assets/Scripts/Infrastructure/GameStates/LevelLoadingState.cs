@@ -13,6 +13,7 @@ namespace Infrastructure.GameStates
         private readonly ISceneLoader _sceneLoader;
         private readonly IGameFactory _gameFactory;
         private readonly IUiFactory _uiFactory;
+        private readonly IObjectsProvider _objectsProvider;
         private readonly IProgressWatchers _progressWatchers;
 
         public LevelLoadingState(
@@ -20,8 +21,10 @@ namespace Infrastructure.GameStates
             ISceneLoader sceneLoader,
             IGameFactory gameFactory,
             IUiFactory uiFactory,
+            IObjectsProvider objectsProvider,
             IProgressWatchers progressWatchers)
         {
+            _objectsProvider = objectsProvider;
             _uiFactory = uiFactory;
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
@@ -32,7 +35,6 @@ namespace Infrastructure.GameStates
         public void Enter(string sceneName)
         {
             _progressWatchers.CleanUp();
-            
             _sceneLoader.Load(sceneName, onLoaded: InitGameWorld);
         }
 
@@ -47,8 +49,14 @@ namespace Infrastructure.GameStates
             InitEnemies(world);
             LoadProgress();
             InitHud(world, character);
-            FollowCamera(character);
+            InitFollowCamera(character);
+            BindObjectsToProvider();
             EnterGamePlay(character);
+        }
+
+        private void BindObjectsToProvider()
+        {
+            _objectsProvider.MainCamera = Camera.main;
         }
 
         private World InitWorld() 
@@ -74,9 +82,9 @@ namespace Infrastructure.GameStates
             return enemies;
         }
 
-        private static void FollowCamera(GameObject target) =>
-            Camera.main!
-                .GetComponent<CameraFollow>()
+        private void InitFollowCamera(GameObject target) 
+            => _gameFactory
+                .CreateFollowCamera()
                 .Follow(target.transform);
 
         private void EnterGamePlay(GameObject character) 

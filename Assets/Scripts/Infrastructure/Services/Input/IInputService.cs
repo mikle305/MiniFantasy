@@ -9,5 +9,6 @@ namespace Infrastructure.Services
         public bool IsAttackInvoked();
         
         public bool IsUiPressed();
+        Vector3 GetCameraDirection();
     }
 }

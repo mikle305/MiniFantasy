@@ -8,5 +8,6 @@ namespace Infrastructure.Services
         public World CreateWorld();
         
         public GameObject CreateCharacter(World world);
+        FollowCamera CreateFollowCamera();
     }
 }

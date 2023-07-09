@@ -7,13 +7,18 @@ namespace Infrastructure.Services
 {
     public class StandaloneInputService : InputService
     {
+        public StandaloneInputService(IObjectsProvider objectsProvider) : base(objectsProvider)
+        {
+            // Cursor.lockState = CursorLockMode.Locked;
+        }
+        
         public override Vector2 GetAxis() =>
-            new(UnityEngine.Input.GetAxis(Horizontal), UnityEngine.Input.GetAxis(Vertical));
+            new(Input.GetAxis(Horizontal), Input.GetAxis(Vertical));
 
         public override bool IsAttackInvoked() => 
-            Math.Abs(UnityEngine.Input.GetAxis(Fire) - 1.0f) < Constants.Epsilon;
+            Math.Abs(Input.GetAxis(Fire) - 1.0f) < Constants.Epsilon;
         
         public override bool IsUiPressed() =>
-            UnityEngine.Input.GetMouseButton(0) && EventSystem.current.IsPointerOverGameObject();
+            Input.GetMouseButton(0) && EventSystem.current.IsPointerOverGameObject();
     }
 }
