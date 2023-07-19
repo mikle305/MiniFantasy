@@ -15,10 +15,15 @@ namespace Infrastructure.Services
         public override Vector2 GetAxis() =>
             new(Input.GetAxis(Horizontal), Input.GetAxis(Vertical));
 
-        public override bool IsAttackInvoked() => 
-            Math.Abs(Input.GetAxis(Fire) - 1.0f) < Constants.Epsilon;
-        
-        public override bool IsUiPressed() =>
+        public override bool IsAttackInvoked()
+        {
+            if (IsUiPressed())
+                return false;
+            
+            return Math.Abs(Input.GetAxis(Fire) - 1.0f) < Constants.Epsilon;
+        }
+
+        private bool IsUiPressed() =>
             Input.GetMouseButton(0) && EventSystem.current.IsPointerOverGameObject();
     }
 }

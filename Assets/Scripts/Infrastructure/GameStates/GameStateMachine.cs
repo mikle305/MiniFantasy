@@ -1,5 +1,4 @@
-﻿using Additional.Abstractions.States;
-using UniDependencyInjection.Core;
+﻿using UniDependencyInjection.Core;
 
 namespace Infrastructure.GameStates
 {

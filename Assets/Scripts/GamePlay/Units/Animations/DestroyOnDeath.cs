@@ -14,7 +14,7 @@ namespace GamePlay.Units
         public void Init(float destroyDuration)
         {
             _destroyDuration = destroyDuration;
-            GetComponent<DeathOnDamage>().Happened += Destroy;
+            GetComponent<Death>().Happened += Destroy;
         }
 
         private void Destroy() 

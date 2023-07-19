@@ -6,11 +6,11 @@ namespace GamePlay.Units
     public class SpawnLootOnDeath : MonoBehaviour
     {
         private LootSpawner _lootSpawner;
-        private DeathOnDamage _death;
+        private Death _death;
 
         private void Awake()
         {
-            _death = GetComponent<DeathOnDamage>();
+            _death = GetComponent<Death>();
             _lootSpawner = GetComponent<LootSpawner>();
             _death.Happened += _lootSpawner.Spawn;
         }

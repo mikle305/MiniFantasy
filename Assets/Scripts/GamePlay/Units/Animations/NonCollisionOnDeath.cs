@@ -9,7 +9,7 @@ namespace GamePlay.Units
         private void Awake()
         {
             _colliders = GetComponents<Collider>();
-            GetComponent<DeathOnDamage>().Happened += DisableColliders;
+            GetComponent<Death>().Happened += DisableColliders;
         }
 
         private void DisableColliders()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GamePlay.Units
 {
-    public class CharacterState : MonoBehaviour
+    public class CharacterStateLegacy : MonoBehaviour
     {
         private CharacterMovement _characterMovement;
         private CharacterAttacker _characterAttacker;
@@ -33,7 +33,7 @@ namespace GamePlay.Units
             if (_isAttacking || _isDied || _isHited)
                 return;
             
-            if (_inputService.IsAttackInvoked() && !_inputService.IsUiPressed())
+            if (_inputService.IsAttackInvoked())
             {
                 _characterAttacker.Attack();
                 return;

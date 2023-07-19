@@ -13,8 +13,5 @@ namespace Infrastructure.Services
 
         public override bool IsAttackInvoked() => 
             SimpleInput.GetButtonUp(Fire);
-
-        public override bool IsUiPressed()
-            => false;
     }
 }

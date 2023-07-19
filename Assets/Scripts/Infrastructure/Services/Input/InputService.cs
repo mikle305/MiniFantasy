@@ -24,8 +24,6 @@ namespace Infrastructure.Services
             return new Vector3(cameraForwardDirection.x, 0, cameraForwardDirection.z);
         }
 
-        public abstract bool IsUiPressed();
-
         public abstract bool IsAttackInvoked();
     }
 }

@@ -33,7 +33,7 @@ namespace Infrastructure.Services
 
         private static void InitDeath(GameObject enemy, EnemyStaticData enemyData)
         {
-            if (enemy.TryGetComponent(out DeathOnDamage deathOnDamage))
+            if (enemy.TryGetComponent(out Death deathOnDamage))
                 deathOnDamage.Init(enemyData.DeathDuration);
             
             if (enemy.TryGetComponent(out DestroyOnDeath destroyOnDeath))

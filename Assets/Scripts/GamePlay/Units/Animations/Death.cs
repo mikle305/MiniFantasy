@@ -4,9 +4,8 @@ using UnityEngine;
 
 namespace GamePlay.Units
 {
-    public class DeathOnDamage : MonoBehaviour
+    public class Death : MonoBehaviour
     {
-        private Health _health;
         private IDieAnimator _animator;
         private float _animDuration;
 
@@ -16,12 +15,10 @@ namespace GamePlay.Units
         public void Init(float animDuration)
         {
             _animator = GetComponent<IDieAnimator>();
-            _health = GetComponent<Health>();
             _animDuration = animDuration;
-            _health.ZeroReached += Die;
         }
 
-        private void Die() 
+        public void Die() 
             => StartCoroutine(DieCoroutine());
 
         private IEnumerator DieCoroutine()

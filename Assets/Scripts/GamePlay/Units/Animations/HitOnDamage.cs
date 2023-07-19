@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using StaticData;
 using UnityEngine;
 
 namespace GamePlay.Units
@@ -18,7 +17,7 @@ namespace GamePlay.Units
         public event Action Ended;
         
         
-        public void Init(float animDuration, Effect effect = null)
+        public void Init(float animDuration)
         {
             _animDuration = animDuration;
             _animator = GetComponent<IHitAnimator>();

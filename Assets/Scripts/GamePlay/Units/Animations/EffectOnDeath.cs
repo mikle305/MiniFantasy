@@ -11,7 +11,7 @@ namespace GamePlay.Units
         public void Init(Effect effect)
         {
             _effect = effect;
-            GetComponent<DeathOnDamage>().Happened += PlayEffect;
+            GetComponent<Death>().Happened += PlayEffect;
         }
         
         private void PlayEffect() 

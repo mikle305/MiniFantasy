@@ -1,4 +1,4 @@
-﻿namespace Additional.Abstractions.States
+﻿namespace Infrastructure.GameStates
 {
     public interface IState: IExitableState
     {
