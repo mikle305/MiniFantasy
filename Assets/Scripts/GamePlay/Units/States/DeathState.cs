@@ -1,11 +1,15 @@
-using UnityEngine;
-
 namespace GamePlay.Units.States
 {
-    public class DeathState : CharacterState
+    public class DeathState : UnitState
     {
-        [SerializeField] private Death _death;
+        private readonly Death _death;
 
+
+        public DeathState(Death death)
+        {
+            _death = death;
+        }
+        
         public override void Enter()
         {
             _death.Die();

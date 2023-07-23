@@ -1,4 +1,5 @@
 ﻿using GamePlay.Units;
+using GamePlay.Units.States;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +16,7 @@ namespace UI
         
         private void Start()
         {
-            _health = FindObjectOfType<CharacterStateLegacy>().GetComponent<Health>();
+            _health = FindObjectOfType<CharacterStateInitializer>().GetComponent<Health>();
             _button = GetComponent<Button>();
             _button.onClick.AddListener(OnButtonClicked);
         }

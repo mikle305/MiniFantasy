@@ -2,35 +2,33 @@
 using System.Collections.Generic;
 using System.Linq;
 using Additional.Utils;
-using UnityEngine;
 
 namespace GamePlay.Units.States
 {
-    public class UnitStateMachine : MonoBehaviour
+    public class UnitStateMachine
     {
-        [SerializeField] private UnitState[] _states;
-
-        private Dictionary<Type, UnitState> _statesMap;
+        private readonly Dictionary<Type, UnitState> _statesMap;
         private UnitState _currentState;
 
-        private void Awake()
+        
+        public UnitStateMachine()
         {
-            _statesMap = _states.ToDictionary(s => s.GetType(), s => s);
+            _statesMap = new Dictionary<Type, UnitState>();
         }
 
-        private void Update()
+        public void AddState(UnitState state)
+            => _statesMap[state.GetType()] = state;
+
+        public void Update()
         {
             if (_currentState != null)
-                _currentState.OnUpdate();
+                _currentState.Tick();
         }
 
         public void Enter<TState>() where TState : UnitState
         {
             if (!_statesMap.TryGetValue(typeof(TState), out UnitState newState))
                 ThrowHelper.InvalidState(typeof(TState));
-
-            if (_currentState == newState)
-                return;
 
             if (_currentState != null)
                 _currentState.Exit();

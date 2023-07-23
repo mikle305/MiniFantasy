@@ -1,31 +1,30 @@
 using Infrastructure.Services;
-using UniDependencyInjection.Unity;
 using UnityEngine;
 
 namespace GamePlay.Units.States
 {
-    public class IdleState : CharacterState
+    public class IdleState : AnyState
     {
-        [SerializeField] private CharacterMovement _movement;
-        
-        private IInputService _inputService;
+        private readonly UnitStateMachine _stateMachine;
+        private readonly IInputService _inputService;
 
-        
-        [Inject]
-        public void Construct(IInputService inputService)
+
+        public IdleState(UnitStateMachine stateMachine, HitOnDamage hit, Health health, IInputService inputService) 
+            : base(stateMachine, hit, health)
         {
+            _stateMachine = stateMachine;
             _inputService = inputService;
         }
-        
-        public override void OnUpdate()
+
+        public override void Tick()
         {
-            if (TryAttack())
+            if (HandleAttack())
                 return;
 
-            Move();
+            HandleMove();
         }
 
-        private bool TryAttack()
+        private bool HandleAttack()
         {
             bool isAttackInput = _inputService.IsAttackInvoked();
             if (isAttackInput) 
@@ -34,11 +33,10 @@ namespace GamePlay.Units.States
             return isAttackInput;
         }
 
-        private void Move()
+        private void HandleMove()
         {
-            Vector2 axis = _inputService.GetAxis();
-            Vector3 cameraDirection = _inputService.GetCameraDirection();
-            _movement.Move(axis, cameraDirection);
+            if (_inputService.GetAxis() != Vector2.zero)
+                _stateMachine.Enter<MoveState>();
         }
     }
 }

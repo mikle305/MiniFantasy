@@ -2,10 +2,10 @@ using UnityEngine;
 
 namespace GamePlay.Units.States
 {
-    public abstract class UnitState : MonoBehaviour
+    public abstract class UnitState
     {
-        public abstract void Enter();
-        public abstract void OnUpdate();
-        public abstract void Exit();
+        public virtual void Enter() {}
+        public virtual void Tick() {}
+        public virtual void Exit() {}
     }
 }
