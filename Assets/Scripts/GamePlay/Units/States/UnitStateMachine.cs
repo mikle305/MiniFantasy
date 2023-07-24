@@ -19,21 +19,16 @@ namespace GamePlay.Units.States
         public void AddState(UnitState state)
             => _statesMap[state.GetType()] = state;
 
-        public void Update()
-        {
-            if (_currentState != null)
-                _currentState.Tick();
-        }
+        public void Tick() 
+            => _currentState?.Tick();
 
         public void Enter<TState>() where TState : UnitState
         {
             if (!_statesMap.TryGetValue(typeof(TState), out UnitState newState))
                 ThrowHelper.InvalidState(typeof(TState));
 
-            if (_currentState != null)
-                _currentState.Exit();
-
-            newState!.Enter();
+            _currentState?.Exit();
+            newState?.Enter();
             _currentState = newState;
         }
     }

@@ -8,17 +8,15 @@ namespace GamePlay.InventorySystem
 {
     public class Inventory : MonoBehaviour
     {
-        [SerializeField] private int _slotsCount = 24;
-        
         private Slot[] _slots;
 
         public event Action<Slot[]> SlotsAdded;
 
 
-        private void Start()
+        public void Init(int slotsCount)
         {
-            _slots = new Slot[_slotsCount];
-            for (var i = 0; i < _slotsCount; i++) 
+            _slots = new Slot[slotsCount];
+            for (var i = 0; i < slotsCount; i++) 
                 _slots[i] = new Slot();
 
             SlotsAdded?.Invoke(_slots);

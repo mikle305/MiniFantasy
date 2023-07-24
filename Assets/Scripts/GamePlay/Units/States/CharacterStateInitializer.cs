@@ -22,7 +22,7 @@ namespace GamePlay.Units.States
             _inputService = inputService;
         }
         
-        private void Awake()
+        private void Start()
         {
             _stateMachine = new UnitStateMachine();
             var states = new UnitState[]
@@ -39,5 +39,8 @@ namespace GamePlay.Units.States
             
             _stateMachine.Enter<IdleState>();
         }
+
+        private void Update()
+            => _stateMachine?.Tick();
     }
 }

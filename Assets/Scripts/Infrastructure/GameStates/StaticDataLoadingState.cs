@@ -17,6 +17,7 @@ namespace Infrastructure.GameStates
         
         public void Enter()
         {
+            _staticDataService.LoadCharacter();
             _staticDataService.LoadEnemies();
             _staticDataService.LoadLoot();
             EnterSettingsLoadingState();

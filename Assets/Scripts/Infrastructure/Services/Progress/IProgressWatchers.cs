@@ -6,6 +6,8 @@ namespace Infrastructure.Services
     {
         public void RegisterComponents(GameObject gameObject);
 
+        public void RegisterComponents(Component component);
+
         public void InformReaders();
         
         public void InformWriters();

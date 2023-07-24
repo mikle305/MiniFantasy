@@ -41,7 +41,7 @@ namespace Infrastructure.Services
 
         public ItemView CreateItem(LootId lootId, Transform itemHolder)
         {
-            LootStaticData lootData = _staticDataService.FindLootData(lootId);
+            LootStaticData lootData = _staticDataService.GetLootData(lootId);
             return _assetProvider.Instantiate<ItemView>(lootData.IconPath, itemHolder.position, itemHolder);
         }
 

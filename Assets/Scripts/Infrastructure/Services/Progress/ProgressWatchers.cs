@@ -22,10 +22,15 @@ namespace Infrastructure.Services
         public void RegisterComponents(GameObject gameObject)
         {
             ISavedProgressReader[] progressReaders = gameObject.GetComponents<ISavedProgressReader>();
-            foreach (ISavedProgressReader progressReader in progressReaders)
-            {
+            foreach (ISavedProgressReader progressReader in progressReaders) 
                 RegisterWatcher(progressReader);
-            }
+        }
+        
+        public void RegisterComponents(Component component)
+        {
+            ISavedProgressReader[] progressReaders = component.GetComponents<ISavedProgressReader>();
+            foreach (ISavedProgressReader progressReader in progressReaders) 
+                RegisterWatcher(progressReader);
         }
 
         public void InformReaders()

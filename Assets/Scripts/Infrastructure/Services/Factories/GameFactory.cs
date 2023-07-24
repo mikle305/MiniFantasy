@@ -1,5 +1,6 @@
 ﻿using Additional.Constants;
 using GamePlay.Additional;
+using StaticData.Character;
 using UnityEngine;
 
 namespace Infrastructure.Services
@@ -7,19 +8,18 @@ namespace Infrastructure.Services
     public class GameFactory : IGameFactory
     {
         private readonly IAssetProvider _assetProvider;
-        private readonly IProgressWatchers _progressWatchers;
+        private readonly IStaticDataService _staticDataService;
 
 
-        public GameFactory(IAssetProvider assetProvider, IProgressWatchers progressWatchers)
+        public GameFactory(IAssetProvider assetProvider, IStaticDataService staticDataService)
         {
+            _staticDataService = staticDataService;
             _assetProvider = assetProvider;
-            _progressWatchers = progressWatchers;
         }
 
         public World CreateWorld()
         {
             var world = _assetProvider.Instantiate<World>(AssetPath.WorldPath);
-            _progressWatchers.RegisterComponents(world.gameObject);
             return world;
         }
 
@@ -29,15 +29,14 @@ namespace Infrastructure.Services
             return followCamera;
         }
 
-        public GameObject CreateCharacter(World world)
+        public GameObject CreateCharacter(Vector3 position, Transform parent)
         {
+            CharacterStaticData data = _staticDataService.GetCharacterData();
             var character = _assetProvider.Instantiate<GameObject>(
-                AssetPath.CharacterPath, 
-                world.SpawnPoint.position, 
-                world.transform,
+                data.PrefabPath, 
+                position, 
+                parent,
                 injectInChildren: false);
-            
-            _progressWatchers.RegisterComponents(character);
 
             return character;
         }

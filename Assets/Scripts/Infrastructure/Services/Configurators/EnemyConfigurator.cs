@@ -17,7 +17,7 @@ namespace Infrastructure.Services
 
         public void Configure(GameObject enemy, EnemyId enemyId)
         {
-            EnemyStaticData enemyData = _staticDataService.FindEnemyData(enemyId);
+            EnemyStaticData enemyData = _staticDataService.GetEnemyData(enemyId);
             InitHealth(enemy, enemyData);
             InitDeath(enemy, enemyData);
             InitHitting(enemy, enemyData);

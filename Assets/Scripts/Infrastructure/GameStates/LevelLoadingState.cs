@@ -58,11 +58,19 @@ namespace Infrastructure.GameStates
             _objectsProvider.MainCamera = Camera.main;
         }
 
-        private World InitWorld() 
-            => _gameFactory.CreateWorld();
+        private World InitWorld()
+        {
+            World world = _gameFactory.CreateWorld();
+            _progressWatchers.RegisterComponents(world);
+            return world;
+        }
 
-        private GameObject InitCharacter(World world) 
-            => _gameFactory.CreateCharacter(world);
+        private GameObject InitCharacter(World world)
+        {
+            GameObject character = world.CharacterSpawner.Spawn(world.transform);
+            _progressWatchers.RegisterComponents(character);
+            return character;
+        }
 
         private Hud InitHud(World world, GameObject character) 
             => _uiFactory.CreateHud(character, world.UICamera);

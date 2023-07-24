@@ -11,20 +11,17 @@ namespace GamePlay.LootSystem
     {
         private IRandomizer _randomizer;
         private ILootFactory _factory;
-        private ILootConfigurator _configurator;
         private IStaticDataService _staticDataService;
         private List<RandomLoot> _lootCollection;
 
 
         [Inject]
         public void Construct(
-            ILootFactory factory, 
-            ILootConfigurator configurator,
+            ILootFactory factory,
             IStaticDataService staticDataService,
             IRandomizer randomizer)
         {
             _factory = factory;
-            _configurator = configurator;
             _staticDataService = staticDataService;
             _randomizer = randomizer;
         }
@@ -47,9 +44,8 @@ namespace GamePlay.LootSystem
 
             int lootCount = _randomizer.Generate(randomLoot.MinCount, randomLoot.MaxCount);
             LootPiece lootPiece = _factory.CreateInWorld(randomLoot.LootId, transform.position.AddY(1));
-            LootStaticData lootData = _staticDataService.FindLootData(randomLoot.LootId);
+            LootStaticData lootData = _staticDataService.GetLootData(randomLoot.LootId);
             lootPiece.Init(lootData, lootCount);
-            _configurator.Configure(lootPiece, randomLoot.LootId);
         }
     }
 }

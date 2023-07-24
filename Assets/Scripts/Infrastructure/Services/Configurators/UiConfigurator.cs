@@ -15,7 +15,7 @@ namespace Infrastructure.Services
         
         public void ConfigureInventoryItem(ItemView itemView, LootId lootId, int count)
         {
-            if (_staticDataService.FindLootData(lootId) is not InventoryLootData lootData)
+            if (_staticDataService.GetLootData(lootId) is not InventoryLootData lootData)
                 return;
             
             itemView.ShowCount(count);

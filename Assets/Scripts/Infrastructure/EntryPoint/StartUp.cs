@@ -1,5 +1,6 @@
 using Infrastructure.GameStates;
 using Infrastructure.Services;
+using StaticData.Character;
 using UniDependencyInjection.Core;
 using UniDependencyInjection.Extensions;
 using UnityEngine;
@@ -37,7 +38,7 @@ namespace Infrastructure.EntryPoint
                 .RegisterSingle<IEnemyFactory, EnemyFactory>()
                 .RegisterSingle<ILootFactory, LootFactory>()
                 .RegisterSingle<IEnemyConfigurator, EnemyConfigurator>()
-                .RegisterSingle<ILootConfigurator, LootConfigurator>()
+                .RegisterSingle<ICharacterConfigurator, CharacterConfigurator>()
                 .RegisterSingle<IUiConfigurator, UiConfigurator>()
                 .RegisterSingle<IProgressAccess, ProgressAccess>()
                 .RegisterSingle<IProgressWatchers, ProgressWatchers>()
