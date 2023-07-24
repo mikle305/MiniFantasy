@@ -2,7 +2,7 @@ using Infrastructure.Services;
 using UniDependencyInjection.Unity;
 using UnityEngine;
 
-namespace GamePlay.Additional
+namespace GamePlay.Units
 {
     public class CharacterSpawner : MonoBehaviour
     {

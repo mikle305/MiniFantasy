@@ -809,7 +809,6 @@ GameObject:
   - component: {fileID: 3469743537302492093}
   - component: {fileID: 1750876446781488161}
   - component: {fileID: 5865577377272360241}
-  - component: {fileID: 4124806720567506142}
   - component: {fileID: 3090262852053502829}
   - component: {fileID: 2748729521728562555}
   - component: {fileID: 2971852532451855727}
@@ -818,6 +817,7 @@ GameObject:
   - component: {fileID: 4157814066027835324}
   - component: {fileID: 7229408791915856028}
   - component: {fileID: -6711205644542441876}
+  - component: {fileID: 5842210331151897990}
   m_Layer: 13
   m_Name: SkeletonArcher
   m_TagString: Untagged
@@ -953,18 +953,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 412097049178461e8f2186e497fcbf14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4124806720567506142
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1627716094429072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf421d5a8b5b4df0a3a676a9e6a3e8ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3090262852053502829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1061,6 +1049,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de72ce0f73764feca21e0e54b33f134d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5842210331151897990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627716094429072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9befa66f7d7d4172af451203f837afb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hit: {fileID: 2748729521728562555}
+  _health: {fileID: 5865577377272360241}
+  _death: {fileID: 6881244985582050221}
+  _follower: {fileID: 3469743537302492093}
 --- !u!1 &1655481144821152
 GameObject:
   m_ObjectHideFlags: 0

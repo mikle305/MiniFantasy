@@ -3,7 +3,7 @@ using Data;
 using Infrastructure.Services;
 using UnityEngine;
 
-namespace GamePlay.Units
+namespace GamePlay.Units.Character
 {
     public class CharacterCompositeProgress : MonoBehaviour, ISavedProgressWriter
     {

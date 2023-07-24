@@ -4,7 +4,7 @@ using GamePlay.LootSystem;
 using StaticData;
 using UnityEngine;
 
-namespace GamePlay.Units
+namespace GamePlay.Units.Character
 {
     public class CharacterPickupHandler : PickupHandler
     {

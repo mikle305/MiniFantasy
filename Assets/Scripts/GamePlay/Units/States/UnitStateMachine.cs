@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Additional.Utils;
 
-namespace GamePlay.Units.States
+namespace GamePlay.Units
 {
     public class UnitStateMachine
     {

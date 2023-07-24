@@ -1,7 +1,7 @@
 using Infrastructure.Services;
 using UnityEngine;
 
-namespace GamePlay.Units.States
+namespace GamePlay.Units.Character
 {
     public class MoveState : AnyState
     {

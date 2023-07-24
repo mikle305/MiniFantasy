@@ -5,7 +5,7 @@ using Additional.Extensions;
 using Additional.Utils;
 using UnityEngine;
 
-namespace GamePlay.Units
+namespace GamePlay.Units.Character
 {
     [RequireComponent(typeof(CharacterAnimator))]
     [RequireComponent(typeof(CharacterController))]

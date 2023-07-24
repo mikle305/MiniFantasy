@@ -8,23 +8,23 @@ namespace GamePlay.InventorySystem
 {
     public class Inventory : MonoBehaviour
     {
-        private Slot[] _slots;
-
         public event Action<Slot[]> SlotsAdded;
+        
+        public Slot[] Slots { get; private set; }
 
 
         public void Init(int slotsCount)
         {
-            _slots = new Slot[slotsCount];
+            Slots = new Slot[slotsCount];
             for (var i = 0; i < slotsCount; i++) 
-                _slots[i] = new Slot();
+                Slots[i] = new Slot();
 
-            SlotsAdded?.Invoke(_slots);
+            SlotsAdded?.Invoke(Slots);
         }
         
         public bool CanAddLoot(InventoryLootData lootData)
         {
-            foreach (Slot slot in _slots)
+            foreach (Slot slot in Slots)
             {
                 if (slot.ItemId == LootId.None)
                     return true;
@@ -53,7 +53,7 @@ namespace GamePlay.InventorySystem
         private int DistributeToEmpty(InventoryLootData lootData, int count)
         {
             int maxCountInSlot = lootData.MaxCountInSlot;
-            foreach (Slot emptySlot in _slots.Where(s => s.ItemId == LootId.None))
+            foreach (Slot emptySlot in Slots.Where(s => s.ItemId == LootId.None))
             {
                 if (count == 0)
                     return count;
@@ -76,7 +76,7 @@ namespace GamePlay.InventorySystem
         /// </summary>
         private int DistributeToExist(InventoryLootData lootData, int count)
         {
-            foreach (Slot slot in _slots.Where(slot => slot.ItemId == lootData.LootId))
+            foreach (Slot slot in Slots.Where(slot => slot.ItemId == lootData.LootId))
             {
                 count = slot.AddCount(count);
                 if (count == 0)

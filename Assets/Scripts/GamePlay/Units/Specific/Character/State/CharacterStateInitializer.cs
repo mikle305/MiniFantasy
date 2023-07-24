@@ -2,7 +2,7 @@
 using UniDependencyInjection.Unity;
 using UnityEngine;
 
-namespace GamePlay.Units.States
+namespace GamePlay.Units.Character
 {
     public class CharacterStateInitializer : MonoBehaviour
     {

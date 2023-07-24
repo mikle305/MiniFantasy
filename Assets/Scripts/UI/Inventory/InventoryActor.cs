@@ -14,6 +14,7 @@
         public void Subscribe()
         {
             _inventory.SlotsAdded += _inventoryView.AddSlots;
+            _inventoryView.AddSlots(_inventory.Slots);
         }
     }
 }

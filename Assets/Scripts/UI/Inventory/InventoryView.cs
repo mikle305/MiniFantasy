@@ -30,6 +30,9 @@ namespace UI.Inventory
 
         public void AddSlots(Slot[] slots)
         {
+            foreach (Transform slot in _slotsGrid)
+                Destroy(slot.gameObject);
+                
             foreach (Slot slot in slots) 
                 _uiFactory.CreateSlot(slot, _slotsGrid);
         }

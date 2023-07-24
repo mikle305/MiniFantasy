@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GamePlay.Units
+namespace GamePlay.Units.Enemy
 {
     [RequireComponent(typeof(Animator))]
     public class EnemyAnimator : UnitAnimator, IMoveAnimator, IHitAnimator, IAttackAnimator, IDieAnimator

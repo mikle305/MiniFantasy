@@ -1290,7 +1290,6 @@ GameObject:
   - component: {fileID: -6692695054325570002}
   - component: {fileID: 4146399864200452387}
   - component: {fileID: 6328243603481058547}
-  - component: {fileID: 4822237933159702650}
   - component: {fileID: 2190400159865864854}
   - component: {fileID: 6497331023182664158}
   - component: {fileID: 925932836136379292}
@@ -1299,6 +1298,7 @@ GameObject:
   - component: {fileID: 5678011447955666130}
   - component: {fileID: 7275613024581900554}
   - component: {fileID: 6595438271228083815}
+  - component: {fileID: 8148482278179227649}
   m_Layer: 13
   m_Name: Ninja
   m_TagString: Untagged
@@ -1445,18 +1445,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 412097049178461e8f2186e497fcbf14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4822237933159702650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1880444566353528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf421d5a8b5b4df0a3a676a9e6a3e8ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2190400159865864854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1553,6 +1541,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de72ce0f73764feca21e0e54b33f134d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8148482278179227649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1880444566353528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9befa66f7d7d4172af451203f837afb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hit: {fileID: 6497331023182664158}
+  _health: {fileID: 6328243603481058547}
+  _death: {fileID: 8260586294591030749}
+  _follower: {fileID: 3835074404040549117}
 --- !u!1 &1906435638013852
 GameObject:
   m_ObjectHideFlags: 0

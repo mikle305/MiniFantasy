@@ -1,6 +1,4 @@
-using UnityEngine;
-
-namespace GamePlay.Units.States
+namespace GamePlay.Units
 {
     public abstract class UnitState
     {

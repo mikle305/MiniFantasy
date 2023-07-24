@@ -9,7 +9,8 @@ namespace Infrastructure.Services
     {
         public StandaloneInputService(IObjectsProvider objectsProvider) : base(objectsProvider)
         {
-            // Cursor.lockState = CursorLockMode.Locked;
+            if (!Application.isEditor) 
+                Cursor.lockState = CursorLockMode.Locked;
         }
         
         public override Vector2 GetAxis() =>

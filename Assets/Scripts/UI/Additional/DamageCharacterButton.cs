@@ -1,5 +1,5 @@
 ﻿using GamePlay.Units;
-using GamePlay.Units.States;
+using GamePlay.Units.Character;
 using UnityEngine;
 using UnityEngine.UI;
 
