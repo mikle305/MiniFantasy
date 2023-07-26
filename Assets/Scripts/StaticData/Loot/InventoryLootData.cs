@@ -11,7 +11,6 @@ namespace StaticData
         [SerializeField] private ItemRarity _itemRarity = ItemRarity.Common;
         
         
-        public string Name => name;
         public string Description => _description;
         public int MaxCountInSlot => _maxCountInSlot;
         public ItemRarity ItemRarity => _itemRarity;

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemRarityColors:
   - _rarity: 0
-    _color: {r: 0.15948732, g: 0.754717, b: 0.31997737, a: 1}
+    _color: {r: 0.14388269, g: 0.9150943, b: 0.35328457, a: 1}
   - _rarity: 1
-    _color: {r: 0.17070128, g: 0.28703332, b: 0.6603774, a: 1}
+    _color: {r: 0.1394327, g: 0.32745644, b: 0.9433962, a: 1}
   - _rarity: 2
-    _color: {r: 0.6025395, g: 0, b: 0.8396226, a: 1}
+    _color: {r: 0.85288966, g: 0.08176094, b: 1, a: 1}

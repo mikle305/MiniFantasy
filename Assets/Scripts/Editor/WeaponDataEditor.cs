@@ -12,7 +12,7 @@ using WeaponComponentData = StaticData.WeaponComponentData;
 namespace Editor
 {
     [CustomEditor(typeof(WeaponData))]
-    public class WeaponDataEditor : UnityEditor.Editor
+    public class WeaponDataEditor : LootDataEditor
     {
         private static Type[] _allComponentsTypes;
         private bool _addComponentsPanel;
@@ -20,19 +20,15 @@ namespace Editor
         private List<WeaponComponentData> _weaponComponents;
 
 
-        private void OnEnable()
+        protected override void OnEnable()
         {
-            _weaponData = target as WeaponData;
-            _weaponComponents = typeof(WeaponData)
-                    .GetFields(BindingFlags.Instance | BindingFlags.NonPublic)
-                    .First(f => f.Name == "_components")
-                    .GetValue(_weaponData) as List<WeaponComponentData>;
+            base.OnEnable();
+            InitWeaponData();
         }
 
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
-            
             CreateAddComponentsPanel();
             EditorGUILayout.Space(20);
             CreateUpdateComponentsButton();
@@ -41,10 +37,18 @@ namespace Editor
         [DidReloadScripts]
         private static void OnRecompile()
         {
-            
             _allComponentsTypes = TypeCache
                 .GetTypesDerivedFrom<WeaponComponentData>()
                 .ToArray();
+        }
+
+        private void InitWeaponData()
+        {
+            _weaponData = target as WeaponData;
+            _weaponComponents = typeof(WeaponData)
+                .GetFields(BindingFlags.Instance | BindingFlags.NonPublic)
+                .First(f => f.Name == "_components")
+                .GetValue(_weaponData) as List<WeaponComponentData>;
         }
 
         private void CreateUpdateComponentsButton()

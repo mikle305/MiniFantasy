@@ -15,3 +15,4 @@ MonoBehaviour:
   _prefabPath: Prefabs/Loot/Coin
   _iconPath: Prefabs/UI/Loot/Coin
   _lootId: 1
+  _name: Coin
