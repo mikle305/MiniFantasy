@@ -15,21 +15,20 @@ MonoBehaviour:
   _prefabPath: Prefabs/Loot/Sword
   _iconPath: Prefabs/UI/Loot/Sword
   _lootId: 4
-  _name: Sword
   _description: 
   _maxCountInSlot: 1
   _itemRarity: 2
   _components:
   - rid: 1240449808619274240
-  - rid: 1240449808619274241
+  - rid: 1240449808619274266
   references:
     version: 2
     RefIds:
     - rid: 1240449808619274240
       type: {class: ChargeComponentData, ns: StaticData, asm: Assembly-CSharp}
       data:
-        _name: ChargeComponentData
-    - rid: 1240449808619274241
+        _name: Charge
+    - rid: 1240449808619274266
       type: {class: KnockBackComponentData, ns: StaticData, asm: Assembly-CSharp}
       data:
-        _name: KnockBackComponentData
+        _name: Knock Back

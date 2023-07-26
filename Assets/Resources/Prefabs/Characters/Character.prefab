@@ -718,7 +718,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 1.8
-  m_Radius: 0.3
+  m_Radius: 0.4
   m_SlopeLimit: 45
   m_StepOffset: 0.05
   m_SkinWidth: 0.08
@@ -908,7 +908,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daa28e143edc48e6968b1dab695fe6f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slotsCount: 24
 --- !u!114 &2681653226707732565
 MonoBehaviour:
   m_ObjectHideFlags: 0

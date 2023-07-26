@@ -4,6 +4,6 @@ namespace Infrastructure.Services
 {
     public interface ISavedProgressReader
     {
-        public void LoadProgress(PlayerProgress progress);
+        public void ReadProgress(PlayerProgress progress);
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Additional.Extensions;
 using StaticData;
 using UnityEditor;
 using UnityEditor.Callbacks;
@@ -14,7 +15,7 @@ namespace Editor
     public class WeaponDataEditor : UnityEditor.Editor
     {
         private static Type[] _allComponentsTypes;
-        private bool _addComponentsTab;
+        private bool _addComponentsPanel;
         private WeaponData _weaponData;
         private List<WeaponComponentData> _weaponComponents;
 
@@ -32,33 +33,47 @@ namespace Editor
         {
             base.OnInspectorGUI();
             
-            ShowAddComponentsTab();
-            ShowUpdateComponentsNamesButton();
+            CreateAddComponentsPanel();
+            EditorGUILayout.Space(20);
+            CreateUpdateComponentsButton();
         }
 
-        private void ShowUpdateComponentsNamesButton()
+        [DidReloadScripts]
+        private static void OnRecompile()
+        {
+            
+            _allComponentsTypes = TypeCache
+                .GetTypesDerivedFrom<WeaponComponentData>()
+                .ToArray();
+        }
+
+        private void CreateUpdateComponentsButton()
         {
             if (GUILayout.Button("Update components names"))
             {
                 foreach (WeaponComponentData weaponComponent in _weaponComponents)
-                    UpdateComponentDisplayName(weaponComponent);
-            }
-        }
-
-        private void ShowAddComponentsTab()
-        {
-            _addComponentsTab = EditorGUILayout.Foldout(_addComponentsTab, "Add Components");
-            if (_addComponentsTab)
-            {
-                foreach (Type componentType in _allComponentsTypes)
                 {
-                    if (GUILayout.Button(componentType.Name))
-                        AddWeaponComponent(componentType);
+                    string displayName = FormatDisplayComponentName(weaponComponent.GetType());
+                    UpdateComponentDisplayName(weaponComponent, displayName);
                 }
             }
         }
 
-        private void AddWeaponComponent(Type componentType)
+        private void CreateAddComponentsPanel()
+        {
+            _addComponentsPanel = EditorGUILayout.Foldout(_addComponentsPanel, "Add Components");
+            if (_addComponentsPanel)
+            {
+                foreach (Type componentType in _allComponentsTypes)
+                {
+                    string componentName = FormatDisplayComponentName(componentType);
+                    if (GUILayout.Button(componentName))
+                        AddWeaponComponent(componentType, componentName);
+                }
+            }
+        }
+
+        private void AddWeaponComponent(Type componentType, string displayName)
         {
             if (_weaponComponents.Exists(c => c.GetType() == componentType))
             {
@@ -70,30 +85,27 @@ namespace Editor
                 throw new InvalidCastException();
 
             _weaponComponents.Add(newComponent);
-            UpdateComponentDisplayName(newComponent);
+            UpdateComponentDisplayName(newComponent, displayName);
             EditorUtility.SetDirty(_weaponData);
         }
 
-        private void UpdateComponentDisplayName(WeaponComponentData weaponComponent)
+        private static void UpdateComponentDisplayName(WeaponComponentData weaponComponent, string displayName)
         {
             typeof(WeaponComponentData)
                 .GetFields(BindingFlags.Instance | BindingFlags.NonPublic)
                 .First(f => f.Name == "_name")
-                .SetValue(weaponComponent, weaponComponent.GetType().Name);
+                .SetValue(weaponComponent, displayName);
         }
 
-        [DidReloadScripts]
-        private static void OnRecompile()
+        private static string FormatDisplayComponentName(Type componentType)
         {
-            _allComponentsTypes = AppDomain
-                .CurrentDomain
-                .GetAssemblies()
-                .SelectMany(a => a.GetTypes())
-                .Where(t => 
-                    t.IsSubclassOf(typeof(WeaponComponentData)) && 
-                    t.ContainsGenericParameters == false && 
-                    t.IsClass)
-                .ToArray();
+            string componentName = componentType
+                .Name
+                .SplitByCapital()
+                .Except(new[] { "Component", "Data" })
+                .ConvertToString(" ");
+            
+            return componentName;
         }
     }
 }

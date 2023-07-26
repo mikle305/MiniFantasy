@@ -46,22 +46,19 @@ namespace Infrastructure.GameStates
             World world = InitWorld();
             GameObject character = InitCharacter(world);
             InitEnemies(world);
+            InitFollowCamera(character);
+
             LoadProgress();
             InitHud(world, character);
-            InitFollowCamera(character);
             BindObjectsToProvider();
-            EnterGamePlay(character);
-        }
 
-        private void BindObjectsToProvider()
-        {
-            _objectsProvider.MainCamera = Camera.main;
+            EnterGamePlay(character);
         }
 
         private World InitWorld()
         {
             World world = _gameFactory.CreateWorld();
-            _progressWatchers.RegisterComponents(world);
+            _progressWatchers.RegisterComponents(world, inChildren: true);
             return world;
         }
 
@@ -93,6 +90,11 @@ namespace Infrastructure.GameStates
             => _gameFactory
                 .CreateFollowCamera()
                 .Follow(target.transform);
+
+        private void BindObjectsToProvider()
+        {
+            _objectsProvider.MainCamera = Camera.main;
+        }
 
         private void EnterGamePlay(GameObject character) 
             => _stateMachine.Enter<GameProcessState, GameObject>(character);

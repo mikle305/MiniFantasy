@@ -18,7 +18,7 @@ namespace GamePlay.Units.Character
             _transform = transform;
         }
 
-        public void LoadProgress(PlayerProgress progress)
+        public void ReadProgress(PlayerProgress progress)
         {
             LevelPosition levelPosition = progress.WorldData.LevelPosition;
             if (levelPosition.Level != GetCurrentLevel())
@@ -31,7 +31,7 @@ namespace GamePlay.Units.Character
             _characterMovement.Warp(to: savedPosition.ToUnityVector());
         }
 
-        public void UpdateProgress(PlayerProgress progress)
+        public void WriteProgress(PlayerProgress progress)
         {
             progress.WorldData.LevelPosition = new LevelPosition
             {

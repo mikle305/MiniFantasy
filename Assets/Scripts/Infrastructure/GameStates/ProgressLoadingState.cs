@@ -1,6 +1,7 @@
 ﻿using Additional.Constants;
 using Data;
 using Infrastructure.Services;
+using StaticData.Character;
 
 namespace Infrastructure.GameStates
 {
@@ -10,23 +11,27 @@ namespace Infrastructure.GameStates
         private readonly IProgressAccess _progressAccess;
         private readonly IStorageService _storageService;
         private readonly IAutoSaver _autoSaver;
+        private readonly IStaticDataService _staticDataService;
 
 
         public ProgressLoadingState(
             GameStateMachine stateMachine,
             IProgressAccess progressAccess,
-            IStorageService storageService, 
-            IAutoSaver autoSaver)
+            IStorageService storageService,
+            IAutoSaver autoSaver,
+            IStaticDataService staticDataService)
         {
             _stateMachine = stateMachine;
             _progressAccess = progressAccess;
             _storageService = storageService;
             _autoSaver = autoSaver;
+            _staticDataService = staticDataService;
         }
 
         public void Enter()
         {
-            _progressAccess.PlayerProgress = _storageService.LoadProgress() ?? CreateNewProgress();
+            CharacterStaticData characterConfig = _staticDataService.GetCharacterData();
+            _progressAccess.PlayerProgress = _storageService.LoadProgress() ?? CreateNewProgress(characterConfig);
             _autoSaver.Start();
             
             string sceneName = _progressAccess.PlayerProgress.WorldData.LevelPosition.Level;
@@ -37,12 +42,12 @@ namespace Infrastructure.GameStates
         {
         }
 
-        private static PlayerProgress CreateNewProgress()
+        private static PlayerProgress CreateNewProgress(CharacterStaticData characterConfig)
         {
             return new PlayerProgress
             {
                 WorldData = CreateNewWorldData(),
-                CharacterStats = CreateNewCharacterStats()
+                CharacterStats = CreateNewCharacterStats(characterConfig)
             };
         }
 
@@ -54,18 +59,18 @@ namespace Infrastructure.GameStates
             {
                 LevelPosition = new LevelPosition
                 {
-                    Level = mainScene
+                    Level = mainScene,
                 }
             };
         }
 
-        private static CharacterStatsData CreateNewCharacterStats()
+        private static CharacterStatsData CreateNewCharacterStats(CharacterStaticData characterConfig)
         {
             return new CharacterStatsData
             {
                 Health = new StatData
                 {
-                    MaxValue = CharacterStatsConst.BaseHealth
+                    MaxValue = characterConfig.Health,
                 }
             };
         }

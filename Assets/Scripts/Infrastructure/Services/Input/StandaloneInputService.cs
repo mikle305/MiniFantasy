@@ -10,9 +10,9 @@ namespace Infrastructure.Services
         public StandaloneInputService(IObjectsProvider objectsProvider) : base(objectsProvider)
         {
             if (!Application.isEditor) 
-                Cursor.lockState = CursorLockMode.Locked;
+                BlockCursor();
         }
-        
+
         public override Vector2 GetAxis() =>
             new(Input.GetAxis(Horizontal), Input.GetAxis(Vertical));
 
@@ -24,7 +24,13 @@ namespace Infrastructure.Services
             return Math.Abs(Input.GetAxis(Fire) - 1.0f) < Constants.Epsilon;
         }
 
-        private bool IsUiPressed() =>
+        private static bool IsUiPressed() =>
             Input.GetMouseButton(0) && EventSystem.current.IsPointerOverGameObject();
+
+        private static void BlockCursor()
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 }

@@ -12,14 +12,14 @@ namespace GamePlay.Units.Character
             _health = health;
         }
         
-        public void LoadProgress(PlayerProgress progress)
+        public void ReadProgress(PlayerProgress progress)
         {
             CharacterStatsData statsData = progress.CharacterStats;
             
             _health.Init(statsData.Health.MaxValue, statsData.Health.MaxValue);
         }
 
-        public void UpdateProgress(PlayerProgress progress)
+        public void WriteProgress(PlayerProgress progress)
         {
             CharacterStatsData statsData = progress.CharacterStats;
             

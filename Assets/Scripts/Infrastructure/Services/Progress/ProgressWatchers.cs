@@ -19,16 +19,22 @@ namespace Infrastructure.Services
         /// Register game object components (readers and writers) recursively
         /// </summary>
         /// <param name="gameObject"></param>
-        public void RegisterComponents(GameObject gameObject)
+        public void RegisterComponents(GameObject gameObject, bool inChildren = false)
         {
-            ISavedProgressReader[] progressReaders = gameObject.GetComponents<ISavedProgressReader>();
+            ISavedProgressReader[] progressReaders = inChildren 
+                ? gameObject.GetComponentsInChildren<ISavedProgressReader>(includeInactive: true)
+                : gameObject.GetComponents<ISavedProgressReader>();
+            
             foreach (ISavedProgressReader progressReader in progressReaders) 
                 RegisterWatcher(progressReader);
         }
         
-        public void RegisterComponents(Component component)
+        public void RegisterComponents(Component component, bool inChildren = false)
         {
-            ISavedProgressReader[] progressReaders = component.GetComponents<ISavedProgressReader>();
+            ISavedProgressReader[] progressReaders = inChildren 
+                ? component.GetComponentsInChildren<ISavedProgressReader>(includeInactive: true) 
+                : component.GetComponents<ISavedProgressReader>();
+            
             foreach (ISavedProgressReader progressReader in progressReaders) 
                 RegisterWatcher(progressReader);
         }
@@ -36,13 +42,13 @@ namespace Infrastructure.Services
         public void InformReaders()
         {
             foreach (ISavedProgressReader progressReader in _readers)
-                progressReader.LoadProgress(_progressAccess.PlayerProgress);
+                progressReader.ReadProgress(_progressAccess.PlayerProgress);
         }
 
         public void InformWriters()
         {
             foreach (ISavedProgressWriter progressWriter in _writers)
-                progressWriter.UpdateProgress(_progressAccess.PlayerProgress);
+                progressWriter.WriteProgress(_progressAccess.PlayerProgress);
         }
 
         public void CleanUp()

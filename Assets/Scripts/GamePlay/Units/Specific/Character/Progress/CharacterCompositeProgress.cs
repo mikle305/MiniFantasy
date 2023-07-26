@@ -20,19 +20,19 @@ namespace GamePlay.Units.Character
             RegisterProgressParts();
         }
 
-        public void LoadProgress(PlayerProgress progress)
+        public void ReadProgress(PlayerProgress progress)
         {
             foreach (ISavedProgressWriter progressReader in _characterProgressParts)
             {
-                progressReader.LoadProgress(progress);
+                progressReader.ReadProgress(progress);
             }
         }
 
-        public void UpdateProgress(PlayerProgress progress)
+        public void WriteProgress(PlayerProgress progress)
         {
             foreach (ISavedProgressWriter progressWriter in _characterProgressParts)
             {
-                progressWriter.UpdateProgress(progress);
+                progressWriter.WriteProgress(progress);
             }
         }
 
