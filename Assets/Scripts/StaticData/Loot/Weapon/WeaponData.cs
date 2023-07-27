@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace StaticData
@@ -8,11 +6,11 @@ namespace StaticData
     [CreateAssetMenu(menuName = "StaticData/Loot/Weapon", fileName = "WeaponData")]
     public class WeaponData : InventoryLootData
     {
+        [SerializeField] private string _weaponPrefabPath;
         [SerializeReference] private List<WeaponComponentData> _components;
 
-        public Type[] GetComponentsTypes()
-            => _components
-                .Select(data => data.ComponentType)
-                .ToArray();
+        public List<WeaponComponentData> Components => _components;
+
+        public string WeaponPrefabPath => _weaponPrefabPath;
     }
 }

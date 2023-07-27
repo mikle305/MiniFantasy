@@ -5,11 +5,11 @@ namespace GamePlay.LootSystem
 {
     public class LootPiece : MonoBehaviour
     {
-        public LootStaticData LootData { get; private set; }
+        public LootData LootData { get; private set; }
         public int CurrentCount { get; set; }
         
 
-        public void Init(LootStaticData lootData, int count)
+        public void Init(LootData lootData, int count)
         {
             LootData = lootData;
             CurrentCount = count;

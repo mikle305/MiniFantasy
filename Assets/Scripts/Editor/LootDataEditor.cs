@@ -5,10 +5,10 @@ using UnityEditor;
 
 namespace Editor
 {
-    [CustomEditor(typeof(LootStaticData), true)]
+    [CustomEditor(typeof(LootData), true)]
     public class LootDataEditor : UnityEditor.Editor
     {
-        private LootStaticData _lootData;
+        private LootData _lootData;
         private FieldInfo _nameField;
 
 
@@ -24,8 +24,8 @@ namespace Editor
 
         private void InitLootData()
         {
-            _lootData = target as LootStaticData;
-            _nameField = typeof(LootStaticData)
+            _lootData = target as LootData;
+            _nameField = typeof(LootData)
                 .GetFields(BindingFlags.Instance | BindingFlags.NonPublic)
                 .First(f => f.Name == "_name");
         }

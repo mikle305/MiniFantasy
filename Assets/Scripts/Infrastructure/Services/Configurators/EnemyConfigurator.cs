@@ -1,6 +1,9 @@
 using GamePlay.LootSystem;
 using GamePlay.Reaction;
 using GamePlay.Units;
+using GamePlay.Units.Death;
+using GamePlay.Units.Enemy;
+using GamePlay.Units.Hit;
 using StaticData;
 using UnityEngine;
 
@@ -17,7 +20,7 @@ namespace Infrastructure.Services
 
         public void Configure(GameObject enemy, EnemyId enemyId)
         {
-            EnemyStaticData enemyData = _staticDataService.GetEnemyData(enemyId);
+            EnemyData enemyData = _staticDataService.GetEnemyData(enemyId);
             InitHealth(enemy, enemyData);
             InitDeath(enemy, enemyData);
             InitHitting(enemy, enemyData);
@@ -25,13 +28,13 @@ namespace Infrastructure.Services
             InitLootSpawner(enemy, enemyData);
         }
 
-        private static void InitHealth(GameObject enemy, EnemyStaticData enemyData)
+        private static void InitHealth(GameObject enemy, EnemyData enemyData)
         {
             if (enemy.TryGetComponent(out Health health))
                 health.Init(enemyData.Health, enemyData.Health);
         }
 
-        private static void InitDeath(GameObject enemy, EnemyStaticData enemyData)
+        private static void InitDeath(GameObject enemy, EnemyData enemyData)
         {
             if (enemy.TryGetComponent(out Death deathOnDamage))
                 deathOnDamage.Init(enemyData.DeathDuration);
@@ -43,7 +46,7 @@ namespace Infrastructure.Services
                 effectOnDeath.Init(enemyData.DeathEffect);
         }
 
-        private static void InitHitting(GameObject enemy, EnemyStaticData enemyData)
+        private static void InitHitting(GameObject enemy, EnemyData enemyData)
         {
             if (enemy.TryGetComponent(out HitOnDamage hitOnDamage))
                 hitOnDamage.Init(enemyData.GetHitDuration);
@@ -52,13 +55,13 @@ namespace Infrastructure.Services
                 effectOnHit.Init(enemyData.HitEffect);
         }
 
-        private static void InitAggroZone(GameObject enemy, EnemyStaticData enemyData)
+        private static void InitAggroZone(GameObject enemy, EnemyData enemyData)
         {
             if (enemy.TryGetComponent(out AggroZone aggroZone))
                 aggroZone.Init(enemyData.FollowingCooldown);
         }
 
-        private static void InitLootSpawner(GameObject enemy, EnemyStaticData enemyData)
+        private static void InitLootSpawner(GameObject enemy, EnemyData enemyData)
         {
             if (enemy.TryGetComponent(out LootSpawner lootSpawner))
                 lootSpawner.Init(enemyData.LootCollection);

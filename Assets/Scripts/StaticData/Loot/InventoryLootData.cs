@@ -4,7 +4,7 @@ using UnityEngine;
 namespace StaticData
 {
     [CreateAssetMenu(menuName = "StaticData/Loot/Default", fileName = "LootData")]
-    public class InventoryLootData : LootStaticData
+    public class InventoryLootData : LootData
     {
         [SerializeField] private string _description;
         [SerializeField] private int _maxCountInSlot = 999;

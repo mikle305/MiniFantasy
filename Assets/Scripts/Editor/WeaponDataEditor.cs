@@ -72,12 +72,12 @@ namespace Editor
                 {
                     string componentName = FormatDisplayComponentName(componentType);
                     if (GUILayout.Button(componentName))
-                        AddWeaponComponent(componentType, componentName);
+                        AddWeaponDataComponent(componentType, componentName);
                 }
             }
         }
 
-        private void AddWeaponComponent(Type componentType, string displayName)
+        private void AddWeaponDataComponent(Type componentType, string displayName)
         {
             if (_weaponComponents.Exists(c => c.GetType() == componentType))
             {
@@ -90,6 +90,7 @@ namespace Editor
 
             _weaponComponents.Add(newComponent);
             UpdateComponentDisplayName(newComponent, displayName);
+            
             EditorUtility.SetDirty(_weaponData);
         }
 

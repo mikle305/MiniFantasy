@@ -44,7 +44,7 @@ namespace GamePlay.LootSystem
 
             int lootCount = _randomizer.Generate(randomLoot.MinCount, randomLoot.MaxCount);
             LootPiece lootPiece = _factory.CreateInWorld(randomLoot.LootId, transform.position.AddY(1));
-            LootStaticData lootData = _staticDataService.GetLootData(randomLoot.LootId);
+            LootData lootData = _staticDataService.GetLootData(randomLoot.LootId);
             lootPiece.Init(lootData, lootCount);
         }
     }

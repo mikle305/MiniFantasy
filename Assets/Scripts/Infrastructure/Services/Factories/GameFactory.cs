@@ -31,7 +31,7 @@ namespace Infrastructure.Services
 
         public GameObject CreateCharacter(Vector3 position, Transform parent)
         {
-            CharacterStaticData data = _staticDataService.GetCharacterData();
+            CharacterData data = _staticDataService.GetCharacterData();
             var character = _assetProvider.Instantiate<GameObject>(
                 data.PrefabPath, 
                 position, 

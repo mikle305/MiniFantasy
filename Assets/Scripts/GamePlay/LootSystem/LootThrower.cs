@@ -17,7 +17,7 @@ namespace GamePlay.LootSystem
             _factory = factory;
         }
 
-        public void Throw(LootStaticData lootData, int count)
+        public void Throw(LootData lootData, int count)
         {
             LootPiece lootPiece = _factory.CreateInWorld(lootData.LootId, transform.position.AddY(1));
             lootPiece.Init(lootData, count);

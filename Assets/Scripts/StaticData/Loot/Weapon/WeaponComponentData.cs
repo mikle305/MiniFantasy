@@ -8,14 +8,6 @@ namespace StaticData
     {
         [SerializeField] [HideInInspector] private string _name;
 
-
-        protected WeaponComponentData()
-        {
-            SetComponentType();
-        }
-        
-        public Type ComponentType { get; protected set; }
-
-        protected abstract void SetComponentType();
+        public abstract Type GetComponentType();
     }
 }

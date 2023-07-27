@@ -1,5 +1,6 @@
 using GamePlay.LootSystem;
 using GamePlay.Units;
+using GamePlay.Units.Enemy;
 using StaticData;
 using StaticData.Character;
 
@@ -13,10 +14,12 @@ namespace Infrastructure.Services
 
         public void LoadCharacter();
         
-        public EnemyStaticData GetEnemyData(EnemyId enemyId);
+        public EnemyData GetEnemyData(EnemyId enemyId);
 
-        public LootStaticData GetLootData(LootId lootId);
+        public TData GetLootData<TData>(LootId lootId) 
+            where TData : LootData;
         
-        public CharacterStaticData GetCharacterData();
+        public CharacterData GetCharacterData();
+        LootData GetLootData(LootId lootId);
     }
 }

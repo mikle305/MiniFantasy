@@ -30,7 +30,7 @@ namespace Infrastructure.GameStates
 
         public void Enter()
         {
-            CharacterStaticData characterConfig = _staticDataService.GetCharacterData();
+            CharacterData characterConfig = _staticDataService.GetCharacterData();
             _progressAccess.PlayerProgress = _storageService.LoadProgress() ?? CreateNewProgress(characterConfig);
             _autoSaver.Start();
             
@@ -42,7 +42,7 @@ namespace Infrastructure.GameStates
         {
         }
 
-        private static PlayerProgress CreateNewProgress(CharacterStaticData characterConfig)
+        private static PlayerProgress CreateNewProgress(CharacterData characterConfig)
         {
             return new PlayerProgress
             {
@@ -64,7 +64,7 @@ namespace Infrastructure.GameStates
             };
         }
 
-        private static CharacterStatsData CreateNewCharacterStats(CharacterStaticData characterConfig)
+        private static CharacterStatsData CreateNewCharacterStats(CharacterData characterConfig)
         {
             return new CharacterStatsData
             {
