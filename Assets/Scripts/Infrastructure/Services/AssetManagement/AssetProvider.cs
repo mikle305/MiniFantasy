@@ -15,9 +15,8 @@ namespace Infrastructure.Services
             _container = container;
         }
 
-        public T Instantiate<T>(
-            string path, 
-            Vector3? position = null, 
+        public T Instantiate<T>(string path,
+            Vector3? position = null,
             Transform parent = null,
             bool injectInChildren = true) 
             where T: Object
@@ -29,10 +28,8 @@ namespace Infrastructure.Services
             T created;
             if (position == null && parent != null)
                 created = _container.Instantiate(prefab, parent, injectInChildren: injectInChildren);
-
             else if (position != null && parent == null)
                 created = _container.Instantiate(prefab, (Vector3)position, injectInChildren: injectInChildren);
-            
             else if (position != null && parent != null)
                 created = _container.Instantiate(prefab, (Vector3)position, parent, injectInChildren: injectInChildren);
             else

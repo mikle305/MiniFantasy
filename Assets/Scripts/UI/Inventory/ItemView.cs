@@ -1,9 +1,8 @@
+using Additional.Extensions;
 using GamePlay.InventorySystem;
 using GamePlay.LootSystem;
-using Infrastructure.Services;
 using StaticData;
 using TMPro;
-using UniDependencyInjection.Unity;
 using UnityEngine;
 
 namespace UI.Inventory
@@ -16,21 +15,20 @@ namespace UI.Inventory
 
         public LootId LootId { get; set; }
         
-
-        [Inject]
-        public void Construct(IConfigAccess configAccess)
+        
+        public void InitData(HudConfiguration hudConfig)
         {
-            _hudConfig = configAccess.FindHudConfig();
+            _hudConfig = hudConfig;
         }
 
-        public void Init(TextMeshProUGUI nameText, TextMeshProUGUI countText)
+        public void InitComponents(TextMeshProUGUI nameText, TextMeshProUGUI countText)
         {
             _countText = countText;
             _nameText = nameText;
         }
 
         public void ShowName(string itemName) 
-            => _nameText.text = itemName;
+            => _nameText.text = itemName.SplitByCapital().ConvertToString(" ");
 
         public void ShowCount(int itemCount)
         {

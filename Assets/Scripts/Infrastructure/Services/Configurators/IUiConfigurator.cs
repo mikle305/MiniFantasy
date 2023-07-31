@@ -5,6 +5,6 @@ namespace Infrastructure.Services
 {
     public interface IUiConfigurator
     {
-        public void ConfigureInventoryItem(ItemView itemView, LootId lootId, int count);
+        public void ConfigureItemView(ItemView itemView, LootId lootId);
     }
 }

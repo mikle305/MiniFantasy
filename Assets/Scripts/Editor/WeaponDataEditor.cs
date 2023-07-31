@@ -47,7 +47,7 @@ namespace Editor
             _weaponData = target as WeaponData;
             _weaponComponents = typeof(WeaponData)
                 .GetFields(BindingFlags.Instance | BindingFlags.NonPublic)
-                .First(f => f.Name == "_components")
+                .First(f => f.Name == "_componentsData")
                 .GetValue(_weaponData) as List<WeaponComponentData>;
         }
 

@@ -12,6 +12,6 @@ namespace Infrastructure.Services
 
         public SlotView CreateSlot(Slot slot, Transform slotsGrid);
         
-        public ItemView CreateItem(LootId lootId, Transform itemHolder);
+        public ItemView CreateItem(LootId lootId, Transform slot);
     }
 }

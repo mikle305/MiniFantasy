@@ -5,17 +5,16 @@ namespace StaticData
 {
     public abstract class LootData : ScriptableObject
     {
-        [Header("Resources")] [Space(3)]
-        [SerializeField] private string _prefabPath;
-        [SerializeField] private string _iconPath;
+        private const string _inWorldPrefabsFolder = "Prefabs/Loot/InWorld/";
+        private const string _iconsFolder = "Prefabs/Loot/Icons/";
         
-        [Header("Configuration")] [Space(3)]
+        [Header("General")] [Space(3)]
         [SerializeField] private LootId _lootId = LootId.None;
         [SerializeField] private string _name;
-        
-        
-        public string PrefabPath => _prefabPath;
-        public string IconPath => _iconPath;
+
+
+        public string InWorldPrefabPath => _inWorldPrefabsFolder + name;
+        public string IconPath => _iconsFolder + name;
         public LootId LootId => _lootId;
         public string Name => _name;
     }

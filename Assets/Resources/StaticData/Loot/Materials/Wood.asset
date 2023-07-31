@@ -12,10 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11eba359ff7b4cd7a9a905f5669184ea, type: 3}
   m_Name: Wood
   m_EditorClassIdentifier: 
-  _prefabPath: Prefabs/Loot/Wood
-  _iconPath: Prefabs/UI/Loot/Wood
   _lootId: 2
   _name: Wood
   _description: 
   _maxCountInSlot: 32
-  _itemUseType: 0
+  _itemRarity: 0

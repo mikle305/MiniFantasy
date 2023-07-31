@@ -1,5 +1,4 @@
-﻿using GamePlay.InventorySystem;
-using GamePlay.LootSystem;
+﻿using GamePlay.LootSystem;
 using Infrastructure.Services;
 using TMPro;
 using UniDependencyInjection.Unity;
@@ -26,17 +25,24 @@ namespace UI.Inventory
             _uiConfigurator = uiConfigurator;
         }
         
-        public void Init(Slot slot)
+        public void Init(SlotActor slotActor)
         {
-            _slotActor = new SlotActor(slot, this);
+            _slotActor = slotActor;
             _slotActor.Subscribe();
         }
 
         public void UpdateItemInfo(LootId lootId, int count)
         {
-            _itemView = _uiFactory.CreateItem(lootId, _itemHolder);
-            _itemView.Init(_nameText, _countText);
-            _uiConfigurator.ConfigureInventoryItem(_itemView, lootId, count);
+            _itemView = CreateItemView(lootId);
+            _itemView.ShowCount(count);
+        }
+
+        private ItemView CreateItemView(LootId lootId)
+        {
+            ItemView itemView = _uiFactory.CreateItem(lootId, _itemHolder);
+            itemView.InitComponents(_nameText, _countText);
+            _uiConfigurator.ConfigureItemView(itemView, lootId);
+            return itemView;
         }
     }
 }

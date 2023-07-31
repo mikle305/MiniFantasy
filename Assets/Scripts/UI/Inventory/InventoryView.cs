@@ -19,9 +19,9 @@ namespace UI.Inventory
             _uiFactory = uiFactory;
         }
         
-        public void Init(GamePlay.InventorySystem.Inventory inventory)
+        public void Init(InventoryActor inventoryActor)
         {
-            _inventoryActor = new InventoryActor(inventory, this);
+            _inventoryActor = inventoryActor;
             _inventoryActor.Subscribe();
         }
 

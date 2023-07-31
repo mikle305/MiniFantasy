@@ -1,5 +1,4 @@
 using GamePlay.LootSystem;
-using GamePlay.Units;
 using GamePlay.Units.Enemy;
 using StaticData;
 using StaticData.Character;
@@ -16,10 +15,11 @@ namespace Infrastructure.Services
         
         public EnemyData GetEnemyData(EnemyId enemyId);
 
+        public LootData GetLootData(LootId lootId);
+
         public TData GetLootData<TData>(LootId lootId) 
             where TData : LootData;
-        
+
         public CharacterData GetCharacterData();
-        LootData GetLootData(LootId lootId);
     }
 }

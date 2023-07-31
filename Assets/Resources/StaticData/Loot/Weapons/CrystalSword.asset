@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a0036359a0df43f49c5a97fe094b1167, type: 3}
-  m_Name: Sword
+  m_Name: CrystalSword
   m_EditorClassIdentifier: Assembly-CSharp:StaticData:WeaponData
-  _lootId: 4
-  _name: Sword
+  _lootId: 5
+  _name: CrystalSword
   _description: 
   _maxCountInSlot: 1
-  _itemRarity: 1
+  _itemRarity: 2
   _componentsData:
   - rid: 1240449808619274330
   references:

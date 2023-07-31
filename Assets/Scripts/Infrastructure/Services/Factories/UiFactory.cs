@@ -35,32 +35,35 @@ namespace Infrastructure.Services
         public SlotView CreateSlot(Slot slot, Transform slotsGrid)
         {
             var slotView = _assetProvider.Instantiate<SlotView>(AssetPath.SlotPath, slotsGrid.position, slotsGrid);
-            slotView.Init(slot);
+            var slotActor = new SlotActor(slot, slotView);
+            slotView.Init(slotActor);
             return slotView;
         }
 
-        public ItemView CreateItem(LootId lootId, Transform itemHolder)
+        public ItemView CreateItem(LootId lootId, Transform slot)
         {
             LootData lootData = _staticDataService.GetLootData(lootId);
-            return _assetProvider.Instantiate<ItemView>(lootData.IconPath, itemHolder.position, itemHolder);
+            return _assetProvider.Instantiate<ItemView>(lootData.IconPath, parent: slot);
         }
 
-        private void InitUiCamera(Canvas hudCanvas, Camera uiCamera)
+        private static void InitUiCamera(Canvas hudCanvas, Camera uiCamera)
         {
             hudCanvas.renderMode = RenderMode.ScreenSpaceCamera;
             hudCanvas.worldCamera = uiCamera;
         }
 
-        private void InitInventoryView(InventoryView inventoryView, GameObject character)
+        private static void InitInventoryView(InventoryView inventoryView, GameObject character)
         {
             var inventory = character.GetComponent<Inventory>();
-            inventoryView.Init(inventory);
+            var inventoryActor = new InventoryActor(inventory, inventoryView);
+            inventoryView.Init(inventoryActor);
         }
 
-        private void InitHpBar(HudStatBar healthBar, GameObject character)
+        private static void InitHpBar(HudStatBar healthBar, GameObject character)
         {
             var health = character.GetComponent<Health>();
-            healthBar.Init(health);
+            var statActor = new StatActor(health, healthBar);
+            healthBar.Init(statActor);
         }
     }
 }

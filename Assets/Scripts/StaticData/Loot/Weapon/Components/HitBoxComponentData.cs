@@ -8,11 +8,11 @@ namespace StaticData
     public class HitBoxComponentData : WeaponComponentData
     {
         [SerializeField] private float _distance;
-        
-        private Type _componentType;
 
+        public float Distance => _distance;
         
-        public override Type GetComponentType()
-            => _componentType ??= typeof(HitBoxComponent);
+
+        protected override Type CreateComponentType()
+            => typeof(HitBoxComponent);
     }
 }

@@ -1,6 +1,4 @@
 using System;
-using GamePlay.Units;
-using GamePlay.Units.Enemy;
 using GamePlay.WeaponSystem;
 using StaticData;
 using UnityEngine;
@@ -28,8 +26,9 @@ namespace Additional.Utils
         public static void SoNotExists()
             => throw new InvalidOperationException("Scriptable object data doesn't exist or didn't loaded.");
 
-        public static void InvalidLootType<TData>()
-            => throw new InvalidCastException($"Requested loot data is not the {typeof(TData).Name} type");
+        public static void InvalidLootType<TData>() 
+            where TData : LootData
+            => throw new InvalidCastException($"Loot data is not derived from the {typeof(TData).Name}");
 
         public static void InvalidWeaponComponentType(Type componentType) => 
             throw new InvalidCastException($"Type {componentType.Name} is not derived from {nameof(WeaponComponent)}");
