@@ -1,28 +1,32 @@
 using System;
 using Additional.Utils;
 using GamePlay.LootSystem;
-using StaticData;
 
 namespace GamePlay.InventorySystem
 {
     public class Slot
     {
         private Item _currentItem;
-
         public event Action<LootId, int> ItemChanged;
-        
-        public LootId ItemId 
-            => _currentItem?.LootId 
-               ?? LootId.None;
+
+        public LootId ItemId
+            => _currentItem?.LootId ?? LootId.None;
+
+        public bool IsHotSlot { get; }
+
+
+        public Slot(bool isHotSlot = false)
+        {
+            IsHotSlot = isHotSlot;
+        }
 
         public bool IsFull()
             => _currentItem.MaxCount == _currentItem.Count;
 
-
         /// <summary>
         /// Returns false
         /// if slot item is not empty
-        /// or if item count is zero
+        /// or item count is zero
         /// </summary>
         public void TrySetItem(Item item)
         {

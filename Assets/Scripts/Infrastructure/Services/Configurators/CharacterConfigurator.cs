@@ -28,8 +28,17 @@ namespace Infrastructure.Services
 
         private static void InitInventory(GameObject character, CharacterData data)
         {
-            if (character.TryGetComponent(out Inventory inventory))
-                inventory.Init(data.InventorySlots);
+            if (!character.TryGetComponent(out Inventory inventory))
+                return;
+
+            var slots = new Slot[data.BackpackSlots + data.HotBarSlots];
+            for (var i = 0; i < data.BackpackSlots; i++)
+                slots[i] = new Slot();
+            
+            for (int i = data.BackpackSlots; i < slots.Length; i++)
+                slots[i] = new Slot(isHotSlot: true);
+
+            inventory.Init(slots);
         }
 
         private static void InitHealth(GameObject character, CharacterData data)

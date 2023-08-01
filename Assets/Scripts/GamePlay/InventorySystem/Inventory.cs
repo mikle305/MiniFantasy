@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using GamePlay.LootSystem;
 using StaticData;
@@ -13,12 +14,9 @@ namespace GamePlay.InventorySystem
         public Slot[] Slots { get; private set; }
 
 
-        public void Init(int slotsCount)
+        public void Init(Slot[] slots)
         {
-            Slots = new Slot[slotsCount];
-            for (var i = 0; i < slotsCount; i++) 
-                Slots[i] = new Slot();
-
+            Slots = slots;
             SlotsAdded?.Invoke(Slots);
         }
         

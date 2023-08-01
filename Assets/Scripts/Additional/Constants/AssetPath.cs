@@ -6,6 +6,7 @@
         public const string FollowCamera = "Prefabs/World/FollowCamera";
         public const string HudPath = "Prefabs/UI/Hud";
         public const string SlotPath = "Prefabs/UI/Slot";
+        public const string HotSlotPath = "Prefabs/UI/HotSlot";
 
         public const string EnemiesDataFolder = "StaticData/Enemies";
         public const string LootDataFolder = "StaticData/Loot";

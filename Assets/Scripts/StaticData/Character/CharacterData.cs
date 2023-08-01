@@ -15,7 +15,8 @@ namespace StaticData.Character
         [SerializeField] private float _getHitDuration;
         [SerializeField] private float _deathDuration;
         [SerializeField] private float _destroyDuration;
-        [SerializeField] private int _inventorySlots = 24;
+        [SerializeField] private int _backpackSlots = 24;
+        [SerializeField] private int _hotBarSlots = 9;
         
         
         public string PrefabPath => _prefabPath;
@@ -32,6 +33,8 @@ namespace StaticData.Character
         
         public float DestroyDuration => _destroyDuration;
 
-        public int InventorySlots => _inventorySlots;
+        public int BackpackSlots => _backpackSlots;
+
+        public int HotBarSlots => _hotBarSlots;
     }
 }
