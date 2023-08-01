@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1700325355730914
+--- !u!1 &2129474894052500072
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,50 +8,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4195409888696224}
-  - component: {fileID: 33209844781451718}
-  - component: {fileID: 23745447015620870}
-  - component: {fileID: 95803994097160840}
-  - component: {fileID: 6553288947030709878}
-  - component: {fileID: -4206365113778853081}
-  - component: {fileID: 2677896381346244694}
+  - component: {fileID: 2127255924510966314}
+  - component: {fileID: 2161336809126534220}
+  - component: {fileID: 2152505213514036364}
+  - component: {fileID: 2080449123423717122}
   m_Layer: 0
-  m_Name: CrystalSword
+  m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4195409888696224
+--- !u!4 &2127255924510966314
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1700325355730914}
+  m_GameObject: {fileID: 2129474894052500072}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 4774247070660126918}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &33209844781451718
+--- !u!33 &2161336809126534220
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1700325355730914}
+  m_GameObject: {fileID: 2129474894052500072}
   m_Mesh: {fileID: 4300000, guid: bb2a94b2948762540bc7c64fedb9bbe4, type: 3}
---- !u!23 &23745447015620870
+--- !u!23 &2152505213514036364
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1700325355730914}
+  m_GameObject: {fileID: 2129474894052500072}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -87,14 +84,14 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &95803994097160840
+--- !u!95 &2080449123423717122
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1700325355730914}
+  m_GameObject: {fileID: 2129474894052500072}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: bb2a94b2948762540bc7c64fedb9bbe4, type: 3}
   m_Controller: {fileID: 0}
@@ -107,13 +104,60 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!54 &6553288947030709878
+--- !u!1 &7646186547399474734
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4774247070660126918}
+  - component: {fileID: 5094254404139365987}
+  - component: {fileID: 7011109379623294399}
+  - component: {fileID: -3671185703721835859}
+  m_Layer: 0
+  m_Name: CrystalSword
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4774247070660126918
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7646186547399474734}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2127255924510966314}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5094254404139365987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7646186547399474734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e1282d9832b496e972a33c434d3ab4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!54 &7011109379623294399
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1700325355730914}
+  m_GameObject: {fileID: 7646186547399474734}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -123,28 +167,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &-4206365113778853081
+--- !u!65 &-3671185703721835859
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1700325355730914}
+  m_GameObject: {fileID: 7646186547399474734}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.31808364, y: 1.1839846, z: 0.09261244}
-  m_Center: {x: -0.000000074505806, y: 0.40896183, z: 0}
---- !u!114 &2677896381346244694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1700325355730914}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e1282d9832b496e972a33c434d3ab4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Center: {x: 0, y: 0.42, z: 0}

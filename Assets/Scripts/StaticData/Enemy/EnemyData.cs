@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using GamePlay.Units;
 using GamePlay.Units.Enemy;
 using UnityEngine;
 using UnityEngine.Serialization;
