@@ -1,14 +1,12 @@
 using Infrastructure.GameStates;
 using Infrastructure.Services;
-using StaticData.Character;
+using UniDependencyInjection;
 using UniDependencyInjection.Core;
-using UniDependencyInjection.Extensions;
 using UnityEngine;
 
 namespace Infrastructure.EntryPoint
 {
     public class StartUp : UniDependencyInjection.Unity.StartUp
-
     {
         private readonly ICoroutineRunner _coroutineRunner;
         private GameStateMachine _stateMachine;
@@ -31,7 +29,7 @@ namespace Infrastructure.EntryPoint
             containerBuilder
                 .RegisterSingle(_coroutineRunner)
                 .RegisterSingle<ISceneLoader, SceneLoader>()
-                .RegisterSingle<IAssetProvider, AssetProvider>()
+                .RegisterSingle<IAssetProvider, ResourcesAssetProvider>()
                 .RegisterSingle<IObjectsProvider, ObjectsProvider>()
                 .RegisterSingle<IGameFactory, GameFactory>()
                 .RegisterSingle<IEnemyFactory, EnemyFactory>()

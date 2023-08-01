@@ -32,11 +32,8 @@ namespace Infrastructure.Services
         public GameObject CreateCharacter(Vector3 position, Transform parent)
         {
             CharacterData data = _staticDataService.GetCharacterData();
-            var character = _assetProvider.Instantiate<GameObject>(
-                data.PrefabPath, 
-                position, 
-                parent,
-                injectInChildren: false);
+            var character = _assetProvider
+                .Instantiate<GameObject>(data.PrefabPath, position, Quaternion.identity, parent);
 
             return character;
         }

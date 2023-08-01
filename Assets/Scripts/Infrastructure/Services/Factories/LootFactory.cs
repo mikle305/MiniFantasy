@@ -19,7 +19,7 @@ namespace Infrastructure.Services
         public LootPiece CreateInWorld(LootId lootId, Vector3 position)
         {
             string prefabPath = _staticDataService.GetLootData(lootId).InWorldPrefabPath;
-            return _assetProvider.Instantiate<LootPiece>(prefabPath, position);
+            return _assetProvider.Instantiate<LootPiece>(prefabPath, position, Quaternion.identity);
         }
 
         public GameObject CreateInHolder(LootId lootId, ItemHolder itemHolder)

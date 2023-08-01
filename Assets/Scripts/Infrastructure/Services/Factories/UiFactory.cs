@@ -34,7 +34,7 @@ namespace Infrastructure.Services
 
         public SlotView CreateSlot(Slot slot, Transform slotsGrid)
         {
-            var slotView = _assetProvider.Instantiate<SlotView>(AssetPath.SlotPath, slotsGrid.position, slotsGrid);
+            var slotView = _assetProvider.Instantiate<SlotView>(AssetPath.SlotPath, slotsGrid);
             var slotActor = new SlotActor(slot, slotView);
             slotView.Init(slotActor);
             return slotView;
