@@ -8,7 +8,13 @@ namespace Additional.Utils
         public static void PlayEffect(Effect effect, Transform parent)
         {
             if (effect != null)
-                Object.Instantiate(effect.Prefab, parent.position + effect.Position, Quaternion.identity, parent);
+                Object.Instantiate(effect.Prefab, effect.Position, Quaternion.identity, parent);
+        }
+        
+        public static void PlayEffect(Effect effect)
+        {
+            if (effect != null)
+                Object.Instantiate(effect.Prefab, effect.Position, Quaternion.identity);
         }
     }
 }

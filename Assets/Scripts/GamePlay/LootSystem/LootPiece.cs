@@ -9,10 +9,9 @@ namespace GamePlay.LootSystem
         public int CurrentCount { get; set; }
         
 
-        public void Init(LootData lootData, int count)
+        public void Init(LootData lootData)
         {
             LootData = lootData;
-            CurrentCount = count;
         }
 
         public void Disappear() 

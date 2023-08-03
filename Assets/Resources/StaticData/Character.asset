@@ -18,9 +18,10 @@ MonoBehaviour:
     _position: {x: 0, y: 0.85, z: 0}
   _deathEffect:
     _prefab: {fileID: 3187647067869052980, guid: 0ee68f701062e7b40bc806d2cc23f207, type: 3}
-    _position: {x: 0, y: 0, z: 0}
+    _position: {x: 0, y: 2, z: 0}
   _health: 5
   _getHitDuration: 0.75
   _deathDuration: 2
   _destroyDuration: 5
-  _inventorySlots: 24
+  _backpackSlots: 24
+  _hotBarSlots: 9

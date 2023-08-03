@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4774247070660126918}
-  - component: {fileID: 5094254404139365987}
   - component: {fileID: 7011109379623294399}
   - component: {fileID: -3671185703721835859}
+  - component: {fileID: 5094254404139365987}
   m_Layer: 14
   m_Name: InWorldTemplate
   m_TagString: Untagged
@@ -32,20 +32,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5094254404139365987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7646186547399474734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e1282d9832b496e972a33c434d3ab4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &7011109379623294399
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -75,3 +63,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5094254404139365987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7646186547399474734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e1282d9832b496e972a33c434d3ab4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

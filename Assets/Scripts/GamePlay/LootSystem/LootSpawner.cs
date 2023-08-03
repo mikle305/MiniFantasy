@@ -9,20 +9,21 @@ namespace GamePlay.LootSystem
 {
     public class LootSpawner : MonoBehaviour
     {
+        private List<RandomLoot> _lootCollection;
         private IRandomizer _randomizer;
         private ILootFactory _factory;
-        private IStaticDataService _staticDataService;
-        private List<RandomLoot> _lootCollection;
+        private ILootConfigurator _lootConfigurator;
+        private LootId _lootId;
 
 
         [Inject]
         public void Construct(
             ILootFactory factory,
-            IStaticDataService staticDataService,
+            ILootConfigurator lootConfigurator,
             IRandomizer randomizer)
         {
+            _lootConfigurator = lootConfigurator;
             _factory = factory;
-            _staticDataService = staticDataService;
             _randomizer = randomizer;
         }
 
@@ -42,10 +43,13 @@ namespace GamePlay.LootSystem
             if (_randomizer.TryChancePercents(randomLoot.Chance) == false)
                 return;
 
-            int lootCount = _randomizer.Generate(randomLoot.MinCount, randomLoot.MaxCount);
-            LootPiece lootPiece = _factory.CreateInWorld(randomLoot.LootId, transform.position.AddY(1));
-            LootData lootData = _staticDataService.GetLootData(randomLoot.LootId);
-            lootPiece.Init(lootData, lootCount);
+            _lootId = randomLoot.LootId;
+            LootPiece lootPiece = _factory.CreateInWorld(_lootId, transform.position.AddY(1));
+            _lootConfigurator.Configure(lootPiece, _lootId);
+            lootPiece.CurrentCount = GenerateLootCount(randomLoot);
         }
+
+        private int GenerateLootCount(RandomLoot randomLoot) 
+            => _randomizer.Generate(randomLoot.MinCount, randomLoot.MaxCount);
     }
 }
