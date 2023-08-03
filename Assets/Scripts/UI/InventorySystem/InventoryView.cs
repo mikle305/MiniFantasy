@@ -3,7 +3,7 @@ using Infrastructure.Services;
 using UniDependencyInjection.Unity;
 using UnityEngine;
 
-namespace UI.Inventory
+namespace UI.InventorySystem
 {
 
     public class InventoryView : MonoBehaviour

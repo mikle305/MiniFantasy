@@ -2,7 +2,7 @@ using System.Linq;
 using GamePlay.InventorySystem;
 using UnityEngine;
 
-namespace UI.Inventory
+namespace UI.InventorySystem
 {
     public class CharacterInventoryView : InventoryView
     {

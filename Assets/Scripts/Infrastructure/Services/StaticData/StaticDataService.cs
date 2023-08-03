@@ -14,7 +14,8 @@ namespace Infrastructure.Services
         private Dictionary<EnemyId, EnemyData> _enemiesMap;
         private Dictionary<LootId, LootData> _lootMap;
         private CharacterData _character;
-        
+        private HudConfiguration _hudConfig;
+
         private readonly IAssetProvider _assetProvider;
 
 
@@ -35,6 +36,11 @@ namespace Infrastructure.Services
 
         public void LoadCharacter()
             => _character = _assetProvider.Load<CharacterData>(AssetPath.CharacterDataPath);
+
+        public void LoadUiConfigs()
+        {
+            _hudConfig = _assetProvider.Load<HudConfiguration>(AssetPath.HudConfigPath);
+        }
 
         public EnemyData GetEnemyData(EnemyId enemyId)
         {
@@ -69,5 +75,8 @@ namespace Infrastructure.Services
 
             return _character;
         }
+
+        public HudConfiguration GetHudConfig()
+            => _hudConfig;
     }
 }

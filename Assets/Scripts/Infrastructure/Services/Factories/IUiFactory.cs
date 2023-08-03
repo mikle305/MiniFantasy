@@ -1,7 +1,7 @@
 ﻿using GamePlay.InventorySystem;
 using GamePlay.LootSystem;
 using UI;
-using UI.Inventory;
+using UI.InventorySystem;
 using UnityEngine;
 
 namespace Infrastructure.Services
@@ -12,6 +12,6 @@ namespace Infrastructure.Services
 
         public SlotView CreateSlot(Slot slot, Transform slotsGrid);
         
-        public ItemView CreateItem(LootId lootId, Transform slot);
+        public GameObject CreateItem(LootId lootId, Transform slot);
     }
 }

@@ -1,4 +1,4 @@
-using UI.Inventory;
+using UI.InventorySystem;
 using UnityEngine;
 
 namespace UI
@@ -8,11 +8,11 @@ namespace UI
     {
         [SerializeField] private Canvas _canvas;
         [SerializeField] private HudStatBar _healthBar;
-        [SerializeField] private CharacterInventoryView _inventoryView;
+        [SerializeField] private InventoryView _inventoryView;
 
 
         public Canvas Canvas => _canvas;
         public HudStatBar HealthBar => _healthBar;
-        public CharacterInventoryView InventoryView => _inventoryView;
+        public InventoryView InventoryView => _inventoryView;
     }
 }

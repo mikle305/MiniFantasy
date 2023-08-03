@@ -20,6 +20,7 @@ namespace Infrastructure.GameStates
             _staticDataService.LoadCharacter();
             _staticDataService.LoadEnemies();
             _staticDataService.LoadLoot();
+            _staticDataService.LoadUiConfigs();
             EnterSettingsLoadingState();
         }
 

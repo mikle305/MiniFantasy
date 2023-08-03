@@ -12,14 +12,17 @@ namespace Infrastructure.Services
         public void LoadLoot();
 
         public void LoadCharacter();
+
+        public void LoadUiConfigs();
         
         public EnemyData GetEnemyData(EnemyId enemyId);
 
         public LootData GetLootData(LootId lootId);
 
-        public TData GetLootData<TData>(LootId lootId) 
-            where TData : LootData;
+        public TData GetLootData<TData>(LootId lootId) where TData : LootData;
 
         public CharacterData GetCharacterData();
+        
+        public HudConfiguration GetHudConfig();
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using GamePlay.WeaponSystem;
+using GamePlay.WeaponSystem.Components;
 using UnityEngine;
 
 namespace StaticData

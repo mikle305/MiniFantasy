@@ -1,6 +1,6 @@
 using StaticData;
 
-namespace GamePlay.WeaponSystem
+namespace GamePlay.WeaponSystem.Components
 {
     public class HitBoxComponent : WeaponComponent<HitBoxComponentData>
     {

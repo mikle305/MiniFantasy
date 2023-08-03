@@ -1,6 +1,6 @@
 ﻿using GamePlay.InventorySystem;
 
-namespace UI.Inventory
+namespace UI.InventorySystem
 {
     public class SlotActor
     {

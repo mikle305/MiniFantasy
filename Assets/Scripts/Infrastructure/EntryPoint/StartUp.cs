@@ -38,13 +38,11 @@ namespace Infrastructure.EntryPoint
                 .RegisterSingle<IUiFactory, UiFactory>()
                 .RegisterSingle<IEnemyConfigurator, EnemyConfigurator>()
                 .RegisterSingle<ICharacterConfigurator, CharacterConfigurator>()
-                .RegisterSingle<IUiConfigurator, UiConfigurator>()
                 .RegisterSingle<IProgressAccess, ProgressAccess>()
                 .RegisterSingle<IProgressWatchers, ProgressWatchers>()
                 .RegisterSingle<IStorageService, PlayerPrefsStorageService>()
                 .RegisterSingle<IAutoSaver, AutoSaver>()
                 .RegisterSingle<IStaticDataService, StaticDataService>()
-                .RegisterSingle<IConfigAccess, ConfigAccess>()
                 .RegisterSingle<IRandomizer, Randomizer>()
                 .RegisterSingle<IFpsService, FpsService>();
         }

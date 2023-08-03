@@ -1,9 +1,11 @@
-﻿namespace UI.Inventory
+﻿using GamePlay.InventorySystem;
+
+namespace UI.InventorySystem
 {
     public class InventoryActor
     {
-        private GamePlay.InventorySystem.Inventory _inventory;
-        private InventoryView _inventoryView;
+        private readonly Inventory _inventory;
+        private readonly InventoryView _inventoryView;
 
         public InventoryActor(GamePlay.InventorySystem.Inventory inventory, InventoryView inventoryView)
         {

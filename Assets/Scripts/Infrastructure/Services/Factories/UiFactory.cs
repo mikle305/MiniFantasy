@@ -4,7 +4,7 @@ using GamePlay.LootSystem;
 using GamePlay.Units;
 using StaticData;
 using UI;
-using UI.Inventory;
+using UI.InventorySystem;
 using UnityEngine;
 
 namespace Infrastructure.Services
@@ -41,10 +41,10 @@ namespace Infrastructure.Services
             return slotView;
         }
 
-        public ItemView CreateItem(LootId lootId, Transform slot)
+        public GameObject CreateItem(LootId lootId, Transform slot)
         {
             LootData lootData = _staticDataService.GetLootData(lootId);
-            return _assetProvider.Instantiate<ItemView>(lootData.IconPath, parent: slot);
+            return _assetProvider.Instantiate<GameObject>(lootData.IconPath, parent: slot);
         }
 
         private static void InitUiCamera(Canvas hudCanvas, Camera uiCamera)
