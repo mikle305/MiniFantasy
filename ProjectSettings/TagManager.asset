@@ -17,10 +17,10 @@ TagManager:
   - 
   - 
   - Character
-  - Aggro
+  - AggroZone
   - Enemy
-  - 
-  - 
+  - Loot
+  - PickupZone
   - 
   - 
   - 

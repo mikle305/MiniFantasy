@@ -7,7 +7,6 @@ using StaticData;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
-using WeaponComponentData = StaticData.WeaponComponentData;
 
 namespace Editor
 {

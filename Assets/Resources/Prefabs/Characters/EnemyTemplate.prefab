@@ -585,7 +585,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300086, guid: e6f8c6b4cd0c5d24fbefebd224edfdb5, type: 3}
+  m_Mesh: {fileID: 0}
   m_Bones:
   - {fileID: 4921074566278974}
   - {fileID: 4018671329067922}
@@ -1299,7 +1299,7 @@ GameObject:
   - component: {fileID: 7275613024581900554}
   - component: {fileID: 6595438271228083815}
   m_Layer: 13
-  m_Name: Ninja
+  m_Name: EnemyTemplate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

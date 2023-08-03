@@ -14,7 +14,7 @@ namespace GamePlay.Units.Death
         
         public void Init(float animDuration)
         {
-            _animator = GetComponent<IDieAnimator>();
+            _animator = GetComponentInParent<IDieAnimator>() ?? GetComponent<IDieAnimator>();
             _animDuration = animDuration;
         }
 

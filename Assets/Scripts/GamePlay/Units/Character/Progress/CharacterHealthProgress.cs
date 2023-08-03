@@ -1,27 +1,26 @@
-﻿using Data;
+﻿using System;
+using Data;
 using Infrastructure.Services;
+using UnityEngine;
 
 namespace GamePlay.Units.Character
 {
-    public class CharacterHealthProgress : ISavedProgressWriter
+    [Serializable]
+    public class CharacterHealthProgress : ProgressPartWriter
     {
-        private readonly Health _health;
-
-        public CharacterHealthProgress(Health health)
-        {
-            _health = health;
-        }
+        [SerializeField] private Health _health;
         
-        public void ReadProgress(PlayerProgress progress)
+        
+        public override void ReadProgress(GameProgress progress)
         {
-            CharacterStatsData statsData = progress.CharacterStats;
+            CharacterStatsData statsData = progress.Character.Stats;
             
             _health.Init(statsData.Health.MaxValue, statsData.Health.MaxValue);
         }
 
-        public void WriteProgress(PlayerProgress progress)
+        public override void WriteProgress(GameProgress progress)
         {
-            CharacterStatsData statsData = progress.CharacterStats;
+            CharacterStatsData statsData = progress.Character.Stats;
             
             statsData.Health.MaxValue = _health.MaxValue;
         }

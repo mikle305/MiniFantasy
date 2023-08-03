@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using Editor.Extensions;
 using GamePlay.Additional;
-using GamePlay.Units;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;

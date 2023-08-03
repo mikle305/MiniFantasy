@@ -4,12 +4,15 @@ namespace GamePlay.Units.Death
 {
     public class NonCollisionOnDeath : MonoBehaviour
     {
+        [SerializeField] private Death _death;
+        
         private Collider[] _colliders;
 
+        
         private void Awake()
         {
-            _colliders = GetComponents<Collider>();
-            GetComponent<Death>().Happened += DisableColliders;
+            _colliders = transform.GetComponents<Collider>(); 
+            _death.Happened += DisableColliders;
         }
 
         private void DisableColliders()

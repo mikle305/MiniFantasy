@@ -31,10 +31,10 @@ namespace Infrastructure.GameStates
         public void Enter()
         {
             CharacterData characterConfig = _staticDataService.GetCharacterData();
-            _progressAccess.PlayerProgress = _storageService.LoadProgress() ?? CreateNewProgress(characterConfig);
+            _progressAccess.Progress = _storageService.LoadProgress() ?? CreateNewProgress(characterConfig);
             _autoSaver.Start();
             
-            string sceneName = _progressAccess.PlayerProgress.WorldData.LevelPosition.Level;
+            string sceneName = _progressAccess.Progress.Character.CurrentLevel.Name;
             _stateMachine.Enter<LevelLoadingState, string>(sceneName);
         }
 
@@ -42,25 +42,25 @@ namespace Infrastructure.GameStates
         {
         }
 
-        private static PlayerProgress CreateNewProgress(CharacterData characterConfig)
+        private static GameProgress CreateNewProgress(CharacterData characterConfig)
         {
-            return new PlayerProgress
-            {
-                WorldData = CreateNewWorldData(),
-                CharacterStats = CreateNewCharacterStats(characterConfig)
+            return new GameProgress
+            { 
+                Character = new CharacterProgress
+                {
+                    CurrentLevel = CreateNewLevelData(), 
+                    Stats = CreateNewCharacterStats(characterConfig),
+                } 
             };
         }
 
-        private static WorldData CreateNewWorldData()
+        private static LevelData CreateNewLevelData()
         {
             var mainScene = SceneName.MainScene.ToString();
             
-            return new WorldData
+            return new LevelData()
             {
-                LevelPosition = new LevelPosition
-                {
-                    Level = mainScene,
-                }
+                Name = mainScene,
             };
         }
 

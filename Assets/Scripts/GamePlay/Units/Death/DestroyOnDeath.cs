@@ -6,6 +6,8 @@ namespace GamePlay.Units.Death
 {
     public class DestroyOnDeath : MonoBehaviour
     {
+        [SerializeField] private Death _death;
+        
         private float _destroyDuration;
 
         public event Action Destroyed;
@@ -14,7 +16,7 @@ namespace GamePlay.Units.Death
         public void Init(float destroyDuration)
         {
             _destroyDuration = destroyDuration;
-            GetComponent<Death>().Happened += Destroy;
+            _death.Happened += Destroy;
         }
 
         private void Destroy() 

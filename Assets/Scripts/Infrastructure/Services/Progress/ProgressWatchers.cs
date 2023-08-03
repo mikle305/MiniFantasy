@@ -5,8 +5,8 @@ namespace Infrastructure.Services
 {
     public class ProgressWatchers : IProgressWatchers
     {
-        private readonly List<ISavedProgressReader> _readers = new();
-        private readonly List<ISavedProgressWriter> _writers = new();
+        private readonly List<IProgressReader> _readers = new();
+        private readonly List<IProgressWriter> _writers = new();
         private readonly IProgressAccess _progressAccess;
 
         
@@ -21,34 +21,34 @@ namespace Infrastructure.Services
         /// <param name="gameObject"></param>
         public void RegisterComponents(GameObject gameObject, bool inChildren = false)
         {
-            ISavedProgressReader[] progressReaders = inChildren 
-                ? gameObject.GetComponentsInChildren<ISavedProgressReader>(includeInactive: true)
-                : gameObject.GetComponents<ISavedProgressReader>();
+            IProgressReader[] progressReaders = inChildren 
+                ? gameObject.GetComponentsInChildren<IProgressReader>(includeInactive: true)
+                : gameObject.GetComponents<IProgressReader>();
             
-            foreach (ISavedProgressReader progressReader in progressReaders) 
+            foreach (IProgressReader progressReader in progressReaders) 
                 RegisterWatcher(progressReader);
         }
         
         public void RegisterComponents(Component component, bool inChildren = false)
         {
-            ISavedProgressReader[] progressReaders = inChildren 
-                ? component.GetComponentsInChildren<ISavedProgressReader>(includeInactive: true) 
-                : component.GetComponents<ISavedProgressReader>();
+            IProgressReader[] progressReaders = inChildren 
+                ? component.GetComponentsInChildren<IProgressReader>(includeInactive: true) 
+                : component.GetComponents<IProgressReader>();
             
-            foreach (ISavedProgressReader progressReader in progressReaders) 
+            foreach (IProgressReader progressReader in progressReaders) 
                 RegisterWatcher(progressReader);
         }
 
         public void InformReaders()
         {
-            foreach (ISavedProgressReader progressReader in _readers)
-                progressReader.ReadProgress(_progressAccess.PlayerProgress);
+            foreach (IProgressReader progressReader in _readers)
+                progressReader.ReadProgress(_progressAccess.Progress);
         }
 
         public void InformWriters()
         {
-            foreach (ISavedProgressWriter progressWriter in _writers)
-                progressWriter.WriteProgress(_progressAccess.PlayerProgress);
+            foreach (IProgressWriter progressWriter in _writers)
+                progressWriter.WriteProgress(_progressAccess.Progress);
         }
 
         public void CleanUp()
@@ -57,11 +57,11 @@ namespace Infrastructure.Services
             _writers.Clear();
         }
 
-        private void RegisterWatcher(ISavedProgressReader progressReader)
+        private void RegisterWatcher(IProgressReader progressReader)
         {
             _readers.Add(progressReader);
             
-            if (progressReader is ISavedProgressWriter progressWriter)
+            if (progressReader is IProgressWriter progressWriter)
                 _writers.Add(progressWriter);
         }
     }

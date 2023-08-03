@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5094254404139365987}
   - component: {fileID: 7011109379623294399}
   - component: {fileID: -3671185703721835859}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: InWorldTemplate
   m_TagString: Untagged
   m_Icon: {fileID: 0}

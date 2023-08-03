@@ -6,12 +6,15 @@ namespace GamePlay.Units.Death
 {
     public class EffectOnDeath : MonoBehaviour
     {
+        [SerializeField] private Death _death;
+        
         private Effect _effect;
 
+        
         public void Init(Effect effect)
         {
             _effect = effect;
-            GetComponent<Death>().Happened += PlayEffect;
+            _death.Happened += PlayEffect;
         }
         
         private void PlayEffect() 

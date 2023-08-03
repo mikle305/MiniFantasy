@@ -1,4 +1,5 @@
-﻿using Additional.Extensions;
+﻿using System;
+using Additional.Extensions;
 using Data;
 using Infrastructure.Services;
 using UnityEngine;
@@ -6,41 +7,39 @@ using UnityEngine.SceneManagement;
 
 namespace GamePlay.Units.Character
 {
-    public class CharacterPositionProgress : ISavedProgressWriter
+    [Serializable]
+    public class CharacterPositionProgress : ProgressPartWriter
     {
-        private readonly CharacterMovement _characterMovement;
-        private readonly Transform _transform;
+        [SerializeField] private CharacterMovement _characterMovement;
+        [SerializeField] private Transform _transform;
 
         
-        public CharacterPositionProgress(CharacterMovement characterMovement, Transform transform)
+        public override void ReadProgress(GameProgress progress)
         {
-            _characterMovement = characterMovement;
-            _transform = transform;
-        }
-
-        public void ReadProgress(PlayerProgress progress)
-        {
-            LevelPosition levelPosition = progress.WorldData.LevelPosition;
-            if (levelPosition.Level != GetCurrentLevel())
+            LevelData levelData = progress.Character.CurrentLevel;
+            if (levelData.Name != GetCurrentLevel())
                 return;
 
-            Vector3Data savedPosition = levelPosition.Position;
+            Vector3Data savedPosition = levelData.Position;
             if (savedPosition == null)
                 return;
 
             _characterMovement.Warp(to: savedPosition.ToUnityVector());
         }
 
-        public void WriteProgress(PlayerProgress progress)
+        public override void WriteProgress(GameProgress progress)
         {
-            progress.WorldData.LevelPosition = new LevelPosition
+            progress.Character.CurrentLevel = new LevelData
             {
-                Level = GetCurrentLevel(),
-                Position = _transform.position.ToVectorData()
+                Name = GetCurrentLevel(),
+                Position = GetCurrentPosition()
             };
         }
 
         private static string GetCurrentLevel() 
             => SceneManager.GetActiveScene().name;
+
+        private Vector3Data GetCurrentPosition() 
+            => _transform.position.ToVectorData();
     }
 }

@@ -6,12 +6,15 @@ namespace GamePlay.Units.Hit
 {
     public class EffectOnHit : MonoBehaviour
     {
+        [SerializeField] private HitOnDamage _hitOnDamage;
+        
         private Effect _effect;
 
+        
         public void Init(Effect effect)
         {
             _effect = effect;
-            GetComponent<HitOnDamage>().Started += PlayEffect;
+            _hitOnDamage.Started += PlayEffect;
         }
         
         private void PlayEffect() 

@@ -58,16 +58,15 @@ namespace GamePlay.Units.Character
         private void OnSecondAttackAnimated() 
             => TryDamage(_secondAttackDamage);
 
-        private bool TryDamage(float damage)
+        private void TryDamage(float damage)
         {
             if (!TryHit(out Collider hit))
-                return false;
+                return;
             
             if (!hit.TryGetComponent(out Health damageable))
-                return false;
+                return;
             
             damageable.TakeDamage(damage);
-            return true;
         }
         
         private bool TryHit(out Collider hit)

@@ -3,9 +3,9 @@
 namespace Data
 {
     [Serializable]
-    public class LevelPosition
+    public class LevelData
     {
-        public string Level;
+        public string Name;
         public Vector3Data Position;
     }
 }

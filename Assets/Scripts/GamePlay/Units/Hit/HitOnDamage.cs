@@ -6,11 +6,10 @@ namespace GamePlay.Units.Hit
 {
     public class HitOnDamage : MonoBehaviour
     {
-        private float _animDuration;
+        [SerializeField] private Health _health;
 
-        private Health _health;
         private IHitAnimator _animator;
-        
+        private float _animDuration;
         private Coroutine _endedCoroutine;
         
         public event Action Started;
@@ -19,10 +18,10 @@ namespace GamePlay.Units.Hit
         
         public void Init(float animDuration)
         {
+            _animator = GetComponentInParent<IHitAnimator>() ?? GetComponent<IHitAnimator>();
+            
             _animDuration = animDuration;
-            _animator = GetComponent<IHitAnimator>();
             _animator.SetHitDuration(_animDuration);
-            _health = GetComponent<Health>();
             _health.ValueChanged += AnimateHit;
         }
 

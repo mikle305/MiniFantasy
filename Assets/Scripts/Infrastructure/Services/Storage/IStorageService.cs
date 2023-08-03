@@ -6,6 +6,6 @@ namespace Infrastructure.Services
     {
         public void SaveProgress();
         
-        public PlayerProgress LoadProgress();
+        public GameProgress LoadProgress();
     }
 }
