@@ -9,12 +9,15 @@ namespace GamePlay.LootSystem
 {
     public class LootSpawner : MonoBehaviour
     {
+        private const float _minSpawnOffset = 0.75f;
+        private const float _maxSpawnOffset = 1.25f;
+        private const float _ySpawnOffset = 0.7f;
+
         private IRandomizer _randomizer;
         private ILootFactory _factory;
         private ILootConfigurator _lootConfigurator;
         
         private List<RandomLoot> _lootCollection;
-        private LootId _lootId;
 
 
         [Inject]
@@ -41,16 +44,32 @@ namespace GamePlay.LootSystem
 
         private void SpawnOne(RandomLoot randomLoot)
         {
-            if (_randomizer.TryChancePercents(randomLoot.Chance) == false)
+            if (IsLootChanceFailed(randomLoot))
                 return;
 
-            _lootId = randomLoot.LootId;
-            LootPiece lootPiece = _factory.CreateInWorld(_lootId, transform.position.AddY(1));
-            lootPiece.CurrentCount = GenerateLootCount(randomLoot);
-            _lootConfigurator.Configure(lootPiece, _lootId);
+            LootPiece lootPiece = CreateLootInWorld(randomLoot);
+            SetLootCount(lootPiece, randomLoot);
+            ConfigureLoot(lootPiece, randomLoot);
         }
 
-        private int GenerateLootCount(RandomLoot randomLoot) 
-            => _randomizer.Generate(randomLoot.MinCount, randomLoot.MaxCount);
+        private bool IsLootChanceFailed(RandomLoot randomLoot) 
+            => _randomizer.TryChancePercents(randomLoot.Chance) == false;
+
+        private LootPiece CreateLootInWorld(RandomLoot randomLoot)
+        {
+            Vector3 lootPosition = 
+                transform.position + new Vector3(x: GenerateRandomOffset(), y: _ySpawnOffset, z: GenerateRandomOffset());
+            
+            return _factory.CreateInWorld(randomLoot.LootId, lootPosition);
+        }
+
+        private void ConfigureLoot(LootPiece lootPiece, RandomLoot randomLoot) 
+            => _lootConfigurator.Configure(lootPiece, randomLoot.LootId);
+
+        private void SetLootCount(LootPiece lootPiece, RandomLoot randomLoot) 
+            => lootPiece.CurrentCount = _randomizer.Generate(randomLoot.MinCount, randomLoot.MaxCount);
+
+        private float GenerateRandomOffset() 
+            => _randomizer.Generate(_minSpawnOffset, _maxSpawnOffset) * _randomizer.GenerateSign();
     }
 }

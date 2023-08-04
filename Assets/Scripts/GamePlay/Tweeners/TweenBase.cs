@@ -12,7 +12,7 @@ namespace Infrastructure.Services
             => _tween = DoTween();
 
         private void OnDestroy() 
-            => _tween.Kill();
+            => _tween?.Kill();
 
         protected abstract Tween DoTween();
     }
