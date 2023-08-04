@@ -12,10 +12,9 @@ namespace GamePlay.LootSystem
         public void Init(Effect effect)
         {
             _effect = effect;
-            PlayEffect(_effect);
         }
 
-        private static void PlayEffect(Effect effect) 
-            => GameUtils.PlayEffect(effect);
+        public void PlayEffect() 
+            => GameUtils.PlayEffect(_effect, transform);
     }
 }

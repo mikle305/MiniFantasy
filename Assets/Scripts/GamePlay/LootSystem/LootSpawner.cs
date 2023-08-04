@@ -9,10 +9,11 @@ namespace GamePlay.LootSystem
 {
     public class LootSpawner : MonoBehaviour
     {
-        private List<RandomLoot> _lootCollection;
         private IRandomizer _randomizer;
         private ILootFactory _factory;
         private ILootConfigurator _lootConfigurator;
+        
+        private List<RandomLoot> _lootCollection;
         private LootId _lootId;
 
 
@@ -45,8 +46,8 @@ namespace GamePlay.LootSystem
 
             _lootId = randomLoot.LootId;
             LootPiece lootPiece = _factory.CreateInWorld(_lootId, transform.position.AddY(1));
-            _lootConfigurator.Configure(lootPiece, _lootId);
             lootPiece.CurrentCount = GenerateLootCount(randomLoot);
+            _lootConfigurator.Configure(lootPiece, _lootId);
         }
 
         private int GenerateLootCount(RandomLoot randomLoot) 

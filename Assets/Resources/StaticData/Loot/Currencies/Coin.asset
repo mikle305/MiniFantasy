@@ -12,7 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fe33c1029e641dc8d120a1b2e17bcb1, type: 3}
   m_Name: Coin
   m_EditorClassIdentifier: 
-  _prefabPath: Prefabs/Loot/Coin
-  _iconPath: Prefabs/UI/Loot/Coin
   _lootId: 1
   _name: Coin
+  _inWorldLootVisual:
+    _lootEffect:
+      _prefab: {fileID: 1590415177872986601, guid: 513d6c47550c62c4483e6572028fe6a1, type: 3}
+      _position: {x: 0, y: 0, z: 0}
+    _scaleTweenData:
+      _scale: {x: 0.15, y: 0.15, z: 0.15}
+      _duration: 2
+    _rotateTweenData:
+      _rotation: {x: 0, y: 360, z: 0}
+      _duration: 3
+    _jumpTweenData:
+      _distance: {x: 0, y: 0.2, z: 0}
+      _power: 0.5
+      _duration: 2

@@ -25,4 +25,8 @@ MonoBehaviour:
   _getHitDuration: 1
   _deathDuration: 2
   _destroyDuration: 10
-  _lootCollection: []
+  _lootCollection:
+  - _lootId: 1
+    _minCount: 3
+    _maxCount: 7
+    _chance: 100

@@ -30,20 +30,19 @@ namespace GamePlay.Units.Character
             int beforeCount = lootPiece.CurrentCount;
             int remainsCount = _characterInventory.AddLoot(inventoryLootData, beforeCount);
             Picked?.Invoke(inventoryLootData, beforeCount - remainsCount);
-            
-            if (remainsCount == 0)
-            {
-                lootPiece.Disappear();
-                return;
-            }
 
             lootPiece.CurrentCount = remainsCount;
+            if (remainsCount == 0) 
+                lootPiece.Disappear();
         }
 
         private void TryAddCurrency(LootPiece lootPiece)
         {
             if (lootPiece.LootData is not CurrencyLootData currencyLootData)
                 return;
+
+            lootPiece.CurrentCount = 0;
+            lootPiece.Disappear();
         }
     }
 }
