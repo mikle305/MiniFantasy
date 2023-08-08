@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1922362918191890232}
   m_LocalRotation: {x: -0, y: -0, z: -0.38268343, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalPosition: {x: 3, y: 3, z: 0}
+  m_LocalScale: {x: 225, y: 225, z: 225}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6442777893972185112}
@@ -93,11 +93,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1949439047712588, guid: e8ca9f44ac91ba541bc6518eee3c1385, type: 3}
       propertyPath: m_Name
-      value: InventoryItemTemplate Variant
+      value: Sword
       objectReference: {fileID: 0}
     - target: {fileID: 4703664918362698, guid: e8ca9f44ac91ba541bc6518eee3c1385, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4703664918362698, guid: e8ca9f44ac91ba541bc6518eee3c1385, type: 3}
       propertyPath: m_LocalPosition.x
@@ -145,8 +145,8 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 3859876492534819562}
   m_SourcePrefab: {fileID: 100100000, guid: e8ca9f44ac91ba541bc6518eee3c1385, type: 3}
---- !u!4 &6442777893972185112 stripped
-Transform:
+--- !u!224 &6442777893972185112 stripped
+RectTransform:
   m_CorrespondingSourceObject: {fileID: 4703664918362698, guid: e8ca9f44ac91ba541bc6518eee3c1385, type: 3}
   m_PrefabInstance: {fileID: 6447445676030323282}
   m_PrefabAsset: {fileID: 0}

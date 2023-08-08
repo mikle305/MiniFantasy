@@ -30,6 +30,10 @@ MonoBehaviour:
     _minCount: 3
     _maxCount: 5
     _chance: 100
+  - _lootId: 2
+    _minCount: 5
+    _maxCount: 15
+    _chance: 100
   - _lootId: 4
     _minCount: 1
     _maxCount: 1

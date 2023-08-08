@@ -25,7 +25,7 @@ namespace Infrastructure.Services
         { 
             var hud = _assetProvider.Instantiate<Hud>(AssetPath.HudPath);
 
-            InitUiCamera(hud.Canvas, uiCamera);
+            InitHudCanvas(hud.Canvas, uiCamera);
             InitHpBar(hud.HealthBar, character);
             InitInventoryView(hud.InventoryView, character);
 
@@ -44,10 +44,12 @@ namespace Infrastructure.Services
         public GameObject CreateItem(LootId lootId, Transform slot)
         {
             LootData lootData = _staticDataService.GetLootData(lootId);
-            return _assetProvider.Instantiate<GameObject>(lootData.IconPath, parent: slot);
+            var itemIcon = _assetProvider.Instantiate<RectTransform>(lootData.IconPath, slot);
+            SetItemSize(itemIcon, slot);
+            return itemIcon.gameObject;
         }
 
-        private static void InitUiCamera(Canvas hudCanvas, Camera uiCamera)
+        private static void InitHudCanvas(Canvas hudCanvas, Camera uiCamera)
         {
             hudCanvas.renderMode = RenderMode.ScreenSpaceCamera;
             hudCanvas.worldCamera = uiCamera;
@@ -65,6 +67,14 @@ namespace Infrastructure.Services
             var health = character.GetComponent<Health>();
             var statActor = new StatActor(health, healthBar);
             healthBar.Init(statActor);
+        }
+
+        private static void SetItemSize(RectTransform itemIcon, Transform slot)
+        {
+            Vector2 scaleFactor = ((RectTransform)slot).rect.size / itemIcon.rect.size;
+            Vector3 itemScale = itemIcon.localScale;
+            itemScale = new Vector3(itemScale.x * scaleFactor.x, itemScale.y * scaleFactor.y, itemScale.z);
+            itemIcon.localScale = itemScale;
         }
     }
 }
