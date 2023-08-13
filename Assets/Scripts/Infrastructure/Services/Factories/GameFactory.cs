@@ -29,11 +29,11 @@ namespace Infrastructure.Services
             return followCamera;
         }
 
-        public GameObject CreateCharacter(Vector3 position, Transform parent)
+        public GameObject CreateCharacter(Transform spawnPoint, Transform parent)
         {
             CharacterData data = _staticDataService.GetCharacterData();
             var character = _assetProvider
-                .Instantiate<GameObject>(data.PrefabPath, position, Quaternion.identity, parent);
+                .Instantiate<GameObject>(data.PrefabPath, spawnPoint.position, spawnPoint.rotation, parent);
 
             return character;
         }

@@ -16,26 +16,26 @@ namespace UI.InventorySystem
         [SerializeField] private TextMeshProUGUI _countText;
 
         private SlotActor _slotActor;
-        private IUiFactory _uiFactory;
+        private IInventoryUiFactory _inventoryUiFactory;
         private IStaticDataService _staticDataService;
         private HudConfiguration _hudConfig;
 
-        private GameObject _itemIcon;
+        private GameObject _itemView;
         private LootId _currentItemId = LootId.None;
+
+        public Transform ItemHolder => _itemHolder;
 
 
         [Inject]
-        public void Construct(IUiFactory uiFactory, IStaticDataService staticDataService)
+        public void Construct(IInventoryUiFactory inventoryUiFactory, IStaticDataService staticDataService)
         {
             _staticDataService = staticDataService;
-            _uiFactory = uiFactory;
+            _inventoryUiFactory = inventoryUiFactory;
         }
         
         public void Init(SlotActor slotActor)
         {
             _slotActor = slotActor;
-            _slotActor.Subscribe();
-            
             _hudConfig = _staticDataService.GetHudConfig();
         }
 
@@ -53,10 +53,15 @@ namespace UI.InventorySystem
             ShowRarity(lootData.ItemRarity);
         }
 
-        private void ShowIcon(LootId lootId)
+        public void HideItemInfo()
         {
-            _itemIcon = _uiFactory.CreateItem(lootId, _itemHolder);
+            _currentItemId = LootId.None;
+            _countText.text = string.Empty;
+            _nameText.text = string.Empty;
         }
+
+        private void ShowIcon(LootId lootId) 
+            => _itemView = _inventoryUiFactory.CreateItem(lootId, this);
 
         private void ShowName(string itemName)
         {
@@ -67,7 +72,7 @@ namespace UI.InventorySystem
 
         private void ShowCount(int itemCount)
         {
-            _countText.text = itemCount.ToString();
+            _countText.text = $"x{itemCount}";
         }
 
         private void ShowRarity(ItemRarity itemRarity)

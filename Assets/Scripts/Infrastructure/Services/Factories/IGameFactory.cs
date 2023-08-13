@@ -7,8 +7,8 @@ namespace Infrastructure.Services
     {
         public World CreateWorld();
 
-        public GameObject CreateCharacter(Vector3 position, Transform parent);
-        
         public FollowCamera CreateFollowCamera();
+        
+        public GameObject CreateCharacter(Transform spawnPoint, Transform parent);
     }
 }

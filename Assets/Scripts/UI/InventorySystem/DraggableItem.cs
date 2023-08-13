@@ -3,37 +3,36 @@ using UnityEngine.EventSystems;
 
 namespace UI.InventorySystem
 {
-    public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+    public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IDropHandler
     {
-        private RectTransform _rectTransform;
-        private CanvasGroup _canvasGroup;
+        [SerializeField] private RectTransform _rectTransform;
+        
+        private Canvas _canvas;
+        private SlotView _slotView;
+        
 
-        private void Awake()
+        public void Init(Canvas canvas, SlotView slotView)
         {
-            _rectTransform = GetComponent<RectTransform>();
-            _canvasGroup = GetComponent<CanvasGroup>();
+            _slotView = slotView;
+            _canvas = canvas;
         }
        
         public void OnBeginDrag(PointerEventData eventData)
         {
-            _canvasGroup.alpha = 0.6f;
-            _canvasGroup.blocksRaycasts = false;
+            _slotView.HideItemInfo();
+            //_slotView.transform.SetAs
         }
 
         public void OnDrag(PointerEventData eventData)
         {
-            _rectTransform.anchoredPosition += eventData.delta;
-        }
-
-        public void OnEndDrag(PointerEventData eventData)
-        {
-            _canvasGroup.alpha = 1f;
-            _canvasGroup.blocksRaycasts = true;
+            MoveItem(eventData);
         }
 
         public void OnDrop(PointerEventData eventData)
         {
-            // Perform any necessary logic when an item is dropped onto this slot
         }
+
+        private void MoveItem(PointerEventData eventData) 
+            => _rectTransform.anchoredPosition += eventData.delta / _canvas.scaleFactor;
     }
 }

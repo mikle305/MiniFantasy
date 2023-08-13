@@ -17,7 +17,6 @@ namespace UI
         public void Init(StatActor statActor)
         {
             _statActor = statActor;
-            _statActor.Subscribe();
         }
 
         public void SetValue(float current, float max)

@@ -6,10 +6,10 @@ namespace GamePlay.Additional
 {
     public class World : MonoBehaviour
     {
-        [SerializeField] private CharacterSpawner _characterSpawner;
+        [SerializeField] private Transform _spawnPoint;
         [SerializeField] private Camera _uiCamera;
 
-        public CharacterSpawner CharacterSpawner => _characterSpawner;
+        public Transform SpawnPoint => _spawnPoint;
         public EnemySpawner[] EnemySpawners { get; private set; }
         public Camera UICamera => _uiCamera;
 

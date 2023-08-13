@@ -1135,7 +1135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _slotsGrid: {fileID: 3694965643703899607}
-  _hotBarGrid: {fileID: 3355549833273310579}
+  _hotSlotsGrid: {fileID: 3355549833273310579}
 --- !u!1 &5025331396195196546
 GameObject:
   m_ObjectHideFlags: 0

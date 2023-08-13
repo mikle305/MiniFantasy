@@ -1,4 +1,5 @@
-﻿using GamePlay.InventorySystem;
+﻿using System.Collections.Generic;
+using GamePlay.InventorySystem;
 using Infrastructure.Services;
 using UniDependencyInjection.Unity;
 using UnityEngine;
@@ -11,19 +12,18 @@ namespace UI.InventorySystem
         [SerializeField] private Transform _slotsGrid;
         
         private InventoryActor _inventoryActor;
-        protected IUiFactory _uiFactory;
+        private IInventoryUiFactory _inventoryUiFactory;
 
 
         [Inject]
-        public void Construct(IUiFactory uiFactory)
+        public void Construct(IInventoryUiFactory inventoryUiFactory)
         {
-            _uiFactory = uiFactory;
+            _inventoryUiFactory = inventoryUiFactory;
         }
         
         public void Init(InventoryActor inventoryActor)
         {
             _inventoryActor = inventoryActor;
-            _inventoryActor.Subscribe();
         }
 
         public void ToggleWindow()
@@ -31,8 +31,17 @@ namespace UI.InventorySystem
 
         public virtual void ShowSlots(Slot[] slots)
         {
-            foreach (Slot slot in slots) 
-                _uiFactory.CreateSlot(slot, _slotsGrid);
+            CreateSlots(slots, _slotsGrid);
+        }
+
+        protected void CreateSlots(IEnumerable<Slot> slots, Transform slotsGrid)
+        {
+            foreach (Slot slot in slots)
+                _inventoryUiFactory.CreateSlot(slot, slotsGrid);
+
+            /*slotsGrid
+                .GetComponent<GridLayoutGroup>()
+                .enabled = false;*/
         }
     }
 }

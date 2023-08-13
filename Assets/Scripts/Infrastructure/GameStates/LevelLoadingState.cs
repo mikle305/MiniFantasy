@@ -11,20 +11,23 @@ namespace Infrastructure.GameStates
         private readonly GameStateMachine _stateMachine;
         private readonly ISceneLoader _sceneLoader;
         private readonly IGameFactory _gameFactory;
-        private readonly IUiFactory _uiFactory;
+        private readonly IHudFactory _hudFactory;
         private readonly IObjectsProvider _objectsProvider;
         private readonly IProgressWatchers _progressWatchers;
+        private ICharacterConfigurator _characterConfigurator;
 
         public LevelLoadingState(
             GameStateMachine stateMachine,
             ISceneLoader sceneLoader,
             IGameFactory gameFactory,
-            IUiFactory uiFactory,
+            IHudFactory hudFactory,
+            ICharacterConfigurator characterConfigurator,
             IObjectsProvider objectsProvider,
             IProgressWatchers progressWatchers)
         {
+            _characterConfigurator = characterConfigurator;
             _objectsProvider = objectsProvider;
-            _uiFactory = uiFactory;
+            _hudFactory = hudFactory;
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
             _gameFactory = gameFactory;
@@ -44,13 +47,14 @@ namespace Infrastructure.GameStates
         private void InitGameWorld()
         {
             World world = InitWorld();
-            GameObject character = InitCharacter(world);
+            GameObject character = CreateCharacter(world);
             InitEnemies(world);
             InitFollowCamera(character);
-
+            
+            Hud hud = InitHud(world, character);
+            ConfigureCharacter(character);
             LoadProgress();
-            InitHud(world, character);
-            BindObjectsToProvider();
+            BindObjectsToProvider(Camera.main, hud.Canvas);
 
             EnterGamePlay(character);
         }
@@ -62,15 +66,18 @@ namespace Infrastructure.GameStates
             return world;
         }
 
-        private GameObject InitCharacter(World world)
+        private GameObject CreateCharacter(World world)
         {
-            GameObject character = world.CharacterSpawner.Spawn(world.transform);
+            GameObject character = _gameFactory.CreateCharacter(world.SpawnPoint, world.transform);
             _progressWatchers.RegisterComponents(character);
             return character;
         }
 
+        private void ConfigureCharacter(GameObject character)
+            => _characterConfigurator.Configure(character);
+
         private Hud InitHud(World world, GameObject character) 
-            => _uiFactory.CreateHud(character, world.UICamera);
+            => _hudFactory.CreateHud(character, world.UICamera);
 
         private void LoadProgress() 
             => _progressWatchers.InformReaders();
@@ -91,9 +98,12 @@ namespace Infrastructure.GameStates
                 .CreateFollowCamera()
                 .Follow(target.transform);
 
-        private void BindObjectsToProvider()
+        private void BindObjectsToProvider(
+            Camera mainCamera,
+            Canvas hudCanvas)
         {
-            _objectsProvider.MainCamera = Camera.main;
+            _objectsProvider.MainCamera = mainCamera;
+            _objectsProvider.HudCanvas = hudCanvas;
         }
 
         private void EnterGamePlay(GameObject character) 

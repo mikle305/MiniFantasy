@@ -6,18 +6,16 @@ namespace UI.InventorySystem
 {
     public class CharacterInventoryView : InventoryView
     {
-        [SerializeField] private Transform _hotBarGrid;
+        [SerializeField] private Transform _hotSlotsGrid;
+        
         
         public override void ShowSlots(Slot[] slots)
         {
-            foreach (Slot slot in slots.Where(s => s.IsHotSlot)) 
-                _uiFactory.CreateSlot(slot, _hotBarGrid);
-
-            Slot[] backpackSlots = slots
-                .Where(s => !s.IsHotSlot)
-                .ToArray();
+            Slot[] hotSlots = slots.Where(s => s.IsHotSlot).ToArray();
+            CreateSlots(hotSlots, _hotSlotsGrid);
             
-            base.ShowSlots(backpackSlots);
+            Slot[] mainSlots = slots.Except(hotSlots).ToArray();
+            base.ShowSlots(mainSlots);
         }
     }
 }

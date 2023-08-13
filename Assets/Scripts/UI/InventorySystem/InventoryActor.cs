@@ -7,7 +7,7 @@ namespace UI.InventorySystem
         private readonly Inventory _inventory;
         private readonly InventoryView _inventoryView;
 
-        public InventoryActor(GamePlay.InventorySystem.Inventory inventory, InventoryView inventoryView)
+        public InventoryActor(Inventory inventory, InventoryView inventoryView)
         {
             _inventoryView = inventoryView;
             _inventory = inventory;
@@ -16,7 +16,6 @@ namespace UI.InventorySystem
         public void Subscribe()
         {
             _inventory.SlotsAdded += _inventoryView.ShowSlots;
-            _inventoryView.ShowSlots(_inventory.Slots);
         }
     }
 }
