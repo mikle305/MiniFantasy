@@ -1,4 +1,6 @@
-﻿using GamePlay.InventorySystem;
+﻿using Additional.Constants;
+using Additional.Extensions;
+using GamePlay.InventorySystem;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -44,6 +46,8 @@ namespace UI.InventorySystem
         private void TakeItemFromSlot()
         {
             _item = _startSlot.TakeItem(destroyIcon: false);
+            
+            _rectTransform.anchoredPosition3D = _rectTransform.anchoredPosition3D.AddZ(Constants.InventoryItemOffsetZ);
             _countText.text = $"x{_item.Count}";
             transform.SetParent(_canvas.transform);
             _raycastImage.raycastTarget = false;
