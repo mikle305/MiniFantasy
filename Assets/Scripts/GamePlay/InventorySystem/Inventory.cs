@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using GamePlay.LootSystem;
 using StaticData;
@@ -8,25 +9,25 @@ namespace GamePlay.InventorySystem
 {
     public class Inventory : MonoBehaviour
     {
-        public event Action<Slot[]> SlotsAdded;
+        private Slot[] _slots;
         
-        public Slot[] Slots { get; private set; }
+        public event Action<Slot[]> SlotsAdded;
 
 
         public void Init(Slot[] slots)
         {
-            Slots = slots;
-            SlotsAdded?.Invoke(Slots);
+            _slots = slots;
+            SlotsAdded?.Invoke(_slots);
         }
         
         public bool CanAddLoot(InventoryLootData lootData)
         {
-            foreach (Slot slot in Slots)
+            foreach (Slot slot in _slots)
             {
-                if (slot.ItemId == LootId.None)
+                if (slot.GetItemId() == LootId.None)
                     return true;
 
-                if (slot.ItemId == lootData.LootId && !slot.IsFull())
+                if (slot.GetItemId() == lootData.LootId && !slot.IsFull())
                     return true;
             }
 
@@ -50,30 +51,31 @@ namespace GamePlay.InventorySystem
         private int DistributeToEmpty(InventoryLootData lootData, int count)
         {
             int maxCountInSlot = lootData.MaxCountInSlot;
-            foreach (Slot emptySlot in Slots.Where(s => s.ItemId == LootId.None))
+            foreach (Slot emptySlot in GetEmptySlots())
             {
                 if (count == 0)
                     return count;
                 
-                int countToSet = count > maxCountInSlot
+                int targetCount = count > maxCountInSlot
                     ? maxCountInSlot
                     : count;
                 
-                count -= countToSet;
+                count -= targetCount;
                 
-                emptySlot.TrySetItem(new Item(lootData.LootId, lootData.MaxCountInSlot, countToSet));
+                emptySlot.TrySetItem(new Item(lootData.LootId, maxCountInSlot, targetCount));
             }
 
             return count;
         }
 
         /// <summary>
-        /// Distributes loot to slots, which already have this type of loot loot.
+        /// Distributes loot to slots, which already have this type of loot.
         /// Returns remains count.
         /// </summary>
         private int DistributeToExist(InventoryLootData lootData, int count)
         {
-            foreach (Slot slot in Slots.Where(slot => slot.ItemId == lootData.LootId))
+            IEnumerable<Slot> slotsWithItem = GetSlotsWithItem(lootData.LootId);
+            foreach (Slot slot in slotsWithItem)
             {
                 count = slot.AddCount(count);
                 if (count == 0)
@@ -82,5 +84,11 @@ namespace GamePlay.InventorySystem
 
             return count;
         }
+
+        private IEnumerable<Slot> GetEmptySlots() 
+            => _slots.Where(s => s.GetItemId() == LootId.None);
+
+        private IEnumerable<Slot> GetSlotsWithItem(LootId lootId) 
+            => _slots.Where(slot => slot.GetItemId() == lootId);
     }
 }

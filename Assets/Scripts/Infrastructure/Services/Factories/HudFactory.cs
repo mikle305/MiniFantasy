@@ -37,7 +37,6 @@ namespace Infrastructure.Services
             var inventory = character.GetComponent<Inventory>();
             var inventoryActor = new InventoryActor(inventory, inventoryView);
             inventoryView.Init(inventoryActor);
-            inventoryActor.Subscribe();
         }
 
         private static void InitHealthActor(HudStatBar healthBar, GameObject character)
@@ -45,7 +44,6 @@ namespace Infrastructure.Services
             var health = character.GetComponent<Health>();
             var statActor = new StatActor(health, healthBar);
             healthBar.Init(statActor);
-            statActor.Subscribe();
         }
     }
 }

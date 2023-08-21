@@ -13,7 +13,6 @@ namespace UI
         
         private void Start()
         {
-            _inventory = FindObjectOfType<InventoryView>(true);
             _button = GetComponent<Button>();
             _button.onClick.AddListener(ToggleInventory);
         }

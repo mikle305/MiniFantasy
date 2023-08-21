@@ -32,17 +32,20 @@ namespace Infrastructure.Services
             return slotView;
         }
 
-        public GameObject CreateItem(LootId lootId, SlotView slotView)
+        public GameObject CreateItem(LootId lootId, SlotView slotView, SlotActor slotActor)
         {
             RectTransform itemView = InstantiateItem(lootId, slotView.ItemHolder);
-            InitDraggableItem(itemView, slotView);
-            SetItemSize(itemView, slotView.ItemHolder);
+            InitDraggableItem(itemView, slotActor);
+            SetItemSize(itemView, slotView.transform);
             return itemView.gameObject;
         }
-
+    
         private SlotView InstantiateSlot(Slot slot, Transform slotsGrid)
         {
-            string slotPath = slot.IsHotSlot ? AssetPath.HotSlotPath : AssetPath.SlotPath;
+            string slotPath = slot.IsHotSlot 
+                ? AssetPath.HotSlotPath 
+                : AssetPath.SlotPath;
+            
             var slotView = _assetProvider.Instantiate<SlotView>(slotPath, slotsGrid);
             return slotView;
         }
@@ -51,7 +54,6 @@ namespace Infrastructure.Services
         {
             var slotActor = new SlotActor(slot, slotView);
             slotView.Init(slotActor);
-            slotActor.Subscribe();
         }
 
         private RectTransform InstantiateItem(LootId lootId, Transform slot)
@@ -61,10 +63,10 @@ namespace Infrastructure.Services
             return itemView;
         }
 
-        private void InitDraggableItem(RectTransform itemView, SlotView slotView) 
+        private void InitDraggableItem(RectTransform itemView, SlotActor slotActor) 
             => itemView
                 .GetComponent<DraggableItem>()
-                .Init(_objectsProvider.HudCanvas, slotView);
+                .Init(_objectsProvider.HudCanvas, slotActor);
 
         private static void SetItemSize(RectTransform itemIcon, Transform slot)
         {

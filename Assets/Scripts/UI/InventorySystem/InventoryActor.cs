@@ -11,10 +11,7 @@ namespace UI.InventorySystem
         {
             _inventoryView = inventoryView;
             _inventory = inventory;
-        }
-
-        public void Subscribe()
-        {
+            
             _inventory.SlotsAdded += _inventoryView.ShowSlots;
         }
     }

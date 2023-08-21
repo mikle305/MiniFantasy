@@ -37,8 +37,8 @@ MonoBehaviour:
   - _lootId: 4
     _minCount: 1
     _maxCount: 1
-    _chance: 10
+    _chance: 100
   - _lootId: 5
     _minCount: 1
     _maxCount: 1
-    _chance: 1
+    _chance: 100

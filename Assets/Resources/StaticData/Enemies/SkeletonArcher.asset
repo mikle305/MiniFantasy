@@ -28,5 +28,17 @@ MonoBehaviour:
   _lootCollection:
   - _lootId: 1
     _minCount: 3
-    _maxCount: 7
+    _maxCount: 5
     _chance: 100
+  - _lootId: 2
+    _minCount: 5
+    _maxCount: 15
+    _chance: 100
+  - _lootId: 4
+    _minCount: 1
+    _maxCount: 1
+    _chance: 10
+  - _lootId: 5
+    _minCount: 1
+    _maxCount: 1
+    _chance: 1

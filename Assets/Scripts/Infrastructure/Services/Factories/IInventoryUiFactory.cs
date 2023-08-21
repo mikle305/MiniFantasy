@@ -9,6 +9,6 @@ namespace Infrastructure.Services
     {
         public SlotView CreateSlot(Slot slot, Transform slotsGrid);
         
-        public GameObject CreateItem(LootId lootId, SlotView slotView);
+        public GameObject CreateItem(LootId lootId, SlotView slotView, SlotActor slotActor);
     }
 }

@@ -11,11 +11,20 @@ namespace UI.InventorySystem
         {
             _slotView = slotView;
             _slot = slot;
-        }
 
-        public void Subscribe()
-        {
             _slot.ItemChanged += _slotView.UpdateItemInfo;
         }
+
+        public Item TakeItem(bool destroyIcon = true)
+        {
+            Item item = _slot.TakeItem();
+            if (destroyIcon)
+                _slotView.DestroyIcon();
+
+            return item;
+        }
+
+        public void SetItem(Item item)
+            => _slot.TrySetItem(item);
     }
 }

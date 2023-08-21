@@ -11,10 +11,6 @@ namespace UI
         {
             _characteristic = characteristic;
             _statBar = statBar;
-        }
-
-        public void Subscribe()
-        {
             _characteristic.ValueChanged += UpdateStatBar;
         }
         

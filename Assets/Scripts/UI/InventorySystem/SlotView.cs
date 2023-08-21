@@ -19,11 +19,14 @@ namespace UI.InventorySystem
         private IInventoryUiFactory _inventoryUiFactory;
         private IStaticDataService _staticDataService;
         private HudConfiguration _hudConfig;
-
-        private GameObject _itemView;
+        
         private LootId _currentItemId = LootId.None;
+        private int _currentCount;
+        private GameObject _icon;
 
         public Transform ItemHolder => _itemHolder;
+
+        public SlotActor Actor => _slotActor;
 
 
         [Inject]
@@ -41,27 +44,39 @@ namespace UI.InventorySystem
 
         public void UpdateItemInfo(LootId lootId, int count)
         {
+            if (lootId != LootId.None)
+                ShowItemInfo(lootId, count);
+            else
+                HideItemInfo();
+        }
+
+        public void DestroyIcon()
+        {
+            if (_icon != null)
+                Destroy(_icon);
+        }
+
+        private void ShowItemInfo(LootId lootId, int count)
+        {
             var lootData = _staticDataService.GetLootData<InventoryLootData>(lootId);
             ShowCount(count);
-            
+
             if (lootId == _currentItemId)
                 return;
 
-            _currentItemId = lootId;
             ShowIcon(lootId);
             ShowName(lootData.Name);
             ShowRarity(lootData.ItemRarity);
+            _currentItemId = lootId;
         }
 
-        public void HideItemInfo()
+        private void HideItemInfo()
         {
             _currentItemId = LootId.None;
             _countText.text = string.Empty;
             _nameText.text = string.Empty;
         }
-
-        private void ShowIcon(LootId lootId) 
-            => _itemView = _inventoryUiFactory.CreateItem(lootId, this);
+        
 
         private void ShowName(string itemName)
         {
@@ -70,10 +85,13 @@ namespace UI.InventorySystem
                 .ConvertToString(" ");
         }
 
-        private void ShowCount(int itemCount)
-        {
-            _countText.text = $"x{itemCount}";
-        }
+        private void ShowIcon(LootId lootId) 
+            => _icon = _inventoryUiFactory.CreateItem(lootId, this, Actor);
+
+        private void ShowCount(int itemCount) 
+            => _countText.text = itemCount != 0 
+                ? $"x{itemCount}"
+                : string.Empty;
 
         private void ShowRarity(ItemRarity itemRarity)
         {
