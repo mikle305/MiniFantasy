@@ -15,7 +15,7 @@ MonoBehaviour:
   _enemyId: 2
   _prefabPath: Prefabs/Characters/SkeletonArcher
   _hitEffect:
-    _prefab: {fileID: 1429954232896169633, guid: 83036083a4ebcd34f98131bd3cf6f4d2, type: 3}
+    _prefab: {fileID: 1429954232896169633, guid: 34d2477c553a56043900e4cb25c00a50, type: 3}
     _position: {x: 0, y: 0.85, z: 0}
   _deathEffect:
     _prefab: {fileID: 5642766282230003982, guid: b5c8ca7ed10b61e499cce8ec3b6e2e4c, type: 3}
@@ -25,4 +25,20 @@ MonoBehaviour:
   _getHitDuration: 1
   _deathDuration: 2
   _destroyDuration: 10
-  _lootCollection: []
+  _lootCollection:
+  - _lootId: 1
+    _minCount: 3
+    _maxCount: 5
+    _chance: 100
+  - _lootId: 2
+    _minCount: 5
+    _maxCount: 15
+    _chance: 100
+  - _lootId: 4
+    _minCount: 1
+    _maxCount: 1
+    _chance: 10
+  - _lootId: 5
+    _minCount: 1
+    _maxCount: 1
+    _chance: 1

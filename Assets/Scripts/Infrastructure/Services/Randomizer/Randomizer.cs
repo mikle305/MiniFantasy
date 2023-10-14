@@ -1,3 +1,4 @@
+using Additional.Constants;
 using Additional.Utils;
 using UnityEngine;
 
@@ -26,6 +27,24 @@ namespace Infrastructure.Services
             return min == max
                 ? min
                 : Random.Range(min, max + 1);
+        }
+
+        public float Generate(float min, float max)
+        {
+            return Mathf.Abs(max - min) > Constants.Epsilon
+                ? Random.Range(min, max)
+                : min;
+        }
+
+        /// <summary>
+        /// Returns -1 or 1 randomly generated
+        /// </summary>
+        /// <returns></returns>
+        public int GenerateSign()
+        {
+            return Random.Range(0, 2) == 0
+                ? -1
+                : 1;
         }
     }
 }

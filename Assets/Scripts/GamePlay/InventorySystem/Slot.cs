@@ -1,39 +1,43 @@
 using System;
 using Additional.Utils;
 using GamePlay.LootSystem;
-using StaticData;
 
 namespace GamePlay.InventorySystem
 {
     public class Slot
     {
         private Item _currentItem;
-
         public event Action<LootId, int> ItemChanged;
-        
-        public LootId ItemId 
-            => _currentItem?.LootId 
-               ?? LootId.None;
+
+        public bool IsHotSlot { get; }
+
+
+        public Slot(bool isHotSlot = false)
+        {
+            IsHotSlot = isHotSlot;
+        }
+
+        public LootId GetItemId() 
+            => _currentItem?.LootId ?? LootId.None;
 
         public bool IsFull()
             => _currentItem.MaxCount == _currentItem.Count;
 
-
-        /// <summary>
-        /// Returns false
-        /// if slot item is not empty
-        /// or if item count is zero
-        /// </summary>
         public void TrySetItem(Item item)
         {
-            if (_currentItem != null) 
+            if (GetItemId() != LootId.None) 
                 return;
-
-            if (item.LootId == LootId.None)
-                ThrowHelper.LootIdIsNone();
 
             _currentItem = item;
             InvokeItemChanged();
+        }
+
+        public Item TakeItem()
+        {
+            Item item = _currentItem;
+            _currentItem = null;
+            InvokeItemChanged();
+            return item;
         }
 
         /// <summary>
@@ -61,14 +65,10 @@ namespace GamePlay.InventorySystem
             return 0;
         }
 
-        public Item SwapItems(Item newItem)
-        {
-            Item oldItem = _currentItem;
-            _currentItem = newItem;
-            return oldItem;
-        }
-
         private void InvokeItemChanged() 
-            => ItemChanged?.Invoke(_currentItem.LootId, _currentItem.Count);
+            => ItemChanged?.Invoke(GetItemId(), GetItemCount());
+
+        private int GetItemCount() 
+            => _currentItem?.Count ?? 0;
     }
 }

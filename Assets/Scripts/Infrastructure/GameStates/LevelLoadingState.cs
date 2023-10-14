@@ -1,6 +1,5 @@
-﻿using Additional.Abstractions.States;
-using GamePlay.Additional;
-using GamePlay.Units;
+﻿using GamePlay.Additional;
+using GamePlay.Units.Enemy;
 using Infrastructure.Services;
 using UI;
 using UnityEngine;
@@ -12,20 +11,23 @@ namespace Infrastructure.GameStates
         private readonly GameStateMachine _stateMachine;
         private readonly ISceneLoader _sceneLoader;
         private readonly IGameFactory _gameFactory;
-        private readonly IUiFactory _uiFactory;
+        private readonly IHudFactory _hudFactory;
         private readonly IObjectsProvider _objectsProvider;
         private readonly IProgressWatchers _progressWatchers;
+        private ICharacterConfigurator _characterConfigurator;
 
         public LevelLoadingState(
             GameStateMachine stateMachine,
             ISceneLoader sceneLoader,
             IGameFactory gameFactory,
-            IUiFactory uiFactory,
+            IHudFactory hudFactory,
+            ICharacterConfigurator characterConfigurator,
             IObjectsProvider objectsProvider,
             IProgressWatchers progressWatchers)
         {
+            _characterConfigurator = characterConfigurator;
             _objectsProvider = objectsProvider;
-            _uiFactory = uiFactory;
+            _hudFactory = hudFactory;
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
             _gameFactory = gameFactory;
@@ -45,28 +47,37 @@ namespace Infrastructure.GameStates
         private void InitGameWorld()
         {
             World world = InitWorld();
-            GameObject character = InitCharacter(world);
+            GameObject character = CreateCharacter(world);
             InitEnemies(world);
-            LoadProgress();
-            InitHud(world, character);
             InitFollowCamera(character);
-            BindObjectsToProvider();
+            
+            Hud hud = InitHud(world, character);
+            ConfigureCharacter(character);
+            LoadProgress();
+            BindObjectsToProvider(Camera.main, hud.Canvas);
+
             EnterGamePlay(character);
         }
 
-        private void BindObjectsToProvider()
+        private World InitWorld()
         {
-            _objectsProvider.MainCamera = Camera.main;
+            World world = _gameFactory.CreateWorld();
+            _progressWatchers.RegisterComponents(world, inChildren: true);
+            return world;
         }
 
-        private World InitWorld() 
-            => _gameFactory.CreateWorld();
+        private GameObject CreateCharacter(World world)
+        {
+            GameObject character = _gameFactory.CreateCharacter(world.SpawnPoint, world.transform);
+            _progressWatchers.RegisterComponents(character);
+            return character;
+        }
 
-        private GameObject InitCharacter(World world) 
-            => _gameFactory.CreateCharacter(world);
+        private void ConfigureCharacter(GameObject character)
+            => _characterConfigurator.Configure(character);
 
         private Hud InitHud(World world, GameObject character) 
-            => _uiFactory.CreateHud(character, world.UICamera);
+            => _hudFactory.CreateHud(character, world.UICamera);
 
         private void LoadProgress() 
             => _progressWatchers.InformReaders();
@@ -86,6 +97,14 @@ namespace Infrastructure.GameStates
             => _gameFactory
                 .CreateFollowCamera()
                 .Follow(target.transform);
+
+        private void BindObjectsToProvider(
+            Camera mainCamera,
+            Canvas hudCanvas)
+        {
+            _objectsProvider.MainCamera = mainCamera;
+            _objectsProvider.HudCanvas = hudCanvas;
+        }
 
         private void EnterGamePlay(GameObject character) 
             => _stateMachine.Enter<GameProcessState, GameObject>(character);

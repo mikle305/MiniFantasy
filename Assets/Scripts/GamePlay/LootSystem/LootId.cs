@@ -7,5 +7,6 @@ namespace GamePlay.LootSystem
         Wood,
         Stone,
         Sword,
+        CrystalSword,
     }
 }

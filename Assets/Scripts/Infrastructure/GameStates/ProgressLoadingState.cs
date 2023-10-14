@@ -1,7 +1,7 @@
-﻿using Additional.Abstractions.States;
-using Additional.Constants;
+﻿using Additional.Constants;
 using Data;
 using Infrastructure.Services;
+using StaticData.Character;
 
 namespace Infrastructure.GameStates
 {
@@ -11,26 +11,30 @@ namespace Infrastructure.GameStates
         private readonly IProgressAccess _progressAccess;
         private readonly IStorageService _storageService;
         private readonly IAutoSaver _autoSaver;
+        private readonly IStaticDataService _staticDataService;
 
 
         public ProgressLoadingState(
             GameStateMachine stateMachine,
             IProgressAccess progressAccess,
-            IStorageService storageService, 
-            IAutoSaver autoSaver)
+            IStorageService storageService,
+            IAutoSaver autoSaver,
+            IStaticDataService staticDataService)
         {
             _stateMachine = stateMachine;
             _progressAccess = progressAccess;
             _storageService = storageService;
             _autoSaver = autoSaver;
+            _staticDataService = staticDataService;
         }
 
         public void Enter()
         {
-            _progressAccess.PlayerProgress = _storageService.LoadProgress() ?? CreateNewProgress();
+            CharacterData characterConfig = _staticDataService.GetCharacterData();
+            _progressAccess.Progress = _storageService.LoadProgress() ?? CreateNewProgress(characterConfig);
             _autoSaver.Start();
             
-            string sceneName = _progressAccess.PlayerProgress.WorldData.LevelPosition.Level;
+            string sceneName = _progressAccess.Progress.Character.CurrentLevel.Name;
             _stateMachine.Enter<LevelLoadingState, string>(sceneName);
         }
 
@@ -38,35 +42,35 @@ namespace Infrastructure.GameStates
         {
         }
 
-        private static PlayerProgress CreateNewProgress()
+        private static GameProgress CreateNewProgress(CharacterData characterConfig)
         {
-            return new PlayerProgress
-            {
-                WorldData = CreateNewWorldData(),
-                CharacterStats = CreateNewCharacterStats()
+            return new GameProgress
+            { 
+                Character = new CharacterProgress
+                {
+                    CurrentLevel = CreateNewLevelData(), 
+                    Stats = CreateNewCharacterStats(characterConfig),
+                } 
             };
         }
 
-        private static WorldData CreateNewWorldData()
+        private static LevelData CreateNewLevelData()
         {
             var mainScene = SceneName.MainScene.ToString();
             
-            return new WorldData
+            return new LevelData()
             {
-                LevelPosition = new LevelPosition
-                {
-                    Level = mainScene
-                }
+                Name = mainScene,
             };
         }
 
-        private static CharacterStatsData CreateNewCharacterStats()
+        private static CharacterStatsData CreateNewCharacterStats(CharacterData characterConfig)
         {
             return new CharacterStatsData
             {
                 Health = new StatData
                 {
-                    MaxValue = CharacterStatsConst.BaseHealth
+                    MaxValue = characterConfig.Health,
                 }
             };
         }

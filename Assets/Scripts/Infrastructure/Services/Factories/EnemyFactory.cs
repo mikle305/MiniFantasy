@@ -1,4 +1,4 @@
-﻿using GamePlay.Units;
+﻿using GamePlay.Units.Enemy;
 using UnityEngine;
 
 namespace Infrastructure.Services
@@ -16,8 +16,8 @@ namespace Infrastructure.Services
         
         public GameObject Create(EnemyId enemyId, Vector3 position, Transform parent)
         {
-            string prefabPath = _staticDataService.FindEnemyData(enemyId).PrefabPath;
-            return _assetProvider.Instantiate<GameObject>(prefabPath, position, parent);
+            string prefabPath = _staticDataService.GetEnemyData(enemyId).PrefabPath;
+            return _assetProvider.Instantiate<GameObject>(prefabPath, position, Quaternion.identity, parent);
         }
     }
 }

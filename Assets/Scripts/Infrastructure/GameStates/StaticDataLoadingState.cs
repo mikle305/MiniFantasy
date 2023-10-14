@@ -1,4 +1,3 @@
-using Additional.Abstractions.States;
 using Infrastructure.Services;
 
 namespace Infrastructure.GameStates
@@ -18,8 +17,10 @@ namespace Infrastructure.GameStates
         
         public void Enter()
         {
+            _staticDataService.LoadCharacter();
             _staticDataService.LoadEnemies();
             _staticDataService.LoadLoot();
+            _staticDataService.LoadUiConfigs();
             EnterSettingsLoadingState();
         }
 

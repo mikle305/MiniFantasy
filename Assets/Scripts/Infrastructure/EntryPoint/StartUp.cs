@@ -1,13 +1,12 @@
 using Infrastructure.GameStates;
 using Infrastructure.Services;
+using UniDependencyInjection;
 using UniDependencyInjection.Core;
-using UniDependencyInjection.Extensions;
 using UnityEngine;
 
 namespace Infrastructure.EntryPoint
 {
     public class StartUp : UniDependencyInjection.Unity.StartUp
-
     {
         private readonly ICoroutineRunner _coroutineRunner;
         private GameStateMachine _stateMachine;
@@ -30,21 +29,22 @@ namespace Infrastructure.EntryPoint
             containerBuilder
                 .RegisterSingle(_coroutineRunner)
                 .RegisterSingle<ISceneLoader, SceneLoader>()
-                .RegisterSingle<IAssetProvider, AssetProvider>()
+                .RegisterSingle<IAssetProvider, ResourcesAssetProvider>()
                 .RegisterSingle<IObjectsProvider, ObjectsProvider>()
                 .RegisterSingle<IGameFactory, GameFactory>()
-                .RegisterSingle<IUiFactory, UiFactory>()
                 .RegisterSingle<IEnemyFactory, EnemyFactory>()
                 .RegisterSingle<ILootFactory, LootFactory>()
+                .RegisterSingle<IInventoryUiFactory, InventoryUiFactory>()
+                .RegisterSingle<IHudFactory, HudFactory>()
                 .RegisterSingle<IEnemyConfigurator, EnemyConfigurator>()
+                .RegisterSingle<ICharacterConfigurator, CharacterConfigurator>()
                 .RegisterSingle<ILootConfigurator, LootConfigurator>()
-                .RegisterSingle<IUiConfigurator, UiConfigurator>()
+                .RegisterSingle<IWeaponConfigurator, WeaponConfigurator>()
                 .RegisterSingle<IProgressAccess, ProgressAccess>()
                 .RegisterSingle<IProgressWatchers, ProgressWatchers>()
                 .RegisterSingle<IStorageService, PlayerPrefsStorageService>()
                 .RegisterSingle<IAutoSaver, AutoSaver>()
                 .RegisterSingle<IStaticDataService, StaticDataService>()
-                .RegisterSingle<IConfigAccess, ConfigAccess>()
                 .RegisterSingle<IRandomizer, Randomizer>()
                 .RegisterSingle<IFpsService, FpsService>();
         }

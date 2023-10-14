@@ -1,4 +1,4 @@
-using UI.Inventory;
+using UI.InventorySystem;
 using UnityEngine;
 
 namespace UI

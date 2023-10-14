@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76966415d8e741e2b4e09c2a33f5a626, type: 3}
+  m_Name: Character
+  m_EditorClassIdentifier: 
+  _prefabPath: Prefabs/Characters/Character
+  _hitEffect:
+    _prefab: {fileID: 4553287630450876385, guid: 15483e51212e3d74886ea57291f4639a, type: 3}
+    _position: {x: 0, y: 0.85, z: 0}
+  _deathEffect:
+    _prefab: {fileID: 3187647067869052980, guid: 0ee68f701062e7b40bc806d2cc23f207, type: 3}
+    _position: {x: 0, y: 2, z: 0}
+  _health: 5
+  _getHitDuration: 0.75
+  _deathDuration: 2
+  _destroyDuration: 5
+  _backpackSlots: 24
+  _hotBarSlots: 9

@@ -9,23 +9,25 @@ namespace GamePlay.LootSystem
 {
     public class LootSpawner : MonoBehaviour
     {
+        private const float _minSpawnOffset = 0.75f;
+        private const float _maxSpawnOffset = 1.25f;
+        private const float _ySpawnOffset = 0.7f;
+
         private IRandomizer _randomizer;
         private ILootFactory _factory;
-        private ILootConfigurator _configurator;
-        private IStaticDataService _staticDataService;
+        private ILootConfigurator _lootConfigurator;
+        
         private List<RandomLoot> _lootCollection;
 
 
         [Inject]
         public void Construct(
-            ILootFactory factory, 
-            ILootConfigurator configurator,
-            IStaticDataService staticDataService,
+            ILootFactory factory,
+            ILootConfigurator lootConfigurator,
             IRandomizer randomizer)
         {
+            _lootConfigurator = lootConfigurator;
             _factory = factory;
-            _configurator = configurator;
-            _staticDataService = staticDataService;
             _randomizer = randomizer;
         }
 
@@ -42,14 +44,32 @@ namespace GamePlay.LootSystem
 
         private void SpawnOne(RandomLoot randomLoot)
         {
-            if (_randomizer.TryChancePercents(randomLoot.Chance) == false)
+            if (IsLootChanceFailed(randomLoot))
                 return;
 
-            int lootCount = _randomizer.Generate(randomLoot.MinCount, randomLoot.MaxCount);
-            LootPiece lootPiece = _factory.CreateInWorld(randomLoot.LootId, transform.position.AddY(1));
-            LootStaticData lootData = _staticDataService.FindLootData(randomLoot.LootId);
-            lootPiece.Init(lootData, lootCount);
-            _configurator.Configure(lootPiece, randomLoot.LootId);
+            LootPiece lootPiece = CreateLootInWorld(randomLoot);
+            SetLootCount(lootPiece, randomLoot);
+            ConfigureLoot(lootPiece, randomLoot);
         }
+
+        private bool IsLootChanceFailed(RandomLoot randomLoot) 
+            => _randomizer.TryChancePercents(randomLoot.Chance) == false;
+
+        private LootPiece CreateLootInWorld(RandomLoot randomLoot)
+        {
+            Vector3 lootPosition = 
+                transform.position + new Vector3(x: GenerateRandomOffset(), y: _ySpawnOffset, z: GenerateRandomOffset());
+            
+            return _factory.CreateInWorld(randomLoot.LootId, lootPosition);
+        }
+
+        private void ConfigureLoot(LootPiece lootPiece, RandomLoot randomLoot) 
+            => _lootConfigurator.Configure(lootPiece, randomLoot.LootId);
+
+        private void SetLootCount(LootPiece lootPiece, RandomLoot randomLoot) 
+            => lootPiece.CurrentCount = _randomizer.Generate(randomLoot.MinCount, randomLoot.MaxCount);
+
+        private float GenerateRandomOffset() 
+            => _randomizer.Generate(_minSpawnOffset, _maxSpawnOffset) * _randomizer.GenerateSign();
     }
 }

@@ -24,15 +24,15 @@ namespace Infrastructure.Services
         {
             _progressWatchers.InformWriters();
 
-            string progressJsonString = _progressAccess.PlayerProgress.ToJson();
+            string progressJsonString = _progressAccess.Progress.ToJson();
             PlayerPrefs.SetString(_progressKey, progressJsonString);
         }
 
-        public PlayerProgress LoadProgress()
+        public GameProgress LoadProgress()
         {
             return PlayerPrefs
                 .GetString(_progressKey)
-                .FromJson<PlayerProgress>();
+                .FromJson<GameProgress>();
         }
     }
 }

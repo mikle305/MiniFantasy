@@ -9,16 +9,28 @@ namespace Infrastructure.Services
     {
         public StandaloneInputService(IObjectsProvider objectsProvider) : base(objectsProvider)
         {
-            // Cursor.lockState = CursorLockMode.Locked;
+            if (!Application.isEditor) 
+                BlockCursor();
         }
-        
+
         public override Vector2 GetAxis() =>
             new(Input.GetAxis(Horizontal), Input.GetAxis(Vertical));
 
-        public override bool IsAttackInvoked() => 
-            Math.Abs(Input.GetAxis(Fire) - 1.0f) < Constants.Epsilon;
-        
-        public override bool IsUiPressed() =>
+        public override bool IsAttackInvoked()
+        {
+            if (IsUiPressed())
+                return false;
+            
+            return Math.Abs(Input.GetAxis(Fire) - 1.0f) < Constants.Epsilon;
+        }
+
+        private static bool IsUiPressed() =>
             Input.GetMouseButton(0) && EventSystem.current.IsPointerOverGameObject();
+
+        private static void BlockCursor()
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 }

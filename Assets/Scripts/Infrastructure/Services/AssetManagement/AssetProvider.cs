@@ -1,76 +1,54 @@
-﻿using System;
-using UniDependencyInjection.Core;
+using UniDependencyInjection;
 using UniDependencyInjection.Unity;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Infrastructure.Services
 {
-    public class AssetProvider : IAssetProvider
+    public abstract class AssetProvider : IAssetProvider
     {
-        private readonly IContainer _container;
+        private readonly IMonoResolver _monoResolver;
 
-        public AssetProvider(IContainer container)
+        protected AssetProvider(IMonoResolver monoResolver)
         {
-            _container = container;
+            _monoResolver = monoResolver;
         }
-
+        
+        public T Instantiate<T>(string prefabPath) where T : Object
+        {
+            var prefab = Load<T>(prefabPath);
+            return _monoResolver.Instantiate(prefab);
+        }
+        
         public T Instantiate<T>(
-            string path, 
-            Vector3? position = null, 
-            Transform parent = null,
-            bool injectInChildren = true) 
-            where T: Object
+            string prefabPath, 
+            Transform parent,
+            bool worldPositionStays = false) where T : Object
         {
-            var prefab = Resources.Load<T>(path);
-            if (prefab == null)
-                throw new InvalidOperationException($"Object not found in resources, path: {path}");
-
-            T created;
-            if (position == null && parent != null)
-                created = _container.Instantiate(prefab, parent, injectInChildren: injectInChildren);
-
-            else if (position != null && parent == null)
-                created = _container.Instantiate(prefab, (Vector3)position, injectInChildren: injectInChildren);
-            
-            else if (position != null && parent != null)
-                created = _container.Instantiate(prefab, (Vector3)position, parent, injectInChildren: injectInChildren);
-            else
-                created = _container.Instantiate(prefab, injectInChildren: injectInChildren);
-
-            SetRotationToCreated(created, prefab);
-            return created;
+            var prefab = Load<T>(prefabPath);
+            return _monoResolver.Instantiate(prefab, parent, worldPositionStays);
+        }
+        
+        public T Instantiate<T>(
+            string prefabPath,
+            Vector3 position,
+            Quaternion rotation) where T : Object
+        {
+            var prefab = Load<T>(prefabPath);
+            return _monoResolver.Instantiate(prefab, position, rotation);
+        }
+        
+        public T Instantiate<T>(
+            string prefabPath,
+            Vector3 position,
+            Quaternion rotation,
+            Transform parent) where T : Object
+        {
+            var prefab = Load<T>(prefabPath);
+            return _monoResolver.Instantiate(prefab, position, rotation, parent);
         }
 
-        public T Load<T>(string path) where T : Object 
-            => Resources.Load<T>(path);
-
-        public T[] LoadMany<T>(string path) where T : Object 
-            => Resources.LoadAll<T>(path);
-
-        private static void SetRotationToCreated<T>(T created, T prefab) where T : Object
-        {
-            switch (created)
-            {
-                case Component createdComponent when prefab is Component prefabComponent:
-                    createdComponent.transform.localRotation = prefabComponent.transform.localRotation;
-                    break;
-                case Component createdComponent:
-                {
-                    if (prefab is GameObject prefabObject)
-                        createdComponent.transform.localRotation = prefabObject.transform.localRotation;
-                    break;
-                }
-                case GameObject createdObject when prefab is Component prefabComponent:
-                    createdObject.transform.localRotation = prefabComponent.transform.localRotation;
-                    break;
-                case GameObject createdObject:
-                {
-                    if (prefab is GameObject prefabObject)
-                        createdObject.transform.localRotation = prefabObject.transform.localRotation;
-                    break;
-                }
-            }
-        }
+        public abstract T Load<T>(string path) where T : Object;
+        
+        public abstract T[] LoadMany<T>(string path) where T : Object;
     }
 }

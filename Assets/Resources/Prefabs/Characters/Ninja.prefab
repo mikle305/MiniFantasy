@@ -519,7 +519,7 @@ GameObject:
   - component: {fileID: 4691737349720738}
   - component: {fileID: 137885481283381568}
   m_Layer: 0
-  m_Name: Chr_Samurai_Ninja_01
+  m_Name: mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1285,12 +1285,11 @@ GameObject:
   - component: {fileID: 2753362449988788841}
   - component: {fileID: 95311200093912232}
   - component: {fileID: 5643594415395831062}
+  - component: {fileID: 8148482278179227649}
   - component: {fileID: 2092527647707644289}
   - component: {fileID: 3835074404040549117}
-  - component: {fileID: -6692695054325570002}
   - component: {fileID: 4146399864200452387}
   - component: {fileID: 6328243603481058547}
-  - component: {fileID: 4822237933159702650}
   - component: {fileID: 2190400159865864854}
   - component: {fileID: 6497331023182664158}
   - component: {fileID: 925932836136379292}
@@ -1380,6 +1379,22 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 7
   m_ObstacleAvoidanceType: 4
+--- !u!114 &8148482278179227649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1880444566353528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9befa66f7d7d4172af451203f837afb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hit: {fileID: 6497331023182664158}
+  _health: {fileID: 6328243603481058547}
+  _death: {fileID: 8260586294591030749}
+  _follower: {fileID: 3835074404040549117}
 --- !u!114 &2092527647707644289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1407,18 +1422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52b64c63e9bca7d4fb04d184595308cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-6692695054325570002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1880444566353528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cba0fd41ad144b58f8b59b0c1557412, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _agent: {fileID: 5643594415395831062}
 --- !u!114 &4146399864200452387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1445,18 +1449,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 412097049178461e8f2186e497fcbf14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4822237933159702650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1880444566353528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf421d5a8b5b4df0a3a676a9e6a3e8ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2190400159865864854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1481,6 +1473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30410417bbae423a94bd695c5edc1343, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _health: {fileID: 6328243603481058547}
 --- !u!114 &925932836136379292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1493,6 +1486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 039ccfc1b692490aa04242bb3fa19777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hitOnDamage: {fileID: 6497331023182664158}
 --- !u!114 &8260586294591030749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1517,6 +1511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d0491b0ea5e4124bfa670316ca6fe73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _death: {fileID: 8260586294591030749}
 --- !u!114 &5678011447955666130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1529,6 +1524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87cd21e8c6e9425d96c99f62f8f523fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _death: {fileID: 8260586294591030749}
 --- !u!114 &7275613024581900554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1541,6 +1537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb41cfd6376e4d8b8fbf05a116032a72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _death: {fileID: 8260586294591030749}
 --- !u!114 &6595438271228083815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1553,6 +1550,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de72ce0f73764feca21e0e54b33f134d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _death: {fileID: 8260586294591030749}
+  _lootSpawner: {fileID: 2190400159865864854}
 --- !u!1 &1906435638013852
 GameObject:
   m_ObjectHideFlags: 0

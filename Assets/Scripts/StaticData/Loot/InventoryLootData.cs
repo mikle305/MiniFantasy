@@ -3,20 +3,20 @@ using UnityEngine;
 
 namespace StaticData
 {
-    [CreateAssetMenu(menuName = "StaticData/Loot/Inventory", fileName = "LootData")]
-    public class InventoryLootData : LootStaticData
+    [CreateAssetMenu(menuName = "StaticData/Loot/Default", fileName = "LootData")]
+    public class InventoryLootData : LootData
     {
-        [SerializeField] private string _name;
+        private const string _inHolderPrefabsFolder = "Prefabs/Loot/InHolder/";
+        
+        [Space(5)] [Header("Inventory")] [Space(3)]
         [SerializeField] private string _description;
         [SerializeField] private int _maxCountInSlot = 999;
-        [SerializeField] private ItemUseType _itemUseType = ItemUseType.None;
         [SerializeField] private ItemRarity _itemRarity = ItemRarity.Common;
 
 
-        public string Name => _name;
+        public string InHolderPrefabPath => _inHolderPrefabsFolder + name;
         public string Description => _description;
         public int MaxCountInSlot => _maxCountInSlot;
-        public ItemUseType UseType => _itemUseType;
         public ItemRarity ItemRarity => _itemRarity;
     }
 }

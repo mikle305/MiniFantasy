@@ -1,6 +1,7 @@
 using GamePlay.LootSystem;
-using GamePlay.Units;
+using GamePlay.Units.Enemy;
 using StaticData;
+using StaticData.Character;
 
 namespace Infrastructure.Services
 {
@@ -9,9 +10,19 @@ namespace Infrastructure.Services
         public void LoadEnemies();
 
         public void LoadLoot();
+
+        public void LoadCharacter();
+
+        public void LoadUiConfigs();
         
-        public EnemyStaticData FindEnemyData(EnemyId enemyId);
+        public EnemyData GetEnemyData(EnemyId enemyId);
+
+        public LootData GetLootData(LootId lootId);
+
+        public TData GetLootData<TData>(LootId lootId) where TData : LootData;
+
+        public CharacterData GetCharacterData();
         
-        public LootStaticData FindLootData(LootId lootId);
+        public HudConfiguration GetHudConfig();
     }
 }

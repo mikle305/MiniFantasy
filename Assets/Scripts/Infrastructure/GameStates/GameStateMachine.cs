@@ -1,17 +1,18 @@
-﻿using Additional.Abstractions.States;
-using UniDependencyInjection.Core;
+﻿using UniDependencyInjection.Core;
+using UniDependencyInjection.Unity;
 
 namespace Infrastructure.GameStates
 {
     public class GameStateMachine
     {
         private IExitableState _currentState;
-        private readonly IScope _scope;
+        private IScope _scope;
+        private readonly IMonoResolver _monoResolver;
 
 
-        public GameStateMachine(IContainer container)
+        public GameStateMachine(IMonoResolver monoResolver)
         {
-            _scope = container.CreateScope();
+            _monoResolver = monoResolver;
         }
 
         public void Enter<TState>() where TState : class, IState
@@ -30,7 +31,7 @@ namespace Infrastructure.GameStates
         {
             _currentState?.Exit();
             
-            var state = _scope.Resolve<TState>();
+            var state = (_scope ??= _monoResolver.CreateScope()).Resolve<TState>();
             _currentState = state;
             
             return state;
